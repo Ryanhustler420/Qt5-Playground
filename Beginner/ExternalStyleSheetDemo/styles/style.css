@@ -1,0 +1,33 @@
+QPushButton {
+    color: white;
+    background-color: red;
+}
+
+QPushButton[text="Submit"] {
+    color: white;
+    font-weight: bold;
+    background-color: black;
+}
+
+QPushButton#okBtn {
+    color: white;
+    background-color: green;
+}
+
+QPushButton#cancelBtn {
+    color: white;
+    background-color: red;
+}
+
+QLineEdit {
+    background-color: grey;
+    border: 2px solid grey;
+    border-radius: 8px;
+    padding: 1px;
+    height: 30px;
+}
+
+QWidget#Widget > QLabel {
+    font-weight: bold;
+    font-size: 20px;
+}

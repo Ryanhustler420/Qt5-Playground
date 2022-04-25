@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/">
+        <file>certs/.bash_history</file>
+        <file>certs/blue_ca.pem</file>
+        <file>certs/blue_index.txt</file>
+        <file>certs/blue_local.key</file>
+        <file>certs/blue_local.pem</file>
+        <file>certs/blue_local.req</file>
+        <file>certs/blue_privkey.pem</file>
+        <file>certs/red_ca.pem</file>
+        <file>certs/red_index.txt</file>
+        <file>certs/red_local.key</file>
+        <file>certs/red_local.pem</file>
+        <file>certs/red_local.req</file>
+        <file>certs/red_privkey.pem</file>
+    </qresource>
+</RCC>

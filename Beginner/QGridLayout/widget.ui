@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Widget</class>
+ <widget class="QWidget" name="Widget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Widget</string>
+  </property>
+  <widget class="QPushButton" name="OneBtn">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>71</y>
+     <width>80</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>One</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="FourBtn">
+   <property name="geometry">
+    <rect>
+     <x>171</x>
+     <y>98</y>
+     <width>80</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Four</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="TwoBtn">
+   <property name="geometry">
+    <rect>
+     <x>257</x>
+     <y>71</y>
+     <width>80</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Two</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="ThreeBtn">
+   <property name="geometry">
+    <rect>
+     <x>343</x>
+     <y>71</y>
+     <width>80</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="text">
+    <string>Three</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="FiveBtn">
+   <property name="geometry">
+    <rect>
+     <x>257</x>
+     <y>98</y>
+     <width>80</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Five</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="SevenBtn">
+   <property name="geometry">
+    <rect>
+     <x>171</x>
+     <y>125</y>
+     <width>80</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Seven</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="NineBtn">
+   <property name="geometry">
+    <rect>
+     <x>343</x>
+     <y>125</y>
+     <width>80</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Nine</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
