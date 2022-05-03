@@ -1,7 +1,6 @@
 #include <QCoreApplication>
 #include <QProcess>
 #include <QDebug>
-#include <QDir>
 
 bool openIPConfig() {
     QProcess ipconfig;
