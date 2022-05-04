@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
     QCoreApplication a(argc, argv);
 
     HttpServerConfig config;
-    config.port = 44387;
+    config.port = 3003;
     config.requestTimeout = 20;
     config.responseTimeout = 5;
     config.verbosity = HttpServerConfig::Verbose::All;

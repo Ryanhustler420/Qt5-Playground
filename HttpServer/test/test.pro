@@ -1,6 +1,6 @@
 TARGET = httpServerTest
 
-QT += network
+QT += core network concurrent networkauth
 QT -= gui
 
 CONFIG += c++11 console
@@ -23,9 +23,6 @@ SOURCES += \
 
 HEADERS += \
     requestHandler.h
-
-#include( C:\Users\Raisehand\Desktop\qtpromise-0.6.0/qtpromise.pri )
-include( ../qtpromise/qtpromise.pri )
 
 # Copy data folder to build directory
 win32 {
@@ -59,4 +56,4 @@ DEPENDPATH += $$PWD/../src
 CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../src/release/ -lhttpServer
 CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../src/debug/ -lhttpServer
 
-include(../common.pri)
+include( ../qtpromise/qtpromise.pri )

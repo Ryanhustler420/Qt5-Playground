@@ -27,6 +27,8 @@ public:
     HttpPromise handleFileTest(HttpDataPtr data);
     HttpPromise handleErrorTest(HttpDataPtr data);
     HttpPromise handleAsyncTest(HttpDataPtr data);
+
+    HttpPromise handleGoogleOAuthRedirection(HttpDataPtr data);
 };
 
 #endif // REQUESTHANDLER_H

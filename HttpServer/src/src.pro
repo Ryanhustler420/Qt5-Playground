@@ -53,8 +53,6 @@ HEADERS += \
         httpServer/middleware.h \
         httpServer/util.h
 
-#include(../common.pri)
-#include( C:\Users\Raisehand\Desktop\qtpromise-0.6.0/qtpromise.pri )
 include( ../qtpromise/qtpromise.pri )
 
 # win32: LIBS += -lzlib
@@ -88,3 +86,5 @@ unix {
 }
 
 DISTFILES +=
+
+RESOURCES +=

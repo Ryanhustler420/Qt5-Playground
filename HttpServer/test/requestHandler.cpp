@@ -173,3 +173,14 @@ HttpPromise RequestHandler::handleAsyncTest(HttpDataPtr data)
         return data;
     });
 }
+
+HttpPromise RequestHandler::handleGoogleOAuthRedirection(HttpDataPtr data)
+{
+    QString code = data->request->parameter("code");
+
+    QJsonObject object;
+    object["code"] = code;
+
+    data->response->setStatus(HttpStatus::Ok, QJsonDocument(object));
+    return HttpPromise::resolve(data);
+}
