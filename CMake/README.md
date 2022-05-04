@@ -1,0 +1,1 @@
+## (Resource)[https://medium.com/swlh/how-to-learn-cmake-in-just-20-minutes-b8eb47367f2c]
