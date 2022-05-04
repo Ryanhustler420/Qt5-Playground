@@ -8,6 +8,7 @@ RequestHandler::RequestHandler()
     router.addRoute("GET", "^/fileTest/(\\d*)/?$", this, &RequestHandler::handleFileTest);
     router.addRoute("GET", "^/errorTest/(\\d*)/?$", this, &RequestHandler::handleErrorTest);
     router.addRoute("GET", "^/asyncTest/(\\d*)/?$", this, &RequestHandler::handleAsyncTest);
+    router.addRoute("GET", "^/google_oauth", this, &RequestHandler::handleGoogleOAuthRedirection);
 }
 
 HttpPromise RequestHandler::handle(HttpDataPtr data)
