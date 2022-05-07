@@ -1,20 +1,15 @@
 #ifndef MANAGER_H
 #define MANAGER_H
 
-#include "parents/commonsuperclass.h"
 #include "singleton/singleton.h"
-
 #include <QUrl>
 
-class Manager : public CommonSuperClass
+class Manager : public Singleton<Manager>
 {
-    static Manager *createInstance();
 
 public:
-    explicit Manager(CommonSuperClass *parent = nullptr);
-
+    explicit Manager(QObject *parent = nullptr);
     QString name;
-    static Manager* instance();
 
 signals:
 

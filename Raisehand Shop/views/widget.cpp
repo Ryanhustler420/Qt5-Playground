@@ -2,6 +2,7 @@
 #include "ui_widget.h"
 
 #include "utility/hotkeyhandler.h"
+#include "oauths/googleoauth.h"
 
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
@@ -24,21 +25,22 @@ Widget::Widget(QWidget *parent)
     // header intercepeor
     // it wiil be a class which will work as interceptor of all the reqest either going or comming...
 
-    // File Class
-    // https://thecodeprogram.com/how-to-use-json-data-with-qt-c--
-    // dependency design
-
     // basically copy the login from other software and make in cpp
 
-    // we need to create a class for saving json data to file in encrypted forment and then retrieve them later...
-    // we can do this wil sql but we want to do this for specific data storage.. because sql data cannot later steal
+    // create docs
+    // create pipe line
+    // create our programming flow pattern
+
+    // merge the downloaded data
+    // prepare all the laptop for dataset downloading
+    // modify the craweler to fetch more data
+    // split data set
+
+    // 1 lakh on each computer
 
     // Constant Class
-    // Timer, Threading i.e concurrent
     // RaisehandCloudinary
-    // Image Manupulator
-    // RxCpp
-    // Unit Test
+    // Image Manupulator <plugin>
     // Models
 }
 
@@ -49,9 +51,11 @@ Widget::~Widget()
 
 void Widget::on_login_btn_clicked()
 {
+    GoogleOAuth g;
+    g.click();
     apis.login(ui->email_le->text(), ui->password_le->text(), [=](QByteArray response) {
-        QString message = JsonHelper::toString(JsonHelper::toJsonDocument(&response), "message");
-        ui->latest_msg_lbl->setText(message);
+        //        QString message = JsonHelper::toString(JsonHelper::toJsonDocument(&response), "message");
+//        ui->latest_msg_lbl->setText(message);
     }, [=](QByteArray error){ ui->latest_msg_lbl->setText(error); });
 }
 

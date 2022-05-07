@@ -1,4 +1,4 @@
-QT       += core gui network sql concurrent
+QT       += core gui network sql concurrent networkauth
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -20,6 +20,7 @@ SOURCES += \
     networking\apis.cpp \
     database\sqlite3.cpp \
     networking\routes.cpp \
+    oauths\googleoauth.cpp \
     utility\filesystem.cpp \
     networking\network.cpp \
     utility\jsonhelper.cpp \
@@ -44,12 +45,12 @@ HEADERS += \
     database\sqlite3.h \
     networking\routes.h \
     utility\filesystem.h \
+    oauths\googleoauth.h \
     networking\network.h \
     utility\jsonhelper.h \
     application\manager.h \
     database\localcache.h \
-    singleton\call_once.h \
-    singleton\singleton.h \
+    singleton\Singleton.h \
     utility\hotkeyhandler.h \
     parents\commonsuperclass.h \
     serializers\serializejson.h \
@@ -66,3 +67,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES +=
+
+RESOURCES += \
+    oauth.qrc

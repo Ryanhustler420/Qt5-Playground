@@ -6,7 +6,7 @@
 
 #include <QNetworkAccessManager>
 
-static QString const host = Manager::instance()->getCurrentHostUrl().url();
+static QString const host = Manager::instance().getCurrentHostUrl().url();
 
 class Routes : public CommonSuperClass
 {

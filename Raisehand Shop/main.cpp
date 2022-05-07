@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     // This is required to write
-    QString env = Manager::instance()->getCurrentEnv();
+    QString env = Manager::instance().getCurrentEnv();
     qInfo() << "The application is running on " << env << " mode.";
     //    Sqlite3 db(path);
     //    if (db.isOpen())

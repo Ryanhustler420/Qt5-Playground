@@ -1,12 +1,12 @@
-#ifndef _SINGLETON_H
-#define _SINGLETON_H
+#ifndef SINGLETON_H
+#define SINGLETON_H
 
 #include <iostream>
 #include <type_traits>
-#include <QObject>
+#include <QWidget>
 
 template <typename T, typename D = T>
-class Singleton: public QObject
+class Singleton: public QWidget
 {
     friend D;
     static_assert(std::is_base_of<T, D>(), "T should be a base type for D");
@@ -27,4 +27,4 @@ T& Singleton<T, D>::instance()
     return inst;
 }
 
-#endif // _SINGLETON_H
+#endif // SINGLETON_H
