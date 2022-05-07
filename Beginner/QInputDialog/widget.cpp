@@ -1,5 +1,5 @@
 #include "widget.h"
-#include "ui_widget.h"
+#include "widget.ui"
 
 #include <QInputDialog>
 #include <QDebug>

@@ -22,6 +22,9 @@ Widget::Widget(QWidget *parent)
         qInfo() << str;
     });
 
+    // login logout
+    // service(such as db, file) -> provider(class) -> bridge(class singleton) -> client(classes who create the instances)
+
     // header intercepeor
     // it wiil be a class which will work as interceptor of all the reqest either going or comming...
 
