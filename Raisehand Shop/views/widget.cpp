@@ -51,21 +51,29 @@ Widget::~Widget()
 
 void Widget::on_login_btn_clicked()
 {
+
     GoogleOAuth g;
     g.click();
-    apis.login(ui->email_le->text(), ui->password_le->text(), [=](QByteArray response) {
-        //        QString message = JsonHelper::toString(JsonHelper::toJsonDocument(&response), "message");
-//        ui->latest_msg_lbl->setText(message);
-    }, [=](QByteArray error){ ui->latest_msg_lbl->setText(error); });
+//    apis.login(ui->email_le->text(), ui->password_le->text(), [=](QByteArray response) {
+//        //        QString message = JsonHelper::toString(JsonHelper::toJsonDocument(&response), "message");
+////        ui->latest_msg_lbl->setText(message);
+//    }, [=](QByteArray error){ ui->latest_msg_lbl->setText(error); });
+
 }
 
 void Widget::on_stocks_btn_clicked()
 {
-    apis.getMyStockIds("61232989fe2e480016701465", [=](QByteArray response){
-        QJsonObject object = JsonHelper::toJsonObject(JsonHelper::toJsonDocument(&response), "document");
-        QJsonArray array = JsonHelper::toJsonArray(object, "shopProducts");
-        for (int var = 0; var < array.size(); ++var)
-            ui->stocks_list_list_widget->addItem(array.at(var).toString());
-    }, [=](QByteArray error){ ui->latest_msg_lbl->setText(error); });
+        apis.exchangeGoogleOAuthCode("4%2F0AX4XfWhwYd86kfd5np9E8AtUTP3nctfVrKtmz5CfYCtEUYXuUw5ALX2vOpmOwrn9nkCsXg", [=](QByteArray response){
+            qInfo() << response;
+        }, [=](QByteArray error){
+            ui->latest_msg_lbl->setText(error);
+        });
+
+//    apis.getMyStockIds("61232989fe2e480016701465", [=](QByteArray response){
+//        QJsonObject object = JsonHelper::toJsonObject(JsonHelper::toJsonDocument(&response), "document");
+//        QJsonArray array = JsonHelper::toJsonArray(object, "shopProducts");
+//        for (int var = 0; var < array.size(); ++var)
+//            ui->stocks_list_list_widget->addItem(array.at(var).toString());
+//    }, [=](QByteArray error){ ui->latest_msg_lbl->setText(error); });
 }
 

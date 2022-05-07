@@ -16,6 +16,8 @@ public:
     void getMyStockIds(QString s_id, std::function<void(QByteArray)> response, std::function<void(QByteArray)> error);
     void attachHeader(QNetworkRequest &netRequest);
 
+    void exchangeGoogleOAuthCode(QString code, std::function<void(QByteArray)> response, std::function<void(QByteArray)> error);
+
 signals:
 
 private:
