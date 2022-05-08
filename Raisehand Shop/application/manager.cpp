@@ -2,7 +2,7 @@
 
 // this class will be manager of entire application
 // will track of the current enviorment and other stuff.
-Manager::Manager(QObject *parent) : Singleton<Manager>()
+Manager::Manager(QObject *parent) : OSingleton<Manager>()
 {
     Q_UNUSED(parent);
 #ifdef QT_DEBUG

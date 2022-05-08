@@ -1,10 +1,10 @@
 #ifndef MANAGER_H
 #define MANAGER_H
 
-#include "singleton/singleton.h"
+#include "singleton/singleton_obj.h"
 #include <QUrl>
 
-class Manager : public Singleton<Manager>
+class Manager : public OSingleton<Manager>
 {
 
 public:

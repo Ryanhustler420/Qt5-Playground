@@ -10,6 +10,7 @@ CONFIG += c++11
 
 SOURCES += \
     main.cpp \
+    rx\signals.cpp \
     utility\os.cpp \
     views\widget.cpp \
     models\spider.cpp \
@@ -34,6 +35,7 @@ SOURCES += \
     utility\filesystembroadcaster.cpp \
 
 HEADERS += \
+    rx\signals.h \
     utility\os.h \
     views\widget.h \
     models\spider.h \
@@ -50,10 +52,11 @@ HEADERS += \
     utility\jsonhelper.h \
     application\manager.h \
     database\localcache.h \
-    singleton\Singleton.h \
     utility\hotkeyhandler.h \
+    singleton\singleton_obj.h \
     parents\commonsuperclass.h \
     serializers\serializejson.h \
+    singleton\singleton_widget.h \
     serializers\serializeclass.h \
     serializers\serializeqobject.h \
     utility\filesystembroadcaster.h \

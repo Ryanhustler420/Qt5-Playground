@@ -185,3 +185,18 @@ void Apis::getMyStockIds(QString s_id, std::function<void (QByteArray)> response
   });
 */
 
+/*
+apis.exchangeGoogleOAuthCode("4%2F0AX4XfWg4hiYZtL_Hp2FFL5ZK4-ka4gSCponQAb90alT6JeSBWxSXUTWkdAhDr0OMlmiLMQ", [=](QByteArray response){
+    QJsonDocument doc = JsonHelper::toJsonDocument(&response);
+    QString access_token = JsonHelper::toString(doc, "access_token");
+    QString token_type = JsonHelper::toString(doc, "token_type");
+    QString id_token = JsonHelper::toString(doc, "id_token");
+    apis.exchangeGoogleAccessTokenForUserInfo(token_type, access_token, [=](QByteArray response) {
+        qInfo() << JsonHelper::toJsonDocument(&response);
+    }, [=](QByteArray error) {
+        qWarning() << error;
+    });
+}, [=](QByteArray error){
+    ui->latest_msg_lbl->setText(error);
+});
+*/
