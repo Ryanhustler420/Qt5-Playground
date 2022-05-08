@@ -57,6 +57,34 @@ void Apis::exchangeGoogleOAuthCode(QString code, std::function<void(QByteArray)>
             break;
         }
     });
+}
+
+void Apis::exchangeGoogleAccessTokenForUserInfo(QString tokenType, QString accessToken, std::function<void (QByteArray)> response, std::function<void (QByteArray)> error)
+{
+    QNetworkRequest request(QUrl("https://www.googleapis.com/oauth2/v2/userinfo"));
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/x-www-form-urlencoded");
+    request.setRawHeader("Authorization", QString("%1 %2").arg(tokenType).arg(accessToken).toLatin1());
+
+    QByteArray * mDataBuffer = new QByteArray();
+    QNetworkReply *mNetReply = mNetMan->get(request);
+    connect(mNetReply, &QIODevice::readyRead, this, [=]() { mDataBuffer->append(mNetReply->readAll()); });
+    connect(mNetReply, &QNetworkReply::finished, this, [=](){
+        int errorCode = mNetReply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+        switch (errorCode) {
+        case 200: /* OK */
+            response(*mDataBuffer);
+            break;
+        case 400: /* BAD */
+        case 401: /* UN AUTHORIZED */
+        case 422: /* Unprocessable Entity */
+        case 426: /* UPGRADE REQUIRED */
+        case 501: /* NOT IMPLEMENTED */
+        case 502: /* BAD GATEWAY */
+        case 503: /* UNDER MAINTENANCE */
+            error(mNetReply->errorString().toLatin1());
+            break;
+        }
+    });
 
 }
 
@@ -124,4 +152,36 @@ void Apis::getMyStockIds(QString s_id, std::function<void (QByteArray)> response
         }
     });
 }
+
+/*
+ * // JAVASCRIPT (Server Code)
+ * // https://developers.google.com/oauthplayground
+  const fetch = require('node-fetch');
+  app.get(`${version}/__run__`, async (req, res) => {
+    const url ='https://oauth2.googleapis.com/token';
+    const code = '4%2F0AX4XfWgBta1lNpxoG1EHCPhPD3PfG312pLsAaHkNaYwDhURswc7E7JAUwZXsckqt9CHp8w';
+    const headers = {
+      "Content-Type": "application/x-www-form-urlencoded",
+      'Content-length': code.length,
+    }
+    fetch(url, {
+        method: 'POST', headers: headers,
+        body: `code=${code}&client_id=926313063462-r1ua8s90db0tgghvpaitt7t96vku7svi.apps.googleusercontent.com
+        &client_secret=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&redirect_uri=http%3A%2F%2F127.0.0.1:3003%2Fgoogle_oauth%2F&grant_type=authorization_code`
+    })
+    .then(res => res.json())
+    .then((json) => {
+      fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
+        method: 'GET',
+        headers: {
+          Authorization: `${json.token_type} ${json.access_token}`
+        },
+      })
+      .then(res => res.json())
+      .then((json) => {
+        return new RESPONSE(res).ok({json});
+      })
+    });
+  });
+*/
 

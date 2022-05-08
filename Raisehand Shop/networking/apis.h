@@ -17,6 +17,7 @@ public:
     void attachHeader(QNetworkRequest &netRequest);
 
     void exchangeGoogleOAuthCode(QString code, std::function<void(QByteArray)> response, std::function<void(QByteArray)> error);
+    void exchangeGoogleAccessTokenForUserInfo(QString tokenType, QString accessToken, std::function<void(QByteArray)> response, std::function<void(QByteArray)> error);
 
 signals:
 
