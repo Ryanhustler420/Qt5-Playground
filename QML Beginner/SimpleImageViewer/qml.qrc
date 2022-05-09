@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>HoverButton.qml</file>
+    </qresource>
+    <qresource prefix="/images">
+        <file>IMG_5061.JPG</file>
+        <file>IMG_5085.JPG</file>
+        <file>IMG_5090.JPG</file>
+    </qresource>
+</RCC>
