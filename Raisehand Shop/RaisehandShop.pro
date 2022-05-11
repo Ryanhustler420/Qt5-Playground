@@ -21,18 +21,27 @@ SOURCES += \
     networking\apis.cpp \
     database\sqlite3.cpp \
     networking\routes.cpp \
+    models\plans\plan.cpp \
     oauths\googleoauth.cpp \
     utility\filesystem.cpp \
     networking\network.cpp \
     utility\jsonhelper.cpp \
     application\manager.cpp \
     database\localcache.cpp \
+    models\country\state.cpp \
     utility\hotkeyhandler.cpp \
+    models\plans\endpoint.cpp \
+    models\country\country.cpp \
     parents\commonsuperclass.cpp \
     serializers\serializejson.cpp \
     serializers\serializeclass.cpp \
+    models\god\modelconventions.cpp \
     serializers\serializeqobject.cpp \
     utility\filesystembroadcaster.cpp \
+    models\contribution\contribution.cpp \
+    models\notifications\notification.cpp \
+    models\notifications\notificationmetadata.cpp \
+    models\contribution\eachcontributedproduct.cpp \
 
 HEADERS += \
     rx\signals.h \
@@ -46,20 +55,30 @@ HEADERS += \
     networking\apis.h \
     database\sqlite3.h \
     networking\routes.h \
+    models\plans\plan.h \
     utility\filesystem.h \
     oauths\googleoauth.h \
     networking\network.h \
     utility\jsonhelper.h \
+    shareable\constants.h \
     application\manager.h \
     database\localcache.h \
+    models\country\state.h \
     utility\hotkeyhandler.h \
+    models\plans\endpoint.h \
+    models\country\country.h \
     singleton\singleton_obj.h \
     parents\commonsuperclass.h \
     serializers\serializejson.h \
     singleton\singleton_widget.h \
     serializers\serializeclass.h \
+    models\god\modelconventions.h \
     serializers\serializeqobject.h \
     utility\filesystembroadcaster.h \
+    models\contribution\contribution.h \
+    models\notifications\notification.h \
+    models\notifications\notificationmetadata.h \
+    models\contribution\eachcontributedproduct.h
 
 FORMS += \
     views\widget.ui

@@ -41,6 +41,8 @@ Widget::Widget(QWidget *parent)
     // RaisehandCloudinary
     // Image Manupulator <plugin>
     // Models
+
+    // create a python script to manipulate the image, extend that continue and export that as .exe later
 }
 
 Widget::~Widget()
