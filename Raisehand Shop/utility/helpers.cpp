@@ -57,3 +57,26 @@ QByteArray Helpers::fromUTF16(QByteArray value)
 {
     return QTextCodec::codecForName("UTF-16")->toUnicode(value).toLatin1();
 }
+
+// https://stackoverflow.com/a/14353740
+QString Helpers::formatView(long value)
+{
+    return QLocale(QLocale::English).toString((int) value);
+}
+
+// https://stackoverflow.com/a/41276585
+QString Helpers::capitalizeFirstCharOnly(const QString& capString)
+{
+    QStringList parts = capString.split(' ', QString::SkipEmptyParts);
+    for (int i = 0; i < parts.size(); ++i)
+        parts[i].replace(0, 1, parts[i][0].toUpper());
+    return parts.join(" ");
+}
+
+QString Helpers::normalizeEmail(const QString &normalizeEmailAddress)
+{
+    if (normalizeEmailAddress == nullptr || normalizeEmailAddress.compare(""))
+        return EMPTY_STRING;
+    return normalizeEmailAddress.trimmed().toLower();
+}
+

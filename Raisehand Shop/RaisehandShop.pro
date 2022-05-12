@@ -16,6 +16,8 @@ SOURCES += \
     models\spider.cpp \
     models\jocker.cpp \
     utility\timer.cpp \
+    models\category.cpp \
+    models\currency.cpp \
     utility\threads.cpp \
     utility\helpers.cpp \
     networking\apis.cpp \
@@ -40,8 +42,11 @@ SOURCES += \
     utility\filesystembroadcaster.cpp \
     models\contribution\contribution.cpp \
     models\notifications\notification.cpp \
+    models\product_repository\contributor.cpp \
     models\notifications\notificationmetadata.cpp \
     models\contribution\eachcontributedproduct.cpp \
+    models\product_repository\productrepository.cpp \
+    models\product_repository\repositoryjoinrequest.cpp \
 
 HEADERS += \
     rx\signals.h \
@@ -50,6 +55,8 @@ HEADERS += \
     models\spider.h \
     models\jocker.h \
     utility\timer.h \
+    models\category.h \
+    models\currency.h \
     utility\threads.h \
     utility\helpers.h \
     networking\apis.h \
@@ -61,6 +68,7 @@ HEADERS += \
     networking\network.h \
     utility\jsonhelper.h \
     shareable\constants.h \
+    qr_signature\iocode.h \
     application\manager.h \
     database\localcache.h \
     models\country\state.h \
@@ -68,6 +76,7 @@ HEADERS += \
     models\plans\endpoint.h \
     models\country\country.h \
     singleton\singleton_obj.h \
+    qr_signature\jwtencoder.h \
     parents\commonsuperclass.h \
     serializers\serializejson.h \
     singleton\singleton_widget.h \
@@ -77,8 +86,11 @@ HEADERS += \
     utility\filesystembroadcaster.h \
     models\contribution\contribution.h \
     models\notifications\notification.h \
+    models\product_repository\contributor.h \
     models\notifications\notificationmetadata.h \
-    models\contribution\eachcontributedproduct.h
+    models\contribution\eachcontributedproduct.h \
+    models\product_repository\productrepository.h \
+    models\product_repository\repositoryjoinrequest.h \
 
 FORMS += \
     views\widget.ui

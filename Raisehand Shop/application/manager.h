@@ -14,11 +14,15 @@ public:
 signals:
 
 public:
+    int getVersionCode() const;
     QString getCurrentEnv() const;
     QUrl getCurrentHostUrl() const;
+    QString getAppVersionName() const;
+    QString getServerVersionCode() const;
 
 private:
-    QString env;
+    int versionCode;
+    QString env, appVersionName, serverVersionCode;
     QUrl *hostUrl;
 
 };

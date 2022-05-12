@@ -4,14 +4,22 @@
 // will track of the current enviorment and other stuff.
 Manager::Manager(QObject *parent) : OSingleton<Manager>()
 {
+    versionCode = 1;
+    appVersionName = "1";
+    serverVersionCode = "8";
     Q_UNUSED(parent);
 #ifdef QT_DEBUG
-    env = "Development";
+    env = "dev";
     hostUrl = new QUrl("http://localhost:3002/sandbox/v1");
 #else
-    env = "Production";
+    env = "prod";
     hostUrl = new QUrl("http://localhost:3002/v1");
 #endif
+}
+
+int Manager::getVersionCode() const
+{
+    return versionCode;
 }
 
 QString Manager::getCurrentEnv() const
@@ -22,4 +30,14 @@ QString Manager::getCurrentEnv() const
 QUrl Manager::getCurrentHostUrl() const
 {
     return *hostUrl;
+}
+
+QString Manager::getAppVersionName() const
+{
+    return appVersionName;
+}
+
+QString Manager::getServerVersionCode() const
+{
+    return serverVersionCode;
 }
