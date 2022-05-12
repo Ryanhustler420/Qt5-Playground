@@ -104,6 +104,8 @@ static const QString SYMBOL_USD = "$";
 
 static const QString CURRENCY = "currency";
 static const QString NOT_MENTIONED = "Not Mentioned";
+static const QString STOPPED_PRODUCTION = "Stopped Production";
+static const QString CONTINUED_PRODUCTION = "Continued Production";
 
 // Stock Capacity
 static const int INFINITY = -1; // meaning unlimited product insertion...
