@@ -10,6 +10,16 @@ CONFIG += c++11
 
 SOURCES += \
     main.cpp \
+    models/siunit.cpp \
+    models/user/signedinvia.cpp \
+    models/user/user.cpp \
+    models/user/psnap.cpp \
+    models/user/token.cpp \
+    models/user/signedbydevice.cpp \
+    models/user/repoaccesspasscode.cpp \
+    models/repo_product/repoproduct.cpp \
+    models/user/repoproductmergerequest.cpp \
+    models/user/mycontributionofrepoproduct.cpp \
     rx\signals.cpp \
     utility\os.cpp \
     views\widget.cpp \
@@ -34,6 +44,7 @@ SOURCES += \
     utility\hotkeyhandler.cpp \
     models\plans\endpoint.cpp \
     models\country\country.cpp \
+    models\repo_product\tag.cpp \
     parents\commonsuperclass.cpp \
     serializers\serializejson.cpp \
     serializers\serializeclass.cpp \
@@ -49,6 +60,16 @@ SOURCES += \
     models\product_repository\repositoryjoinrequest.cpp \
 
 HEADERS += \
+    models/siunit.h \
+    models/user/signedinvia.h \
+    models/user/user.h \
+    models/user/psnap.h \
+    models/user/token.h \
+    models/user/signedbydevice.h \
+    models/user/repoaccesspasscode.h \
+    models/repo_product/repoproduct.h \
+    models/user/repoproductmergerequest.h \
+    models/user/mycontributionofrepoproduct.h \
     rx\signals.h \
     utility\os.h \
     views\widget.h \
@@ -76,6 +97,7 @@ HEADERS += \
     models\plans\endpoint.h \
     models\country\country.h \
     singleton\singleton_obj.h \
+    models\repo_product\tag.h \
     qr_signature\jwtencoder.h \
     parents\commonsuperclass.h \
     serializers\serializejson.h \
