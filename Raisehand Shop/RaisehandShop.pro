@@ -10,6 +10,18 @@ CONFIG += c++11
 
 SOURCES += \
     main.cpp \
+    models/coordinates.cpp \
+    models/location.cpp \
+    models/payment.cpp \
+    models/productrepositoryexpiredetails.cpp \
+    models/rangecoordinate.cpp \
+    models/rechargecoupon.cpp \
+    models/secretkey.cpp \
+    models/shop/shop.cpp \
+    models/shop/shopjoinrequest.cpp \
+    models/shop/workingtime.cpp \
+    models/shopexpiredetails.cpp \
+    models/shopproduct.cpp \
     models/siunit.cpp \
     models/user/signedinvia.cpp \
     models/user/user.cpp \
@@ -60,6 +72,18 @@ SOURCES += \
     models\product_repository\repositoryjoinrequest.cpp \
 
 HEADERS += \
+    models/coordinates.h \
+    models/location.h \
+    models/payment.h \
+    models/productrepositoryexpiredetails.h \
+    models/rangecoordinate.h \
+    models/rechargecoupon.h \
+    models/secretkey.h \
+    models/shop/shop.h \
+    models/shop/shopjoinrequest.h \
+    models/shop/workingtime.h \
+    models/shopexpiredetails.h \
+    models/shopproduct.h \
     models/siunit.h \
     models/user/signedinvia.h \
     models/user/user.h \
