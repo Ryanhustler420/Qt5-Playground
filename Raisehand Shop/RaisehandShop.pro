@@ -10,9 +10,13 @@ CONFIG += c++11
 
 SOURCES += \
     main.cpp \
+    models/barcode.cpp \
     models/coordinates.cpp \
+    models/counter.cpp \
     models/location.cpp \
+    models/mergerequest.cpp \
     models/payment.cpp \
+    models/productmergehistory.cpp \
     models/productrepositoryexpiredetails.cpp \
     models/rangecoordinate.cpp \
     models/rechargecoupon.cpp \
@@ -72,9 +76,13 @@ SOURCES += \
     models\product_repository\repositoryjoinrequest.cpp \
 
 HEADERS += \
+    models/barcode.h \
     models/coordinates.h \
+    models/counter.h \
     models/location.h \
+    models/mergerequest.h \
     models/payment.h \
+    models/productmergehistory.h \
     models/productrepositoryexpiredetails.h \
     models/rangecoordinate.h \
     models/rechargecoupon.h \
