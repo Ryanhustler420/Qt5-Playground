@@ -3,8 +3,8 @@ import QtQuick.Window 2.12
 import QtQuick.Controls 2.3
 
 ApplicationWindow {
-    width: 640
-    height: 480
+    width: 900
+    height: 550
     visible: true
     title: qsTr("xCodeClazz")
 

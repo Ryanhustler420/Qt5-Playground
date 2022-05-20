@@ -4,4 +4,7 @@
         <file>application.qml</file>
         <file>dashboard_page.qml</file>
     </qresource>
+    <qresource prefix="/js">
+        <file>ComponentGenerator.js</file>
+    </qresource>
 </RCC>

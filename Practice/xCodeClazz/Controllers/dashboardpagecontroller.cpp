@@ -4,3 +4,8 @@ DashboardPageController::DashboardPageController(QObject *parent) : QObject(pare
 {
 
 }
+
+void DashboardPageController::openCountState(QString name, QString count)
+{
+    qInfo() << name << count;
+}
