@@ -1,4 +1,4 @@
-#include "Controllers/allstudentspagecontroller.h"
+#include "controllers/allstudentspagecontroller.h"
 
 AllStudentsPageController::AllStudentsPageController(QObject *parent) : QObject(parent)
 {

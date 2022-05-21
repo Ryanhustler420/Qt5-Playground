@@ -11,22 +11,10 @@ Page {
     Layout.fillWidth: true
     title: qsTr("xCodeClazz")
 
-    Component.onCompleted: {
-        // every component can have stackView
-
-        // if login page removed from stack view, then gotopage can't call
-        // first go to that page and then remove the stack below
-    }
-
-    // first complete the flow of the ui
-    // put the routes and internet connection/login
-    // put db login as well
-    // figure out the design pattern and use that in another project
-
     // these signals are being used in this page
     signal openCourse(string id, string name);
     onOpenCourse: {
-        // console.log(id, name)
+        page_controller.hold(name, id, "QString duration", "QString thumbnailUrl", "QString imageContainer", [], 123, false, 0, 8, "QString starts", "QString ends")
         application.gotoPage(application.getSingleCoursePagePath())
     }
 

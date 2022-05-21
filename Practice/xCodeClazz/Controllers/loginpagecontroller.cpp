@@ -1,4 +1,4 @@
-#include "Controllers/loginpagecontroller.h"
+#include "controllers/loginpagecontroller.h"
 
 LoginPageController::LoginPageController(QObject *parent) : QObject(parent)
 {

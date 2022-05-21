@@ -11,8 +11,16 @@ Page {
     title: qsTr("xCodeClazz")
 
     Component.onCompleted: {
+        // every component can have stackView
 
+        // if login page removed from stack view, then gotopage can't call
+        // first go to that page and then remove the stack below
     }
+
+    // first complete the flow of the ui
+    // put the routes and internet connection/login
+    // put db login as well
+    // figure out the design pattern and use that in another project
 
     Popup {
         id: popup

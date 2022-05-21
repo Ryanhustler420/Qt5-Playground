@@ -1,4 +1,4 @@
-#include "Controllers/dashboardpagecontroller.h"
+#include "controllers/dashboardpagecontroller.h"
 
 DashboardPageController::DashboardPageController(QObject *parent) : QObject(parent)
 {

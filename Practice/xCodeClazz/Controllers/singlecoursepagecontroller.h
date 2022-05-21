@@ -1,7 +1,8 @@
 #ifndef SINGLECOURSEPAGECONTROLLER_H
 #define SINGLECOURSEPAGECONTROLLER_H
 
-#include <QObject>
+#include "ipc/databridge.h"
+#include "models/course.h"
 
 class SingleCoursePageController : public QObject
 {

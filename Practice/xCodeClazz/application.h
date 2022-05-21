@@ -6,12 +6,12 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 
-#include "Controllers/loginpagecontroller.h"
-#include "Controllers/dashboardpagecontroller.h"
-#include "Controllers/allrequestcallbackspage.h"
-#include "Controllers/allcoursespagecontroller.h"
-#include "Controllers/allstudentspagecontroller.h"
-#include "Controllers/singlecoursepagecontroller.h"
+#include "controllers/loginpagecontroller.h"
+#include "controllers/dashboardpagecontroller.h"
+#include "controllers/allrequestcallbackspage.h"
+#include "controllers/allcoursespagecontroller.h"
+#include "controllers/allstudentspagecontroller.h"
+#include "controllers/singlecoursepagecontroller.h"
 
 class Application : public QObject
 {
