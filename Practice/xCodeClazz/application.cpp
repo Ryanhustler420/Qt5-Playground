@@ -30,3 +30,8 @@ void Application::gotoPage(QString qrc)
 {
     emit pushPage(qrc);
 }
+
+void Application::replacePage(QString qrc)
+{
+    emit pageReplaced(qrc);
+}

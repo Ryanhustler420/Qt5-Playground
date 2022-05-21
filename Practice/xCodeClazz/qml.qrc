@@ -1,10 +1,19 @@
 <RCC>
     <qresource prefix="/">
-        <file>login_page.qml</file>
         <file>application.qml</file>
-        <file>dashboard_page.qml</file>
     </qresource>
     <qresource prefix="/js">
         <file>ComponentGenerator.js</file>
+    </qresource>
+    <qresource prefix="/pages">
+        <file>all_courses_page.qml</file>
+        <file>dashboard_page.qml</file>
+        <file>login_page.qml</file>
+        <file>all_students_page.qml</file>
+        <file>all_request_callbacks_page.qml</file>
+        <file>single_course_page.qml</file>
+    </qresource>
+    <qresource prefix="/images">
+        <file>oCopy.png</file>
     </qresource>
 </RCC>

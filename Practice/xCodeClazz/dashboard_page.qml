@@ -7,7 +7,8 @@ import "qrc:/js/ComponentGenerator.js" as ComponentGenerator
 
 Page {
     id: root
-    anchors.fill: parent
+    Layout.fillHeight: true
+    Layout.fillWidth: true
     title: qsTr("xCodeClazz")
 
     // these signals are being used in this page
@@ -31,18 +32,24 @@ Page {
 
             ListView {
                 id: list_options
-                anchors.fill: parent
+                Layout.fillHeight: true
+                Layout.fillWidth: true
                 width: parent.width
                 model: [{ name: "Courses" }, { name: "Students" }, { name: "Callback Requests" }]
                 delegate: ItemDelegate {
                     text: modelData.name
                     width: parent.width
                     onClicked: {
-                        console.log(modelData.name)
+                        if (modelData.name === "Courses") {
+                            application.gotoPage(application.getCoursesPagePath())
+                        } else if (modelData.name === "Students") {
+                            application.gotoPage(application.getStudentsPagePath())
+                        } else if (modelData.name === "Callback Requests") {
+                            application.gotoPage(application.getRequestCallbacksPagePath())
+                        }
                     }
                 }
             }
-
         }
 
         ColumnLayout {
@@ -56,7 +63,8 @@ Page {
 
             ScrollView {
                 visible: true
-                anchors.fill: parent
+                Layout.fillHeight: true
+                Layout.fillWidth: true
                 height: parent.height
                 width: parent.width
 
@@ -92,7 +100,7 @@ Page {
                             var list = [
                                         { name: "Courses", count: "5" },
                                         { name: "Students", count: "15" },
-                                        { name: "Callbacks", count: "32" },
+                                        { name: "Callbacks", count: "32" }
                                     ]
                             for(var i =0; i< list.length; i++) {
                                 ComponentGenerator.createCountState(i, list[i], overall_status);

@@ -5,7 +5,9 @@ import QtQuick.Layouts 1.3
 import com.xcodeclazz.loginpagecontroller 1.0
 
 Page {
-    anchors.fill: parent
+    id: root
+    Layout.fillHeight: true
+    Layout.fillWidth: true
     title: qsTr("xCodeClazz")
 
     Component.onCompleted: {
@@ -82,7 +84,7 @@ Page {
         }
         onLoginSucced: {
             popup.close()
-            application.gotoPage(application.getDashboardPath())
+            application.replacePage(application.getDashboardPath())
         }
     }
 
