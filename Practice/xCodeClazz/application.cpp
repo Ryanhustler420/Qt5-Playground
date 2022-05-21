@@ -8,6 +8,10 @@ Application::Application(QObject *parent) : QObject(parent)
     // register all the controllers here if you do not want binding of two different component
     qmlRegisterType<LoginPageController>("com.xcodeclazz.loginpagecontroller", 1, 0, "LoginPageController");
     qmlRegisterType<DashboardPageController>("com.xcodeclazz.dashboardcontroller", 1, 0, "DashboardPageController");
+    qmlRegisterType<AllRequestCallbacksPage>("com.xcodeclazz.allrequestcallbackspage", 1, 0, "AllRequestCallbacksPage");
+    qmlRegisterType<AllCoursesPageController>("com.xcodeclazz.allcoursespagecontroller", 1, 0, "AllCoursesPageController");
+    qmlRegisterType<AllStudentsPageController>("com.xcodeclazz.allstudentspagecontroller", 1, 0, "AllStudentsPageController");
+    qmlRegisterType<SingleCoursePageController>("com.xcodeclazz.singlecoursepagecontroller", 1, 0, "SingleCoursePageController");
 }
 
 void Application::boot(QGuiApplication &app)

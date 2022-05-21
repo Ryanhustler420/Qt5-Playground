@@ -2,6 +2,7 @@ import QtQuick 2.0
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.3
 
+import com.xcodeclazz.allcoursespagecontroller 1.0
 import "qrc:/js/ComponentGenerator.js" as ComponentGenerator
 
 Page {
@@ -95,6 +96,10 @@ Page {
             }
 
         }
+    }
+
+    AllCoursesPageController {
+        id: page_controller
     }
 
 }

@@ -7,8 +7,12 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+        Controllers/allcoursespagecontroller.cpp \
+        Controllers/allrequestcallbackspage.cpp \
+        Controllers/allstudentspagecontroller.cpp \
         Controllers/dashboardpagecontroller.cpp \
         Controllers/loginpagecontroller.cpp \
+        Controllers/singlecoursepagecontroller.cpp \
         application.cpp \
         main.cpp
 
@@ -26,6 +30,10 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
+    Controllers/allcoursespagecontroller.h \
+    Controllers/allrequestcallbackspage.h \
+    Controllers/allstudentspagecontroller.h \
     Controllers/dashboardpagecontroller.h \
     Controllers/loginpagecontroller.h \
+    Controllers/singlecoursepagecontroller.h \
     application.h

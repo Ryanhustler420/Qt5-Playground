@@ -11,7 +11,7 @@ Window {
     StackView {
         id: stackview
         anchors.fill: parent
-        initialItem: "/pages/login_page.qml"
+        initialItem: application.getLoginPagePath()
     }
 
     RoundButton {

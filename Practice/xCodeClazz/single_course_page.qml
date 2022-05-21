@@ -2,6 +2,8 @@ import QtQuick 2.0
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.3
 
+import com.xcodeclazz.singlecoursepagecontroller 1.0
+
 Page {
     id: root
     Layout.fillHeight: true
@@ -24,6 +26,10 @@ Page {
             text: "Loading\u2026"
             font.pointSize: 12
         }
+    }
+
+    SingleCoursePageController {
+        id: page_controller
     }
 
 }

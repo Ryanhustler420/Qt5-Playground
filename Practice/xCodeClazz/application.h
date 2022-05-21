@@ -8,6 +8,10 @@
 
 #include "Controllers/loginpagecontroller.h"
 #include "Controllers/dashboardpagecontroller.h"
+#include "Controllers/allrequestcallbackspage.h"
+#include "Controllers/allcoursespagecontroller.h"
+#include "Controllers/allstudentspagecontroller.h"
+#include "Controllers/singlecoursepagecontroller.h"
 
 class Application : public QObject
 {
