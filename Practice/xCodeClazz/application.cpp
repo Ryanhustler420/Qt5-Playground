@@ -16,7 +16,7 @@ Application::Application(QObject *parent) : QObject(parent)
 
 void Application::boot(QGuiApplication &app)
 {
-    const QUrl url(QStringLiteral("qrc:/application.qml"));
+    const QUrl url(getApplicationPath());
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {
         if (!obj && url == objUrl)
@@ -38,4 +38,9 @@ void Application::gotoPage(QString qrc)
 void Application::replacePage(QString qrc)
 {
     emit pageReplaced(qrc);
+}
+
+void Application::pop()
+{
+    emit poped();
 }

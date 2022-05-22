@@ -2,7 +2,6 @@
 
 AllCoursesPageController::AllCoursesPageController(QObject *parent) : QObject(parent)
 {
-
 }
 
 void AllCoursesPageController::hold(QString title, QString subtitle, QString duration, QString thumbnailUrl, QString imageContainer, QList<QString> features, int price, bool hasActive, int spaceLeft, int spaceFull, QString starts, QString ends)

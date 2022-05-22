@@ -24,7 +24,7 @@ Window {
         anchors.right: parent.right
         visible: stackview.depth > 1
         onClicked: {
-            stackview.pop()
+            pop()
         }
     }
     Connections {
@@ -38,6 +38,13 @@ Window {
         onPageReplaced: {
             stackview.replace(qrc)
         }
+        onPoped: {
+            pop()
+        }
+    }
+
+    function pop() {
+        stackview.pop()
     }
 
 }

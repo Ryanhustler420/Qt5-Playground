@@ -3,6 +3,7 @@
 
 #include "ipc/databridge.h"
 #include "models/course.h"
+#include "rx/signals.h"
 
 class AllCoursesPageController : public QObject
 {

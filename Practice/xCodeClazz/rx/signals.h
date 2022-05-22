@@ -12,12 +12,10 @@ public:
     explicit Signals(QWidget *parent = nullptr);
 
 signals:
-    void signalOne();
-    void signalTwo(int a = 0);
+    void deleteCourse();
 
 public slots:
-    void signalOneReceiver(std::function<void ()> callback);
-    void signalTwoReceiver(std::function<void (int a)> callback);
+    void onDeleteCourse(std::function<void ()> callback);
 
 };
 
