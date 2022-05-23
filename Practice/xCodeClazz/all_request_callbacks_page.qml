@@ -94,18 +94,14 @@ Page {
                         text: `Delete`
                         highlighted: true
                         Material.background: Material.Red
-                        onClicked: {
-                            page_controller.removeItem(index);
-                        }
+                        onClicked: page_controller.removeItem(index);
                     }
 
                     Button {
                         text: `Accept`
                         highlighted: true
                         Material.background: Material.Green
-                        onClicked: {
-                            page_controller.removeItem(index);
-                        }
+                        onClicked: page_controller.removeItem(index);
                     }
 
                 }
@@ -137,23 +133,13 @@ Page {
             callbacks_model.remove(currentIndex)
         }
         onNewItemAdded: {
-            callbacks_model.append(JSON.parse(JSON.stringify(object)))
+            callbacks_model.append(JSON.parse(object))
+        }
+        onNewItemsAdded: {
+            callbacks_model.append(objects.map(e => JSON.parse(e)));
         }
         Component.onCompleted: {
-            page_controller.addNewItem({ course: "Python Code For Beginner", name: "Sikha Jha", school: "KPS Kadma", phone: "xxxxxxxxxx" })
-            page_controller.addNewItem({ course: "C++ Code For Beginner", name: "Vikram Pradhan", school: "KPS Gamharia", phone: "xxxxxxxxxx" })
-            page_controller.addNewItem({ course: "Java Code For Beginner", name: "Anjali Gupta", school: "DAV Adityapur", phone: "xxxxxxxxxx" })
-            page_controller.addNewItem({ course: "NodeJs Code For Beginner", name: "Mahesh Gupta", school: "Xavier Gamharia", phone: "xxxxxxxxxx" })
-            page_controller.addNewItem({ course: "NodeJs Code For Beginner", name: "Mahesh Gupta", school: "Xavier Gamharia", phone: "xxxxxxxxxx" })
-            page_controller.addNewItem({ course: "NodeJs Code For Beginner", name: "Mahesh Gupta", school: "Xavier Gamharia", phone: "xxxxxxxxxx" })
-            page_controller.addNewItem({ course: "NodeJs Code For Beginner", name: "Mahesh Gupta", school: "Xavier Gamharia", phone: "xxxxxxxxxx" })
-            page_controller.addNewItem({ course: "NodeJs Code For Beginner", name: "Mahesh Gupta", school: "Xavier Gamharia", phone: "xxxxxxxxxx" })
-            page_controller.addNewItem({ course: "NodeJs Code For Beginner", name: "Mahesh Gupta", school: "Xavier Gamharia", phone: "xxxxxxxxxx" })
-            page_controller.addNewItem({ course: "NodeJs Code For Beginner", name: "Mahesh Gupta", school: "Xavier Gamharia", phone: "xxxxxxxxxx" })
-            page_controller.addNewItem({ course: "NodeJs Code For Beginner", name: "Mahesh Gupta", school: "Xavier Gamharia", phone: "xxxxxxxxxx" })
-            page_controller.addNewItem({ course: "NodeJs Code For Beginner", name: "Mahesh Gupta", school: "Xavier Gamharia", phone: "xxxxxxxxxx" })
-            page_controller.addNewItem({ course: "NodeJs Code For Beginner", name: "Mahesh Gupta", school: "Xavier Gamharia", phone: "xxxxxxxxxx" })
-            page_controller.addNewItem({ course: "NodeJs Code For Beginner", name: "Mahesh Gupta", school: "Xavier Gamharia", phone: "xxxxxxxxxx" })
+            page_controller.ready()
         }
     }
 

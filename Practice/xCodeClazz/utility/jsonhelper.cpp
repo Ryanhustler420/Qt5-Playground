@@ -30,6 +30,12 @@ QString JsonHelper::toString(QJsonDocument jsonDocument, QString key)
     return jsonDocument.object().value(key).toString();
 }
 
+QJsonObject JsonHelper::toJson(QString in)
+{
+    QJsonValue val(in);
+    return val.toObject();
+}
+
 QJsonDocument JsonHelper::createDummyJSON()
 {
     // create main object for whole json data

@@ -11,6 +11,7 @@ class AllRequestCallbacksPage : public QObject
     Q_OBJECT
 public:
     explicit AllRequestCallbacksPage(QObject *parent = nullptr);
+    Q_INVOKABLE void ready(); // for qml only
 
     Q_INVOKABLE void addNewItem(QVariant object);
     Q_INVOKABLE void removeItem(int currentIndx);
@@ -20,6 +21,7 @@ public:
     Q_INVOKABLE QVariantList getAll();
 
 signals:
+    void newItemsAdded(QVariantList objects);
     void newItemAdded(QVariant object, QVariantList objects);
     void itemRemoved(int currentIndex, QVariantList objects);
     void allItemRemoved();

@@ -13,9 +13,20 @@ SOURCES += \
         controllers\allrequestcallbackspage.cpp \
         controllers\dashboardpagecontroller.cpp \
         controllers\loginpagecontroller.cpp \
+    database/localcache.cpp \
+    database/sqlite3.cpp \
         models\god\modelconventions.cpp \
+    networking/apis.cpp \
+    networking/network.cpp \
+    networking/routes.cpp \
         parents\commonsuperclass.cpp \
         application\manager.cpp \
+    utility/filesystem.cpp \
+    utility/filesystembroadcaster.cpp \
+    utility/helpers.cpp \
+    utility/os.cpp \
+    utility/threads.cpp \
+    utility/timer.cpp \
         utility\jsonhelper.cpp \
         models\course.cpp \
         models\session.cpp \
@@ -44,11 +55,23 @@ HEADERS += \
     controllers\allrequestcallbackspage.h \
     controllers\dashboardpagecontroller.h \
     controllers\loginpagecontroller.h \
+    database/localcache.h \
+    database/sqlite3.h \
     models\god\modelconventions.h \
+    networking/apis.h \
+    networking/network.h \
+    networking/routes.h \
     parents\commonsuperclass.h \
+    shareable/constants.h \
     singleton\singleton_obj.h \
     application\manager.h \
     utility/CursorPosProvider.h \
+    utility/filesystem.h \
+    utility/filesystembroadcaster.h \
+    utility/helpers.h \
+    utility/os.h \
+    utility/threads.h \
+    utility/timer.h \
     utility\jsonhelper.h \
     ipc\databridge.h \
     models\session.h \
