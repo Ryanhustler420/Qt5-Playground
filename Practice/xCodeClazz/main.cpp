@@ -1,4 +1,5 @@
 #include "application.h"
+#include "application/manager.h"
 
 // ****************************************
 // https://stackoverflow.com/questions/8834147/c-signal-to-qml-slot-in-qt
@@ -11,6 +12,9 @@ int main(int argc, char *argv[])
 #endif
 
     QGuiApplication app(argc, argv);
+
+    // Setting up the env configs
+    qInfo() << "Running on:" << Manager::instance().getCurrentEnv();
 
     // App kicks in
     Application application;

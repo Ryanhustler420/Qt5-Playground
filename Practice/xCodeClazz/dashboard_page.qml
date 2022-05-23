@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.5
+import QtQuick.Controls.Material 2.3
 
 import com.xcodeclazz.dashboardcontroller 1.0
 import "qrc:/js/ComponentGenerator.js" as ComponentGenerator
@@ -27,7 +28,7 @@ Page {
 
         ColumnLayout {
             clip: true
-            width: root.width * .3
+            width: 200
             height: root.height
 
             ListView {
@@ -35,7 +36,7 @@ Page {
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 width: parent.width
-                model: [{ name: "Courses" }, { name: "Students" }, { name: "Callback Requests" }]
+                model: [{ name: "Courses" }, { name: "Students" }, { name: "Callback Requests" }, { name: "Logout" }]
                 delegate: ItemDelegate {
                     text: modelData.name
                     width: parent.width
@@ -46,6 +47,8 @@ Page {
                             application.gotoPage(application.getStudentsPagePath())
                         } else if (modelData.name === "Callback Requests") {
                             application.gotoPage(application.getRequestCallbacksPagePath())
+                        } else if (modelData.name === "Logout") {
+                            application.replacePage(application.getLoginPagePath())
                         }
                     }
                 }
@@ -54,14 +57,15 @@ Page {
 
         ColumnLayout {
             clip: true
-            x: root.width * .3
-            width: root.width - (root.width * .3)
+            x: 200
+            width: root.width - (200)
             height: root.height
             onWidthChanged: {
                 right_col.width = width
             }
 
             ScrollView {
+                padding: 10
                 visible: true
                 Layout.fillHeight: true
                 Layout.fillWidth: true
@@ -72,7 +76,7 @@ Page {
                     clip: true
                     id: right_col
                     width: parent.width
-                    spacing: 20
+                    spacing: 15
 
                     /*************************************************/
                     /*************************************************/
@@ -84,7 +88,7 @@ Page {
                         font.pointSize: 25
                     }
 
-                    Text {
+                    Label {
                         width: parent.width
                         font.pointSize: 12
                         wrapMode: Text.WordWrap
@@ -119,7 +123,7 @@ Page {
                         font.pointSize: 25
                     }
 
-                    Text {
+                    Label {
                         width: parent.width
                         font.pointSize: 12
                         wrapMode: Text.WordWrap
@@ -133,13 +137,87 @@ Page {
 
                         Component.onCompleted: {
                             var list = [
-                                        { name: "Deepika", count: "3000/-" },
-                                        { name: "Subham", count: "2950/-" },
-                                        { name: "Anjali", count: "3000/-" },
+                                        { name: "Deepika", count: "3000" },
+                                        { name: "Subham", count: "2950" },
+                                        { name: "Anjali", count: "3000" },
                                     ]
                             for(var i =0; i< list.length; i++) {
                                 ComponentGenerator.createCountState(i, list[i], latest_payment_status);
                             }
+                        }
+
+                    }
+
+                    /*************************************************/
+                    /*************************************************/
+
+                    Label {
+                        width: parent.width
+                        text: "Course Progress"
+                        font.bold: true
+                        font.pointSize: 25
+                    }
+
+                    Label {
+                        width: parent.width
+                        font.pointSize: 12
+                        wrapMode: Text.WordWrap
+                        text: "You can see the current progress of respective course(s)"
+                    }
+
+                    Row {
+                        width: parent.width
+                        spacing: 10
+
+                        Label {
+                            Layout.alignment: Qt.AlignVCenter
+                            text: "C++"
+                            font.bold: true
+                            font.pointSize: 10
+                        }
+
+                        ProgressBar {
+                            height: parent.height
+                            Layout.alignment: Qt.AlignVCenter
+                            value: 0.6
+                        }
+
+                    }
+
+                    Row {
+                        width: parent.width
+                        spacing: 10
+
+                        Label {
+                            Layout.alignment: Qt.AlignVCenter
+                            text: "Python"
+                            font.bold: true
+                            font.pointSize: 10
+                        }
+
+                        ProgressBar {
+                            height: parent.height
+                            Layout.alignment: Qt.AlignVCenter
+                            value: 0.3
+                        }
+
+                    }
+
+                    Row {
+                        width: parent.width
+                        spacing: 10
+
+                        Label {
+                            Layout.alignment: Qt.AlignVCenter
+                            text: "Java"
+                            font.bold: true
+                            font.pointSize: 10
+                        }
+
+                        ProgressBar {
+                            height: parent.height
+                            Layout.alignment: Qt.AlignVCenter
+                            value: 0.9
                         }
 
                     }
@@ -167,10 +245,11 @@ Page {
     //        BusyIndicator {
     //            id: bi_loading
     //            running: true
+    //            antialiasing: true
     //            anchors.centerIn: parent
     //        }
 
-    //        Text {
+    //        Label {
     //            anchors.top: bi_loading.bottom
     //            text: qsTr("Loading\u2026")
     //            font.pointSize: 15

@@ -2,8 +2,11 @@
 
 Application::Application(QObject *parent) : QObject(parent)
 {
+    CursorPosProvider *mousePosProvider = new CursorPosProvider(parent);
+
     // Same Instace Binding Between Different Component/Pages
     engine.rootContext()->setContextProperty("application", this);
+    engine.rootContext()->setContextProperty("mousePosition", mousePosProvider);
 
     // register all the controllers here if you do not want binding of two different component
     qmlRegisterType<LoginPageController>("com.xcodeclazz.loginpagecontroller", 1, 0, "LoginPageController");
@@ -17,10 +20,8 @@ Application::Application(QObject *parent) : QObject(parent)
 void Application::boot(QGuiApplication &app)
 {
     const QUrl url(getApplicationPath());
-    QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
-                     &app, [url](QObject *obj, const QUrl &objUrl) {
-        if (!obj && url == objUrl)
-            QCoreApplication::exit(-1);
+    QObject::connect(&engine, &QQmlApplicationEngine::objectCreated, &app, [url](QObject *obj, const QUrl &objUrl) {
+        if (!obj && url == objUrl) QCoreApplication::exit(-1);
     }, Qt::QueuedConnection);
     engine.load(url);
 }

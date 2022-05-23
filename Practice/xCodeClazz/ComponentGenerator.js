@@ -11,12 +11,13 @@ function createCountState(i, obj, __parent__) {
        import QtQuick 2.0;
        import QtQuick.Layouts 1.3;
        import QtQuick.Controls 2.3;
+       import QtQuick.Controls.Material 2.3;
 
-       Rectangle {
+       Item {
            id: createCountState_${i};
            width: 150;
            height: 150;
-           border.color: "black";
+           Material.elevation: 6;
 
            MouseArea {
                anchors.fill: parent;
@@ -25,21 +26,22 @@ function createCountState(i, obj, __parent__) {
                }
            }
 
-           ColumnLayout {
+           Column {
+               spacing: 10;
                width: parent.width;
                anchors.fill: parent;
                Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter;
 
-               Text {
-                   Layout.alignment: Qt.AlignHCenter;
-                   text: qsTr("${obj.count}");
-                   font.pointSize: 30;
-               }
-
-               Text {
+               Label {
                    Layout.alignment: Qt.AlignHCenter;
                    text: qsTr("${obj.name}");
                    font.pointSize: 18;
+               }
+
+               Label {
+                   Layout.alignment: Qt.AlignHCenter;
+                   text: qsTr("${obj.count}");
+                   font.pointSize: 30;
                    font.bold: true;
                }
 
@@ -61,31 +63,48 @@ function createCourseCard(i, obj, __parent__) {
 
         import QtQuick 2.0;
         import QtQuick.Controls 2.3;
+        import QtQuick.Controls.Material 2.3;
 
-        Rectangle {
+        Item {
             id: createCourseCard_${i};
             clip: true;
             width: 200;
             height: 200;
-            border.color: "black";
 
             Column {
                 width: parent.width;
                 anchors.fill: parent;
                 height: parent.height;
 
-                Image {
-                    source: "${obj.url}";
-                    height: parent.height - 30;
-                    width: parent.width;
-                    fillMode: Image.PreserveAspectFit;
+                Loader {
+                   visible: status == Loader.Ready;
+                   id: course_img_loader_${i};
+                   height: parent.height - 50;
+                   width: parent.width;
+                   source: "${obj.url}";
+                   asynchronous: true;
+                }
+
+                BusyIndicator {
+                   running: course_img_loader_${i}.status === Loader.Loading;
+                   id: course_img_loader_busy_animation_${i};
+                   height: course_img_loader_${i}.height;
+                   width: course_img_loader_${i}.width;
+
+                   Image {
+                       source: "${obj.url}";
+                       height: parent.height;
+                       width: parent.width;
+                       fillMode: Image.PreserveAspectFit;
+                       anchors.horizontalCenter: parent.horizontalCenter;
+                       anchors.verticalCenter: parent.verticalCenter;
+                   }
+
                 }
 
                 Button {
                     text: "${obj.name}";
                     width: parent.width;
-                    highlighted: true;
-                    height: 30;
                     onClicked: {
                         openCourse("${obj.id}", "${obj.name}");
                     }

@@ -2,7 +2,6 @@
 
 LoginPageController::LoginPageController(QObject *parent) : QObject(parent)
 {
-
 }
 
 void LoginPageController::checkAuthentication()

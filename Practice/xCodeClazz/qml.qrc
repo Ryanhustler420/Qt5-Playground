@@ -1,6 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>application.qml</file>
+        <file>qtquickcontrols2.conf</file>
     </qresource>
     <qresource prefix="/js">
         <file>ComponentGenerator.js</file>
@@ -15,5 +16,6 @@
     </qresource>
     <qresource prefix="/images">
         <file>oCopy.png</file>
+        <file>aboutQtIcon.png</file>
     </qresource>
 </RCC>

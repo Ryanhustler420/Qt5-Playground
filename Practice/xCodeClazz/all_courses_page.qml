@@ -2,6 +2,8 @@ import QtQuick 2.0
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.3
 
+import QtQuick.Controls.Material 2.3
+
 import com.xcodeclazz.allcoursespagecontroller 1.0
 import "qrc:/js/ComponentGenerator.js" as ComponentGenerator
 
@@ -18,7 +20,7 @@ Page {
         application.gotoPage(application.getSingleCoursePagePath())
     }
 
-    header: Rectangle {
+    header: Item {
         height: 70
         width: parent.width
 
@@ -33,6 +35,7 @@ Page {
 
         TextField {
             id: search_field
+            width: 400
             anchors.right: parent.right
             anchors.bottom: parent.bottom
             anchors.margins: 10
@@ -57,7 +60,7 @@ Page {
             width: parent.width
             spacing: 20
 
-            Text {
+            Label {
                 width: parent.width
                 font.pointSize: 12
                 wrapMode: Text.WordWrap
@@ -79,8 +82,7 @@ Page {
                     for(var i =0; i< list.length; i++) {
                         ComponentGenerator.createCourseCard(i, list[i], courses);
                     }
-                }
-
+                }                
             }
 
         }
@@ -91,3 +93,9 @@ Page {
     }
 
 }
+
+/*##^##
+Designer {
+    D{i:0;formeditorZoom:0.9}
+}
+##^##*/

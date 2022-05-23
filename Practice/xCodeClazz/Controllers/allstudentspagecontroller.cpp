@@ -4,3 +4,10 @@ AllStudentsPageController::AllStudentsPageController(QObject *parent) : QObject(
 {
 
 }
+
+void AllStudentsPageController::getStudentsList()
+{
+    QList<QString> mp;
+    mp.append("{\"name\": \"world\"}");
+    emit studentList(mp);
+}

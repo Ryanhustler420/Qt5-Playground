@@ -15,28 +15,34 @@ Page {
         page_controller.checkAuthentication()
     }
 
-    RowLayout {
+    Row {
         id: row
         anchors.fill: parent
 
-        ColumnLayout {
+        Column {
             id: column
+            height: 200
             spacing: 10
-            width: (parent.width * .3)
+            width: parent.width * .3
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.horizontalCenter: parent.horizontalCenter
             Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
 
             Label {
                 id: label
+                width: parent.width
                 Layout.alignment: Qt.AlignHCenter
                 text: qsTr("<b>x</b>CodeClazz")
+                horizontalAlignment: Text.AlignHCenter
                 anchors.topMargin: 10
-                width: parent.width
                 font.pointSize: 20
             }
 
             TextField {
                 id: tfEmail
                 width: parent.width
+                bottomPadding: 16
+                Layout.fillWidth: true
                 Layout.alignment: Qt.AlignHCenter
                 placeholderText: qsTr("Email")
             }
@@ -44,6 +50,7 @@ Page {
             TextField {
                 id: tfPassword
                 width: parent.width
+                Layout.fillWidth: true
                 Layout.alignment: Qt.AlignHCenter
                 placeholderText: qsTr("Password")
                 echoMode: TextField.Password
@@ -51,15 +58,20 @@ Page {
 
             Button {
                 id: loginBtn
+                width: parent.width
                 text: "Login"
-                width: tfPassword.width
+                Layout.fillWidth: true
                 Layout.alignment: Qt.AlignHCenter
                 onClicked: {
-                    popup.open()
-                    page_controller.login(tfEmail.text, tfPassword.text)
+                    login()
                 }
             }
         }
+    }
+
+    function login() {
+        popup.open()
+        page_controller.login(tfEmail.text, tfPassword.text)
     }
 
     Popup {
@@ -88,4 +100,17 @@ Page {
         }
     }
 
+    Action {
+        shortcut: "return"
+        onTriggered: {
+            login()
+        }
+    }
+
 }
+
+/*##^##
+Designer {
+    D{i:0;autoSize:true;height:480;width:640}
+}
+##^##*/

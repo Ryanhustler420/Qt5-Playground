@@ -9,7 +9,6 @@ class Manager : public OSingleton<Manager>
 
 public:
     explicit Manager(QObject *parent = nullptr);
-    QString name;
 
 signals:
 

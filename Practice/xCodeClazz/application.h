@@ -6,6 +6,8 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 
+#include "utility/CursorPosProvider.h"
+
 #include "controllers/loginpagecontroller.h"
 #include "controllers/dashboardpagecontroller.h"
 #include "controllers/allrequestcallbackspage.h"
