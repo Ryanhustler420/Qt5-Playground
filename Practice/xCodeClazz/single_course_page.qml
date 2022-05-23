@@ -204,10 +204,10 @@ Page {
                 padding: 10
                 Layout.fillHeight: true
                 Layout.fillWidth: true
-                width: parent.width * .7
+                width: parent.width * 1.0 // .7
                 height: parent.height
                 onWidthChanged: {
-                    width: parent.width * .7
+                    width: parent.width * 1.0 // .7
                     height: parent.height
                 }
 
@@ -240,10 +240,10 @@ Page {
             Column {
                 Layout.fillHeight: true
                 Layout.fillWidth: true
-                width: parent.width * .3
+                width: parent.width * 0 // .3
                 height: parent.height
                 onWidthChanged: {
-                    width: parent.width * .3
+                    width: parent.width * 0 // .3
                     height: parent.height
                 }
 

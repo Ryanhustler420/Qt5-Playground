@@ -17,5 +17,6 @@
     <qresource prefix="/images">
         <file>oCopy.png</file>
         <file>aboutQtIcon.png</file>
+        <file>favicon.ico</file>
     </qresource>
 </RCC>
