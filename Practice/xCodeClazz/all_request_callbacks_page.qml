@@ -28,55 +28,39 @@ Page {
             anchors.left: parent.left
         }
 
+        DelayButton {
+            delay: 5000
+            text: "Clear Everything"
+            anchors.rightMargin: 10
+            anchors.right: parent.right
+            anchors.verticalCenter: parent.verticalCenter
+            onActivated: {
+                page_controller.removeAll()
+                application.pop()
+            }
+        }
+
     }
 
+    ListModel { id: callbacks_model }
     ListView {
+        id: callbacks_listview
         clip: true
         spacing: 10
         topMargin: 15
         leftMargin: 15
         width: parent.width
         height: parent.height
+        highlightFollowsCurrentItem: true
         onWidthChanged: {
             width: parent.width
             height: parent.height
         }
-        model: ListModel {
-
-            ListElement {
-                course: "C++ Code For Beginner"
-                name: "Vikram Pradhan"
-                school: "KPS Gamharia"
-                phone: "xxxxxxxxxx"
-            }
-
-            ListElement {
-                course: "Java Code For Beginner"
-                name: "Anjali Gupta"
-                school: "DAV Adityapur"
-                phone: "xxxxxxxxxx"
-            }
-
-            ListElement {
-                course: "Python Code For Beginner"
-                name: "Sikha Jha"
-                school: "KPS Kadma"
-                phone: "xxxxxxxxxx"
-            }
-
-            ListElement {
-                course: "NodeJs Code For Beginner"
-                name: "Mahesh Gupta"
-                school: "Xavier Gamharia"
-                phone: "xxxxxxxxxx"
-            }
-
-        }
+        model: callbacks_model
         delegate: Rectangle {
-            width: parent.width
+            width: callbacks_listview.width
             color: "transparent"
-            height: 80
-
+            height: 70
             Row {
                 width: parent.width
 
@@ -110,12 +94,18 @@ Page {
                         text: `Delete`
                         highlighted: true
                         Material.background: Material.Red
+                        onClicked: {
+                            page_controller.removeItem(index);
+                        }
                     }
 
                     Button {
-                        text: `Accepted`
+                        text: `Accept`
                         highlighted: true
                         Material.background: Material.Green
+                        onClicked: {
+                            page_controller.removeItem(index);
+                        }
                     }
 
                 }
@@ -140,6 +130,31 @@ Page {
 
     AllRequestCallbacksPage {
         id: page_controller
+        onAllItemRemoved: {
+            callbacks_model.clear()
+        }
+        onItemRemoved: {
+            callbacks_model.remove(currentIndex)
+        }
+        onNewItemAdded: {
+            callbacks_model.append(JSON.parse(JSON.stringify(object)))
+        }
+        Component.onCompleted: {
+            page_controller.addNewItem({ course: "Python Code For Beginner", name: "Sikha Jha", school: "KPS Kadma", phone: "xxxxxxxxxx" })
+            page_controller.addNewItem({ course: "C++ Code For Beginner", name: "Vikram Pradhan", school: "KPS Gamharia", phone: "xxxxxxxxxx" })
+            page_controller.addNewItem({ course: "Java Code For Beginner", name: "Anjali Gupta", school: "DAV Adityapur", phone: "xxxxxxxxxx" })
+            page_controller.addNewItem({ course: "NodeJs Code For Beginner", name: "Mahesh Gupta", school: "Xavier Gamharia", phone: "xxxxxxxxxx" })
+            page_controller.addNewItem({ course: "NodeJs Code For Beginner", name: "Mahesh Gupta", school: "Xavier Gamharia", phone: "xxxxxxxxxx" })
+            page_controller.addNewItem({ course: "NodeJs Code For Beginner", name: "Mahesh Gupta", school: "Xavier Gamharia", phone: "xxxxxxxxxx" })
+            page_controller.addNewItem({ course: "NodeJs Code For Beginner", name: "Mahesh Gupta", school: "Xavier Gamharia", phone: "xxxxxxxxxx" })
+            page_controller.addNewItem({ course: "NodeJs Code For Beginner", name: "Mahesh Gupta", school: "Xavier Gamharia", phone: "xxxxxxxxxx" })
+            page_controller.addNewItem({ course: "NodeJs Code For Beginner", name: "Mahesh Gupta", school: "Xavier Gamharia", phone: "xxxxxxxxxx" })
+            page_controller.addNewItem({ course: "NodeJs Code For Beginner", name: "Mahesh Gupta", school: "Xavier Gamharia", phone: "xxxxxxxxxx" })
+            page_controller.addNewItem({ course: "NodeJs Code For Beginner", name: "Mahesh Gupta", school: "Xavier Gamharia", phone: "xxxxxxxxxx" })
+            page_controller.addNewItem({ course: "NodeJs Code For Beginner", name: "Mahesh Gupta", school: "Xavier Gamharia", phone: "xxxxxxxxxx" })
+            page_controller.addNewItem({ course: "NodeJs Code For Beginner", name: "Mahesh Gupta", school: "Xavier Gamharia", phone: "xxxxxxxxxx" })
+            page_controller.addNewItem({ course: "NodeJs Code For Beginner", name: "Mahesh Gupta", school: "Xavier Gamharia", phone: "xxxxxxxxxx" })
+        }
     }
 
 }
