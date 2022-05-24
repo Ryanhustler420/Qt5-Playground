@@ -13,26 +13,29 @@ SOURCES += \
         controllers\allrequestcallbackspage.cpp \
         controllers\dashboardpagecontroller.cpp \
         controllers\loginpagecontroller.cpp \
-    database/localcache.cpp \
-    database/sqlite3.cpp \
+    utility/xcodeclazzdb.cpp \
+    utility/xdb.cpp \
+        utility\filesystembroadcaster.cpp \
         models\god\modelconventions.cpp \
-    networking/apis.cpp \
-    networking/network.cpp \
-    networking/routes.cpp \
         parents\commonsuperclass.cpp \
+        database\localcache.cpp \
         application\manager.cpp \
-    utility/filesystem.cpp \
-    utility/filesystembroadcaster.cpp \
-    utility/helpers.cpp \
-    utility/os.cpp \
-    utility/threads.cpp \
-    utility/timer.cpp \
+        utility\filesystem.cpp \
+        networking\network.cpp \
         utility\jsonhelper.cpp \
-        models\course.cpp \
+        networking\routes.cpp \
+        database\musicdb.cpp \
+        database\sqlite3.cpp \
+        utility\helpers.cpp \
+        networking\apis.cpp \
+        utility\threads.cpp \
         models\session.cpp \
         ipc\databridge.cpp \
+        utility\timer.cpp \
+        models\course.cpp \
         application.cpp \
         rx\signals.cpp \
+        utility\os.cpp \
         main.cpp \
 
 RESOURCES += qml.qrc
@@ -55,23 +58,26 @@ HEADERS += \
     controllers\allrequestcallbackspage.h \
     controllers\dashboardpagecontroller.h \
     controllers\loginpagecontroller.h \
-    database/localcache.h \
-    database/sqlite3.h \
+    database\localcache.h \
+    database\musicdb.h \
+    database\sqlite3.h \
     models\god\modelconventions.h \
-    networking/apis.h \
-    networking/network.h \
-    networking/routes.h \
+    networking\apis.h \
+    networking\network.h \
+    networking\routes.h \
     parents\commonsuperclass.h \
-    shareable/constants.h \
+    shareable\constants.h \
     singleton\singleton_obj.h \
     application\manager.h \
-    utility/CursorPosProvider.h \
-    utility/filesystem.h \
-    utility/filesystembroadcaster.h \
-    utility/helpers.h \
-    utility/os.h \
-    utility/threads.h \
-    utility/timer.h \
+    utility/xcodeclazzdb.h \
+    utility/xdb.h \
+    utility\CursorPosProvider.h \
+    utility\filesystem.h \
+    utility\filesystembroadcaster.h \
+    utility\helpers.h \
+    utility\os.h \
+    utility\threads.h \
+    utility\timer.h \
     utility\jsonhelper.h \
     ipc\databridge.h \
     models\session.h \

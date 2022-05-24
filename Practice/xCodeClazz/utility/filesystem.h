@@ -19,53 +19,53 @@ class FileSystem : public CommonSuperClass
 {
 public:
     explicit FileSystem(CommonSuperClass *parent = nullptr);
+    FileSystem(const QString &currentPath);
 
-    void qBuffer();
-    void qDataStream();
-    void qDir();
-    void qLock();
-    void qStorageInfo();
-
-private:
-    void listFileDetails (QString path);
-
-    bool createFileDataStream(QString path);
-    void readFileDataStream(QString path);
-
-    bool createFileTextStream(QString path);
-    void readFileTextStream(QString path);
+    QFileInfoList getFilesInfo(const QString &path);
+    QList<QStorageInfo> getSystemStorageDetails();
+    QFileInfo getFileInfo(const QString &path);
+    QList<QFileInfo> getFilesInsideDir(QDir dir);
+    QChar path_separator();
 
     QString getCurrentPath();
-    QString getCurrentPath(QString filename);
+    QString getCurrentPath(const QString &file_name);
+    void setCurrentPath(const QString &path);
 
-    bool put (QString path, QByteArray data, QIODevice::OpenMode mode);
-    void write(QString path, QByteArray data);
-    bool write2(QString path, QByteArray data);
-    void append(QString path, QByteArray data);
+    QDir *getDir(const QString &path);
 
-    bool createFile2(QString path);
-    void readSmallFile(QString path);
-    void readLargeFileByLines(QString path);
-    void readLargeFileByBytes(QString path);
+    bool write(QByteArray data, const QString &file_name);
+    bool append(QByteArray data, const QString &file_name);
 
-    void printFilesInsideDir(QDir dir);
-    bool createDir(QString path);
-    bool rename(QString path, QString name);
-    bool remove(QString path);
+    bool deleteFile(const QString &file_name);
+    QByteArray read(const QString &file_name);
+    QByteArray readSmallFile(const QString &file_name);
+    QByteArray readBytes(const QString &file_name, int bytesToRead);
 
-    QLockFile * createLockFile(QFile* path);
-    QFile* getFile(QString path, QIODevice::OpenModeFlag io);
-    QFile* getFile(QString path, QIODevice::OpenMode io);
+    bool writeDataStream(QByteArray &data, QString &file_name);
+    QByteArray readDataStream(QString &file_name);
 
-    QDir* getDir(QString path);
+    bool writeTextStream(QByteArray &data, QString &file_name);
+    QByteArray readTextStream(QString &file_name);
 
-    bool fileExist(QString path);
-    bool dirExist(QString path);
-    bool dirExist(QString path, bool createNew);
-    bool dirRemoved(QString path, bool recursiveDelete);
+    QByteArray readFromBuffer();
+    bool writeIntoBuffer(const QByteArray &data);
+
+    void deadLock(const QString &file_name, std::function<void (bool hasLocked)> callback);
+    bool fileExist(const QString &file_name);
+    QFile* getFile(const QString &file_name, QIODevice::OpenModeFlag io);
+    QFile* getFile(const QString &file_name, QIODevice::OpenMode io);
+
+    bool createDir(const QString &path);
+    bool renameDir(const QString &path, const QString &newName);
+    bool removeDir(const QString &path, bool recursiveDelete);
+    bool existDir(const QString &path, bool createNew);
 
 signals:
 
+private:
+    bool put (const QString &file_name, QByteArray data, QIODevice::OpenMode mode);
+    QBuffer buffer;
+    QString currentPath;
 };
 
 #endif // FILESYSTEM_H

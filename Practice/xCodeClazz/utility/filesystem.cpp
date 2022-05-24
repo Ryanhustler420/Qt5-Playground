@@ -5,296 +5,188 @@ FileSystem::FileSystem(CommonSuperClass *parent) : CommonSuperClass(parent)
 
 }
 
-void FileSystem::qBuffer()
+FileSystem::FileSystem(const QString &currentPath) : currentPath(currentPath)
 {
-
-    QBuffer buffer;
-
-    if(buffer.open(QIODevice::ReadWrite)) {
-        QByteArray data("Hello World");
-        buffer.write(data);
-        // File and device access you may need to flush the data to the device
-        // buffer.flush();
-
-        // Move to the first position
-        buffer.seek(0);
-        qInfo() << buffer.readAll();
-
-        // ALWAYS close your device:
-        buffer.close();
-    } else {
-        qInfo() << "Could not open buffer";
-    }
 
 }
 
-void FileSystem::listFileDetails(QString path)
+QFileInfoList FileSystem::getFilesInfo(const QString &path)
 {
-    QDir *dir = getDir(path);
-    qInfo() << dir->absolutePath();
-
-    QFileInfoList dirs = dir->entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot);
-    QFileInfoList files = dir->entryInfoList(QDir::Files);
-
-    foreach (QFileInfo fi, dirs) { qInfo() << fi.fileName(); }
-    foreach (QFileInfo fi, files) {
-        qInfo() << "..Name: " << fi.fileName();
-        qInfo() << "...Size: " << fi.size();
-        qInfo() << "...Created: " << fi.birthTime();
-        qInfo() << "...Modified: " << fi.lastModified();
-    }
-
-    foreach (QFileInfo fi, files) { listFileDetails(fi.absoluteFilePath()); }
+    return getFilesInsideDir(*getDir(path));
 }
 
-bool FileSystem::createFileDataStream(QString path)
+QList<QStorageInfo> FileSystem::getSystemStorageDetails()
 {
-    QFile *file = getFile(path, QIODevice::WriteOnly);
-    if (!file) return false;
-
-    QDataStream stream(file);
-    stream << "Random Number: "; // shifting the data into stream
-    stream << QRandomGenerator::global()->bounded(1000); // shifting the data into stream
-    file->close(); // we are not starting/closing stream because it doesn't have ending...
-    return true;
+    // getDir(QStorageInfo::root())->entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot)
+    return QStorageInfo::mountedVolumes();
 }
 
-void FileSystem::readFileDataStream(QString path)
+QFileInfo FileSystem::getFileInfo(const QString &path)
 {
-    QFile *file = getFile(path, QIODevice::ReadOnly);
-    if (!file) return;
-
-    QDataStream stream(file);
-    QString banner;
-    stream >> banner; // reading from stream
-    qint32 num;
-    stream >> num; // reading from stream
-    file->close();
+    QFile f(path);
+    QFileInfo i(f);
+    return i;
 }
 
-bool FileSystem::createFileTextStream(QString path)
+QList<QFileInfo> FileSystem::getFilesInsideDir(QDir dir)
 {
-    QFile *file = getFile(path, QIODevice::WriteOnly);
-    if (!file) return false;
-
-    QTextStream stream(file);
-    QString banner = "Random Number:\r\n";
-    stream << banner; // shifting the data into stream;
-    qint32 num = QRandomGenerator::global()->bounded(1000);
-    stream << num << "\r\n";
-    file->close(); // we are not starting/closing stream because it doesn't have ending...
-    return true;
+    return dir.entryInfoList(QDir::Files);
 }
 
-void FileSystem::readFileTextStream(QString path)
+QDir *FileSystem::getDir(const QString &path)
 {
-    QFile *file = getFile(path, QIODevice::ReadOnly);
-    if (!file) return;
-
-    QTextStream stream(file);
-    QString banner;
-    stream >> banner; // reading from stream
-    QString num;
-    stream >> num; // reading from stream
-    file->close();
+    return new QDir(path);
 }
 
-bool FileSystem::put(QString path, QByteArray data, QIODevice::OpenMode mode)
+bool FileSystem::write(QByteArray data, const QString &file_name)
 {
-    QFile *file = getFile(path, mode);
-    if (!file) return false;
-
-    qint64 bytes = file->write(data);
-    if (!bytes) qWarning() << file->errorString() ;
-    else qInfo() << "Wrote " << bytes << " to the file";
-    file->flush(); // not really needed, but for making sure
-    file->close();
-    return true;
+    return put(file_name, data, QIODevice::WriteOnly);
 }
 
-void FileSystem::write(QString path, QByteArray data)
+bool FileSystem::append(QByteArray data, const QString &file_name)
 {
-    if (put(path, data, QIODevice::WriteOnly)) qInfo() << "Data written to file";
-    else qWarning() << "Failed to write to file:";
+    return put(file_name, data, QIODevice::Append);
 }
 
-bool FileSystem::write2(QString path, QByteArray data)
+bool FileSystem::deleteFile(const QString &file_name)
 {
-    QFile *file = getFile(path, QIODevice::WriteOnly);
-    if (!file) return false;
-
-    qint64 bytes = file->write(data);
-    // file.flush();
-    file->close();
-    return bytes ? true : false;
+    QFile f(getCurrentPath(file_name));
+    return f.remove();
 }
 
-void FileSystem::append(QString path, QByteArray data)
+QByteArray FileSystem::read(const QString &file_name)
 {
-    if (put(path, data, QIODevice::Append)) qInfo() << "Data appended to file";
-    else qWarning() << "Failed to appended to file:";
-
-    //    QString path = QDir::currentPath() + QDir::separator() + "test.txt";
-    //    qInfo() << "Path: " << path;
-
-    //    QByteArray data("Hello Gaurav\r\n");
-    //    for (int var = 0; var < 5; ++var) {
-    //        QString num = QString::number(var);
-    //        num.append(" ");
-
-    //        QByteArray line(num.toLatin1() + data);
-    //        // write(path, line);
-    //        append(path, line);
-    //    }
-}
-
-bool FileSystem::createFile2(QString path)
-{
-    QByteArray data;
-    data.append(QString::number(1));
-    data.append("Hello World\r\n");
-    return write2(path, data);
-}
-
-void FileSystem::readSmallFile(QString path)
-{
-    if (!fileExist(path)) return;
-
-    QFile *file = getFile(path, QIODevice::ReadOnly);
-    if (!file) return;
-
-    qInfo() << file->readAll(); // best for small size file like 1Mb or 4Mb; dont do this for large file. else it will take hell lot of memory
-}
-
-void FileSystem::readLargeFileByLines(QString path)
-{
-    if (!fileExist(path)) return;
-
-    QFile *file = getFile(path, QIODevice::ReadOnly);
-    if (!file) return;
-
+    // best with text files.
+    if (!fileExist(file_name)) return nullptr;
+    QFile *file = getFile(file_name, QIODevice::ReadOnly);
+    if (!file) return nullptr;
+    QByteArray response;
     while(!file->atEnd()) {
         QString line(file->readLine());
-        qInfo() << "Read: " << line.trimmed(); // best with text files.
+        response += line.trimmed();
     }
+    return response;
 }
 
-void FileSystem::readLargeFileByBytes(QString path)
+QByteArray FileSystem::readBytes(const QString &file_name, int bytesToRead)
 {
     // the file is actually a buffer in system, called file buffer, because it has a starting and an ending point and data in between
     // while stream has not end point, like river
-    if (!fileExist(path)) return;
 
-    QFile *file = getFile(path, QIODevice::ReadOnly);
-    if (!file) return;
-
-    while(!file->atEnd()) qInfo() << "Read: " << file->read(5); // best with larger file or structs
+    // best with larger file or structs
+    if (!fileExist(file_name)) return nullptr;
+    QFile *file = getFile(file_name, QIODevice::ReadOnly);
+    if (!file) return nullptr;
+    QByteArray response;
+    while(!file->atEnd()) response += file->read(bytesToRead);
+    return response;
 }
 
-void FileSystem::printFilesInsideDir(QDir dir)
+bool FileSystem::writeDataStream(QByteArray &data, QString &file_name)
 {
-    foreach (QFileInfo fi, dir.entryInfoList()) qInfo() << fi.fileName();
+    QFile *file = getFile(file_name, QIODevice::WriteOnly);
+    if (!file) return false;
+
+    QDataStream stream(file);
+    stream << data; // shifting the data into stream
+    // stream << QRandomGenerator::global()->bounded(1000); // shifting more data into stream
+    file->close(); // we are not starting/closing stream because it doesn't have ending...
+    return true;
 }
 
-bool FileSystem::createDir(QString path)
+QByteArray FileSystem::readDataStream(QString &file_name)
 {
-    return dirExist(path, true);
+    QFile *file = getFile(file_name, QIODevice::ReadOnly);
+    if (!file) return nullptr;
+
+    QDataStream stream(file);
+    QByteArray response;
+    stream >> response; // reading from stream
+    // qint32 num;
+    // stream >> num; // reading from stream
+    file->close();
+    return response;
 }
 
-bool FileSystem::rename(QString path, QString name)
+bool FileSystem::writeTextStream(QByteArray &data, QString &file_name)
 {
-    if (!dirExist(path)) return false;
+    QFile *file = getFile(file_name, QIODevice::WriteOnly);
+    if (!file) return false;
 
-    QDir* dir = getDir(path);
-
-    int pos = path.lastIndexOf(QDir::separator());
-    QString parent = path.mid(0, pos);
-    QString newPath = parent + QDir::separator() + name;
-
-    qInfo() << "Absolute: " << dir->absolutePath();
-    qInfo() << "Parent: " << parent;
-    qInfo() << "New: " << newPath;
-
-    return dir->rename(path, newPath);
+    QTextStream stream(file);
+    stream << data; // shifting the data into stream;
+    // qint32 num = QRandomGenerator::global()->bounded(1000);
+    // stream << num << "\r\n";
+    file->close(); // we are not starting/closing stream because it doesn't have ending...
+    return true;
 }
 
-bool FileSystem::remove(QString path)
+QByteArray FileSystem::readTextStream(QString &file_name)
 {
-    return dirRemoved(path, true);
+    QFile *file = getFile(file_name, QIODevice::ReadOnly);
+    if (!file) return nullptr;
+
+    QTextStream stream(file);
+    QByteArray response;
+    stream >> response; // reading from stream
+    // QString num;
+    // stream >> num; // reading from stream
+    file->close();
+    return response;
 }
 
-void FileSystem::qLock()
+QByteArray FileSystem::readFromBuffer()
 {
-    QString path = getCurrentPath("test.txt");
+    // Move to the first position
+    buffer.seek(0);
+    QByteArray response = buffer.readAll();
+    // ALWAYS close your device:
+    buffer.close();
+    return response;
+}
 
-    QFile *file = getFile(path, QIODevice::WriteOnly);
-    QLockFile *lock = createLockFile(file);
-
-    // automatically unlock the file.. after 30000 i.e 30 seconds
-    lock->setStaleLockTime(30000);
-
-    if (lock->tryLock()) {
-        if (file) {
-            // Took over 30 seconds here, auto unlock
-            QByteArray data;
-            file->write(data);
-            file->close();
-        }
-        // comment this out and run to see what happen
-        lock->unlock();
+bool FileSystem::writeIntoBuffer(const QByteArray &data)
+{
+    if(buffer.open(QIODevice::ReadWrite)) {
+        // File and device access you may need to flush the data to the device
+        buffer.write(data);
+        return true;
     } else {
-        qInfo() << "Could not lock the file:";
-        qint64 pid;
-        QString host, application;
-        if (lock->getLockInfo(&pid, &host, &application)) {
-            qInfo() << "The file is locked by:";
-            qInfo() << "Pid: " << pid;
-            qInfo() << "Host: " << host;
-            qInfo() << "Application: " << application;
-        } else qInfo() << "File is locked, but can't get the info:";
+        qInfo() << "Could not open buffer";
+        return false;
     }
 }
 
-void FileSystem::qStorageInfo()
+void FileSystem::deadLock(const QString &file_name, std::function<void (bool hasLocked)> callback)
 {
-    foreach (QStorageInfo storage, QStorageInfo::mountedVolumes()) {
-        qInfo() << "Name: " << storage.displayName();
-        qInfo() << "Type: " << storage.fileSystemType();
-        qInfo() << "Total: " << storage.bytesTotal() / 1000 / 1000 << " MB";
-        qInfo() << "Available: " << storage.bytesAvailable() / 1000 / 1000 << " MB";
-        qInfo() << "Device: " << storage.device();
-        qInfo() << "Root: " << storage.isRoot();
-        qInfo() << endl;
-    }
-
-    QStorageInfo root = QStorageInfo::root();
-    foreach (QFileInfo fi, getDir(root.rootPath())->entryInfoList(QDir::Dirs | QDir::NoDotAndDotDot)) {
-        qInfo() << fi.filePath();
-    }
-}
-
-// *********************************************
-// *************    HELPER     *****************
-// *********************************************
-
-QLockFile *FileSystem::createLockFile(QFile* file)
-{
+    QFile *file = getFile(file_name, QIODevice::WriteOnly);
     QLockFile *lock = new QLockFile(file->fileName() + "-lock");
-    return lock;
+
+    // Automatically unlock the file.. after 30000 i.e 30 seconds
+    // lock->setStaleLockTime(30000);
+
+    // https://doc.qt.io/qt-5/qmutex.html
+    qint64 pid;
+    QString host, application;
+    bool isAlreadyLocked = lock->getLockInfo(&pid, &host, &application);
+    if (isAlreadyLocked) {
+        callback(false);
+    } else {
+        lock->tryLock();
+        // lock->lock();
+        callback(true);
+    }
 }
 
-QString FileSystem::getCurrentPath()
+bool FileSystem::fileExist(const QString &file_name)
 {
-    return QDir::currentPath() + QDir::separator();
+    QFile file(getCurrentPath(file_name));
+    return file.exists();
 }
 
-QString FileSystem::getCurrentPath(QString filename)
+QFile *FileSystem::getFile(const QString &file_name, QIODevice::OpenModeFlag io)
 {
-    return getCurrentPath() + filename;
-}
-
-QFile* FileSystem::getFile(QString path, QIODevice::OpenMode io) {
-    QFile *file = new QFile(path);
+    QFile *file = new QFile(getCurrentPath(file_name));
     if (!file->open(io)) {
         qWarning() << file->errorString();
         return nullptr;
@@ -302,41 +194,77 @@ QFile* FileSystem::getFile(QString path, QIODevice::OpenMode io) {
     return file;
 }
 
-QDir *FileSystem::getDir(QString path)
+QFile *FileSystem::getFile(const QString &file_name, QIODevice::OpenMode io)
 {
-    QDir *dir = new QDir(path);
-    return dir;
+    QFile *file = new QFile(getCurrentPath(file_name));
+    if (!file->open(io)) {
+        qWarning() << file->errorString();
+        return nullptr;
+    }
+    return file;
 }
 
-bool FileSystem::fileExist(QString path)
+bool FileSystem::createDir(const QString &path)
 {
-    QFile file(path);
-    return file.exists();
+    return existDir(path, true);
 }
 
-bool FileSystem::dirExist(QString path)
+bool FileSystem::renameDir(const QString &path, const QString &newName)
 {
-    QDir dir(path);
-    return dir.exists();
+    if (!existDir(path, false)) return false;
+    QDir* dir = getDir(path);
+    int pos = path.lastIndexOf(path_separator());
+    QString parent = path.mid(0, pos);
+    QString newPath = parent + path_separator() + newName;
+    return dir->rename(path, newPath);
 }
 
-bool FileSystem::dirExist(QString path, bool createNew)
+bool FileSystem::removeDir(const QString &path, bool recursiveDelete)
+{
+    return existDir(path, false) ? (recursiveDelete ? getDir(path)->removeRecursively() /* Danger Opt.*/ : false) : false;
+}
+
+bool FileSystem::existDir(const QString &path, bool createNew)
 {
     QDir dir(path);
     return dir.exists() ? true : (createNew ? dir.mkdir(path) : false);
 }
 
-bool FileSystem::dirRemoved(QString path, bool recursiveDelete)
+QByteArray FileSystem::readSmallFile(const QString &file_name)
 {
-    return dirExist(path) ? (recursiveDelete ? getDir(path)->removeRecursively() /* Danger Opt.*/ : false) : false;
+    // best for small size file like 1Mb or 4Mb; dont do this for large file. else it will take hell lot of memory
+    if (!fileExist(file_name)) return nullptr;
+    QFile *file = getFile(file_name, QIODevice::ReadOnly);
+    if (!file) return nullptr;
+    return file->readAll();
 }
 
-QFile *FileSystem::getFile(QString path, QIODevice::OpenModeFlag io)
+bool FileSystem::put(const QString &file_name, QByteArray data, QIODevice::OpenMode mode)
 {
-    QFile *file = new QFile(path);
-    if (!file->open(io)) {
+    QFile *file = getFile(file_name, mode);
+    if (!file) return false;
+
+    qint64 bytes = file->write(data);
+    if (!bytes) {
         qWarning() << file->errorString();
-        return nullptr;
+        return false;
     }
-    return file;
+    file->flush();
+    file->close();
+    return true;
+}
+
+QChar FileSystem::path_separator()
+{
+    return QDir::separator();
+}
+
+QString FileSystem::getCurrentPath()
+{
+    return currentPath;
+}
+
+QString FileSystem::getCurrentPath(const QString &file_name)
+{
+    return getCurrentPath() + path_separator() + file_name;
 }

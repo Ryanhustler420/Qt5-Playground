@@ -16,59 +16,28 @@ class Sqlite3 : public CommonSuperClass
 {
 public:
     explicit Sqlite3(CommonSuperClass *parent = nullptr);
-    Sqlite3(const QString &path);
-    ~Sqlite3();
 
-    bool isOpen() const;
-    void readAllMusics(const QString &tableName);
-    bool createMusicListTable(const QString &tableName);
-    bool createSettingsTable(const QString &tableName);
-    bool insertMusic(const QString &tableName,const QString &name, const QString &path, const int &lenghtAsSecond, const QString &lenghtToShow);
-    bool removeMusic(const int &musicId);
-    bool updateMusicDuration(const int &musicId , const int &lenghtAsSecond , QString &lenghtToShow);
-
-    bool dropTable(const QString &tableName);
-
-private:
-    QString quotesql(const QString& s) {
-        return QString("'") + s + QString("'");
-    }
-
-public:
-    QString tableNamesMusicList = "tblMusicList";
-    QString tableNamesSettings = "tblSettings";
-
-    typedef struct TABLE {
-        QString id = "id";
-        QString current_index = "current_index";
-        QString selected_index = "selected_index";
-        QString repeatSingle = "repeatSingle";
-        QString repeatAll = "repeatAll";
-        QString shuffle = "shuffle";
-        QString volume = "volume";
-    } table_settings ;
-
-    typedef struct MUSIC {
-        QString id = "id";
-        QString name = "name";
-        QString path = "path";
-        QString lenghtToShow = "lenghtToShow";
-        QString lenghtAsSecond = "lenghtAsSecond";
-    } table_music;
-
-    /**
-     * @brief List of table and column names which created above
-     */
-    struct TablesAndColumns {
-        table_settings _tableSettings;
-        table_music _tableMusic;
+    bool isOpen() const
+    {
+        return m_db.isOpen();
     };
+    bool dropTable(const QString &tableName)
+    {
+        QSqlQuery query;
+        query.prepare("DROP TABLE " + tableName);
+        return query.exec();
+    };
+    QString quotesql(const QString& s)
+    {
+        return QString("'") + s + QString("'");
+    };
+    virtual void init() = 0;
+    virtual void insertDummy() = 0;
 
 signals:
 
-private:
+protected:
     QSqlDatabase m_db;
-    TablesAndColumns *allTables;
 };
 
 #endif // SQLITE3_H
