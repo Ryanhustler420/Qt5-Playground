@@ -2,7 +2,6 @@
 #include "application/manager.h"
 
 #include <QIcon>
-#include "utility/xcodeclazzdb.h"
 
 // ****************************************
 // https://stackoverflow.com/questions/8834147/c-signal-to-qml-slot-in-qt
@@ -20,9 +19,6 @@ int main(int argc, char *argv[])
     // Setting up the env configs
     QString env = Manager::instance().getCurrentEnv();
     qInfo() << "The application is running on " << env << " mode.";
-
-    XCodeClazzDB x;
-    x.saveLoginDetails("username", "password");
 
     // App kicks in
     Application application;

@@ -33,10 +33,8 @@ public:
     QString getDatePortionFromCreatedAt(QString createdAt);
     bool boolOf(int integer);
     bool urlContainsHttpKeyword(QString url);
-    QString decideAppropriateUrlAmong(QString imageContainers, QString url);
     bool urlsContainsHttpKeyword(QList<QString> urls);
     void openUrlInBrowser(QString url);
-    QList<QString> decideAppropriateUrlsAmong(QString imageContainers, QList<QString> urls);
     QString refineDecimal(double amount);
     QString refineDecimalAndGroup(double amount);
     bool hasOnlyNumericValue(QString v);
