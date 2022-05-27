@@ -68,21 +68,9 @@ Page {
             }
 
             Flow {
-                id: courses
+                id: coursesContainer
                 width: parent.width
-                spacing: 15
-
-                Component.onCompleted: {
-                    var list = [
-                                { name: "Java", id: "5", url: "http://xcodeclazz.com/assets/java-icon.svg" },
-                                { name: "Python", id: "15", url: "http://xcodeclazz.com/assets/python-icon.svg" },
-                                { name: "NodeJS", id: "15", url: "http://xcodeclazz.com/assets/nodejs-icon.svg" },
-                                { name: "C++", id: "15", url: "http://xcodeclazz.com/assets/cpp_icon.svg" },
-                            ]
-                    for(var i =0; i< list.length; i++) {
-                        ComponentGenerator.createCourseCard(i, list[i], courses);
-                    }
-                }                
+                spacing: 15            
             }
 
         }
@@ -90,6 +78,22 @@ Page {
 
     AllCoursesPageController {
         id: page_controller
+        onCoursesLoaded: {
+            console.log(courses)
+            var list = [
+                        { name: "Java", id: "5", url: "http://xcodeclazz.com/assets/java-icon.svg" },
+                        { name: "Python", id: "15", url: "http://xcodeclazz.com/assets/python-icon.svg" },
+                        { name: "NodeJS", id: "15", url: "http://xcodeclazz.com/assets/nodejs-icon.svg" },
+                        { name: "C++", id: "15", url: "http://xcodeclazz.com/assets/cpp_icon.svg" },
+                    ]
+            for(var i =0; i< list.length; i++) {
+                ComponentGenerator.createCourseCard(i, list[i], coursesContainer);
+            }
+        }
+    }
+
+    Component.onCompleted: {
+        page_controller.loadCourses()
     }
 
 }

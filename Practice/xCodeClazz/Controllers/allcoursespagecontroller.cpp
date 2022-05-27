@@ -21,3 +21,18 @@ void AllCoursesPageController::hold(QString title, QString subtitle, QString dur
 
     DataBridge::instance().setCourse(&course);
 }
+
+void AllCoursesPageController::loadCourses()
+{
+    // get the data from the internet and emit an event which will render the data in view
+    // if already present the data in local then get that in the first place.
+
+    // we will make google like design for shop keeper to check the product exstence across the city
+
+    apis.getCourses([=](QByteArray response){
+        qInfo() << QJsonDocument::fromJson(response).object();
+        emit coursesLoaded(QVariantList());
+    }, [=](QByteArray error){
+        qWarning() << error;
+    });
+}

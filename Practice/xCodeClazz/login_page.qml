@@ -66,6 +66,18 @@ Page {
                     login()
                 }
             }
+
+            Button {
+                id: googleLoginBtn
+                width: parent.width
+                text: "Continue with Google"
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignHCenter
+                onClicked: {
+                    page_controller.oauthGoogleLogin();
+                }
+            }
+
         }
     }
 

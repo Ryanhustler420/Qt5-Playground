@@ -13,9 +13,11 @@ public:
 
 signals:
     void deleteCourse();
+    void googleOAuthCodeReceive(QString code);
 
 public slots:
     void onDeleteCourse(std::function<void ()> callback);
+    void onGoogleOAuthCodeReceive(std::function<void(QString code)> callback);
 
 };
 

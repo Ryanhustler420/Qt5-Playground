@@ -3,38 +3,42 @@
 
 #include "parents/commonsuperclass.h"
 
-#include <QNetworkReply>
-#include <QNetworkRequest>
 #include <QNetworkAccessManager>
+#include <QNetworkRequest>
+#include <QNetworkReply>
 
-#include <QNetworkCookie>
 #include <QNetworkCookieJar>
+#include <QNetworkCookie>
 
-// this class will only responsible for network connection,
-// interpretor and other things, we need to add dependencies in this class
 class Network : public CommonSuperClass
 {
 public:
     explicit Network(CommonSuperClass *parent = nullptr);
 
-private:
-    QNetworkAccessManager *mNetMan;
-    QNetworkCookieJar *cookieJar;
-    QNetworkReply *mNetReply;
-    QByteArray *mDataBuffer;
-signals:
+public:
+    void attachHeader(QNetworkRequest &netRequest, QByteArray key, QByteArray value);
+    void attachHeader(QNetworkRequest &netRequest);
+    void printCookies(QUrl qurl);
+    void clearResponse();
+    void handleSpecifStatusCode(QNetworkReply *reply,
+                          std::function<void()> ok = nullptr,
+                          std::function<void()> bad = nullptr,
+                          std::function<void()> unauthorized = nullptr,
+                          std::function<void()> unprocessable = nullptr,
+                          std::function<void()> upgrade = nullptr,
+                          std::function<void()> not_implemented = nullptr,
+                          std::function<void()> bad_gateway = nullptr,
+                          std::function<void()> under_maintenance = nullptr);
+    void handleAllStatusCode(QNetworkReply *reply,
+                          std::function<void()> ok,
+                          std::function<void()> error);
 
 public:
-    void attachHeader(QNetworkRequest &netRequest);
-    void attachHeader(QNetworkRequest &netRequest, QByteArray key, QByteArray value);
+    QNetworkAccessManager *mNetMan;
+    QNetworkCookieJar *cookie_jar;
+    QNetworkReply *mNetReply;
+    QByteArray *mDataBuffer;
 
-private:
-    void printCookies(QUrl qurl);
-
-    void houseKeeper();
-
-private:
-    QNetworkCookieJar cookie_jar;
 };
 
 #endif // NETWORK_H

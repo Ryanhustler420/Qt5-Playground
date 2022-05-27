@@ -63,7 +63,7 @@ HttpPromise RequestHandler::handleGzipTest(HttpDataPtr data)
             Just use that as the chunk size \
             \
             If only 16 bytes, then je";
-    if (data->request->headerDefault("Content-Encoding", "") == "gzip")
+            if (data->request->headerDefault("Content-Encoding", "") == "gzip")
     {
         qInfo() << data->request->parseBodyStr();
     }
@@ -97,56 +97,56 @@ HttpPromise RequestHandler::handleFileTest(HttpDataPtr data)
 
     switch (id)
     {
-        case 1:
-            data->response->sendFile("data/404.html", "text/html", "utf-8");
-            break;
+    case 1:
+        data->response->sendFile("data/404.html", "text/html", "utf-8");
+        break;
 
-        case 2:
-            data->response->sendFile("data/404.html", "text/html", "");
-            break;
+    case 2:
+        data->response->sendFile("data/404.html", "text/html", "");
+        break;
 
-        case 3:
-            data->response->sendFile("data/404.html", "text/html", "", -1, Z_DEFAULT_COMPRESSION);
-            break;
+    case 3:
+        data->response->sendFile("data/404.html", "text/html", "", -1, Z_DEFAULT_COMPRESSION);
+        break;
 
-        case 4:
-            data->response->sendFile("data/colorPage.png", "image/png", "", -1, Z_DEFAULT_COMPRESSION, "colorPage.png");
-            break;
+    case 4:
+        data->response->sendFile("data/colorPage.png", "image/png", "", -1, Z_DEFAULT_COMPRESSION, "colorPage.png");
+        break;
 
-        case 5:
-            data->response->sendFile("data/colorPage.png", "image/png", "", -1, -2, "colorPage.png");
-            break;
+    case 5:
+        data->response->sendFile("data/colorPage.png", "image/png", "", -1, -2, "colorPage.png");
+        break;
 
-        case 6:
-            data->response->sendFile("data/colorPage.png", "image/png", "", -1, -2, "", 3600);
-            break;
+    case 6:
+        data->response->sendFile("data/colorPage.png", "image/png", "", -1, -2, "", 3600);
+        break;
 
-        case 7:
-            data->response->sendFile("data/colorPage.png", "image/png", "", -1, Z_DEFAULT_COMPRESSION, "", 3600);
-            break;
+    case 7:
+        data->response->sendFile("data/colorPage.png", "image/png", "", -1, Z_DEFAULT_COMPRESSION, "", 3600);
+        break;
 
-        case 8:
-            data->response->sendFile("data/404.html", "text/html", "utf-8", 100);
-            break;
+    case 8:
+        data->response->sendFile("data/404.html", "text/html", "utf-8", 100);
+        break;
 
-        case 9:
-            data->response->sendFile("data/404.html");
-            break;
+    case 9:
+        data->response->sendFile("data/404.html");
+        break;
 
-        case 10:
-            data->response->sendFile("data/404.html", "", "utf-8");
-            break;
+    case 10:
+        data->response->sendFile("data/404.html", "", "utf-8");
+        break;
 
-        case 11:
-            data->response->sendFile("data/colorPage.png");
-            break;
+    case 11:
+        data->response->sendFile("data/colorPage.png");
+        break;
 
-        case 12:
-            data->response->sendFile("data/presentation.pptx");
-            break;
+    case 12:
+        data->response->sendFile("data/presentation.pptx");
+        break;
 
-        default:
-            throw new HttpException(HttpStatus::BadRequest);
+    default:
+        throw new HttpException(HttpStatus::BadRequest);
     }
 
     data->response->setStatus(HttpStatus::Ok);
@@ -175,13 +175,26 @@ HttpPromise RequestHandler::handleAsyncTest(HttpDataPtr data)
     });
 }
 
+// **********************************************************************
+// **********************************************************************
+// **********************************************************************
+
+#include "rx/signals.h"
+
 HttpPromise RequestHandler::handleGoogleOAuthRedirection(HttpDataPtr data)
 {
     QString code = data->request->parameter("code");
 
     QJsonObject object;
-    object["code"] = code;
+    object["message"] = "Please wait we are loading user datails from google server";
+    object["status"] = "Success";
+
+    Signals::instance().googleOAuthCodeReceive(code);
 
     data->response->setStatus(HttpStatus::Ok, QJsonDocument(object));
     return HttpPromise::resolve(data);
 }
+
+// **********************************************************************
+// **********************************************************************
+// **********************************************************************
