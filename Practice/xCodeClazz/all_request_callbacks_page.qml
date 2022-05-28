@@ -11,10 +11,6 @@ Page {
     Layout.fillWidth: true
     title: qsTr("xCodeClazz")
 
-    Component.onCompleted: {
-
-    }
-
     header: Item {
         height: 70
         width: parent.width
@@ -139,9 +135,13 @@ Page {
         onNewItemsAdded: {
             callbacks_model.append(objects.map(e => JSON.parse(e)));
         }
-        Component.onCompleted: {
-            page_controller.ready()
+        onCallbackRequestsLoaded: {
+            console.log(callbacks);
         }
+    }
+
+    Component.onCompleted: {
+        page_controller.loadCallbackRequests();
     }
 
 }
