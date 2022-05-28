@@ -7,8 +7,8 @@ import com.xcodeclazz.singlecoursepagecontroller 1.0
 
 Page {
     id: root
-    Layout.fillHeight: true
     Layout.fillWidth: true
+    Layout.fillHeight: true
     title: qsTr("xCodeClazz")
 
     Component.onCompleted: {
@@ -26,10 +26,10 @@ Page {
         Row {
             clip: true
             width: parent.width
-            height: parent.height * .6
+            height: parent.height * .5
             onWidthChanged: {
                 width: parent.width
-                height: parent.height * .6
+                height: parent.height * .5
             }
 
             Column {
@@ -97,28 +97,46 @@ Page {
                         width: parent.width
                     }
 
-                    Label {
-                        id: title
-                        font.bold: true
+                    Column {
                         width: parent.width
-                        font.pointSize: 25
-                        wrapMode: Text.WordWrap
-                        Layout.alignment: Qt.AlignHCenter
-                        onWidthChanged: {
-                            width: parent.width
-                        }
-                    }
+                        onWidthChanged: { width: parent.width }
 
-                    Label {
-                        id: subtitle
-                        color: "gray"
-                        width: parent.width
-                        font.pointSize: 15
-                        wrapMode: Text.WordWrap
-                        Layout.alignment: Qt.AlignHCenter
-                        onWidthChanged: {
+                        Label {
+                            id: duration
+                            color: "gray"
                             width: parent.width
+                            font.pointSize: 12
+                            wrapMode: Text.WordWrap
+                            Layout.alignment: Qt.AlignHCenter
+                            onWidthChanged: {
+                                width: parent.width
+                            }
                         }
+
+                        Label {
+                            id: title
+                            font.bold: true
+                            width: parent.width
+                            font.pointSize: 25
+                            wrapMode: Text.WordWrap
+                            Layout.alignment: Qt.AlignHCenter
+                            onWidthChanged: {
+                                width: parent.width
+                            }
+                        }
+
+                        Label {
+                            id: subtitle
+                            color: "gray"
+                            width: parent.width
+                            font.pointSize: 15
+                            wrapMode: Text.WordWrap
+                            Layout.alignment: Qt.AlignHCenter
+                            onWidthChanged: {
+                                width: parent.width
+                            }
+                        }
+
                     }
 
                     Label {
@@ -176,20 +194,20 @@ Page {
         Row {
             clip: true
             width: parent.width
-            height: parent.height * .4
+            height: parent.height * .5
             onWidthChanged: {
                 width: parent.width
-                height: parent.height * .4
+                height: parent.height * .5
             }
 
             ScrollView {
                 padding: 10
                 Layout.fillHeight: true
                 Layout.fillWidth: true
-                width: parent.width * 1.0 // .7
+                width: parent.width * 1.0
                 height: parent.height
                 onWidthChanged: {
-                    width: parent.width * 1.0 // .7
+                    width: parent.width * 1.0
                     height: parent.height
                 }
 
@@ -212,7 +230,7 @@ Page {
                         width: parent.width
                         font.pointSize: 15
                         wrapMode: Text.WordWrap
-                        lineHeight: 1.5
+                        lineHeight: 1.2
                         text: "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available"
                     }
 
@@ -222,10 +240,10 @@ Page {
             Column {
                 Layout.fillHeight: true
                 Layout.fillWidth: true
-                width: parent.width * 0 // .3
+                width: parent.width * 0
                 height: parent.height
                 onWidthChanged: {
-                    width: parent.width * 0 // .3
+                    width: parent.width * 0
                     height: parent.height
                 }
 
@@ -243,6 +261,7 @@ Page {
             }
 
         }
+
     }
 
     Popup {
@@ -260,38 +279,137 @@ Page {
     }
 
     Popup {
-        id: edit_form_popup
+        width: 350
         modal: true
         focus: true
+        id: edit_form_popup
         anchors.centerIn: parent
         closePolicy: Popup.NoAutoClose
-
-        width: 350
 
         Column {
             width: parent.width
             spacing: 5
 
-            Label {
-                font.bold: true
-                font.pointSize: 25
-                text: "Course Update"
+            Row {
+                width: parent.width
+
+                Label {
+                    font.bold: true
+                    font.pointSize: 20
+                    text: "Course Update"
+                    width: parent.width * .9
+                }
+
+                Label {
+                    text: "X"
+                    font.bold: true
+                    font.pointSize: 20
+                    width: parent.width * .1
+
+                    MouseArea {
+                        cursorShape: Qt.PointingHandCursor
+                        anchors.fill: parent
+                        onClicked: {
+                            edit_form_popup.close()
+                        }
+                    }
+
+                }
+
             }
 
             TextField {
-               placeholderText: "Course Name"
-               width: parent.width
+                placeholderText: "Title"
+                width: parent.width
             }
 
             TextField {
-               placeholderText: "Course Subtitle"
-               width: parent.width
+                placeholderText: "Subtitle"
+                width: parent.width
             }
 
             TextField {
-               placeholderText: "Price"
-               width: parent.width
-               inputMethodHints: Qt.ImhPreferNumbers
+                placeholderText: "Duration 3 Months"
+                width: parent.width
+            }
+
+            TextField {
+                placeholderText: "Thumbnail Slug /assts/img.png"
+                width: parent.width
+            }
+
+            TextField {
+                placeholderText: "Features | One | By | One"
+                width: parent.width
+            }
+
+            TextField {
+                placeholderText: "Price"
+                width: parent.width
+            }
+
+            Row {
+                width: parent.width
+                spacing: 5
+
+                TextField {
+                    width: parent.width * .5
+                    placeholderText: "Session Starts"
+                }
+
+                TextField {
+                    width: parent.width * .5
+                    placeholderText: "Session Ends"
+                }
+
+            }
+
+            Row {
+                width: parent.width
+                spacing: 5
+
+                CheckBox {
+                    text: "HasActive"
+                }
+
+            }
+
+            Row {
+                width: parent.width
+                spacing: 5
+
+                Label {
+                    anchors.verticalCenter: parent.verticalCenter
+                    width: parent.width * .3
+                    font.pixelSize: 15
+                    text: "Space Left"
+                }
+
+                SpinBox {
+                    width: parent.width * .7
+                    from: 0
+                    to: 50
+                }
+
+            }
+
+            Row {
+                width: parent.width
+                spacing: 5
+
+                Label {
+                    anchors.verticalCenter: parent.verticalCenter
+                    width: parent.width * .3
+                    font.pixelSize: 15
+                    text: "Space Full"
+                }
+
+                SpinBox {
+                    width: parent.width * .7
+                    from: 0
+                    to: 50
+                }
+
             }
 
             Button {
@@ -311,23 +429,26 @@ Page {
         onDataReady: {
             // every component can have stackView
 
+            // use animation
             // if login page removed from stack view, then gotopage can't call
             // first go to that page and then remove the stack below
-
-            // first complete the flow of the ui
-            // put the routes and internet connection/login
-            // put db login as well
             // figure out the design pattern and use that in another project
-
-
-            // {"course":{"_id":"628346fa96e2e93b132e0e45","duration":"3 Months","features":["Weekly Coding Challenge","Debugging Session","Dry Run Practice","Coding Group"],"hasActive":false,"imageContainer":"raisehand","price":3000,"session":{"ends":"September","starts":"June"},"spaceFull":8,"spaceLeft":0,"subtitle":"The heart of websites","thumbnailUrl":"/assets/js-core-icon.svg","title":"Complete Core JavaScript"}}
 
             var docs = JSON.parse(JSON.stringify(o))["course"];
             docs['assetsUrl'] = application.getSiteAssetsUrl();
 
+            // docs['_id']
+            // docs['hasActive']
+            // docs['spaceLeft']
+            // docs['spaceFull']
+            // docs['imageContainer']
+            // docs['session']['ends']
+            // docs['session']['starts']
+
             title.text = docs['title'];
+            duration.text = docs['duration'];
             subtitle.text = docs['subtitle'];
-            price.text = docs['price'] + '/-'
+            price.text = docs['price'] + '/-';
             course_img_loader.source = docs['assetsUrl'] + docs['thumbnailUrl'];
             course_img_loader_placeholder.source = docs['assetsUrl'] + docs['thumbnailUrl'];
 

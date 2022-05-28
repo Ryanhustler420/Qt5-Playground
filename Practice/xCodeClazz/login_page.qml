@@ -21,8 +21,8 @@ Page {
 
         Column {
             id: column
+            spacing: 5
             height: 200
-            spacing: 10
             width: parent.width * .3
             anchors.verticalCenter: parent.verticalCenter
             anchors.horizontalCenter: parent.horizontalCenter
@@ -56,26 +56,31 @@ Page {
                 echoMode: TextField.Password
             }
 
-            Button {
-                id: loginBtn
+            Column {
                 width: parent.width
-                text: "Login"
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignHCenter
-                onClicked: {
-                    login()
-                }
-            }
 
-            Button {
-                id: googleLoginBtn
-                width: parent.width
-                text: "Continue with Google"
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignHCenter
-                onClicked: {
-                    page_controller.oauthGoogleLogin();
+                Button {
+                    id: loginBtn
+                    width: parent.width
+                    text: "Login"
+                    Layout.fillWidth: true
+                    Layout.alignment: Qt.AlignHCenter
+                    onClicked: {
+                        login()
+                    }
                 }
+
+                Button {
+                    id: googleLoginBtn
+                    width: parent.width
+                    text: "Continue with Google"
+                    Layout.fillWidth: true
+                    Layout.alignment: Qt.AlignHCenter
+                    onClicked: {
+                        page_controller.oauthGoogleLogin();
+                    }
+                }
+
             }
 
         }

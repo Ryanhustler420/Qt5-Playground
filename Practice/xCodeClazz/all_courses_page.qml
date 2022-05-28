@@ -32,13 +32,15 @@ Page {
             anchors.left: parent.left
         }
 
-        TextField {
-            id: search_field
-            width: 400
+        Button {
+            id: create_course_btn
+            text: "Create New Course"
             anchors.right: parent.right
             anchors.bottom: parent.bottom
             anchors.margins: 10
-            placeholderText: "Search\u2026"
+            onClicked: {
+                create_new_course_form.open()
+            }
         }
 
     }
@@ -69,10 +71,156 @@ Page {
             Flow {
                 id: coursesContainer
                 width: parent.width
-                spacing: 15            
+                spacing: 15
             }
 
         }
+    }
+
+    Popup {
+        width: 350
+        modal: true
+        focus: true
+        id: create_new_course_form
+        anchors.centerIn: parent
+        closePolicy: Popup.NoAutoClose
+
+        Column {
+            width: parent.width
+            spacing: 5
+
+            Row {
+                width: parent.width
+
+                Label {
+                    font.bold: true
+                    font.pointSize: 20
+                    text: "Course Create"
+                    width: parent.width * .9
+                }
+
+                Label {
+                    text: "X"
+                    font.bold: true
+                    font.pointSize: 20
+                    width: parent.width * .1
+
+                    MouseArea {
+                        cursorShape: Qt.PointingHandCursor
+                        anchors.fill: parent
+                        onClicked: {
+                            create_new_course_form.close()
+                        }
+                    }
+
+                }
+
+            }
+
+            TextField {
+                placeholderText: "Title"
+                width: parent.width
+            }
+
+            TextField {
+                placeholderText: "Subtitle"
+                width: parent.width
+            }
+
+            TextField {
+                placeholderText: "Duration 3 Months"
+                width: parent.width
+            }
+
+            TextField {
+                placeholderText: "Thumbnail Slug /assts/img.png"
+                width: parent.width
+            }
+
+            TextField {
+                placeholderText: "Features | One | By | One"
+                width: parent.width
+            }
+
+            TextField {
+                placeholderText: "Price"
+                width: parent.width
+            }
+
+            Row {
+                width: parent.width
+                spacing: 5
+
+                TextField {
+                    width: parent.width * .5
+                    placeholderText: "Session Starts"
+                }
+
+                TextField {
+                    width: parent.width * .5
+                    placeholderText: "Session Ends"
+                }
+
+            }
+
+            Row {
+                width: parent.width
+                spacing: 5
+
+                CheckBox {
+                    text: "HasActive"
+                }
+
+            }
+
+            Row {
+                width: parent.width
+                spacing: 5
+
+                Label {
+                    anchors.verticalCenter: parent.verticalCenter
+                    width: parent.width * .3
+                    font.pixelSize: 15
+                    text: "Space Left"
+                }
+
+                SpinBox {
+                    width: parent.width * .7
+                    from: 0
+                    to: 50
+                }
+
+            }
+
+            Row {
+                width: parent.width
+                spacing: 5
+
+                Label {
+                    anchors.verticalCenter: parent.verticalCenter
+                    width: parent.width * .3
+                    font.pixelSize: 15
+                    text: "Space Full"
+                }
+
+                SpinBox {
+                    width: parent.width * .7
+                    from: 0
+                    to: 50
+                }
+
+            }
+
+            Button {
+                text: "Create"
+                width: parent.width
+                onClicked: {
+                    create_new_course_form.close()
+                }
+            }
+
+        }
+
     }
 
     AllCoursesPageController {

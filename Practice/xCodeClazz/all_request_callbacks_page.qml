@@ -61,6 +61,7 @@ Page {
             width: callbacks_listview.width
             color: "transparent"
             height: 70
+
             Row {
                 width: parent.width
 
