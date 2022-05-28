@@ -16,6 +16,8 @@ public:
     QVariant get(QString key);
     QVariant get(QString key, QString group);
 
+    void remove(QString key);
+
 private:
     void sync();
     void printAllGroup();

@@ -13,10 +13,9 @@ Page {
     Layout.fillWidth: true
     title: qsTr("xCodeClazz")
 
-    // these signals are being used in this page
-    signal openCourse(string id, string name);
-    onOpenCourse: {
-        page_controller.hold(name, id, "QString duration", "QString thumbnailUrl", "QString imageContainer", [], 123, false, 0, 8, "QString starts", "QString ends")
+    // these functions are being used in this page
+    function openCourse(object) {
+        page_controller.hold(JSON.stringify(object))
         application.gotoPage(application.getSingleCoursePagePath())
     }
 
@@ -79,16 +78,12 @@ Page {
     AllCoursesPageController {
         id: page_controller
         onCoursesLoaded: {
-            console.log(courses)
-            var list = [
-                        { name: "Java", id: "5", url: "http://xcodeclazz.com/assets/java-icon.svg" },
-                        { name: "Python", id: "15", url: "http://xcodeclazz.com/assets/python-icon.svg" },
-                        { name: "NodeJS", id: "15", url: "http://xcodeclazz.com/assets/nodejs-icon.svg" },
-                        { name: "C++", id: "15", url: "http://xcodeclazz.com/assets/cpp_icon.svg" },
-                    ]
-            for(var i =0; i< list.length; i++) {
-                ComponentGenerator.createCourseCard(i, list[i], coursesContainer);
+            for(var i =0; i< courses.length; i++) {
+                ComponentGenerator.createCourseCard(i, JSON.parse(JSON.stringify(courses[i])), application.getSiteAssetsUrl(), coursesContainer);
             }
+        }
+        onHolded: {
+            // console.log(o);
         }
     }
 

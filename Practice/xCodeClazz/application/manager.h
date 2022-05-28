@@ -16,13 +16,14 @@ public:
     int getVersionCode() const;
     QString getCurrentEnv() const;
     QUrl getCurrentHostUrl() const;
+    QUrl getCurrentAssetsUrl() const;
     QString getAppVersionName() const;
     QString getServerVersionCode() const;
 
 private:
     int versionCode;
     QString env, appVersionName, serverVersionCode;
-    QUrl *hostUrl;
+    QUrl *hostUrl, *siteAssets;
 
 };
 

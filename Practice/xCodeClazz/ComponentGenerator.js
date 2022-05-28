@@ -1,6 +1,6 @@
 // @Required - your context must have these signal(s)
 // SIGNALS:
-//      openCountState(string name, string count)
+//      openCountState(object o)
 // PROPERTIES
 //      i: int
 //      __parent__: ElementId
@@ -52,13 +52,14 @@ function createCountState(i, obj, __parent__) {
 }
 
 // @Required - your context must have these signal(s)
-// SIGNALS:
-//      openCourse(string id, string name)
+// FUNCTIONS:
+//      signal openCourse(object)
 // PROPERTIES
 //      i: int
+//      obj: { name: String, id: String, thumbnailUrl: String }
+//      assetsUrl: string
 //      __parent__: ElementId
-//      obj: { name: String, id: String, url: string }
-function createCourseCard(i, obj, __parent__) {
+function createCourseCard(i, obj, assetsUrl, __parent__) {
     Qt.createQmlObject(`
 
         import QtQuick 2.0;
@@ -81,7 +82,7 @@ function createCourseCard(i, obj, __parent__) {
                    id: course_img_loader_${i};
                    height: parent.height - 50;
                    width: parent.width;
-                   source: "${obj.url}";
+                   source: "${assetsUrl}/${obj.thumbnailUrl}";
                    asynchronous: true;
                 }
 
@@ -92,7 +93,7 @@ function createCourseCard(i, obj, __parent__) {
                    width: course_img_loader_${i}.width;
 
                    Image {
-                       source: "${obj.url}";
+                       source: "${assetsUrl}/${obj.thumbnailUrl}";
                        height: parent.height;
                        width: parent.width;
                        fillMode: Image.PreserveAspectFit;
@@ -103,10 +104,10 @@ function createCourseCard(i, obj, __parent__) {
                 }
 
                 Button {
-                    text: "${obj.name}";
+                    text: "${obj.title}";
                     width: parent.width;
                     onClicked: {
-                        openCourse("${obj.id}", "${obj.name}");
+                        openCourse(${JSON.stringify(obj)});
                     }
                 }
 

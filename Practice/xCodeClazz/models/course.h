@@ -47,10 +47,10 @@ signals:
 public:
     QList<QString> getAllFields();
     QString getPackageName();
-    QList<Course *> parseJSONArray(QJsonArray o) throw();
-    Course *parseJSONObject(QJsonObject o) throw();
-    QList<Course *> parseArrayString(QString o) throw();
-    Course *parseObjectString(QString o) throw();
+    QList<Course *> parseJSONArray(QJsonArray o) throw(ExceptionThrow);
+    QVariantList parseJSONArrayToVariantList(QJsonArray o) throw(ExceptionThrow);
+    Course *parseJSONObject(QJsonObject o) throw(ExceptionThrow);
+    QVariant parseJSONObjectToVariant(QJsonObject o);
     bool equal(Course *o);
     void copy(Course *o);
 
@@ -77,7 +77,6 @@ public:
     void setSpaceFull(int newSpaceFull);
     Session *getSession() const;
     void setSession(Session *newSession);
-
 };
 
 #endif // COURSE_H

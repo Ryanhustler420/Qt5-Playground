@@ -6,6 +6,8 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 
+#include "application/manager.h"
+
 #include "controllers/loginpagecontroller.h"
 #include "controllers/dashboardpagecontroller.h"
 #include "controllers/allrequestcallbackspage.h"
@@ -21,6 +23,7 @@ public:
     void boot(QGuiApplication &app);
 
 public:
+    Q_INVOKABLE QString getSiteAssetsUrl() { return Manager::instance().getCurrentAssetsUrl().toString(); }
     Q_INVOKABLE QString getApplicationPath() { return "qrc:/application.qml"; };
     Q_INVOKABLE QString getLoginPagePath() { return "qrc:/pages/login_page.qml"; };
     Q_INVOKABLE QString getDashboardPath() { return "qrc:/pages/dashboard_page.qml"; };

@@ -2,7 +2,6 @@
 
 Application::Application(QObject *parent) : QObject(parent)
 {
-
     // Same Instace Binding Between Different Component/Pages
     engine.rootContext()->setContextProperty("application", this);
 

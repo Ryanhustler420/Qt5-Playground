@@ -5,15 +5,40 @@
 #include <QVector>
 #include <QList>
 #include "utility/jsonhelper.h"
+#include "utility/exceptionthrow.h"
 
 template<typename T>
 class ModelConventions : public QObject
 {
 public:
-    QList<QString> parseOnlyStringJSONArray(QJsonArray o) throw();
-    QList<double> parseOnlyDoubleJSONArray(QJsonArray o) throw();
-    QList<long> parseOnlyLongJSONArray(QJsonArray o) throw();
-    QList<int> parseOnlyIntegerJSONArray(QJsonArray o) throw();
+    QList<QString> *parseOnlyStringJSONArray(QJsonArray o) throw()
+    {
+        QList<QString> *list = new QList<QString>();
+        for (int i = 0; i < o.size(); i++)
+            list->append(o.at(i).toString());
+        return list;
+    }
+    QList<double> *parseOnlyDoubleJSONArray(QJsonArray o) throw()
+    {
+        QList<double> *list = new QList<double>();
+        for (int i = 0; i < o.size(); i++)
+            list->append(o.at(i).toDouble());
+        return list;
+    }
+    QList<long> *parseOnlyLongJSONArray(QJsonArray o) throw()
+    {
+        QList<long> *list = new QList<long>();
+        for (int i = 0; i < o.size(); i++)
+            list->append(o.at(i).toDouble());
+        return list;
+    }
+    QList<int> *parseOnlyIntegerJSONArray(QJsonArray o) throw()
+    {
+        QList<int> *list = new QList<int>();
+        for (int i = 0; i < o.size(); i++)
+            list->append(o.at(i).toInt());
+        return list;
+    }
 
 protected:
     QString className;
@@ -27,10 +52,10 @@ public:
     virtual QList<QString> getAllFields() = 0;
     virtual QString getPackageName() = 0;
 
-    virtual QList<T*> parseJSONArray(QJsonArray o) throw() = 0;
-    virtual T* parseJSONObject(QJsonObject o) throw() = 0;
-    virtual QList<T*> parseArrayString(QString o) throw() = 0;
-    virtual T* parseObjectString(QString o) throw() = 0;
+    virtual QList<T*> parseJSONArray(QJsonArray o) throw(ExceptionThrow) = 0;
+    virtual QVariantList parseJSONArrayToVariantList(QJsonArray o) throw(ExceptionThrow) = 0;
+    virtual T* parseJSONObject(QJsonObject o) throw(ExceptionThrow) = 0;
+    virtual QVariant parseJSONObjectToVariant(QJsonObject o) = 0;
 
     virtual bool equal(T* o) = 0;
     virtual void copy(T *o) = 0;

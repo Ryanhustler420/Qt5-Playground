@@ -39,6 +39,11 @@ QVariant LocalCache::get(QString key, QString group)
     return value;
 }
 
+void LocalCache::remove(QString key)
+{
+    settings->remove(key);
+}
+
 void LocalCache::sync()
 {
     settings->sync();

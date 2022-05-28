@@ -10,10 +10,12 @@ Manager::Manager(QObject *parent) : OSingleton<Manager>()
     Q_UNUSED(parent);
 #ifdef QT_DEBUG
     env = "dev";
+    siteAssets = new QUrl("http://xcodeclazz.com");
     hostUrl = new QUrl("http://localhost:3002/sandbox/v1");
 #else
     env = "prod";
-    hostUrl = new QUrl("http://localhost:3002/v1");
+    siteAssets = new QUrl("http://xcodeclazz.com");
+    hostUrl = new QUrl("http://xcodeclazz.com/v1");
 #endif
 }
 
@@ -30,6 +32,11 @@ QString Manager::getCurrentEnv() const
 QUrl Manager::getCurrentHostUrl() const
 {
     return *hostUrl;
+}
+
+QUrl Manager::getCurrentAssetsUrl() const
+{
+    return *siteAssets;
 }
 
 QString Manager::getAppVersionName() const

@@ -35,7 +35,6 @@ void Session::setStarts(const QString &newStarts)
     starts = newStarts;
 }
 
-
 QList<QString> Session::getAllFields()
 {
 
@@ -51,17 +50,17 @@ QList<Session *> Session::parseJSONArray(QJsonArray o) throw()
 
 }
 
+QVariantList Session::parseJSONArrayToVariantList(QJsonArray o) throw(ExceptionThrow)
+{
+
+}
+
 Session *Session::parseJSONObject(QJsonObject o) throw()
 {
 
 }
 
-QList<Session *> Session::parseArrayString(QString o) throw()
-{
-
-}
-
-Session *Session::parseObjectString(QString o) throw()
+QVariant Session::parseJSONObjectToVariant(QJsonObject o)
 {
 
 }

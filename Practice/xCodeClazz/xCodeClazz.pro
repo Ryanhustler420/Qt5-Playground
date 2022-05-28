@@ -21,6 +21,7 @@ SOURCES += \
         controllers/allrequestcallbackspage.cpp \
         controllers/dashboardpagecontroller.cpp \
         controllers/loginpagecontroller.cpp \
+    utility/exceptionthrow.cpp \
         utility/filesystembroadcaster.cpp \
         models/god/modelconventions.cpp \
         parents/commonsuperclass.cpp \
@@ -38,7 +39,6 @@ SOURCES += \
         networking/apis.cpp \
         utility/threads.cpp \
         models/session.cpp \
-        ipc/databridge.cpp \
         utility/timer.cpp \
         models/course.cpp \
         utility/xdb.cpp \
@@ -87,6 +87,7 @@ HEADERS += \
     controllers/allrequestcallbackspage.h \
     controllers/dashboardpagecontroller.h \
     controllers/loginpagecontroller.h \
+    utility/exceptionthrow.h \
     utility/filesystembroadcaster.h \
     models/god/modelconventions.h \
     parents/commonsuperclass.h \
@@ -105,7 +106,6 @@ HEADERS += \
     networking/apis.h \
     utility/helpers.h \
     utility/threads.h \
-    ipc/databridge.h \
     models/session.h \
     utility/timer.h \
     models/course.h \

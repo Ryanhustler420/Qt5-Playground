@@ -1,8 +1,8 @@
 #ifndef SINGLECOURSEPAGECONTROLLER_H
 #define SINGLECOURSEPAGECONTROLLER_H
 
-#include "ipc/databridge.h"
 #include "models/course.h"
+#include "database/localcache.h"
 
 class SingleCoursePageController : public QObject
 {
@@ -11,6 +11,9 @@ public:
     explicit SingleCoursePageController(QObject *parent = nullptr);
 
 signals:
+
+private:
+    LocalCache lc;
 
 };
 
