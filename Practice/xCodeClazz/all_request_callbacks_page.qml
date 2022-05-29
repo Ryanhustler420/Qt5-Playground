@@ -136,7 +136,11 @@ Page {
             callbacks_model.append(objects.map(e => JSON.parse(e)));
         }
         onCallbackRequestsLoaded: {
+
             console.log(callbacks);
+
+            // callbacks_model.append()
+
         }
     }
 

@@ -15,51 +15,56 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        controllers/allstudentspagecontroller.cpp \
-        controllers/singlecoursepagecontroller.cpp \
-        controllers/allcoursespagecontroller.cpp \
-        controllers/allrequestcallbackspage.cpp \
-        controllers/dashboardpagecontroller.cpp \
-        controllers/loginpagecontroller.cpp \
+    controllers/allstudentspagecontroller.cpp \
+    controllers/singlecoursepagecontroller.cpp \
+    controllers/allcoursespagecontroller.cpp \
+    controllers/allrequestcallbackspage.cpp \
+    controllers/dashboardpagecontroller.cpp \
+    controllers/loginpagecontroller.cpp \
+    models/callbackrequest.cpp \
+    models/fee.cpp \
+    models/payment.cpp \
+    models/student.cpp \
+    models/timeslot.cpp \
     utility/exceptionthrow.cpp \
-        utility/filesystembroadcaster.cpp \
-        models/god/modelconventions.cpp \
-        parents/commonsuperclass.cpp \
-        utility/xcodeclazzdb.cpp \
-        database/localcache.cpp \
-        application/manager.cpp \
-        utility/filesystem.cpp \
-        networking/network.cpp \
-        utility/jsonhelper.cpp \
-        oauth/googleoauth.cpp \
-        networking/routes.cpp \
-        database/musicdb.cpp \
-        database/sqlite3.cpp \
-        utility/helpers.cpp \
-        networking/apis.cpp \
-        utility/threads.cpp \
-        models/session.cpp \
-        utility/timer.cpp \
-        models/course.cpp \
-        utility/xdb.cpp \
-        application.cpp \
-        rx/signals.cpp \
-        utility/os.cpp \
-        main.cpp \
-        server/source/util.cpp \
-        server/source/httpData.cpp \
-        server/source/httpServer.cpp \
-        server/source/httpRequest.cpp \
-        server/source/httpResponse.cpp \
-        server/source/httpConnection.cpp \
-        server/routes/requestHandler.cpp \
-        server/source/httpRequestRouter.cpp \
-        server/middleware/verifyJson.cpp \
-        server/middleware/getObject.cpp \
-        server/middleware/getArray.cpp \
-        server/middleware/CORS.cpp \
-        server/middleware/auth.cpp \
-        server/server.cpp \
+    utility/filesystembroadcaster.cpp \
+    models/god/modelconventions.cpp \
+    parents/commonsuperclass.cpp \
+    utility/xcodeclazzdb.cpp \
+    database/localcache.cpp \
+    application/manager.cpp \
+    utility/filesystem.cpp \
+    networking/network.cpp \
+    utility/jsonhelper.cpp \
+    oauth/googleoauth.cpp \
+    networking/routes.cpp \
+    database/musicdb.cpp \
+    database/sqlite3.cpp \
+    utility/helpers.cpp \
+    networking/apis.cpp \
+    utility/threads.cpp \
+    models/session.cpp \
+    utility/timer.cpp \
+    models/course.cpp \
+    utility/xdb.cpp \
+    application.cpp \
+    rx/signals.cpp \
+    utility/os.cpp \
+    main.cpp \
+    server/source/util.cpp \
+    server/source/httpData.cpp \
+    server/source/httpServer.cpp \
+    server/source/httpRequest.cpp \
+    server/source/httpResponse.cpp \
+    server/source/httpConnection.cpp \
+    server/routes/requestHandler.cpp \
+    server/source/httpRequestRouter.cpp \
+    server/middleware/verifyJson.cpp \
+    server/middleware/getObject.cpp \
+    server/middleware/getArray.cpp \
+    server/middleware/CORS.cpp \
+    server/middleware/auth.cpp \
+    server/server.cpp \
 
 RESOURCES += qml.qrc
 
@@ -87,6 +92,11 @@ HEADERS += \
     controllers/allrequestcallbackspage.h \
     controllers/dashboardpagecontroller.h \
     controllers/loginpagecontroller.h \
+    models/callbackrequest.h \
+    models/fee.h \
+    models/payment.h \
+    models/student.h \
+    models/timeslot.h \
     utility/exceptionthrow.h \
     utility/filesystembroadcaster.h \
     models/god/modelconventions.h \
