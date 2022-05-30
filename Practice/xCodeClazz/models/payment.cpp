@@ -44,7 +44,7 @@ QString Payment::getPackageName()
     return this->className;
 }
 
-QList<Payment*> Payment::parseJSONArray(QJsonArray o) throw(ExceptionThrow)
+QList<Payment*> Payment::parseJSONArray(QJsonArray o)
 {
     QList<Payment*> list;
     if (o.empty()) return list;
@@ -54,7 +54,7 @@ QList<Payment*> Payment::parseJSONArray(QJsonArray o) throw(ExceptionThrow)
     return list;
 }
 
-QVariantList Payment::parseJSONArrayToVariantList(QJsonArray o) throw(ExceptionThrow)
+QVariantList Payment::parseJSONArrayToVariantList(QJsonArray o)
 {
     QVariantList list;
     if (o.empty()) return list;
@@ -64,7 +64,7 @@ QVariantList Payment::parseJSONArrayToVariantList(QJsonArray o) throw(ExceptionT
     return list;
 }
 
-Payment *Payment::parseJSONObject(QJsonObject o) throw(ExceptionThrow)
+Payment *Payment::parseJSONObject(QJsonObject o)
 {
     if (o.isEmpty()) return nullptr;
     Payment *n = new Payment();
@@ -74,7 +74,6 @@ Payment *Payment::parseJSONObject(QJsonObject o) throw(ExceptionThrow)
             n->setTitle(o.value(fields->title).toString());
         } else {
             n->setTitle(fallbackValue);
-            throw (new ExceptionThrow(fields->title));
         }
     }  catch (QString error) {
         n->setTitle(fallbackValue);
@@ -85,7 +84,6 @@ Payment *Payment::parseJSONObject(QJsonObject o) throw(ExceptionThrow)
             n->setDate(o.value(fields->date).toString());
         } else {
             n->setDate(fallbackValue);
-            throw (new ExceptionThrow(fields->date));
         }
     }  catch (QString error) {
         n->setDate(fallbackValue);

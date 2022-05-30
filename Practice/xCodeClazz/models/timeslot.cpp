@@ -56,7 +56,7 @@ QString TimeSlot::getPackageName()
     return this->className;
 }
 
-QList<TimeSlot*> TimeSlot::parseJSONArray(QJsonArray o) throw(ExceptionThrow)
+QList<TimeSlot*> TimeSlot::parseJSONArray(QJsonArray o)
 {
     QList<TimeSlot*> list;
     if (o.empty()) return list;
@@ -66,7 +66,7 @@ QList<TimeSlot*> TimeSlot::parseJSONArray(QJsonArray o) throw(ExceptionThrow)
     return list;
 }
 
-QVariantList TimeSlot::parseJSONArrayToVariantList(QJsonArray o) throw(ExceptionThrow)
+QVariantList TimeSlot::parseJSONArrayToVariantList(QJsonArray o)
 {
     QVariantList list;
     if (o.empty()) return list;
@@ -76,7 +76,7 @@ QVariantList TimeSlot::parseJSONArrayToVariantList(QJsonArray o) throw(Exception
     return list;
 }
 
-TimeSlot *TimeSlot::parseJSONObject(QJsonObject o) throw(ExceptionThrow)
+TimeSlot *TimeSlot::parseJSONObject(QJsonObject o)
 {
     if (o.isEmpty()) return nullptr;
     TimeSlot *n = new TimeSlot();
@@ -86,7 +86,6 @@ TimeSlot *TimeSlot::parseJSONObject(QJsonObject o) throw(ExceptionThrow)
             n->setFrom(o.value(fields->from).toString());
         } else {
             n->setFrom(fallbackValue);
-            throw (new ExceptionThrow(fields->from));
         }
     }  catch (QString error) {
         n->setFrom(fallbackValue);
@@ -97,7 +96,6 @@ TimeSlot *TimeSlot::parseJSONObject(QJsonObject o) throw(ExceptionThrow)
             n->setTo(o.value(fields->to).toString());
         } else {
             n->setTo(fallbackValue);
-            throw (new ExceptionThrow(fields->to));
         }
     }  catch (QString error) {
         n->setTo(fallbackValue);
@@ -108,7 +106,6 @@ TimeSlot *TimeSlot::parseJSONObject(QJsonObject o) throw(ExceptionThrow)
             n->setWeeks(parseOnlyStringJSONArray(o.value(fields->weeks).toArray()));
         } else {
             n->setWeeks(nullptr);
-            throw (new ExceptionThrow(fields->weeks));
         }
     }  catch (QString error) {
         n->setWeeks(nullptr);

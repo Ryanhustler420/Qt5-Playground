@@ -198,7 +198,7 @@ QString Student::getPackageName()
     return this->className;
 }
 
-QList<Student*> Student::parseJSONArray(QJsonArray o) throw(ExceptionThrow)
+QList<Student*> Student::parseJSONArray(QJsonArray o)
 {
     QList<Student*> list;
     if (o.empty()) return list;
@@ -208,7 +208,7 @@ QList<Student*> Student::parseJSONArray(QJsonArray o) throw(ExceptionThrow)
     return list;
 }
 
-QVariantList Student::parseJSONArrayToVariantList(QJsonArray o) throw(ExceptionThrow)
+QVariantList Student::parseJSONArrayToVariantList(QJsonArray o)
 {
     QVariantList list;
     if (o.empty()) return list;
@@ -218,7 +218,7 @@ QVariantList Student::parseJSONArrayToVariantList(QJsonArray o) throw(ExceptionT
     return list;
 }
 
-Student *Student::parseJSONObject(QJsonObject o) throw(ExceptionThrow)
+Student *Student::parseJSONObject(QJsonObject o)
 {
     if (o.isEmpty()) return nullptr;
     Student *n = new Student();
@@ -228,7 +228,6 @@ Student *Student::parseJSONObject(QJsonObject o) throw(ExceptionThrow)
             n->setId(o.value(fields->_id).toString());
         } else {
             n->setId(fallbackValue);
-            throw (new ExceptionThrow(fields->_id));
         }
     }  catch (QString error) {
         n->setId(fallbackValue);
@@ -239,7 +238,6 @@ Student *Student::parseJSONObject(QJsonObject o) throw(ExceptionThrow)
             n->setSchool(o.value(fields->school).toString());
         } else {
             n->setSchool(fallbackValue);
-            throw (new ExceptionThrow(fields->school));
         }
     }  catch (QString error) {
         n->setSchool(fallbackValue);
@@ -250,7 +248,6 @@ Student *Student::parseJSONObject(QJsonObject o) throw(ExceptionThrow)
             n->setName(o.value(fields->name).toString());
         } else {
             n->setName(fallbackValue);
-            throw (new ExceptionThrow(fields->name));
         }
     }  catch (QString error) {
         n->setName(fallbackValue);
@@ -261,7 +258,6 @@ Student *Student::parseJSONObject(QJsonObject o) throw(ExceptionThrow)
             n->setImageUrl(o.value(fields->imageUrl).toString());
         } else {
             n->setImageUrl(fallbackValue);
-            throw (new ExceptionThrow(fields->imageUrl));
         }
     }  catch (QString error) {
         n->setImageUrl(fallbackValue);
@@ -272,7 +268,6 @@ Student *Student::parseJSONObject(QJsonObject o) throw(ExceptionThrow)
             n->setImageContainer(o.value(fields->imageContainer).toString());
         } else {
             n->setImageContainer(fallbackValue);
-            throw (new ExceptionThrow(fields->imageContainer));
         }
     }  catch (QString error) {
         n->setImageContainer(fallbackValue);
@@ -283,7 +278,6 @@ Student *Student::parseJSONObject(QJsonObject o) throw(ExceptionThrow)
             n->setAge(o.value(fields->age).toInt());
         } else {
             n->setAge(fallbackZero);
-            throw (new ExceptionThrow(fields->age));
         }
     }  catch (QString error) {
         n->setAge(fallbackZero);
@@ -294,7 +288,6 @@ Student *Student::parseJSONObject(QJsonObject o) throw(ExceptionThrow)
             n->setAge(o.value(fields->age).toInt());
         } else {
             n->setAge(fallbackZero);
-            throw (new ExceptionThrow(fields->age));
         }
     }  catch (QString error) {
         n->setAge(fallbackZero);
@@ -305,7 +298,6 @@ Student *Student::parseJSONObject(QJsonObject o) throw(ExceptionThrow)
             n->setClazz(o.value(fields->clazz).toString());
         } else {
             n->setClazz(fallbackValue);
-            throw (new ExceptionThrow(fields->clazz));
         }
     }  catch (QString error) {
         n->setClazz(fallbackValue);
@@ -317,21 +309,20 @@ Student *Student::parseJSONObject(QJsonObject o) throw(ExceptionThrow)
             // n->setPayments((new Payment())->parseJSONArray(o.value(fields->payments).toArray()));
         } else {
             n->setPayments(nullptr);
-            throw (new ExceptionThrow(fields->payments));
         }
     }  catch (QString error) {
         n->setPayments(nullptr);
     }
 
-//    QList<Payment> *payments;
-//    QList<QString> *courses;
-//    QList<Course> *ALTCourses;
-//    TimeSlot *timeSlot;
-//    QList<QString> *phoneNumbers;
-//    QString joinDate;
-//    Fee *fees;
-//    int batchNumber;
-//    QString email;
+    //    QList<Payment> *payments;
+    //    QList<QString> *courses;
+    //    QList<Course> *ALTCourses;
+    //    TimeSlot *timeSlot;
+    //    QList<QString> *phoneNumbers;
+    //    QString joinDate;
+    //    Fee *fees;
+    //    int batchNumber;
+    //    QString email;
 
     return n;
 }

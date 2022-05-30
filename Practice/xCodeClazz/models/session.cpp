@@ -45,7 +45,7 @@ QString Session::getPackageName()
     return this->className;
 }
 
-QList<Session*> Session::parseJSONArray(QJsonArray o) throw(ExceptionThrow)
+QList<Session*> Session::parseJSONArray(QJsonArray o)
 {
     QList<Session*> list;
     if (o.empty()) return list;
@@ -55,7 +55,7 @@ QList<Session*> Session::parseJSONArray(QJsonArray o) throw(ExceptionThrow)
     return list;
 }
 
-QVariantList Session::parseJSONArrayToVariantList(QJsonArray o) throw(ExceptionThrow)
+QVariantList Session::parseJSONArrayToVariantList(QJsonArray o)
 {
     QVariantList list;
     if (o.empty()) return list;
@@ -65,7 +65,7 @@ QVariantList Session::parseJSONArrayToVariantList(QJsonArray o) throw(ExceptionT
     return list;
 }
 
-Session *Session::parseJSONObject(QJsonObject o) throw(ExceptionThrow)
+Session *Session::parseJSONObject(QJsonObject o)
 {
     if (o.isEmpty()) return nullptr;
     Session *n = new Session();
@@ -75,7 +75,6 @@ Session *Session::parseJSONObject(QJsonObject o) throw(ExceptionThrow)
             n->setStarts(o.value(fields->starts).toString());
         } else {
             n->setStarts(fallbackValue);
-            throw (new ExceptionThrow(fields->starts));
         }
     }  catch (QString error) {
         n->setStarts(fallbackValue);
@@ -86,7 +85,6 @@ Session *Session::parseJSONObject(QJsonObject o) throw(ExceptionThrow)
             n->setEnds(o.value(fields->ends).toString());
         } else {
             n->setEnds(fallbackValue);
-            throw (new ExceptionThrow(fields->ends));
         }
     }  catch (QString error) {
         n->setEnds(fallbackValue);

@@ -144,7 +144,7 @@ QString Course::getPackageName()
     return this->className;
 }
 
-QList<Course*> Course::parseJSONArray(QJsonArray o) throw(ExceptionThrow)
+QList<Course*> Course::parseJSONArray(QJsonArray o)
 {
     QList<Course*> list;
     if (o.empty()) return list;
@@ -154,7 +154,7 @@ QList<Course*> Course::parseJSONArray(QJsonArray o) throw(ExceptionThrow)
     return list;
 }
 
-QVariantList Course::parseJSONArrayToVariantList(QJsonArray o) throw(ExceptionThrow)
+QVariantList Course::parseJSONArrayToVariantList(QJsonArray o)
 {
     QVariantList list;
     if (o.empty()) return list;
@@ -164,7 +164,7 @@ QVariantList Course::parseJSONArrayToVariantList(QJsonArray o) throw(ExceptionTh
     return list;
 }
 
-Course *Course::parseJSONObject(QJsonObject o) throw(ExceptionThrow)
+Course *Course::parseJSONObject(QJsonObject o)
 {
     if (o.isEmpty()) return nullptr;
     Course *n = new Course();
@@ -174,7 +174,6 @@ Course *Course::parseJSONObject(QJsonObject o) throw(ExceptionThrow)
             n->setTitle(o.value(fields->title).toString());
         } else {
             n->setTitle(fallbackValue);
-            throw (new ExceptionThrow(fields->title));
         }
     }  catch (QString error) {
         n->setTitle(error);
@@ -185,7 +184,6 @@ Course *Course::parseJSONObject(QJsonObject o) throw(ExceptionThrow)
             n->setSubtitle(o.value(fields->subtitle).toString());
         } else {
             n->setSubtitle(fallbackValue);
-            throw (new ExceptionThrow(fields->subtitle));
         }
     }  catch (QString error) {
         n->setSubtitle(error);
@@ -196,7 +194,6 @@ Course *Course::parseJSONObject(QJsonObject o) throw(ExceptionThrow)
             n->setDuration(o.value(fields->duration).toString());
         } else {
             n->setDuration(fallbackValue);
-            throw (new ExceptionThrow(fields->duration));
         }
     }  catch (QString error) {
         n->setDuration(error);
@@ -207,7 +204,6 @@ Course *Course::parseJSONObject(QJsonObject o) throw(ExceptionThrow)
             n->setThumbnailUrl(o.value(fields->thumbnailUrl).toString());
         } else {
             n->setThumbnailUrl(fallbackValue);
-            throw (new ExceptionThrow(fields->thumbnailUrl));
         }
     }  catch (QString error) {
         n->setThumbnailUrl(error);
@@ -218,7 +214,6 @@ Course *Course::parseJSONObject(QJsonObject o) throw(ExceptionThrow)
             n->setImageContainer(o.value(fields->imageContainer).toString());
         } else {
             n->setImageContainer(fallbackValue);
-            throw (new ExceptionThrow(fields->imageContainer));
         }
     }  catch (QString error) {
         n->setImageContainer(error);
@@ -230,7 +225,6 @@ Course *Course::parseJSONObject(QJsonObject o) throw(ExceptionThrow)
             n->setFeatures(parseOnlyStringJSONArray(o.value(fields->features).toArray()));
         } else {
             n->setFeatures(nullptr);
-            throw (new ExceptionThrow(fields->features));
         }
     }  catch (QString error) {
         n->setFeatures(nullptr);
@@ -241,7 +235,6 @@ Course *Course::parseJSONObject(QJsonObject o) throw(ExceptionThrow)
             n->setPrice(o.value(fields->price).toInt());
         } else {
             n->setPrice(fallbackZero);
-            throw (new ExceptionThrow(fields->price));
         }
     }  catch (QString error) {
         n->setPrice(fallbackZero);
@@ -252,7 +245,6 @@ Course *Course::parseJSONObject(QJsonObject o) throw(ExceptionThrow)
             n->setHasActive(o.value(fields->hasActive).toInt());
         } else {
             n->setHasActive(false);
-            throw (new ExceptionThrow(fields->hasActive));
         }
     }  catch (QString error) {
         n->setHasActive(false);
@@ -263,7 +255,6 @@ Course *Course::parseJSONObject(QJsonObject o) throw(ExceptionThrow)
             n->setSpaceLeft(o.value(fields->spaceLeft).toInt());
         } else {
             n->setSpaceLeft(fallbackZero);
-            throw (new ExceptionThrow(fields->spaceLeft));
         }
     }  catch (QString error) {
         n->setSpaceLeft(fallbackZero);
@@ -274,7 +265,6 @@ Course *Course::parseJSONObject(QJsonObject o) throw(ExceptionThrow)
             n->setSpaceLeft(o.value(fields->spaceFull).toInt());
         } else {
             n->setSpaceLeft(fallbackZero);
-            throw (new ExceptionThrow(fields->spaceFull));
         }
     }  catch (QString error) {
         n->setSpaceLeft(fallbackZero);
@@ -285,7 +275,6 @@ Course *Course::parseJSONObject(QJsonObject o) throw(ExceptionThrow)
             n->setSession((new Session())->parseJSONObject(o.value(fields->session).toObject()));
         } else {
             n->setSession(nullptr);
-            throw (new ExceptionThrow(fields->session));
         }
     }  catch (QString error) {
         n->setSession(nullptr);

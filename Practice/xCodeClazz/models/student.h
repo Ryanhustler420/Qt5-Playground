@@ -60,9 +60,9 @@ signals:
 public:
     QList<QString> getAllFields();
     QString getPackageName();
-    QList<Student*> parseJSONArray(QJsonArray o) throw(ExceptionThrow);
-    QVariantList parseJSONArrayToVariantList(QJsonArray o) throw(ExceptionThrow);
-    Student *parseJSONObject(QJsonObject o) throw(ExceptionThrow);
+    QList<Student*> parseJSONArray(QJsonArray o);
+    QVariantList parseJSONArrayToVariantList(QJsonArray o);
+    Student *parseJSONObject(QJsonObject o);
     QVariant parseJSONObjectToVariant(QJsonObject o);
     bool equal(Student *o);
     void copy(Student *o);

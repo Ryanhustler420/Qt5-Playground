@@ -6,35 +6,34 @@
 #include <QList>
 #include "utility/jsonhelper.h"
 #include "utility/mongoservice.h"
-#include "utility/exceptionthrow.h"
 
 // Please don't use explicit construtor of child class
 template<typename T>
 class ModelConventions : public QObject
 {
 public:
-    QList<QString> *parseOnlyStringJSONArray(QJsonArray o) throw()
+    QList<QString> *parseOnlyStringJSONArray(QJsonArray o)
     {
         QList<QString> *list = new QList<QString>();
         for (int i = 0; i < o.size(); i++)
             list->append(o.at(i).toString());
         return list;
     }
-    QList<double> *parseOnlyDoubleJSONArray(QJsonArray o) throw()
+    QList<double> *parseOnlyDoubleJSONArray(QJsonArray o)
     {
         QList<double> *list = new QList<double>();
         for (int i = 0; i < o.size(); i++)
             list->append(o.at(i).toDouble());
         return list;
     }
-    QList<long> *parseOnlyLongJSONArray(QJsonArray o) throw()
+    QList<long> *parseOnlyLongJSONArray(QJsonArray o)
     {
         QList<long> *list = new QList<long>();
         for (int i = 0; i < o.size(); i++)
             list->append(o.at(i).toDouble());
         return list;
     }
-    QList<int> *parseOnlyIntegerJSONArray(QJsonArray o) throw()
+    QList<int> *parseOnlyIntegerJSONArray(QJsonArray o)
     {
         QList<int> *list = new QList<int>();
         for (int i = 0; i < o.size(); i++)
@@ -58,9 +57,9 @@ public:
     virtual QList<QString> getAllFields() = 0;
     virtual QString getPackageName() = 0;
 
-    virtual QList<T*> parseJSONArray(QJsonArray o) throw(ExceptionThrow) = 0;
-    virtual QVariantList parseJSONArrayToVariantList(QJsonArray o) throw(ExceptionThrow) = 0;
-    virtual T* parseJSONObject(QJsonObject o) throw(ExceptionThrow) = 0;
+    virtual QList<T*> parseJSONArray(QJsonArray o) = 0;
+    virtual QVariantList parseJSONArrayToVariantList(QJsonArray o) = 0;
+    virtual T* parseJSONObject(QJsonObject o) = 0;
     virtual QVariant parseJSONObjectToVariant(QJsonObject o) = 0;
     virtual QJsonArray getAsJsonArray(QList<T> *t) const = 0;
     virtual QJsonObject getAsJson() const = 0;

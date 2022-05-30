@@ -28,9 +28,9 @@ signals:
 public:
     QList<QString> getAllFields();
     QString getPackageName();
-    QList<Session*> parseJSONArray(QJsonArray o) throw(ExceptionThrow);
-    QVariantList parseJSONArrayToVariantList(QJsonArray o) throw(ExceptionThrow);
-    Session *parseJSONObject(QJsonObject o) throw(ExceptionThrow);
+    QList<Session*> parseJSONArray(QJsonArray o);
+    QVariantList parseJSONArrayToVariantList(QJsonArray o);
+    Session *parseJSONObject(QJsonObject o);
     QVariant parseJSONObjectToVariant(QJsonObject o);
     bool equal(Session *o);
     void copy(Session *o);

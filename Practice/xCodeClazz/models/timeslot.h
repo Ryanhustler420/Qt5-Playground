@@ -30,9 +30,9 @@ signals:
 public:
     QList<QString> getAllFields();
     QString getPackageName();
-    QList<TimeSlot*> parseJSONArray(QJsonArray o) throw(ExceptionThrow);
-    QVariantList parseJSONArrayToVariantList(QJsonArray o) throw(ExceptionThrow);
-    TimeSlot *parseJSONObject(QJsonObject o) throw(ExceptionThrow);
+    QList<TimeSlot*> parseJSONArray(QJsonArray o);
+    QVariantList parseJSONArrayToVariantList(QJsonArray o);
+    TimeSlot *parseJSONObject(QJsonObject o);
     QVariant parseJSONObjectToVariant(QJsonObject o);
     bool equal(TimeSlot *o);
     void copy(TimeSlot *o);

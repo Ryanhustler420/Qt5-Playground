@@ -121,7 +121,7 @@ QString CallbackRequest::getPackageName()
     return this->className;
 }
 
-QList<CallbackRequest*> CallbackRequest::parseJSONArray(QJsonArray o) throw(ExceptionThrow)
+QList<CallbackRequest*> CallbackRequest::parseJSONArray(QJsonArray o)
 {
     QList<CallbackRequest*> list;
     if (o.empty()) return list;
@@ -131,7 +131,7 @@ QList<CallbackRequest*> CallbackRequest::parseJSONArray(QJsonArray o) throw(Exce
     return list;
 }
 
-QVariantList CallbackRequest::parseJSONArrayToVariantList(QJsonArray o) throw(ExceptionThrow)
+QVariantList CallbackRequest::parseJSONArrayToVariantList(QJsonArray o)
 {
     QVariantList list;
     if (o.empty()) return list;
@@ -141,7 +141,7 @@ QVariantList CallbackRequest::parseJSONArrayToVariantList(QJsonArray o) throw(Ex
     return list;
 }
 
-CallbackRequest *CallbackRequest::parseJSONObject(QJsonObject o) throw(ExceptionThrow)
+CallbackRequest *CallbackRequest::parseJSONObject(QJsonObject o)
 {
     if (o.isEmpty()) return nullptr;
     CallbackRequest *n = new CallbackRequest();
@@ -151,7 +151,6 @@ CallbackRequest *CallbackRequest::parseJSONObject(QJsonObject o) throw(Exception
             n->setId(o.value(fields->_id).toString());
         } else {
             n->setId(fallbackValue);
-            throw (new ExceptionThrow(fields->_id));
         }
     }  catch (QString error) {
         n->setId(error);
@@ -168,7 +167,6 @@ CallbackRequest *CallbackRequest::parseJSONObject(QJsonObject o) throw(Exception
             else n->setALTcourse((new Course())->parseJSONObject(o.value(fields->ALTcourse).toObject()));
         } else {
             n->setCourse(fallbackValue);
-            throw (new ExceptionThrow(fallbackValue));
         }
     }  catch (QString error) {
         n->setALTcourse(nullptr);
@@ -180,7 +178,6 @@ CallbackRequest *CallbackRequest::parseJSONObject(QJsonObject o) throw(Exception
             n->setName(o.value(fields->name).toString());
         } else {
             n->setName(fallbackValue);
-            throw (new ExceptionThrow(fields->name));
         }
     }  catch (QString error) {
         n->setName(error);
@@ -191,7 +188,6 @@ CallbackRequest *CallbackRequest::parseJSONObject(QJsonObject o) throw(Exception
             n->setPhone(o.value(fields->phone).toString());
         } else {
             n->setPhone(fallbackValue);
-            throw (new ExceptionThrow(fields->phone));
         }
     }  catch (QString error) {
         n->setPhone(error);
@@ -202,7 +198,6 @@ CallbackRequest *CallbackRequest::parseJSONObject(QJsonObject o) throw(Exception
             n->setSchool(o.value(fields->school).toString());
         } else {
             n->setSchool(fallbackValue);
-            throw (new ExceptionThrow(fields->school));
         }
     }  catch (QString error) {
         n->setSchool(error);
@@ -213,7 +208,6 @@ CallbackRequest *CallbackRequest::parseJSONObject(QJsonObject o) throw(Exception
             n->setCreatedAt(o.value(fields->createdAt).toString());
         } else {
             n->setCreatedAt(fallbackValue);
-            throw (new ExceptionThrow(fields->createdAt));
         }
     }  catch (QString error) {
         n->setCreatedAt(error);
@@ -224,7 +218,6 @@ CallbackRequest *CallbackRequest::parseJSONObject(QJsonObject o) throw(Exception
             n->setUpdatedAt(o.value(fields->updatedAt).toString());
         } else {
             n->setUpdatedAt(fallbackValue);
-            throw (new ExceptionThrow(fields->updatedAt));
         }
     }  catch (QString error) {
         n->setUpdatedAt(error);
@@ -235,7 +228,6 @@ CallbackRequest *CallbackRequest::parseJSONObject(QJsonObject o) throw(Exception
             n->setIsReviewed(o.value(fields->isReviewed).toBool());
         } else {
             n->setIsReviewed(false);
-            throw (new ExceptionThrow(fields->updatedAt));
         }
     }  catch (QString error) {
         n->setIsReviewed(false);

@@ -28,9 +28,9 @@ signals:
 public:
     QList<QString> getAllFields();
     QString getPackageName();
-    QList<Fee*> parseJSONArray(QJsonArray o) throw(ExceptionThrow);
-    QVariantList parseJSONArrayToVariantList(QJsonArray o) throw(ExceptionThrow);
-    Fee *parseJSONObject(QJsonObject o) throw(ExceptionThrow);
+    QList<Fee*> parseJSONArray(QJsonArray o);
+    QVariantList parseJSONArrayToVariantList(QJsonArray o);
+    Fee *parseJSONObject(QJsonObject o);
     QVariant parseJSONObjectToVariant(QJsonObject o);
     bool equal(Fee *o);
     void copy(Fee *o);

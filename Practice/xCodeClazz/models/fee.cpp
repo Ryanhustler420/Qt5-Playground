@@ -44,7 +44,7 @@ QString Fee::getPackageName()
     return this->className;
 }
 
-QList<Fee*> Fee::parseJSONArray(QJsonArray o) throw(ExceptionThrow)
+QList<Fee*> Fee::parseJSONArray(QJsonArray o)
 {
     QList<Fee*> list;
     if (o.empty()) return list;
@@ -54,7 +54,7 @@ QList<Fee*> Fee::parseJSONArray(QJsonArray o) throw(ExceptionThrow)
     return list;
 }
 
-QVariantList Fee::parseJSONArrayToVariantList(QJsonArray o) throw(ExceptionThrow)
+QVariantList Fee::parseJSONArrayToVariantList(QJsonArray o)
 {
     QVariantList list;
     if (o.empty()) return list;
@@ -64,7 +64,7 @@ QVariantList Fee::parseJSONArrayToVariantList(QJsonArray o) throw(ExceptionThrow
     return list;
 }
 
-Fee *Fee::parseJSONObject(QJsonObject o) throw(ExceptionThrow)
+Fee *Fee::parseJSONObject(QJsonObject o)
 {
     if (o.isEmpty()) return nullptr;
     Fee *n = new Fee();
@@ -74,7 +74,6 @@ Fee *Fee::parseJSONObject(QJsonObject o) throw(ExceptionThrow)
             n->setAmount(o.value(fields->amount).toDouble());
         } else {
             n->setAmount(fallbackZero);
-            throw (new ExceptionThrow(fields->amount));
         }
     }  catch (QString error) {
         n->setAmount(fallbackZero);
@@ -85,7 +84,6 @@ Fee *Fee::parseJSONObject(QJsonObject o) throw(ExceptionThrow)
             n->setPer(o.value(fields->per).toString());
         } else {
             n->setPer(fallbackValue);
-            throw (new ExceptionThrow(fields->per));
         }
     }  catch (QString error) {
         n->setPer(error);
