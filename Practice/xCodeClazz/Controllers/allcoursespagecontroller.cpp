@@ -14,7 +14,7 @@ void AllCoursesPageController::loadCourses()
 {
     apis.getCourses([=](QByteArray response){
         Course *m = new Course();
-        QList<Course *> list = m->parseJSONArray(QJsonDocument::fromJson(response).object().value("courses").toArray());
+        // QList<Course> list = m->parseJSONArray(QJsonDocument::fromJson(response).object().value("courses").toArray());
         QVariantList m_list = m->parseJSONArrayToVariantList(QJsonDocument::fromJson(response).object().value("courses").toArray());
         emit coursesLoaded(m_list);
     }, [=](QByteArray error){

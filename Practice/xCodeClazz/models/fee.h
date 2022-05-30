@@ -20,7 +20,7 @@ private:
         QString per = "per";
     } _fields;
 
-    _fields *field;
+    _fields *fields;
 
 signals:
 
@@ -28,12 +28,14 @@ signals:
 public:
     QList<QString> getAllFields();
     QString getPackageName();
-    QList<Fee *> parseJSONArray(QJsonArray o) throw(ExceptionThrow);
+    QList<Fee*> parseJSONArray(QJsonArray o) throw(ExceptionThrow);
     QVariantList parseJSONArrayToVariantList(QJsonArray o) throw(ExceptionThrow);
     Fee *parseJSONObject(QJsonObject o) throw(ExceptionThrow);
     QVariant parseJSONObjectToVariant(QJsonObject o);
     bool equal(Fee *o);
     void copy(Fee *o);
+    QJsonObject getAsJson() const;
+    QJsonArray getAsJsonArray(QList<Fee> *t) const;
 
 public:
     double getAmount() const;

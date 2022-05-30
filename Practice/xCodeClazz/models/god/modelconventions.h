@@ -5,8 +5,10 @@
 #include <QVector>
 #include <QList>
 #include "utility/jsonhelper.h"
+#include "utility/mongoservice.h"
 #include "utility/exceptionthrow.h"
 
+// Please don't use explicit construtor of child class
 template<typename T>
 class ModelConventions : public QObject
 {
@@ -48,6 +50,10 @@ protected:
     QString const fallbackTime = "1997-07-21T12:09:43.233Z";
 
 public:
+    MongoService mongo;
+    JsonHelper json;
+
+public:
     // You have to implement these methods in child class else you will get error
     virtual QList<QString> getAllFields() = 0;
     virtual QString getPackageName() = 0;
@@ -56,6 +62,8 @@ public:
     virtual QVariantList parseJSONArrayToVariantList(QJsonArray o) throw(ExceptionThrow) = 0;
     virtual T* parseJSONObject(QJsonObject o) throw(ExceptionThrow) = 0;
     virtual QVariant parseJSONObjectToVariant(QJsonObject o) = 0;
+    virtual QJsonArray getAsJsonArray(QList<T> *t) const = 0;
+    virtual QJsonObject getAsJson() const = 0;
 
     virtual bool equal(T* o) = 0;
     virtual void copy(T *o) = 0;

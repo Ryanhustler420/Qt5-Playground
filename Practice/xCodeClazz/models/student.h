@@ -52,7 +52,7 @@ private:
         QString email = "email";
     } _fields;
 
-    _fields *field;
+    _fields *fields;
 
 signals:
 
@@ -60,12 +60,14 @@ signals:
 public:
     QList<QString> getAllFields();
     QString getPackageName();
-    QList<Student *> parseJSONArray(QJsonArray o) throw(ExceptionThrow);
+    QList<Student*> parseJSONArray(QJsonArray o) throw(ExceptionThrow);
     QVariantList parseJSONArrayToVariantList(QJsonArray o) throw(ExceptionThrow);
     Student *parseJSONObject(QJsonObject o) throw(ExceptionThrow);
     QVariant parseJSONObjectToVariant(QJsonObject o);
     bool equal(Student *o);
     void copy(Student *o);
+    QJsonObject getAsJson() const;
+    QJsonArray getAsJsonArray(QList<Student> *t) const;
 
 public:
     const QString &getSchool() const;

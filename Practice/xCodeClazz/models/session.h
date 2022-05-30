@@ -28,12 +28,14 @@ signals:
 public:
     QList<QString> getAllFields();
     QString getPackageName();
-    QList<Session *> parseJSONArray(QJsonArray o) throw();
+    QList<Session*> parseJSONArray(QJsonArray o) throw(ExceptionThrow);
     QVariantList parseJSONArrayToVariantList(QJsonArray o) throw(ExceptionThrow);
-    Session *parseJSONObject(QJsonObject o) throw();
+    Session *parseJSONObject(QJsonObject o) throw(ExceptionThrow);
     QVariant parseJSONObjectToVariant(QJsonObject o);
     bool equal(Session *o);
     void copy(Session *o);
+    QJsonObject getAsJson() const;
+    QJsonArray getAsJsonArray(QList<Session> *t) const;
 
 public:
     const QString &getStarts() const;

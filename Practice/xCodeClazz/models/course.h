@@ -39,7 +39,7 @@ private:
         QString session = "session";
     } _fields;
 
-    _fields *field;
+    _fields *fields;
 
 signals:
 
@@ -47,12 +47,14 @@ signals:
 public:
     QList<QString> getAllFields();
     QString getPackageName();
-    QList<Course *> parseJSONArray(QJsonArray o) throw(ExceptionThrow);
+    QList<Course*> parseJSONArray(QJsonArray o) throw(ExceptionThrow);
     QVariantList parseJSONArrayToVariantList(QJsonArray o) throw(ExceptionThrow);
     Course *parseJSONObject(QJsonObject o) throw(ExceptionThrow);
     QVariant parseJSONObjectToVariant(QJsonObject o);
     bool equal(Course *o);
     void copy(Course *o);
+    QJsonObject getAsJson() const;
+    QJsonArray getAsJsonArray(QList<Course> *t) const;
 
 public:
     const QString &getTitle() const;

@@ -1,11 +1,17 @@
 #include "models/fee.h"
 
+Fee::Fee(QObject *parent)
+{
+    this->className = "Fee";
+    this->fields = new _fields();
+}
+
 Fee::Fee(double amount, const QString &per) :
     amount(amount),
     per(per)
 {
     this->className = "Fee";
-    this->field = new _fields();
+    this->fields = new _fields();
 }
 
 const QString &Fee::getPer() const
@@ -38,24 +44,61 @@ QString Fee::getPackageName()
     return this->className;
 }
 
-QList<Fee *> Fee::parseJSONArray(QJsonArray o) throw(ExceptionThrow)
+QList<Fee*> Fee::parseJSONArray(QJsonArray o) throw(ExceptionThrow)
 {
-
+    QList<Fee*> list;
+    if (o.empty()) return list;
+    for(int i = 0; i < o.size(); i++) {
+        list.append(parseJSONObject(o.at(i).toObject()));
+    }
+    return list;
 }
 
 QVariantList Fee::parseJSONArrayToVariantList(QJsonArray o) throw(ExceptionThrow)
 {
-
+    QVariantList list;
+    if (o.empty()) return list;
+    for(int i = 0; i < o.size(); i++) {
+        list.append(parseJSONObjectToVariant(o.at(i).toObject()));
+    }
+    return list;
 }
 
 Fee *Fee::parseJSONObject(QJsonObject o) throw(ExceptionThrow)
 {
+    if (o.isEmpty()) return nullptr;
+    Fee *n = new Fee();
 
+    try {
+        if (o.contains(fields->amount)) {
+            n->setAmount(o.value(fields->amount).toDouble());
+        } else {
+            n->setAmount(fallbackZero);
+            throw (new ExceptionThrow(fields->amount));
+        }
+    }  catch (QString error) {
+        n->setAmount(fallbackZero);
+    }
+
+    try {
+        if (o.contains(fields->per)) {
+            n->setPer(o.value(fields->per).toString());
+        } else {
+            n->setPer(fallbackValue);
+            throw (new ExceptionThrow(fields->per));
+        }
+    }  catch (QString error) {
+        n->setPer(error);
+    }
+
+    return n;
 }
 
 QVariant Fee::parseJSONObjectToVariant(QJsonObject o)
 {
-
+    if (o.isEmpty()) return QVariant();
+    QVariant v(o);
+    return v;
 }
 
 bool Fee::equal(Fee *o)
@@ -65,5 +108,21 @@ bool Fee::equal(Fee *o)
 
 void Fee::copy(Fee *o)
 {
+    this->amount = o->amount;
+    this->per = o->per;
+}
 
+QJsonObject Fee::getAsJson() const
+{
+    QJsonObject mainObject;
+    mainObject.insert(this->fields->amount, this->amount);
+    mainObject.insert(this->fields->per, this->per);
+    return mainObject;
+}
+
+QJsonArray Fee::getAsJsonArray(QList<Fee> *t) const
+{
+    QJsonArray array;
+    for (int var = 0; var < t->size(); ++var) array.append(t->at(var).getAsJson());
+    return array;
 }

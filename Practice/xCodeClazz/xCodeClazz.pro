@@ -30,6 +30,7 @@ SOURCES += \
     utility/filesystembroadcaster.cpp \
     models/god/modelconventions.cpp \
     parents/commonsuperclass.cpp \
+    utility/mongoservice.cpp \
     utility/xcodeclazzdb.cpp \
     database/localcache.cpp \
     application/manager.cpp \
@@ -102,6 +103,7 @@ HEADERS += \
     models/god/modelconventions.h \
     parents/commonsuperclass.h \
     singleton/singleton_obj.h \
+    utility/mongoservice.h \
     utility/xcodeclazzdb.h \
     database/localcache.h \
     shareable/constants.h \

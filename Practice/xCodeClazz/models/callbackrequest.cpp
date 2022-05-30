@@ -1,6 +1,13 @@
 #include "models/callbackrequest.h"
 
-CallbackRequest::CallbackRequest(const QString &id, const QString &course, Course *ALTcourse, const QString &name, const QString &phone, const QString &school, const QString &createdAt, const QString &updatedAt, bool isReviewed) : _id(id),
+CallbackRequest::CallbackRequest(QObject *parent)
+{
+    this->className = "CallbackRequest";
+    this->fields = new _fields();
+}
+
+CallbackRequest::CallbackRequest(const QString &id, const QString &course, Course *ALTcourse, const QString &name, const QString &phone, const QString &school, const QString &createdAt, const QString &updatedAt, bool isReviewed) :
+    _id(id),
     course(course),
     ALTcourse(ALTcourse),
     name(name),
@@ -11,47 +18,7 @@ CallbackRequest::CallbackRequest(const QString &id, const QString &course, Cours
     isReviewed(isReviewed)
 {
     this->className = "CallbackRequest";
-    this->field = new _fields();
-}
-
-QList<QString> CallbackRequest::getAllFields()
-{
-
-}
-
-QString CallbackRequest::getPackageName()
-{
-    return this->className;
-}
-
-QList<CallbackRequest *> CallbackRequest::parseJSONArray(QJsonArray o) throw(ExceptionThrow)
-{
-
-}
-
-QVariantList CallbackRequest::parseJSONArrayToVariantList(QJsonArray o) throw(ExceptionThrow)
-{
-
-}
-
-CallbackRequest *CallbackRequest::parseJSONObject(QJsonObject o) throw(ExceptionThrow)
-{
-
-}
-
-QVariant CallbackRequest::parseJSONObjectToVariant(QJsonObject o)
-{
-
-}
-
-bool CallbackRequest::equal(CallbackRequest *o)
-{
-    return o->id() == this->id();
-}
-
-void CallbackRequest::copy(CallbackRequest *o)
-{
-
+    this->fields = new _fields();
 }
 
 const QString &CallbackRequest::getCourse() const
@@ -142,4 +109,185 @@ const QString &CallbackRequest::id() const
 void CallbackRequest::setId(const QString &newId)
 {
     _id = newId;
+}
+
+QList<QString> CallbackRequest::getAllFields()
+{
+
+}
+
+QString CallbackRequest::getPackageName()
+{
+    return this->className;
+}
+
+QList<CallbackRequest*> CallbackRequest::parseJSONArray(QJsonArray o) throw(ExceptionThrow)
+{
+    QList<CallbackRequest*> list;
+    if (o.empty()) return list;
+    for(int i = 0; i < o.size(); i++) {
+        list.append(parseJSONObject(o.at(i).toObject()));
+    }
+    return list;
+}
+
+QVariantList CallbackRequest::parseJSONArrayToVariantList(QJsonArray o) throw(ExceptionThrow)
+{
+    QVariantList list;
+    if (o.empty()) return list;
+    for(int i = 0; i < o.size(); i++) {
+        list.append(parseJSONObjectToVariant(o.at(i).toObject()));
+    }
+    return list;
+}
+
+CallbackRequest *CallbackRequest::parseJSONObject(QJsonObject o) throw(ExceptionThrow)
+{
+    if (o.isEmpty()) return nullptr;
+    CallbackRequest *n = new CallbackRequest();
+
+    try {
+        if (o.contains(fields->_id)) {
+            n->setId(o.value(fields->_id).toString());
+        } else {
+            n->setId(fallbackValue);
+            throw (new ExceptionThrow(fields->_id));
+        }
+    }  catch (QString error) {
+        n->setId(error);
+    }
+
+    try {
+        if (o.contains(fields->course)) {
+            if (mongo.isValidMongoID(fields->course))
+                n->setCourse(o.value(fields->course).toString());
+            else n->setALTcourse((new Course())->parseJSONObject(o.value(fields->course).toObject()));
+        } else if (o.contains(fields->ALTcourse)) {
+            if (mongo.isValidMongoID(o.value(fields->ALTcourse).toString()))
+                n->setCourse(o.value(fields->ALTcourse).toString());
+            else n->setALTcourse((new Course())->parseJSONObject(o.value(fields->ALTcourse).toObject()));
+        } else {
+            n->setCourse(fallbackValue);
+            throw (new ExceptionThrow(fallbackValue));
+        }
+    }  catch (QString error) {
+        n->setALTcourse(nullptr);
+        n->setCourse(error);
+    }
+
+    try {
+        if (o.contains(fields->name)) {
+            n->setName(o.value(fields->name).toString());
+        } else {
+            n->setName(fallbackValue);
+            throw (new ExceptionThrow(fields->name));
+        }
+    }  catch (QString error) {
+        n->setName(error);
+    }
+
+    try {
+        if (o.contains(fields->phone)) {
+            n->setPhone(o.value(fields->phone).toString());
+        } else {
+            n->setPhone(fallbackValue);
+            throw (new ExceptionThrow(fields->phone));
+        }
+    }  catch (QString error) {
+        n->setPhone(error);
+    }
+
+    try {
+        if (o.contains(fields->school)) {
+            n->setSchool(o.value(fields->school).toString());
+        } else {
+            n->setSchool(fallbackValue);
+            throw (new ExceptionThrow(fields->school));
+        }
+    }  catch (QString error) {
+        n->setSchool(error);
+    }
+
+    try {
+        if (o.contains(fields->createdAt)) {
+            n->setCreatedAt(o.value(fields->createdAt).toString());
+        } else {
+            n->setCreatedAt(fallbackValue);
+            throw (new ExceptionThrow(fields->createdAt));
+        }
+    }  catch (QString error) {
+        n->setCreatedAt(error);
+    }
+
+    try {
+        if (o.contains(fields->updatedAt)) {
+            n->setUpdatedAt(o.value(fields->updatedAt).toString());
+        } else {
+            n->setUpdatedAt(fallbackValue);
+            throw (new ExceptionThrow(fields->updatedAt));
+        }
+    }  catch (QString error) {
+        n->setUpdatedAt(error);
+    }
+
+    try {
+        if (o.contains(fields->isReviewed)) {
+            n->setIsReviewed(o.value(fields->isReviewed).toBool());
+        } else {
+            n->setIsReviewed(false);
+            throw (new ExceptionThrow(fields->updatedAt));
+        }
+    }  catch (QString error) {
+        n->setIsReviewed(false);
+    }
+
+    return n;
+}
+
+QVariant CallbackRequest::parseJSONObjectToVariant(QJsonObject o)
+{
+    if (o.isEmpty()) return QVariant();
+    // Todo: add ALT values here
+    QVariant v(o);
+    return v;
+}
+
+bool CallbackRequest::equal(CallbackRequest *o)
+{
+    return o->id() == this->id();
+}
+
+void CallbackRequest::copy(CallbackRequest *o)
+{
+    this->_id = o->_id;
+    this->course = o->course;
+    this->ALTcourse = o->ALTcourse;
+    this->name = o->name;
+    this->phone = o->phone;
+    this->school = o->school;
+    this->createdAt = o->createdAt;
+    this->updatedAt = o->updatedAt;
+    this->isReviewed = o->isReviewed;
+}
+
+QJsonObject CallbackRequest::getAsJson() const
+{
+    QJsonObject mainObject;
+    mainObject.insert(this->fields->_id, this->_id);
+    mainObject.insert(this->fields->course, this->course);
+    mainObject.insert(this->fields->ALTcourse, this->ALTcourse->getAsJson());
+    mainObject.insert(this->fields->name, this->name);
+    mainObject.insert(this->fields->phone, this->phone);
+    mainObject.insert(this->fields->school, this->school);
+    mainObject.insert(this->fields->createdAt, this->createdAt);
+    mainObject.insert(this->fields->updatedAt, this->updatedAt);
+    mainObject.insert(this->fields->isReviewed, this->isReviewed);
+    return mainObject;
+}
+
+QJsonArray CallbackRequest::getAsJsonArray(QList<CallbackRequest> *t) const
+{
+    QJsonArray array;
+    for (int var = 0; var < t->size(); ++var) array.append(t->at(var).getAsJson());
+    return array;
 }

@@ -72,7 +72,7 @@ Page {
 
                     Label {
                         color: "grey"
-                        text: `${course}`
+                        text: `${course} ${ALTcourse}`
                         font.bold: true
                         font.pointSize: 10
                     }
@@ -96,6 +96,7 @@ Page {
 
                     Button {
                         text: `Accept`
+                        enabled: `${isReviewed}`
                         highlighted: true
                         Material.background: Material.Green
                         onClicked: page_controller.removeItem(index);
@@ -136,11 +137,9 @@ Page {
             callbacks_model.append(objects.map(e => JSON.parse(e)));
         }
         onCallbackRequestsLoaded: {
-
-            console.log(callbacks);
-
-            // callbacks_model.append()
-
+            for(let i = 0; i < callbacks.length; i++) {
+                callbacks_model.append(JSON.parse(JSON.stringify(callbacks[i])))
+            }
         }
     }
 

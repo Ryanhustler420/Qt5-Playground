@@ -6,6 +6,7 @@
 #include <QVariant>
 #include <QVariantList>
 
+#include "models/callbackrequest.h"
 #include "utility/jsonhelper.h"
 #include "networking/apis.h"
 

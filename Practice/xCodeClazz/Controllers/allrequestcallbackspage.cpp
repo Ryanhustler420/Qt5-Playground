@@ -12,18 +12,10 @@ void AllRequestCallbacksPage::hold(QVariant o)
 void AllRequestCallbacksPage::loadCallbackRequests()
 {
     apis.getRequestCallbacks([=](QByteArray response){
-
-        // create more models
-
-        //        qInfo() << QJsonDocument::fromJson(response);
-        //        QList<Course *> list = m->parseJSONArray(QJsonDocument::fromJson(response).object().value("courses").toArray());
-        //        QVariantList m_list = m->parseJSONArrayToVariantList(QJsonDocument::fromJson(response).object().value("courses").toArray());
-        QVariantList l;
-        //        l.append(QVariant("{ \"course\": \"Python Code For Beginner\", \"name\": \"Sikha Jha\", \"school\": \"KPS Kadma\", \"phone\": \"xxxxxxxxxx\" }"));
-        //        l.append(QVariant("{ \"course\": \"C++ Code For Beginner\", \"name\": \"Vikram Pradhan\", \"school\": \"KPS Gamharia\", \"phone\": \"xxxxxxxxxx\" }"));
-        //        l.append(QVariant("{ \"course\": \"Java Code For Beginne\", \"name\": \"Anjali Gupta\", \"school\": \"DAV Adityapur\", \"phone\": \"xxxxxxxxxx\" }"));
-        //        l.append(QVariant("{ \"course\": \"NodeJs Code For Beginner\", \"name\": \"Mahesh Gupta\", \"school\": \"Xavier Gamharia\", \"phone\": \"xxxxxxxxxx\" }"));
-        emit callbackRequestsLoaded(l);
+        CallbackRequest *c = new CallbackRequest();
+        QList<CallbackRequest *> list = c->parseJSONArray(QJsonDocument::fromJson(response).object().value("callbacks").toArray());
+        QVariantList m_list = c->parseJSONArrayToVariantList(QJsonDocument::fromJson(response).object().value("callbacks").toArray());
+        emit callbackRequestsLoaded(m_list);
     }, [=](QByteArray error){
         qInfo() << error;
     });
