@@ -198,12 +198,12 @@ QString Student::getPackageName()
     return this->className;
 }
 
-QList<Student*> Student::parseJSONArray(QJsonArray o)
+QList<Student> *Student::parseJSONArray(QJsonArray o)
 {
-    QList<Student*> list;
+    QList<Student> *list = new QList<Student>();
     if (o.empty()) return list;
     for(int i = 0; i < o.size(); i++) {
-        list.append(parseJSONObject(o.at(i).toObject()));
+        // list->append(*parseJSONObject(o.at(i).toObject()));
     }
     return list;
 }
@@ -305,8 +305,8 @@ Student *Student::parseJSONObject(QJsonObject o)
 
     try {
         if (o.contains(fields->payments)) {
-            // TODO:
-            // n->setPayments((new Payment())->parseJSONArray(o.value(fields->payments).toArray()));
+            Payment p;
+            n->setPayments(p.parseJSONArray(o.value(fields->payments).toArray()));
         } else {
             n->setPayments(nullptr);
         }
@@ -314,15 +314,84 @@ Student *Student::parseJSONObject(QJsonObject o)
         n->setPayments(nullptr);
     }
 
-    //    QList<Payment> *payments;
-    //    QList<QString> *courses;
-    //    QList<Course> *ALTCourses;
-    //    TimeSlot *timeSlot;
-    //    QList<QString> *phoneNumbers;
-    //    QString joinDate;
-    //    Fee *fees;
-    //    int batchNumber;
-    //    QString email;
+    try {
+        if (o.contains(fields->courses)) {
+            if (mongo.hasMongoIds(o.value(fields->courses).toArray()))
+                n->setCourses(parseOnlyStringJSONArray(o.value(fields->courses).toArray()));
+            else n->setALTCourses((new Course())->parseJSONArray(o.value(fields->courses).toArray()));
+        } else if (o.contains(fields->ALTCourses)) {
+            if (mongo.isValidMongoID(o.value(fields->ALTCourses).toString()))
+                n->setCourses(parseOnlyStringJSONArray(o.value(fields->courses).toArray()));
+            else n->setALTCourses((new Course())->parseJSONArray(o.value(fields->courses).toArray()));
+        } else {
+            n->setCourses(nullptr);
+        }
+    }  catch (QString error) {
+        n->setALTCourses(nullptr);
+        n->setCourses(new QList<QString>());
+    }
+
+    try {
+        if (o.contains(fields->timeSlot)) {
+            TimeSlot p;
+            n->setTimeSlot(p.parseJSONObject(o.value(fields->timeSlot).toObject()));
+        } else {
+            n->setTimeSlot(nullptr);
+        }
+    }  catch (QString error) {
+        n->setTimeSlot(nullptr);
+    }
+
+    try {
+        if (o.contains(fields->phoneNumbers)) {
+            n->setPhoneNumbers(parseOnlyStringJSONArray(o.value(fields->phoneNumbers).toArray()));
+        } else {
+            n->setPhoneNumbers(nullptr);
+        }
+    }  catch (QString error) {
+        n->setPhoneNumbers(nullptr);
+    }
+
+    try {
+        if (o.contains(fields->joinDate)) {
+            n->setJoinDate(o.value(fields->joinDate).toString());
+        } else {
+            n->setJoinDate(nullptr);
+        }
+    }  catch (QString error) {
+        n->setJoinDate(nullptr);
+    }
+
+    try {
+        if (o.contains(fields->fees)) {
+            Fee f;
+            n->setFees(f.parseJSONObject(o.value(fields->fees).toObject()));
+        } else {
+            n->setFees(nullptr);
+        }
+    }  catch (QString error) {
+        n->setFees(nullptr);
+    }
+
+    try {
+        if (o.contains(fields->batchNumber)) {
+            n->setBatchNumber(o.value(fields->batchNumber).toInt());
+        } else {
+            n->setBatchNumber(fallbackZero);
+        }
+    }  catch (QString error) {
+        n->setBatchNumber(fallbackZero);
+    }
+
+    try {
+        if (o.contains(fields->email)) {
+            n->setEmail(o.value(fields->email).toString());
+        } else {
+            n->setEmail(fallbackValue);
+        }
+    }  catch (QString error) {
+        n->setEmail(fallbackValue);
+    }
 
     return n;
 }

@@ -45,12 +45,12 @@ QString Session::getPackageName()
     return this->className;
 }
 
-QList<Session*> Session::parseJSONArray(QJsonArray o)
+QList<Session> *Session::parseJSONArray(QJsonArray o)
 {
-    QList<Session*> list;
+    QList<Session> *list = new QList<Session>();
     if (o.empty()) return list;
     for(int i = 0; i < o.size(); i++) {
-        list.append(parseJSONObject(o.at(i).toObject()));
+        // list->append(*parseJSONObject(o.at(i).toObject()));
     }
     return list;
 }

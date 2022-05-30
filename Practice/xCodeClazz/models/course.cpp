@@ -144,12 +144,12 @@ QString Course::getPackageName()
     return this->className;
 }
 
-QList<Course*> Course::parseJSONArray(QJsonArray o)
+QList<Course> *Course::parseJSONArray(QJsonArray o)
 {
-    QList<Course*> list;
+    QList<Course> *list = new QList<Course>();
     if (o.empty()) return list;
     for(int i = 0; i < o.size(); i++) {
-        list.append(parseJSONObject(o.at(i).toObject()));
+        // list->append(*parseJSONObject(o.at(i).toObject()));
     }
     return list;
 }

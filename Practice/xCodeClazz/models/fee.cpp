@@ -44,12 +44,12 @@ QString Fee::getPackageName()
     return this->className;
 }
 
-QList<Fee*> Fee::parseJSONArray(QJsonArray o)
-{
-    QList<Fee*> list;
+QList<Fee> *Fee::parseJSONArray(QJsonArray o)
+{  
+    QList<Fee> *list = new QList<Fee>();
     if (o.empty()) return list;
     for(int i = 0; i < o.size(); i++) {
-        list.append(parseJSONObject(o.at(i).toObject()));
+        // list->append(*parseJSONObject(o.at(i).toObject()));
     }
     return list;
 }

@@ -12,7 +12,7 @@ class MongoService : public QObject
 public:
     explicit MongoService(QObject *parent = nullptr);
 
-    bool hasMongoIds(QJsonArray *array);
+    bool hasMongoIds(QJsonArray array);
     bool isValidMongoID(QString id);
 
 signals:

@@ -121,12 +121,12 @@ QString CallbackRequest::getPackageName()
     return this->className;
 }
 
-QList<CallbackRequest*> CallbackRequest::parseJSONArray(QJsonArray o)
+QList<CallbackRequest> *CallbackRequest::parseJSONArray(QJsonArray o)
 {
-    QList<CallbackRequest*> list;
+    QList<CallbackRequest> *list = new QList<CallbackRequest>();
     if (o.empty()) return list;
     for(int i = 0; i < o.size(); i++) {
-        list.append(parseJSONObject(o.at(i).toObject()));
+        // list->append(*parseJSONObject(o.at(i).toObject()));
     }
     return list;
 }
@@ -283,3 +283,13 @@ QJsonArray CallbackRequest::getAsJsonArray(QList<CallbackRequest> *t) const
     for (int var = 0; var < t->size(); ++var) array.append(t->at(var).getAsJson());
     return array;
 }
+
+//QList<QSharedPointer<CallbackRequest>> CallbackRequest::parse(QJsonArray o)
+//{
+//    QList<QSharedPointer<CallbackRequest>> list;
+//    if (o.empty()) return list;
+//    for(int i = 0; i < o.size(); i++) {
+//        list.append(QSharedPointer<CallbackRequest>(parseJSONObject(o.at(i).toObject())));
+//    }
+//    return list;
+//}

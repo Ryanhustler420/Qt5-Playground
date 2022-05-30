@@ -56,12 +56,12 @@ QString TimeSlot::getPackageName()
     return this->className;
 }
 
-QList<TimeSlot*> TimeSlot::parseJSONArray(QJsonArray o)
+QList<TimeSlot> *TimeSlot::parseJSONArray(QJsonArray o)
 {
-    QList<TimeSlot*> list;
+    QList<TimeSlot> *list = new QList<TimeSlot>();
     if (o.empty()) return list;
     for(int i = 0; i < o.size(); i++) {
-        list.append(parseJSONObject(o.at(i).toObject()));
+        // list->append(*parseJSONObject(o.at(i).toObject()));
     }
     return list;
 }

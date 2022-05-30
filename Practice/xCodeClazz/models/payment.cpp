@@ -44,12 +44,12 @@ QString Payment::getPackageName()
     return this->className;
 }
 
-QList<Payment*> Payment::parseJSONArray(QJsonArray o)
+QList<Payment> *Payment::parseJSONArray(QJsonArray o)
 {
-    QList<Payment*> list;
+    QList<Payment> *list = new QList<Payment>();
     if (o.empty()) return list;
     for(int i = 0; i < o.size(); i++) {
-        list.append(parseJSONObject(o.at(i).toObject()));
+        // list->append(*parseJSONObject(o.at(i).toObject()));
     }
     return list;
 }

@@ -6,11 +6,11 @@ MongoService::MongoService(QObject *parent) : QObject(parent)
 {   
 }
 
-bool MongoService::hasMongoIds(QJsonArray *array)
+bool MongoService::hasMongoIds(QJsonArray array)
 {
     QList<bool> queue;
-    for (int var = 0; var < array->size(); ++var) {
-        queue.append(isValidMongoID(array->at(var).toString()));
+    for (int var = 0; var < array.size(); ++var) {
+        queue.append(isValidMongoID(array.at(var).toString()));
     }
     return !queue.contains(false);
 }

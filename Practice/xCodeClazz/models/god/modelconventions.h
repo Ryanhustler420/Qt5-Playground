@@ -57,7 +57,7 @@ public:
     virtual QList<QString> getAllFields() = 0;
     virtual QString getPackageName() = 0;
 
-    virtual QList<T*> parseJSONArray(QJsonArray o) = 0;
+    virtual QList<T> *parseJSONArray(QJsonArray o) = 0;
     virtual QVariantList parseJSONArrayToVariantList(QJsonArray o) = 0;
     virtual T* parseJSONObject(QJsonObject o) = 0;
     virtual QVariant parseJSONObjectToVariant(QJsonObject o) = 0;

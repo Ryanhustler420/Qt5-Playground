@@ -60,7 +60,7 @@ signals:
 public:
     QList<QString> getAllFields();
     QString getPackageName();
-    QList<Student*> parseJSONArray(QJsonArray o);
+    QList<Student> *parseJSONArray(QJsonArray o);
     QVariantList parseJSONArrayToVariantList(QJsonArray o);
     Student *parseJSONObject(QJsonObject o);
     QVariant parseJSONObjectToVariant(QJsonObject o);
