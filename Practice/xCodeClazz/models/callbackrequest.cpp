@@ -239,7 +239,6 @@ CallbackRequest *CallbackRequest::parseJSONObject(QJsonObject o)
 QVariant CallbackRequest::parseJSONObjectToVariant(QJsonObject o)
 {
     if (o.isEmpty()) return QVariant();
-    // Todo: add ALT values here
     QVariant v(o);
     return v;
 }

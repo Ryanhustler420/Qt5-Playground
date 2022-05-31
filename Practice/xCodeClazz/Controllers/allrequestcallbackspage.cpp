@@ -14,8 +14,13 @@ void AllRequestCallbacksPage::loadCallbackRequests()
     apis.getRequestCallbacks([=](QByteArray response){
         CallbackRequest *c = new CallbackRequest();
         QList<CallbackRequest *> list = c->parseJSONArray(QJsonDocument::fromJson(response).object().value("callbacks").toArray());
-        QVariantList m_list = c->parseJSONArrayToVariantList(QJsonDocument::fromJson(response).object().value("callbacks").toArray());
-        emit callbackRequestsLoaded(m_list);
+        // QVariantList m_list = c->parseJSONArrayToVariantList(QJsonDocument::fromJson(response).object().value("callbacks").toArray());
+
+        QJsonArray arr;
+        for (int var = 0; var < list.size(); ++var)
+            arr.push_back(list.at(var)->getAsJson());
+
+        emit callbackRequestsLoaded(arr.toVariantList());
     }, [=](QByteArray error){
         qInfo() << error;
     });

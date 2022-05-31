@@ -72,7 +72,7 @@ Page {
 
                     Label {
                         color: "grey"
-                        text: `${course} ${ALTcourse}`
+                        text: `${ALTcourse.session.starts} - ${ALTcourse.session.ends}`
                         font.bold: true
                         font.pointSize: 10
                     }
