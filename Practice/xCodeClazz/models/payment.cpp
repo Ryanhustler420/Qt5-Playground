@@ -44,12 +44,13 @@ QString Payment::getPackageName()
     return this->className;
 }
 
-QList<Payment> *Payment::parseJSONArray(QJsonArray o)
+QList<Payment *> Payment::parseJSONArray(QJsonArray o)
 {
-    QList<Payment> *list = new QList<Payment>();
+    QList<Payment *> list;
     if (o.empty()) return list;
     for(int i = 0; i < o.size(); i++) {
-        // list->append(*parseJSONObject(o.at(i).toObject()));
+        parseJSONObject(o.at(i).toObject());
+        list.append(parseJSONObject(o.at(i).toObject()));
     }
     return list;
 }
@@ -104,12 +105,6 @@ bool Payment::equal(Payment *o)
     return this->title == o->title;
 }
 
-void Payment::copy(Payment *o)
-{
-    this->title = o->title;
-    this->date = o->date;
-}
-
 QJsonObject Payment::getAsJson() const
 {
     QJsonObject mainObject;
@@ -118,9 +113,9 @@ QJsonObject Payment::getAsJson() const
     return mainObject;
 }
 
-QJsonArray Payment::getAsJsonArray(QList<Payment> *t) const
+QJsonArray Payment::getAsJsonArray(QList<Payment *> t) const
 {
     QJsonArray array;
-    for (int var = 0; var < t->size(); ++var) array.append(t->at(var).getAsJson());
+    for (int var = 0; var < t.size(); ++var) array.append(t.at(var)->getAsJson());
     return array;
 }

@@ -45,12 +45,13 @@ QString Session::getPackageName()
     return this->className;
 }
 
-QList<Session> *Session::parseJSONArray(QJsonArray o)
+QList<Session *> Session::parseJSONArray(QJsonArray o)
 {
-    QList<Session> *list = new QList<Session>();
+    QList<Session *> list;
     if (o.empty()) return list;
     for(int i = 0; i < o.size(); i++) {
-        // list->append(*parseJSONObject(o.at(i).toObject()));
+        parseJSONObject(o.at(i).toObject());
+        list.append(parseJSONObject(o.at(i).toObject()));
     }
     return list;
 }
@@ -105,12 +106,6 @@ bool Session::equal(Session *o)
     return o == this;
 }
 
-void Session::copy(Session *o)
-{
-    this->starts = o->starts;
-    this->ends = o->ends;
-}
-
 QJsonObject Session::getAsJson() const
 {
     QJsonObject mainObject;
@@ -119,9 +114,9 @@ QJsonObject Session::getAsJson() const
     return mainObject;
 }
 
-QJsonArray Session::getAsJsonArray(QList<Session> *t) const
+QJsonArray Session::getAsJsonArray(QList<Session *> t) const
 {
     QJsonArray array;
-    for (int var = 0; var < t->size(); ++var) array.append(t->at(var).getAsJson());
+    for (int var = 0; var < t.size(); ++var) array.append(t.at(var)->getAsJson());
     return array;
 }

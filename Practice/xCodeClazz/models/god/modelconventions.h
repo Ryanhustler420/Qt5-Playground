@@ -1,9 +1,11 @@
 #ifndef MODELCONVENTIONS_H
 #define MODELCONVENTIONS_H
 
+#include <QSharedPointer>
 #include <QObject>
 #include <QVector>
 #include <QList>
+
 #include "utility/jsonhelper.h"
 #include "utility/mongoservice.h"
 
@@ -57,15 +59,14 @@ public:
     virtual QList<QString> getAllFields() = 0;
     virtual QString getPackageName() = 0;
 
-    virtual QList<T> *parseJSONArray(QJsonArray o) = 0;
+    virtual QList<T *> parseJSONArray(QJsonArray o) = 0;
     virtual QVariantList parseJSONArrayToVariantList(QJsonArray o) = 0;
-    virtual T* parseJSONObject(QJsonObject o) = 0;
+    virtual T *parseJSONObject(QJsonObject o) = 0;
     virtual QVariant parseJSONObjectToVariant(QJsonObject o) = 0;
-    virtual QJsonArray getAsJsonArray(QList<T> *t) const = 0;
+    virtual QJsonArray getAsJsonArray(QList<T *> t) const = 0;
     virtual QJsonObject getAsJson() const = 0;
 
     virtual bool equal(T* o) = 0;
-    virtual void copy(T *o) = 0;
 };
 
 #endif // MODELCONVENTIONS_H

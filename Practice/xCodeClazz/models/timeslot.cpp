@@ -56,12 +56,13 @@ QString TimeSlot::getPackageName()
     return this->className;
 }
 
-QList<TimeSlot> *TimeSlot::parseJSONArray(QJsonArray o)
+QList<TimeSlot *> TimeSlot::parseJSONArray(QJsonArray o)
 {
-    QList<TimeSlot> *list = new QList<TimeSlot>();
+    QList<TimeSlot *> list;
     if (o.empty()) return list;
     for(int i = 0; i < o.size(); i++) {
-        // list->append(*parseJSONObject(o.at(i).toObject()));
+        parseJSONObject(o.at(i).toObject());
+        list.append(parseJSONObject(o.at(i).toObject()));
     }
     return list;
 }
@@ -126,13 +127,6 @@ bool TimeSlot::equal(TimeSlot *o)
     return this->from == o->from;
 }
 
-void TimeSlot::copy(TimeSlot *o)
-{
-    this->from = o->from;
-    this->to = o->to;
-    this->weeks = o->weeks;
-}
-
 QJsonObject TimeSlot::getAsJson() const
 {
     QJsonObject mainObject;
@@ -142,9 +136,9 @@ QJsonObject TimeSlot::getAsJson() const
     return mainObject;
 }
 
-QJsonArray TimeSlot::getAsJsonArray(QList<TimeSlot> *t) const
+QJsonArray TimeSlot::getAsJsonArray(QList<TimeSlot *> t) const
 {
     QJsonArray array;
-    for (int var = 0; var < t->size(); ++var) array.append(t->at(var).getAsJson());
+    for (int var = 0; var < t.size(); ++var) array.append(t.at(var)->getAsJson());
     return array;
 }

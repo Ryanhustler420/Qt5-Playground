@@ -3,7 +3,6 @@
 
 #include "models/god/modelconventions.h"
 #include "models/course.h"
-#include <QSharedPointer>
 
 class CallbackRequest : public ModelConventions<CallbackRequest>
 {
@@ -43,15 +42,26 @@ signals:
 public:
     QList<QString> getAllFields();
     QString getPackageName();
-    QList<CallbackRequest> *parseJSONArray(QJsonArray o);
+    QList<CallbackRequest *> parseJSONArray(QJsonArray o);
     QVariantList parseJSONArrayToVariantList(QJsonArray o);
     CallbackRequest *parseJSONObject(QJsonObject o);
     QVariant parseJSONObjectToVariant(QJsonObject o);
     bool equal(CallbackRequest *o);
-    void copy(CallbackRequest *o);
     QJsonObject getAsJson() const;
-    QJsonArray getAsJsonArray(QList<CallbackRequest> *t) const;
+    QJsonArray getAsJsonArray(QList<CallbackRequest *> t) const;
     // QList<QSharedPointer<CallbackRequest>> parse(QJsonArray o);
+
+    void operator = (const CallbackRequest &o) {
+        this->_id = o._id;
+        this->course = o.course;
+        this->ALTcourse = o.ALTcourse;
+        this->name = o.name;
+        this->phone = o.phone;
+        this->school = o.school;
+        this->createdAt = o.createdAt;
+        this->updatedAt = o.updatedAt;
+        this->isReviewed = o.isReviewed;
+    }
 
 public:
     const QString &id() const;

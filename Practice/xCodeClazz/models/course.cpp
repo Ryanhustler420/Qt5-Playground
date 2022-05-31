@@ -144,12 +144,13 @@ QString Course::getPackageName()
     return this->className;
 }
 
-QList<Course> *Course::parseJSONArray(QJsonArray o)
+QList<Course *> Course::parseJSONArray(QJsonArray o)
 {
-    QList<Course> *list = new QList<Course>();
+    QList<Course *> list;
     if (o.empty()) return list;
     for(int i = 0; i < o.size(); i++) {
-        // list->append(*parseJSONObject(o.at(i).toObject()));
+        parseJSONObject(o.at(i).toObject());
+        list.append(parseJSONObject(o.at(i).toObject()));
     }
     return list;
 }
@@ -295,21 +296,6 @@ bool Course::equal(Course *o)
     return o == this;
 }
 
-void Course::copy(Course *course)
-{
-    this->title = course->title;
-    this->subtitle = course->subtitle;
-    this->duration = course->duration;
-    this->thumbnailUrl = course->thumbnailUrl;
-    this->imageContainer = course->imageContainer;
-    this->features = course->features;
-    this->price = course->price;
-    this->hasActive = course->hasActive;
-    this->spaceLeft = course->spaceLeft;
-    this->spaceFull = course->spaceFull;
-    this->session = course->session;
-}
-
 QJsonObject Course::getAsJson() const
 {
     QJsonObject mainObject;
@@ -327,9 +313,9 @@ QJsonObject Course::getAsJson() const
     return mainObject;
 }
 
-QJsonArray Course::getAsJsonArray(QList<Course> *t) const
+QJsonArray Course::getAsJsonArray(QList<Course *> t) const
 {
     QJsonArray array;
-    for (int var = 0; var < t->size(); ++var) array.append(t->at(var).getAsJson());
+    for (int var = 0; var < t.size(); ++var) array.append(t.at(var)->getAsJson());
     return array;
 }

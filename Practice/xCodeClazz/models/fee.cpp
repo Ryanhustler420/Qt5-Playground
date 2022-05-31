@@ -44,12 +44,13 @@ QString Fee::getPackageName()
     return this->className;
 }
 
-QList<Fee> *Fee::parseJSONArray(QJsonArray o)
-{  
-    QList<Fee> *list = new QList<Fee>();
+QList<Fee *> Fee::parseJSONArray(QJsonArray o)
+{
+    QList<Fee *> list;
     if (o.empty()) return list;
     for(int i = 0; i < o.size(); i++) {
-        // list->append(*parseJSONObject(o.at(i).toObject()));
+        parseJSONObject(o.at(i).toObject());
+        list.append(parseJSONObject(o.at(i).toObject()));
     }
     return list;
 }
@@ -104,12 +105,6 @@ bool Fee::equal(Fee *o)
     return o->amount = this->amount;
 }
 
-void Fee::copy(Fee *o)
-{
-    this->amount = o->amount;
-    this->per = o->per;
-}
-
 QJsonObject Fee::getAsJson() const
 {
     QJsonObject mainObject;
@@ -118,9 +113,9 @@ QJsonObject Fee::getAsJson() const
     return mainObject;
 }
 
-QJsonArray Fee::getAsJsonArray(QList<Fee> *t) const
+QJsonArray Fee::getAsJsonArray(QList<Fee *> t) const
 {
     QJsonArray array;
-    for (int var = 0; var < t->size(); ++var) array.append(t->at(var).getAsJson());
+    for (int var = 0; var < t.size(); ++var) array.append(t.at(var)->getAsJson());
     return array;
 }

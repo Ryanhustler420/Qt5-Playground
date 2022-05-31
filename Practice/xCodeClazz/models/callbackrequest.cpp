@@ -121,12 +121,12 @@ QString CallbackRequest::getPackageName()
     return this->className;
 }
 
-QList<CallbackRequest> *CallbackRequest::parseJSONArray(QJsonArray o)
+QList<CallbackRequest *> CallbackRequest::parseJSONArray(QJsonArray o)
 {
-    QList<CallbackRequest> *list = new QList<CallbackRequest>();
+    QList<CallbackRequest *> list;
     if (o.empty()) return list;
     for(int i = 0; i < o.size(); i++) {
-        // list->append(*parseJSONObject(o.at(i).toObject()));
+        list.append(parseJSONObject(o.at(i).toObject()));
     }
     return list;
 }
@@ -249,19 +249,6 @@ bool CallbackRequest::equal(CallbackRequest *o)
     return o->id() == this->id();
 }
 
-void CallbackRequest::copy(CallbackRequest *o)
-{
-    this->_id = o->_id;
-    this->course = o->course;
-    this->ALTcourse = o->ALTcourse;
-    this->name = o->name;
-    this->phone = o->phone;
-    this->school = o->school;
-    this->createdAt = o->createdAt;
-    this->updatedAt = o->updatedAt;
-    this->isReviewed = o->isReviewed;
-}
-
 QJsonObject CallbackRequest::getAsJson() const
 {
     QJsonObject mainObject;
@@ -277,19 +264,9 @@ QJsonObject CallbackRequest::getAsJson() const
     return mainObject;
 }
 
-QJsonArray CallbackRequest::getAsJsonArray(QList<CallbackRequest> *t) const
+QJsonArray CallbackRequest::getAsJsonArray(QList<CallbackRequest *> t) const
 {
     QJsonArray array;
-    for (int var = 0; var < t->size(); ++var) array.append(t->at(var).getAsJson());
+    for (int var = 0; var < t.size(); ++var) array.append(t.at(var)->getAsJson());
     return array;
 }
-
-//QList<QSharedPointer<CallbackRequest>> CallbackRequest::parse(QJsonArray o)
-//{
-//    QList<QSharedPointer<CallbackRequest>> list;
-//    if (o.empty()) return list;
-//    for(int i = 0; i < o.size(); i++) {
-//        list.append(QSharedPointer<CallbackRequest>(parseJSONObject(o.at(i).toObject())));
-//    }
-//    return list;
-//}

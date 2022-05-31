@@ -12,7 +12,7 @@ class Student : public ModelConventions<Student>
     Q_OBJECT
 public:
     explicit Student(QObject *parent = nullptr);
-    Student(const QString &_id, const QString &school, const QString &name, const QString &imageUrl, const QString &imageContainer, int age, const QString &clazz, QList<Payment> *payments, QList<QString> *courses, QList<Course> *ALTCourses, TimeSlot *timeSlot, QList<QString> *phoneNumbers, const QString &joinDate, Fee *fees, int batchNumber, const QString &email);
+    Student(const QString &_id, const QString &school, const QString &name, const QString &imageUrl, const QString &imageContainer, int age, const QString &clazz, QList<Payment *> payments, QList<QString> *courses, QList<Course *> ALTCourses, TimeSlot *timeSlot, QList<QString> *phoneNumbers, const QString &joinDate, Fee *fees, int batchNumber, const QString &email);
 
 private:
     QString _id;
@@ -22,9 +22,9 @@ private:
     QString imageContainer;
     int age;
     QString clazz;
-    QList<Payment> *payments;
+    QList<Payment *> payments;
     QList<QString> *courses;
-    QList<Course> *ALTCourses;
+    QList<Course *> ALTCourses;
     TimeSlot *timeSlot;
     QList<QString> *phoneNumbers;
     QString joinDate;
@@ -60,14 +60,32 @@ signals:
 public:
     QList<QString> getAllFields();
     QString getPackageName();
-    QList<Student> *parseJSONArray(QJsonArray o);
+    QList<Student *> parseJSONArray(QJsonArray o);
     QVariantList parseJSONArrayToVariantList(QJsonArray o);
     Student *parseJSONObject(QJsonObject o);
     QVariant parseJSONObjectToVariant(QJsonObject o);
     bool equal(Student *o);
-    void copy(Student *o);
     QJsonObject getAsJson() const;
-    QJsonArray getAsJsonArray(QList<Student> *t) const;
+    QJsonArray getAsJsonArray(QList<Student *> t) const;
+
+    void operator = (const Student &o) {
+        this->_id = o._id;
+        this->school = o.school;
+        this->name = o.name;
+        this->imageUrl = o.imageUrl;
+        this->imageContainer = o.imageContainer;
+        this->age = o.age;
+        this->clazz = o.clazz;
+        this->payments = o.payments;
+        this->courses = o.courses;
+        this->ALTCourses = o.ALTCourses;
+        this->timeSlot = o.timeSlot;
+        this->phoneNumbers = o.phoneNumbers;
+        this->joinDate = o.joinDate;
+        this->fees = o.fees;
+        this->batchNumber = o.batchNumber;
+        this->email = o.email;
+    }
 
 public:
     const QString &getSchool() const;
@@ -84,8 +102,8 @@ public:
     void setClazz(const QString &newClazz);
     QList<QString> *getCourses() const;
     void setCourses(QList<QString> *newCourses);
-    QList<Course> *getALTCourses() const;
-    void setALTCourses(QList<Course> *newALTCourses);
+    QList<Course *> getALTCourses() const;
+    void setALTCourses(QList<Course *> newALTCourses);
     TimeSlot *getTimeSlot() const;
     void setTimeSlot(TimeSlot *newTimeSlot);
     QList<QString> *getPhoneNumbers() const;
@@ -98,8 +116,8 @@ public:
     void setBatchNumber(int newBatchNumber);
     const QString &getEmail() const;
     void setEmail(const QString &newEmail);
-    QList<Payment> *getPayments() const;
-    void setPayments(QList<Payment> *newPayments);
+    QList<Payment *> getPayments() const;
+    void setPayments(QList<Payment *> newPayments);
     const QString &id() const;
     void setId(const QString &newId);
 };

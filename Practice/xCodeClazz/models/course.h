@@ -47,14 +47,27 @@ signals:
 public:
     QList<QString> getAllFields();
     QString getPackageName();
-    QList<Course> *parseJSONArray(QJsonArray o);
+    QList<Course *> parseJSONArray(QJsonArray o);
     QVariantList parseJSONArrayToVariantList(QJsonArray o);
     Course *parseJSONObject(QJsonObject o);
     QVariant parseJSONObjectToVariant(QJsonObject o);
     bool equal(Course *o);
-    void copy(Course *o);
     QJsonObject getAsJson() const;
-    QJsonArray getAsJsonArray(QList<Course> *t) const;
+    QJsonArray getAsJsonArray(QList<Course *> t) const;
+
+    void operator = (const Course &course) {
+        this->title = course.title;
+        this->subtitle = course.subtitle;
+        this->duration = course.duration;
+        this->thumbnailUrl = course.thumbnailUrl;
+        this->imageContainer = course.imageContainer;
+        this->features = course.features;
+        this->price = course.price;
+        this->hasActive = course.hasActive;
+        this->spaceLeft = course.spaceLeft;
+        this->spaceFull = course.spaceFull;
+        this->session = course.session;
+    }
 
 public:
     const QString &getTitle() const;

@@ -6,7 +6,7 @@ Student::Student(QObject *parent)
     this->fields = new _fields();
 }
 
-Student::Student(const QString &_id, const QString &school, const QString &name, const QString &imageUrl, const QString &imageContainer, int age, const QString &clazz, QList<Payment> *payments, QList<QString> *courses, QList<Course> *ALTCourses, TimeSlot *timeSlot, QList<QString> *phoneNumbers, const QString &joinDate, Fee *fees, int batchNumber, const QString &email) :
+Student::Student(const QString &_id, const QString &school, const QString &name, const QString &imageUrl, const QString &imageContainer, int age, const QString &clazz, QList<Payment *> payments, QList<QString> *courses, QList<Course *> ALTCourses, TimeSlot *timeSlot, QList<QString> *phoneNumbers, const QString &joinDate, Fee *fees, int batchNumber, const QString &email) :
     _id(_id),
     school(school),
     name(name),
@@ -38,12 +38,12 @@ void Student::setId(const QString &newId)
     _id = newId;
 }
 
-QList<Payment> *Student::getPayments() const
+QList<Payment *> Student::getPayments() const
 {
-    return payments != nullptr ? payments : new QList<Payment>();
+    return payments;
 }
 
-void Student::setPayments(QList<Payment> *newPayments)
+void Student::setPayments(QList<Payment *> newPayments)
 {
     payments = newPayments;
 }
@@ -90,7 +90,7 @@ void Student::setJoinDate(const QString &newJoinDate)
 
 QList<QString> *Student::getPhoneNumbers() const
 {
-    return phoneNumbers != nullptr ? phoneNumbers : new QList<QString>();
+    return phoneNumbers;
 }
 
 void Student::setPhoneNumbers(QList<QString> *newPhoneNumbers)
@@ -108,19 +108,19 @@ void Student::setTimeSlot(TimeSlot *newTimeSlot)
     timeSlot = newTimeSlot;
 }
 
-QList<Course> *Student::getALTCourses() const
+QList<Course *> Student::getALTCourses() const
 {
-    return ALTCourses != nullptr ? ALTCourses : new QList<Course>();
+    return ALTCourses;
 }
 
-void Student::setALTCourses(QList<Course> *newALTCourses)
+void Student::setALTCourses(QList<Course *> newALTCourses)
 {
     ALTCourses = newALTCourses;
 }
 
 QList<QString> *Student::getCourses() const
 {
-    return courses != nullptr ? courses : new QList<QString>();
+    return courses;
 }
 
 void Student::setCourses(QList<QString> *newCourses)
@@ -198,12 +198,13 @@ QString Student::getPackageName()
     return this->className;
 }
 
-QList<Student> *Student::parseJSONArray(QJsonArray o)
+QList<Student *> Student::parseJSONArray(QJsonArray o)
 {
-    QList<Student> *list = new QList<Student>();
+    QList<Student *> list;
     if (o.empty()) return list;
     for(int i = 0; i < o.size(); i++) {
-        // list->append(*parseJSONObject(o.at(i).toObject()));
+        parseJSONObject(o.at(i).toObject());
+        list.append(parseJSONObject(o.at(i).toObject()));
     }
     return list;
 }
@@ -305,13 +306,14 @@ Student *Student::parseJSONObject(QJsonObject o)
 
     try {
         if (o.contains(fields->payments)) {
+            // you can only store Pointer data type in array and not the object
             Payment p;
             n->setPayments(p.parseJSONArray(o.value(fields->payments).toArray()));
         } else {
-            n->setPayments(nullptr);
+            n->setPayments(QList<Payment *>());
         }
     }  catch (QString error) {
-        n->setPayments(nullptr);
+        n->setPayments(QList<Payment *>());
     }
 
     try {
@@ -327,7 +329,7 @@ Student *Student::parseJSONObject(QJsonObject o)
             n->setCourses(nullptr);
         }
     }  catch (QString error) {
-        n->setALTCourses(nullptr);
+        n->setALTCourses(QList<Course *>());
         n->setCourses(new QList<QString>());
     }
 
@@ -408,26 +410,6 @@ bool Student::equal(Student *o)
     return o->id() == this->id();
 }
 
-void Student::copy(Student *o)
-{
-    this->_id = o->_id;
-    this->school = o->school;
-    this->name = o->name;
-    this->imageUrl = o->imageUrl;
-    this->imageContainer = o->imageContainer;
-    this->age = o->age;
-    this->clazz = o->clazz;
-    this->payments = o->payments;
-    this->courses = o->courses;
-    this->ALTCourses = o->ALTCourses;
-    this->timeSlot = o->timeSlot;
-    this->phoneNumbers = o->phoneNumbers;
-    this->joinDate = o->joinDate;
-    this->fees = o->fees;
-    this->batchNumber = o->batchNumber;
-    this->email = o->email;
-}
-
 QJsonObject Student::getAsJson() const
 {
     QJsonObject mainObject;
@@ -447,13 +429,12 @@ QJsonObject Student::getAsJson() const
     mainObject.insert(this->fields->phoneNumbers, this->phoneNumbers->join(", "));
     mainObject.insert(this->fields->courses, (new Course())->getAsJsonArray(this->ALTCourses));
     mainObject.insert(this->fields->payments, (new Payment())->getAsJsonArray(this->payments));
-
     return mainObject;
 }
 
-QJsonArray Student::getAsJsonArray(QList<Student> *t) const
+QJsonArray Student::getAsJsonArray(QList<Student *> t) const
 {
     QJsonArray array;
-    for (int var = 0; var < t->size(); ++var) array.append(t->at(var).getAsJson());
+    for (int var = 0; var < t.size(); ++var) array.append(t.at(var)->getAsJson());
     return array;
 }

@@ -28,14 +28,18 @@ signals:
 public:
     QList<QString> getAllFields();
     QString getPackageName();
-    QList<Session> *parseJSONArray(QJsonArray o);
+    QList<Session *> parseJSONArray(QJsonArray o);
     QVariantList parseJSONArrayToVariantList(QJsonArray o);
     Session *parseJSONObject(QJsonObject o);
     QVariant parseJSONObjectToVariant(QJsonObject o);
     bool equal(Session *o);
-    void copy(Session *o);
     QJsonObject getAsJson() const;
-    QJsonArray getAsJsonArray(QList<Session> *t) const;
+    QJsonArray getAsJsonArray(QList<Session *> t) const;
+
+    void operator = (const Session &o) {
+        this->starts = o.starts;
+        this->ends = o.ends;
+    }
 
 public:
     const QString &getStarts() const;

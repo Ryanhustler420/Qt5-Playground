@@ -28,14 +28,18 @@ signals:
 public:
     QList<QString> getAllFields();
     QString getPackageName();
-    QList<Fee> *parseJSONArray(QJsonArray o);
+    QList<Fee *> parseJSONArray(QJsonArray o);
     QVariantList parseJSONArrayToVariantList(QJsonArray o);
     Fee *parseJSONObject(QJsonObject o);
     QVariant parseJSONObjectToVariant(QJsonObject o);
     bool equal(Fee *o);
-    void copy(Fee *o);
     QJsonObject getAsJson() const;
-    QJsonArray getAsJsonArray(QList<Fee> *t) const;
+    QJsonArray getAsJsonArray(QList<Fee *> t) const;
+
+    void operator = (const Fee &o) {
+        this->amount = o.amount;
+        this->per = o.per;
+    }
 
 public:
     double getAmount() const;
