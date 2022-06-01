@@ -9,6 +9,7 @@
 
 #include <QNetworkCookieJar>
 #include <QNetworkCookie>
+#include <QEventLoop>
 
 class Network : public CommonSuperClass
 {

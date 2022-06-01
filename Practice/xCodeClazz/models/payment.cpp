@@ -57,12 +57,7 @@ QList<Payment *> Payment::parseJSONArray(QJsonArray o)
 
 QVariantList Payment::parseJSONArrayToVariantList(QJsonArray o)
 {
-    QVariantList list;
-    if (o.empty()) return list;
-    for(int i = 0; i < o.size(); i++) {
-        list.append(parseJSONObjectToVariant(o.at(i).toObject()));
-    }
-    return list;
+    return o.toVariantList();
 }
 
 Payment *Payment::parseJSONObject(QJsonObject o)

@@ -21,6 +21,7 @@ public:
     static QJsonDocument toJsonDocument(QByteArray *byteArray);
     static QString toString(QJsonDocument jsonDocument, QString key);
     static QJsonObject toJson(QString in);
+    static QJsonArray toJsonArray(QList<QString> *arr);
 
 private:
     static QJsonDocument createDummyJSON();

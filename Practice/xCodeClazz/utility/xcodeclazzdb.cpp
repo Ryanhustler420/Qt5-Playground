@@ -31,3 +31,15 @@ QString XCodeClazzDB::getPassword(const QString &username)
 {
 
 }
+
+bool XCodeClazzDB::saveCallbackRequests(const QJsonArray &o)
+{
+    QJsonDocument doc;
+    doc.setArray(o);
+    x->save(doc, callback_requests);
+}
+
+QJsonArray XCodeClazzDB::getCallbackRequests()
+{
+    return x->get(callback_requests).array();
+}

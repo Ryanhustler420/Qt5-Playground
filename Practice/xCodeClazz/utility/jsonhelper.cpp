@@ -36,6 +36,15 @@ QJsonObject JsonHelper::toJson(QString in)
     return val.toObject();
 }
 
+QJsonArray JsonHelper::toJsonArray(QList<QString> *arr)
+{
+    QJsonArray array;
+    for (int var = 0; var < arr->size(); ++var) {
+        array.push_back(arr->at(var));
+    }
+    return array;
+}
+
 QJsonDocument JsonHelper::createDummyJSON()
 {
     // create main object for whole json data

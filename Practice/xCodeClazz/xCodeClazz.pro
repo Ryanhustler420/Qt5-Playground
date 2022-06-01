@@ -31,6 +31,7 @@ SOURCES += \
     parents/commonsuperclass.cpp \
     utility/mongoservice.cpp \
     utility/xcodeclazzdb.cpp \
+    networking/internet.cpp \
     database/localcache.cpp \
     application/manager.cpp \
     utility/filesystem.cpp \
@@ -103,6 +104,7 @@ HEADERS += \
     singleton/singleton_obj.h \
     utility/mongoservice.h \
     utility/xcodeclazzdb.h \
+    networking/internet.h \
     database/localcache.h \
     shareable/constants.h \
     application/manager.h \

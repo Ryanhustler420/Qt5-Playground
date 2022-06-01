@@ -57,12 +57,7 @@ QList<Fee *> Fee::parseJSONArray(QJsonArray o)
 
 QVariantList Fee::parseJSONArrayToVariantList(QJsonArray o)
 {
-    QVariantList list;
-    if (o.empty()) return list;
-    for(int i = 0; i < o.size(); i++) {
-        list.append(parseJSONObjectToVariant(o.at(i).toObject()));
-    }
-    return list;
+    return o.toVariantList();
 }
 
 Fee *Fee::parseJSONObject(QJsonObject o)

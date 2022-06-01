@@ -15,6 +15,9 @@ public:
     bool isPasswordMatched(const QString &username, const QString &password);
     QString getPassword(const QString &username);
 
+    bool saveCallbackRequests(const QJsonArray &o);
+    QJsonArray getCallbackRequests();
+
     // remove this document from that filed
     // saerch this document from that file
 
@@ -46,6 +49,7 @@ private:
     // files
     QString const app_name = "xcodeclazz";
     QString const login_json = app_name + "_" + "login.json";
+    QString const callback_requests = app_name + "_" + "callback_requests.json";
 
 };
 

@@ -20,8 +20,13 @@ public:
     QString getAppVersionName() const;
     QString getServerVersionCode() const;
 
+public:
+    bool getIsInternetPresent() const;
+    void setIsInternetPresent(bool newIsInternetPresent);
+
 private:
     int versionCode;
+    bool isInternetPresent;
     QString env, appVersionName, serverVersionCode;
     QUrl *hostUrl, *siteAssets;
 

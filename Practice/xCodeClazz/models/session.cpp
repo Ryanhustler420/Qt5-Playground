@@ -58,12 +58,7 @@ QList<Session *> Session::parseJSONArray(QJsonArray o)
 
 QVariantList Session::parseJSONArrayToVariantList(QJsonArray o)
 {
-    QVariantList list;
-    if (o.empty()) return list;
-    for(int i = 0; i < o.size(); i++) {
-        list.append(parseJSONObjectToVariant(o.at(i).toObject()));
-    }
-    return list;
+    return o.toVariantList();
 }
 
 Session *Session::parseJSONObject(QJsonObject o)

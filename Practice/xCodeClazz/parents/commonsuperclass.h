@@ -13,6 +13,8 @@
 #define plus(a, b) a + b
 #define AUTHOR = "Raisehand Software Private Limited";
 
+#include "shareable/constants.h"
+
 class CommonSuperClass : public QObject
 {
     Q_OBJECT

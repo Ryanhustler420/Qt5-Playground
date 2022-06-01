@@ -15,7 +15,7 @@ Manager::Manager(QObject *parent) : OSingleton<Manager>()
 #else
     env = "prod";
     siteAssets = new QUrl("http://xcodeclazz.com");
-    hostUrl = new QUrl("http://xcodeclazz.com/v1");
+    hostUrl = new QUrl("https://raisehand.software/v1");
 #endif
 }
 
@@ -47,4 +47,14 @@ QString Manager::getAppVersionName() const
 QString Manager::getServerVersionCode() const
 {
     return serverVersionCode;
+}
+
+bool Manager::getIsInternetPresent() const
+{
+    return isInternetPresent;
+}
+
+void Manager::setIsInternetPresent(bool newIsInternetPresent)
+{
+    isInternetPresent = newIsInternetPresent;
 }

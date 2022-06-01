@@ -12,11 +12,11 @@ public:
     explicit Signals(QWidget *parent = nullptr);
 
 signals:
-    void deleteCourse();
+    void internetStatusRefreshed(bool b);
     void googleOAuthCodeReceive(QString code);
 
 public slots:
-    void onDeleteCourse(std::function<void ()> callback);
+    void onInternetStatusRefresh(std::function<void (bool b)> callback);
     void onGoogleOAuthCodeReceive(std::function<void(QString code)> callback);
 
 };

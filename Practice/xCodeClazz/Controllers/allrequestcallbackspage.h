@@ -7,6 +7,8 @@
 #include <QVariantList>
 
 #include "models/callbackrequest.h"
+#include "utility/xcodeclazzdb.h"
+#include "application/manager.h"
 #include "utility/jsonhelper.h"
 #include "networking/apis.h"
 
@@ -25,6 +27,9 @@ public:
     Q_INVOKABLE void removeAll();
 
 signals:
+    void showLoading(bool b);
+
+signals:
     void holded(QVariant o);
     void callbackRequestsLoaded(QVariantList callbacks);
 
@@ -35,6 +40,7 @@ signals:
 
 private:
     QVariantList callbacks;
+    XCodeClazzDB xdb;
     Apis apis;
 
 };

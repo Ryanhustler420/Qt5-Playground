@@ -69,12 +69,7 @@ QList<TimeSlot *> TimeSlot::parseJSONArray(QJsonArray o)
 
 QVariantList TimeSlot::parseJSONArrayToVariantList(QJsonArray o)
 {
-    QVariantList list;
-    if (o.empty()) return list;
-    for(int i = 0; i < o.size(); i++) {
-        list.append(parseJSONObjectToVariant(o.at(i).toObject()));
-    }
-    return list;
+    return o.toVariantList();
 }
 
 TimeSlot *TimeSlot::parseJSONObject(QJsonObject o)
@@ -132,7 +127,7 @@ QJsonObject TimeSlot::getAsJson() const
     QJsonObject mainObject;
     mainObject.insert(this->fields->from, this->from);
     mainObject.insert(this->fields->to, this->to);
-    mainObject.insert(this->fields->weeks, this->weeks->join(", "));
+    mainObject.insert(this->fields->weeks, json.toJsonArray(this->weeks));
     return mainObject;
 }
 

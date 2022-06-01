@@ -5,9 +5,9 @@ Signals::Signals(QWidget *parent) : OSingleton<Signals>()
     Q_UNUSED(parent);
 }
 
-void Signals::onDeleteCourse(std::function<void ()> callback)
+void Signals::onInternetStatusRefresh(std::function<void (bool)> callback)
 {
-    connect(this, &Signals::deleteCourse, this, [=](){ callback(); });
+    connect(this, &Signals::internetStatusRefreshed, this, [=](bool b){ callback(b); });
 }
 
 void Signals::onGoogleOAuthCodeReceive(std::function<void (QString)> callback)

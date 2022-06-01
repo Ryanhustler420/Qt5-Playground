@@ -157,12 +157,7 @@ QList<Course *> Course::parseJSONArray(QJsonArray o)
 
 QVariantList Course::parseJSONArrayToVariantList(QJsonArray o)
 {
-    QVariantList list;
-    if (o.empty()) return list;
-    for(int i = 0; i < o.size(); i++) {
-        list.append(parseJSONObjectToVariant(o.at(i).toObject()));
-    }
-    return list;
+    return o.toVariantList();
 }
 
 Course *Course::parseJSONObject(QJsonObject o)
@@ -304,7 +299,7 @@ QJsonObject Course::getAsJson() const
     mainObject.insert(this->fields->duration, this->duration);
     mainObject.insert(this->fields->thumbnailUrl, this->thumbnailUrl);
     mainObject.insert(this->fields->imageContainer, this->imageContainer);
-    mainObject.insert(this->fields->features, this->features->join(", "));
+    mainObject.insert(this->fields->features, json.toJsonArray(this->features));
     mainObject.insert(this->fields->price, this->price);
     mainObject.insert(this->fields->hasActive, this->hasActive);
     mainObject.insert(this->fields->spaceLeft, this->spaceLeft);

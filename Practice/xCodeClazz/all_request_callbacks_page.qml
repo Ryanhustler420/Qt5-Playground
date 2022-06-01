@@ -124,6 +124,13 @@ Page {
 
     AllRequestCallbacksPage {
         id: page_controller
+        onShowLoading: {
+            if (b) {
+                popup.open()
+            } else {
+                popup.close()
+            }
+        }
         onAllItemRemoved: {
             callbacks_model.clear()
         }

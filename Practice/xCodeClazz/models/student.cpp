@@ -211,12 +211,7 @@ QList<Student *> Student::parseJSONArray(QJsonArray o)
 
 QVariantList Student::parseJSONArrayToVariantList(QJsonArray o)
 {
-    QVariantList list;
-    if (o.empty()) return list;
-    for(int i = 0; i < o.size(); i++) {
-        list.append(parseJSONObjectToVariant(o.at(i).toObject()));
-    }
-    return list;
+    return o.toVariantList();
 }
 
 Student *Student::parseJSONObject(QJsonObject o)
@@ -424,9 +419,9 @@ QJsonObject Student::getAsJson() const
     mainObject.insert(this->fields->batchNumber, this->batchNumber);
     mainObject.insert(this->fields->imageContainer, this->imageContainer);
     mainObject.insert(this->fields->fees, this->fees->getAsJson());
-    mainObject.insert(this->fields->courses, this->courses->join(", "));
+    mainObject.insert(this->fields->courses, json.toJsonArray(this->courses));
     mainObject.insert(this->fields->timeSlot, this->timeSlot->getAsJson());
-    mainObject.insert(this->fields->phoneNumbers, this->phoneNumbers->join(", "));
+    mainObject.insert(this->fields->phoneNumbers, json.toJsonArray(this->phoneNumbers));
     mainObject.insert(this->fields->courses, (new Course())->getAsJsonArray(this->ALTCourses));
     mainObject.insert(this->fields->payments, (new Payment())->getAsJsonArray(this->payments));
     return mainObject;

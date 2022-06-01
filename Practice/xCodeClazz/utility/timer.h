@@ -27,7 +27,6 @@ public:
 
     // https://stackoverflow.com/a/62631757
     function<void()> debounced(function<void()>&f , int period);
-
 signals:
 
 private:
