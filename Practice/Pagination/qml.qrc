@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>qtquickcontrols2.conf</file>
+        <file>Page1.qml</file>
+        <file>component_generator.js</file>
+        <file>Page2.qml</file>
+    </qresource>
+</RCC>

@@ -19,7 +19,7 @@ void Internet::check_internet_connection_in_loop()
 
 void Internet::internetAvailable(std::function<void (bool)> response)
 {
-    QUrl url(pokeSite);
+    QUrl url(isProd() ? pokeSite : unsecure_localhost_sandbox);
     QNetworkRequest req(url);
 
     QNetworkAccessManager *man = new QNetworkAccessManager();
