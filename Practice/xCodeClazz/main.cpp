@@ -30,7 +30,9 @@ int main(int argc, char *argv[])
     Internet i;
     i.setCheck_internet_connection_in_loop_is_running(true);
     i.check_internet_connection_in_loop();
-    Signals::instance().onInternetStatusRefresh([=](bool status){ Manager::instance().setIsInternetPresent(status); });
+    Signals::instance().onInternetStatusRefresh([=](bool status){
+        Manager::instance().setIsInternetPresent(status);
+    });
 
     return app.exec();
 }

@@ -12,13 +12,13 @@ static const QString appVersionName = Manager::instance().getAppVersionName(); /
 static const QString serverVersionCode = Manager::instance().getServerVersionCode(); // example 1 (int)
 static const int appVersionCode = Manager::instance().getVersionCode(); // example 15 (int)
 
-static bool isProd() { return rootNode.compare(PROD); }
+static bool isProd() { return rootNode.compare(rootNode); }
 
 static const QString tld_dns = "xcodeclazz.com";
 static const QString tld_dns_sandbox = "xcodeclazz.surge.sh";
 
-static const QString tld_localhost = "10.0.2.2:3002";
-static const QString tld_localhost_sandbox = "10.0.2.0:3002";
+static const QString tld_localhost = "localhost:3002";
+static const QString tld_localhost_sandbox = "localhost:3002";
 static const QString TLD = isProd() ? tld_dns : tld_localhost;
 
 static const QString secure_dns_live = "http://" + tld_dns;
@@ -26,7 +26,9 @@ static const QString secure_dns_sandbox = "https://" + tld_dns_sandbox;
 
 static const QString unsecure_dns_live = "http://" + tld_dns;
 static const QString unsecure_dns_sandbox = "http://" + tld_dns_sandbox;
-static const QString unsecure_localhost_sandbox = "http://" + tld_localhost;
+static const QString unsecure_localhost_sandbox = "http://" + tld_localhost_sandbox;
+
+static const QString pokeSite = "https://www.cplusplus.com";
 
 /* CHANGE BASED ON PROJECT */
 

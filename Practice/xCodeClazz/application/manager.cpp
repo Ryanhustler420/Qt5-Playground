@@ -7,7 +7,6 @@ Manager::Manager(QObject *parent) : OSingleton<Manager>()
     versionCode = 1;
     appVersionName = "1";
     serverVersionCode = "8";
-    Q_UNUSED(parent);
 #ifdef QT_DEBUG
     env = "dev";
     siteAssets = new QUrl("http://xcodeclazz.com");

@@ -81,6 +81,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 include( ./libs/qtpromise/qtpromise.pri )
+include( ./libs/qsyncable/qsyncable.pri )
 
 # win32: LIBS += -lzlib
 win32: LIBS += -lz

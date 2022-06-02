@@ -2,6 +2,8 @@
 
 AllRequestCallbacksPage::AllRequestCallbacksPage(QObject *parent) : QObject(parent)
 {
+    // ...
+    // hook listeners
 }
 
 void AllRequestCallbacksPage::hold(QVariant o)
@@ -20,8 +22,8 @@ void AllRequestCallbacksPage::loadCallbackRequests()
                 QJsonArray arr;
                 for (int var = 0; var < list.size(); ++var) arr.push_back(list.at(var)->getAsJson());
 
-                // update the local file
                 xdb.saveCallbackRequests(arr);
+                callbacks.append(arr.toVariantList());
 
                 emit callbackRequestsLoaded(arr.toVariantList());
                 emit showLoading(false);
@@ -41,7 +43,6 @@ void AllRequestCallbacksPage::loadCallbackRequests()
                 QJsonArray arr;
                 for (int var = 0; var < list.size(); ++var) arr.push_back(list.at(var)->getAsJson());
 
-                // update the local file
                 xdb.saveCallbackRequests(arr);
 
             }, [=](QByteArray error){
@@ -51,9 +52,11 @@ void AllRequestCallbacksPage::loadCallbackRequests()
             qInfo() << "No internet connection";
         }
         // render those and fetch new request
+        callbacks.append(xdb.getCallbackRequests().toVariantList());
         emit callbackRequestsLoaded(xdb.getCallbackRequests().toVariantList());
     }
 
+    // pagination
     // wire delete and accept callback
     // show loading / hide loading when operation performed
     // clean the code as well
@@ -69,6 +72,10 @@ void AllRequestCallbacksPage::addNewItem(QVariant object)
 void AllRequestCallbacksPage::removeItem(int currentIndx)
 {
     if (currentIndx > -1) {
+        QVariant v = callbacks.at(currentIndx);
+        qInfo() << v.toJsonObject().value("_id");
+        emit showLoading(true);
+
         callbacks.removeAt(currentIndx);
         emit itemRemoved(currentIndx, callbacks);
     }

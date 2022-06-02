@@ -27,7 +27,7 @@ signals:
 
 private:
     bool check_internet_connection_in_loop_is_running = false;
-    int wait_seconds_ms = 3000;
+    int wait_seconds_ms = 10000;
     Timer timer;
 
 };

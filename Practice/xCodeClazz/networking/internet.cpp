@@ -19,8 +19,10 @@ void Internet::check_internet_connection_in_loop()
 
 void Internet::internetAvailable(std::function<void (bool)> response)
 {
+    QUrl url(pokeSite);
+    QNetworkRequest req(url);
+
     QNetworkAccessManager *man = new QNetworkAccessManager();
-    QNetworkRequest req(QUrl(unsecure_dns_live.toLatin1()));
     QNetworkReply *reply = man->get(req);
     QEventLoop loop;
 
