@@ -84,6 +84,14 @@ Page {
                     width: parent.width * .7
                     height: parent.height
                 }
+                ScrollBar.vertical: ScrollBar {
+                    id: scroll_handle
+                    onPositionChanged: {
+                        if (scroll_handle.position + scroll_handle.size == 1) {
+                            console.log("Reached Bottom")
+                        }
+                    }
+                }
 
                 Column {
                     topPadding: 20

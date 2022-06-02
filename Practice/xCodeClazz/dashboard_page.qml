@@ -71,6 +71,14 @@ Page {
                 Layout.fillWidth: true
                 height: parent.height
                 width: parent.width
+                ScrollBar.vertical: ScrollBar {
+                    id: scroll_handle
+                    onPositionChanged: {
+                        if (scroll_handle.position + scroll_handle.size == 1) {
+                            console.log("Reached Bottom")
+                        }
+                    }
+                }
 
                 Column {
                     clip: true

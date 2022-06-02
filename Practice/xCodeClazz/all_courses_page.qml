@@ -54,6 +54,14 @@ Page {
         onWidthChanged: {
             couses_list.width = width
         }
+        ScrollBar.vertical: ScrollBar {
+            id: scroll_handle
+            onPositionChanged: {
+                if (scroll_handle.position + scroll_handle.size == 1) {
+                    console.log("Reached Bottom")
+                }
+            }
+        }
 
         Column {
             id: couses_list

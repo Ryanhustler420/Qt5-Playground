@@ -53,6 +53,17 @@ Page {
             height: parent.height
         }
         model: callbacks_model
+        onMovementEnded: { }
+        onMovementStarted: { }
+        onContentYChanged: {
+            if ((taskScroll.position + taskScroll.size) == 1) {
+                console.log("fetch more data")
+                const oldPos = taskScroll.position
+                const oldSize = taskScroll.size
+                taskScroll.position = oldPos - taskScroll.position
+            }
+        }
+        ScrollBar.vertical: ScrollBar { id: taskScroll }
         delegate: Rectangle {
             width: callbacks_listview.width
             color: "transparent"
