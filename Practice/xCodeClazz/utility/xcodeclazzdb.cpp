@@ -39,6 +39,17 @@ bool XCodeClazzDB::saveCallbackRequests(const QJsonArray &o)
     x->save(doc, callback_requests);
 }
 
+bool XCodeClazzDB::deleteCallbackRequest(const QString &callbackRequestId)
+{
+    QJsonArray s = getCallbackRequests();
+    QJsonArray l;
+    for (int var = 0; var < s.size(); ++var) {
+        QJsonObject v = s.at(var).toObject();
+        if(!v.value("_id").toString().contains(callbackRequestId)) l.push_back(v);
+    }
+    return saveCallbackRequests(l);
+}
+
 QJsonArray XCodeClazzDB::getCallbackRequests()
 {
     return x->get(callback_requests).array();

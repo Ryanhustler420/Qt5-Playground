@@ -18,6 +18,8 @@ public:
     bool saveCallbackRequests(const QJsonArray &o);
     QJsonArray getCallbackRequests();
 
+    bool deleteCallbackRequest(const QString &requestCallbackId);
+
     // remove this document from that filed
     // saerch this document from that file
 

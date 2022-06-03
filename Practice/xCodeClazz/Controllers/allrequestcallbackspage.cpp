@@ -2,8 +2,9 @@
 
 AllRequestCallbacksPage::AllRequestCallbacksPage(QObject *parent) : QObject(parent)
 {
-    // ...
-    // hook listeners
+    Signals::instance().onInternetStatusRefresh([=](bool b){
+        qInfo() << b;
+    });
 }
 
 void AllRequestCallbacksPage::hold(QVariant o)
@@ -32,7 +33,6 @@ void AllRequestCallbacksPage::loadCallbackRequests()
                 emit showLoading(false);
             });
         } else {
-            qInfo() << "No internet connection";
             emit showLoading(false);
         }
     } else {
@@ -49,18 +49,10 @@ void AllRequestCallbacksPage::loadCallbackRequests()
                 qInfo() << error;
             });
         } else {
-            qInfo() << "No internet connection";
         }
-        // render those and fetch new request
         callbacks.append(xdb.getCallbackRequests().toVariantList());
         emit callbackRequestsLoaded(xdb.getCallbackRequests().toVariantList());
     }
-
-    // pagination
-    // wire delete and accept callback
-    // show loading / hide loading when operation performed
-    // clean the code as well
-    // task to be done,
 }
 
 void AllRequestCallbacksPage::addNewItem(QVariant object)
@@ -73,11 +65,39 @@ void AllRequestCallbacksPage::removeItem(int currentIndx)
 {
     if (currentIndx > -1) {
         QVariant v = callbacks.at(currentIndx);
-        qInfo() << v.toJsonObject().value("_id");
+        QString _id = v.toJsonObject().value("_id").toString();
         emit showLoading(true);
+        apis.callbackRequestDelete(_id, [=](QByteArray response){
+            QJsonObject o = QJsonDocument::fromJson(response).object();
+            if (xdb.deleteCallbackRequest(_id)){
+                callbacks.removeAt(currentIndx);
+                emit showLoading(false);
+                emit itemRemoved(currentIndx, callbacks);
+            }
+        }, [=](QByteArray error){
+            emit showLoading(false);
+            qInfo() << error;
+        });
+    }
+}
 
-        callbacks.removeAt(currentIndx);
-        emit itemRemoved(currentIndx, callbacks);
+void AllRequestCallbacksPage::acceptItem(int currentIndx)
+{
+    if (currentIndx > -1) {
+        QVariant v = callbacks.at(currentIndx);
+        QString _id = v.toJsonObject().value("_id").toString();
+        emit showLoading(true);
+        apis.callbackRequestDelete(_id, [=](QByteArray response){
+            QJsonObject o = QJsonDocument::fromJson(response).object();
+            if (xdb.deleteCallbackRequest(_id)){
+                callbacks.removeAt(currentIndx);
+                emit showLoading(false);
+                emit itemRemoved(currentIndx, callbacks);
+            }
+        }, [=](QByteArray error){
+            emit showLoading(false);
+            qInfo() << error;
+        });
     }
 }
 

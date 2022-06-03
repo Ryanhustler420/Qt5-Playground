@@ -11,6 +11,7 @@
 #include "application/manager.h"
 #include "utility/jsonhelper.h"
 #include "networking/apis.h"
+#include "rx/signals.h"
 
 class AllRequestCallbacksPage : public QObject
 {
@@ -23,6 +24,7 @@ public:
 
     Q_INVOKABLE void addNewItem(QVariant object);
     Q_INVOKABLE void removeItem(int currentIndx);
+    Q_INVOKABLE void acceptItem(int currentIndx);
     Q_INVOKABLE QVariant get(int i);
     Q_INVOKABLE void removeAll();
 

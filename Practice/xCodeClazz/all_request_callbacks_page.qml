@@ -110,7 +110,7 @@ Page {
                         enabled: `${isReviewed}`
                         highlighted: true
                         Material.background: Material.Green
-                        onClicked: page_controller.removeItem(index);
+                        onClicked: page_controller.acceptItem(index);
                     }
 
                 }

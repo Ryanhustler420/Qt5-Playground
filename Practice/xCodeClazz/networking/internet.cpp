@@ -1,8 +1,10 @@
 #include "networking/internet.h"
 
-Internet::Internet(CommonSuperClass *parent) : CommonSuperClass(parent)
+Internet::Internet(QObject *parent) : QObject(parent)
 {
-
+    internetAvailable([=](bool b){
+        emit Signals::instance().internetStatusRefreshed(b);
+    });
 }
 
 void Internet::check_internet_connection_in_loop()

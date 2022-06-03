@@ -27,12 +27,13 @@ int main(int argc, char *argv[])
     application.boot(app);
 
     // Check internet in loop
-    Internet i;
-    i.setCheck_internet_connection_in_loop_is_running(true);
-    i.check_internet_connection_in_loop();
     Signals::instance().onInternetStatusRefresh([=](bool status){
         Manager::instance().setIsInternetPresent(status);
     });
+
+    Internet i;
+    i.setCheck_internet_connection_in_loop_is_running(true);
+    i.check_internet_connection_in_loop();
 
     return app.exec();
 }

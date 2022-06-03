@@ -1,8 +1,6 @@
 #ifndef INTERNET_H
 #define INTERNET_H
 
-#include "parents/commonsuperclass.h"
-
 #include "rx/signals.h"
 #include "utility/timer.h"
 #include "shareable/constants.h"
@@ -12,11 +10,11 @@
 #include <QNetworkReply>
 #include <QEventLoop>
 
-class Internet : public CommonSuperClass
+class Internet : public QObject
 {
     Q_OBJECT
 public:
-    explicit Internet(CommonSuperClass *parent = nullptr);
+    explicit Internet(QObject *parent = nullptr);
 
     void check_internet_connection_in_loop();
     void internetAvailable(std::function<void(bool)> response);
