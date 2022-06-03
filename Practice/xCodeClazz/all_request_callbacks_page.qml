@@ -11,6 +11,8 @@ Page {
     Layout.fillWidth: true
     title: qsTr("xCodeClazz")
 
+    FontLoader { id:mainFont; source:"qrc:/assets/assets/encode-sans/EncodeSans-ExtraLight.ttf" }
+
     header: Item {
         height: 70
         width: parent.width
@@ -36,6 +38,19 @@ Page {
             }
         }
 
+    }
+
+    Label {
+        id: nothing_found_label
+        property string weight
+        text: "Nothing Found Here"
+        padding: 15
+        visible: callbacks_listview.count == 0
+        font {
+            styleName: weight
+            family: mainFont.name
+            pointSize: 25
+        }
     }
 
     ListModel { id: callbacks_model }
@@ -166,3 +181,9 @@ Page {
     }
 
 }
+
+/*##^##
+Designer {
+    D{i:0;autoSize:true;formeditorZoom:0.01;height:480;width:640}
+}
+##^##*/

@@ -2,9 +2,9 @@
 
 AllRequestCallbacksPage::AllRequestCallbacksPage(QObject *parent) : QObject(parent)
 {
-    Signals::instance().onInternetStatusRefresh([=](bool b){
+    /*Signals::instance().onInternetStatusRefresh([=](bool b){
         qInfo() << b;
-    });
+    });*/
 }
 
 void AllRequestCallbacksPage::hold(QVariant o)

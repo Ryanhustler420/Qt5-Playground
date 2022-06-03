@@ -19,4 +19,53 @@
         <file>aboutQtIcon.png</file>
         <file>favicon.ico</file>
     </qresource>
+    <qresource prefix="/assets">
+        <file>assets/encode-sans/EncodeSans-Black.ttf</file>
+        <file>assets/encode-sans/EncodeSans-Bold.ttf</file>
+        <file>assets/encode-sans/EncodeSansCondensed-Black.ttf</file>
+        <file>assets/encode-sans/EncodeSansCondensed-Bold.ttf</file>
+        <file>assets/encode-sans/EncodeSansCondensed-ExtraBold.ttf</file>
+        <file>assets/encode-sans/EncodeSansCondensed-ExtraLight.ttf</file>
+        <file>assets/encode-sans/EncodeSansCondensed-Light.ttf</file>
+        <file>assets/encode-sans/EncodeSansCondensed-Medium.ttf</file>
+        <file>assets/encode-sans/EncodeSansCondensed-Regular.ttf</file>
+        <file>assets/encode-sans/EncodeSansCondensed-SemiBold.ttf</file>
+        <file>assets/encode-sans/EncodeSansCondensed-Thin.ttf</file>
+        <file>assets/encode-sans/EncodeSansExpanded-Black.ttf</file>
+        <file>assets/encode-sans/EncodeSansExpanded-Bold.ttf</file>
+        <file>assets/encode-sans/EncodeSansExpanded-ExtraBold.ttf</file>
+        <file>assets/encode-sans/EncodeSansExpanded-ExtraLight.ttf</file>
+        <file>assets/encode-sans/EncodeSansExpanded-Light.ttf</file>
+        <file>assets/encode-sans/EncodeSansExpanded-Medium.ttf</file>
+        <file>assets/encode-sans/EncodeSansExpanded-Regular.ttf</file>
+        <file>assets/encode-sans/EncodeSansExpanded-SemiBold.ttf</file>
+        <file>assets/encode-sans/EncodeSansExpanded-Thin.ttf</file>
+        <file>assets/encode-sans/EncodeSans-ExtraBold.ttf</file>
+        <file>assets/encode-sans/EncodeSans-ExtraLight.ttf</file>
+        <file>assets/encode-sans/EncodeSans-Light.ttf</file>
+        <file>assets/encode-sans/EncodeSans-Medium.ttf</file>
+        <file>assets/encode-sans/EncodeSans-Regular.ttf</file>
+        <file>assets/encode-sans/EncodeSans-SemiBold.ttf</file>
+        <file>assets/encode-sans/EncodeSansSemiCondensed-Black.ttf</file>
+        <file>assets/encode-sans/EncodeSansSemiCondensed-Bold.ttf</file>
+        <file>assets/encode-sans/EncodeSansSemiCondensed-ExtraBold.ttf</file>
+        <file>assets/encode-sans/EncodeSansSemiCondensed-ExtraLight.ttf</file>
+        <file>assets/encode-sans/EncodeSansSemiCondensed-Light.ttf</file>
+        <file>assets/encode-sans/EncodeSansSemiCondensed-Medium.ttf</file>
+        <file>assets/encode-sans/EncodeSansSemiCondensed-Regular.ttf</file>
+        <file>assets/encode-sans/EncodeSansSemiCondensed-SemiBold.ttf</file>
+        <file>assets/encode-sans/EncodeSansSemiCondensed-Thin.ttf</file>
+        <file>assets/encode-sans/EncodeSansSemiExpanded-Black.ttf</file>
+        <file>assets/encode-sans/EncodeSansSemiExpanded-Bold.ttf</file>
+        <file>assets/encode-sans/EncodeSansSemiExpanded-ExtraBold.ttf</file>
+        <file>assets/encode-sans/EncodeSansSemiExpanded-ExtraLight.ttf</file>
+        <file>assets/encode-sans/EncodeSansSemiExpanded-Light.ttf</file>
+        <file>assets/encode-sans/EncodeSansSemiExpanded-Medium.ttf</file>
+        <file>assets/encode-sans/EncodeSansSemiExpanded-Regular.ttf</file>
+        <file>assets/encode-sans/EncodeSansSemiExpanded-SemiBold.ttf</file>
+        <file>assets/encode-sans/EncodeSansSemiExpanded-Thin.ttf</file>
+        <file>assets/encode-sans/EncodeSans-Thin.ttf</file>
+        <file>assets/encode-sans/README.txt</file>
+        <file>assets/encode-sans/SIL Open Font License.txt</file>
+    </qresource>
 </RCC>

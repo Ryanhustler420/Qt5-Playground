@@ -10,6 +10,55 @@ ApplicationWindow {
     title: qsTr("xCodeClazz")
     // flags: Qt.FramelessWindowHint | Qt.Window
 
+    FontLoader { source:"qrc:/assets/assets/encode-sans/EncodeSans-Black.ttf" }
+    FontLoader { source:"qrc:/assets/assets/encode-sans/EncodeSans-Bold.ttf" }
+    FontLoader { source:"qrc:/assets/assets/encode-sans/EncodeSans-ExtraBold.ttf" }
+    FontLoader { source:"qrc:/assets/assets/encode-sans/EncodeSans-Light.ttf" }
+    FontLoader { source:"qrc:/assets/assets/encode-sans/EncodeSans-Medium.ttf" }
+    FontLoader { source:"qrc:/assets/assets/encode-sans/EncodeSans-Regular.ttf" }
+    FontLoader { source:"qrc:/assets/assets/encode-sans/EncodeSans-SemiBold.ttf" }
+    FontLoader { source:"qrc:/assets/assets/encode-sans/EncodeSans-Thin.ttf" }
+
+    FontLoader { source:"qrc:/assets/assets/encode-sans/EncodeSansCondensed-Black.ttf" }
+    FontLoader { source:"qrc:/assets/assets/encode-sans/EncodeSansCondensed-Bold.ttf" }
+    FontLoader { source:"qrc:/assets/assets/encode-sans/EncodeSansCondensed-ExtraBold.ttf" }
+    FontLoader { source:"qrc:/assets/assets/encode-sans/EncodeSansCondensed-ExtraLight.ttf" }
+    FontLoader { source:"qrc:/assets/assets/encode-sans/EncodeSansCondensed-Light.ttf" }
+    FontLoader { source:"qrc:/assets/assets/encode-sans/EncodeSansCondensed-Medium.ttf" }
+    FontLoader { source:"qrc:/assets/assets/encode-sans/EncodeSansCondensed-Regular.ttf" }
+    FontLoader { source:"qrc:/assets/assets/encode-sans/EncodeSansCondensed-SemiBold.ttf" }
+    FontLoader { source:"qrc:/assets/assets/encode-sans/EncodeSansCondensed-Thin.ttf" }
+
+    FontLoader { source:"qrc:/assets/assets/encode-sans/EncodeSansExpanded-Black.ttf" }
+    FontLoader { source:"qrc:/assets/assets/encode-sans/EncodeSansExpanded-Bold.ttf" }
+    FontLoader { source:"qrc:/assets/assets/encode-sans/EncodeSansExpanded-ExtraBold.ttf" }
+    FontLoader { source:"qrc:/assets/assets/encode-sans/EncodeSansExpanded-ExtraLight.ttf" }
+    FontLoader { source:"qrc:/assets/assets/encode-sans/EncodeSansExpanded-Light.ttf" }
+    FontLoader { source:"qrc:/assets/assets/encode-sans/EncodeSansExpanded-Medium.ttf" }
+    FontLoader { source:"qrc:/assets/assets/encode-sans/EncodeSansExpanded-Regular.ttf" }
+    FontLoader { source:"qrc:/assets/assets/encode-sans/EncodeSansExpanded-SemiBold.ttf" }
+    FontLoader { source:"qrc:/assets/assets/encode-sans/EncodeSansExpanded-Thin.ttf" }
+
+    FontLoader { source:"qrc:/assets/assets/encode-sans/EncodeSansSemiCondensed-Black.ttf" }
+    FontLoader { source:"qrc:/assets/assets/encode-sans/EncodeSansSemiCondensed-Bold.ttf" }
+    FontLoader { source:"qrc:/assets/assets/encode-sans/EncodeSansSemiCondensed-ExtraBold.ttf" }
+    FontLoader { source:"qrc:/assets/assets/encode-sans/EncodeSansSemiCondensed-ExtraLight.ttf" }
+    FontLoader { source:"qrc:/assets/assets/encode-sans/EncodeSansSemiCondensed-Light.ttf" }
+    FontLoader { source:"qrc:/assets/assets/encode-sans/EncodeSansSemiCondensed-Medium.ttf" }
+    FontLoader { source:"qrc:/assets/assets/encode-sans/EncodeSansSemiCondensed-Regular.ttf" }
+    FontLoader { source:"qrc:/assets/assets/encode-sans/EncodeSansSemiCondensed-SemiBold.ttf" }
+    FontLoader { source:"qrc:/assets/assets/encode-sans/EncodeSansSemiCondensed-Thin.ttf" }
+
+    FontLoader { source:"qrc:/assets/assets/encode-sans/EncodeSansSemiExpanded-Black.ttf" }
+    FontLoader { source:"qrc:/assets/assets/encode-sans/EncodeSansSemiExpanded-Bold.ttf" }
+    FontLoader { source:"qrc:/assets/assets/encode-sans/EncodeSansSemiExpanded-ExtraBold.ttf" }
+    FontLoader { source:"qrc:/assets/assets/encode-sans/EncodeSansSemiExpanded-ExtraLight.ttf" }
+    FontLoader { source:"qrc:/assets/assets/encode-sans/EncodeSansSemiExpanded-Light.ttf" }
+    FontLoader { source:"qrc:/assets/assets/encode-sans/EncodeSansSemiExpanded-Medium.ttf" }
+    FontLoader { source:"qrc:/assets/assets/encode-sans/EncodeSansSemiExpanded-Regular.ttf" }
+    FontLoader { source:"qrc:/assets/assets/encode-sans/EncodeSansSemiExpanded-SemiBold.ttf" }
+    FontLoader { source:"qrc:/assets/assets/encode-sans/EncodeSansSemiExpanded-Thin.ttf" }
+
     StackView {
         id: stackview
         anchors.fill: parent

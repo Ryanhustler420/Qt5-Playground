@@ -72,6 +72,7 @@ Page {
                 height: parent.height
                 width: parent.width
                 ScrollBar.vertical: ScrollBar {
+                    height: 0
                     id: scroll_handle
                     onPositionChanged: {
                         if (scroll_handle.position + scroll_handle.size == 1) {
