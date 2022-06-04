@@ -7,6 +7,7 @@
 #include <QQmlApplicationEngine>
 
 #include "application/manager.h"
+#include "shareable/assets.h"
 
 #include "controllers/loginpagecontroller.h"
 #include "controllers/dashboardpagecontroller.h"

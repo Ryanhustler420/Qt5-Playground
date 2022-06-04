@@ -11,37 +11,30 @@ class XCodeClazzDB : public OSingleton<XCodeClazzDB>
 public:
     explicit XCodeClazzDB(QObject *parent = nullptr);
 
+    bool login_file();
     bool saveLoginDetails(const QString &username, const QString &password);
     bool isPasswordMatched(const QString &username, const QString &password);
     QString getPassword(const QString &username);
 
+    bool callbackRequest_file();
+    bool saveCallbackRequest(const QJsonObject &o);
     bool saveCallbackRequests(const QJsonArray &o);
     QJsonArray getCallbackRequests();
+    QJsonObject getCallbackRequest(const QString &requestCallbackId);
 
     bool deleteCallbackRequest(const QString &requestCallbackId);
+    bool deleteCallbackRequests();
 
-    // remove this document from that filed
-    // saerch this document from that file
+    bool student_file();
+    bool saveStudent(const QJsonObject &o);
+    bool saveStudents(const QJsonArray &o);
+    QJsonArray getStudents();
+    QJsonObject getStudent(const QString &studentId);
 
-    // saveCallbackRequests(QVariantList list); // convert that into json first and then save into file
-    // saveCallbackRequest(QVariant o);
-
-    // QVariant getCallbackRequest()
-    // QVariantList getCallbackRequests()
-    // QVariant getCallbackRequestById(QString id)
-
-    // bool deleteAllCallbackRequests()
-    // bool deleteCallbackRequest(QVariant o)
-    // bool containCallbackRequest(QVariant o)
+    bool deleteStudent(const QString &studentId);
+    bool deleteStudents();
 
     // courses
-    // students
-
-    // JSON Helper
-    // QJsonObject findKey(JsonObject, key)
-    // QJsonObject findKey(JsonArray, key)
-    // QJsonObject index(JsonArray, index)
-    // void deleteJsonObjectAt(JsonArray, index)
 
 signals:
 
@@ -51,6 +44,7 @@ private:
     // files
     QString const app_name = "xcodeclazz";
     QString const login_json = app_name + "_" + "login.json";
+    QString const students = app_name + "_" + "students.json";
     QString const callback_requests = app_name + "_" + "callback_requests.json";
 
 };

@@ -19,6 +19,7 @@ QUrl Routes::get_api_xcodeclazz_request_callbacks() const { return *enums->_urls
 QUrl Routes::post_api_xcodeclazz_request_callback() const { return *enums->_urls.POST_API_XCODECLAZZ_REQUEST_CALLBACK; }
 QUrl Routes::post_api_xcodeclazz_request_callback_create() const { return *enums->_urls.POST_API_XCODECLAZZ_REQUEST_CALLBACK_CREATE; }
 QUrl Routes::post_api_xcodeclazz_request_callback_delete() const { return *enums->_urls.POST_API_XCODECLAZZ_REQUEST_CALLBACK_DELETE; }
+QUrl Routes::post_api_xcodeclazz_request_callback_delete_all() const { return *enums->_urls.POST_API_XCODECLAZZ_REQUEST_CALLBACK_DELETE_ALL; }
 
 QUrl Routes::get_api_xcodeclazz_courses() const { return *enums->_urls.GET_API_XCODECLAZZ_COURSES; }
 QUrl Routes::post_api_xcodeclazz_course() const { return *enums->_urls.POST_API_XCODECLAZZ_COURSE; }

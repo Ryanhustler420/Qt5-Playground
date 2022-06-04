@@ -2,9 +2,7 @@
 
 AllRequestCallbacksPage::AllRequestCallbacksPage(QObject *parent) : QObject(parent)
 {
-    /*Signals::instance().onInternetStatusRefresh([=](bool b){
-        qInfo() << b;
-    });*/
+    // [signals] if any
 }
 
 void AllRequestCallbacksPage::hold(QVariant o)
@@ -14,7 +12,7 @@ void AllRequestCallbacksPage::hold(QVariant o)
 
 void AllRequestCallbacksPage::loadCallbackRequests()
 {
-    if (xdb.getCallbackRequests().isEmpty()) {
+    if (!xdb.callbackRequest_file() || xdb.getCallbackRequests().isEmpty()) {
         if (Manager::instance().getIsInternetPresent()) {
             emit showLoading(true);
             apis.getRequestCallbacks([=](QByteArray response){
@@ -108,6 +106,16 @@ QVariant AllRequestCallbacksPage::get(int i)
 
 void AllRequestCallbacksPage::removeAll()
 {
-    callbacks.clear();
-    emit allItemRemoved();
+    emit showLoading(true);
+    apis.callbackRequestDeleteAll([=](QByteArray response){
+        QJsonObject o = QJsonDocument::fromJson(response).object();
+        if (xdb.deleteStudents()) {
+            callbacks.clear();
+            emit allItemRemoved();
+            emit showLoading(false);
+        }
+    }, [=](QByteArray error){
+        emit showLoading(false);
+        qInfo() << error;
+    });
 }

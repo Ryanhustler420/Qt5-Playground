@@ -2,8 +2,10 @@
 
 Application::Application(QObject *parent) : QObject(parent)
 {
+    Assets *a = new Assets();
     // Same Instace Binding Between Different Component/Pages
     engine.rootContext()->setContextProperty("application", this);
+    engine.rootContext()->setContextProperty("assets", a);
 
     // register all the controllers here if you do not want binding of two different component
     qmlRegisterType<LoginPageController>("com.xcodeclazz.loginpagecontroller", 1, 0, "LoginPageController");

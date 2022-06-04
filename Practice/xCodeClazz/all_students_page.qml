@@ -10,9 +10,7 @@ Page {
     Layout.fillWidth: true
     title: qsTr("xCodeClazz")
 
-    Component.onCompleted: {
-        page_controller.getStudentsList();
-    }
+    FontLoader { id: mainFont; source: assets.getEncodeSans_ExtraLight() }
 
     header: Item {
         height: 70
@@ -38,6 +36,19 @@ Page {
 
     }
 
+    Label {
+        id: nothing_found_label
+        property string weight
+        text: "No Student Found"
+        padding: 10
+        visible: students_listview.count == 0
+        font {
+            styleName: weight
+            family: mainFont.name
+            pointSize: 25
+        }
+    }
+
     Row {
         clip: true
         width: parent.width
@@ -47,17 +58,21 @@ Page {
             height: parent.height
         }
 
+        ListModel { id: students_model }
         ListView {
+            id: students_listview
             clip: true
             leftMargin: 10
             topMargin: 10
             spacing: 10
             height: parent.height
-            width: parent.width * (searchFieldEmpty() ? 1.0 : 0.4)
+            width: parent.width * (isPreviewStudent() ? 0.4 : 1.0)
+            highlightFollowsCurrentItem: true
             onWidthChanged: {
                 height: parent.height
-                width: parent.width * (searchFieldEmpty() ? 1.0 : 0.4)
+                width: parent.width * (isPreviewStudent() ? 0.4 : 1.0)
             }
+            model: students_model
             onMovementEnded: { }
             onMovementStarted: { }
             onContentYChanged: {
@@ -69,39 +84,6 @@ Page {
                 }
             }
             ScrollBar.vertical: ScrollBar { id: taskScroll }
-            model: ListModel {
-
-                ListElement {
-                    name: "Gaurav Kumar Gupta"
-                    school: "KPS Gamharia"
-                    std: "10"
-                }
-
-                ListElement {
-                    name: "Gaurav Kumar Gupta"
-                    school: "KPS Gamharia"
-                    std: "10"
-                }
-
-                ListElement {
-                    name: "Gaurav Kumar Gupta"
-                    school: "KPS Gamharia"
-                    std: "10"
-                }
-
-                ListElement {
-                    name: "Gaurav Kumar Gupta"
-                    school: "KPS Gamharia"
-                    std: "10"
-                }
-
-                ListElement {
-                    name: "Gaurav Kumar Gupta"
-                    school: "KPS Gamharia"
-                    std: "10"
-                }
-
-            }
             delegate: Component {
                 Item {
                     width: parent.width
@@ -149,7 +131,7 @@ Page {
 
         ScrollView {
             clip: true
-            visible: !searchFieldEmpty()
+            visible: (students_listview.count > 0 && isPreviewStudent())
             Layout.fillHeight: true
             Layout.fillWidth: true
             width: parent.width * 0.6
@@ -417,13 +399,34 @@ Page {
 
     AllStudentsPageController {
         id: page_controller
-        onStudentList: {
-            console.log(JSON.parse(list[0]).name);
+        onShowLoading: {
+            if (b) {
+                popup.open()
+            } else {
+                popup.close()
+            }
         }
+        onStudentsLoaded: {
+            add_to_model(students, students_model);
+        }
+    }
+
+    Component.onCompleted: {
+        page_controller.loadStudents();
+    }
+
+    function isPreviewStudent() {
+        return true;
     }
 
     function searchFieldEmpty() {
         return search_field.text.length == 0;
+    }
+
+    function add_to_model(dataArray, model_id) {
+        for(let i = 0; i < dataArray.length; i++) {
+            model_id.append(JSON.parse(JSON.stringify(dataArray[i])))
+        }
     }
 
 }

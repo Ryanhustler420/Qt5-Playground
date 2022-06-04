@@ -11,7 +11,7 @@ Page {
     Layout.fillWidth: true
     title: qsTr("xCodeClazz")
 
-    FontLoader { id:mainFont; source:"qrc:/assets/assets/encode-sans/EncodeSans-ExtraLight.ttf" }
+    FontLoader { id: mainFont; source: assets.getEncodeSans_ExtraLight() }
 
     header: Item {
         height: 70
@@ -34,7 +34,6 @@ Page {
             anchors.verticalCenter: parent.verticalCenter
             onActivated: {
                 page_controller.removeAll()
-                application.pop()
             }
         }
 
@@ -53,83 +52,89 @@ Page {
         }
     }
 
-    ListModel { id: callbacks_model }
-    ListView {
-        id: callbacks_listview
-        clip: true
-        spacing: 10
-        topMargin: 15
-        leftMargin: 15
+    ScrollView {
         width: parent.width
         height: parent.height
-        highlightFollowsCurrentItem: true
-        onWidthChanged: {
+        padding: 10
+
+        ListModel { id: callbacks_model }
+        ListView {
+            id: callbacks_listview
+            clip: true
+            spacing: 10
             width: parent.width
             height: parent.height
-        }
-        model: callbacks_model
-        onMovementEnded: { }
-        onMovementStarted: { }
-        onContentYChanged: {
-            if ((taskScroll.position + taskScroll.size) == 1) {
-                console.log("fetch more data")
-                const oldPos = taskScroll.position
-                const oldSize = taskScroll.size
-                taskScroll.position = oldPos - taskScroll.position
-            }
-        }
-        ScrollBar.vertical: ScrollBar { id: taskScroll }
-        delegate: Rectangle {
-            width: callbacks_listview.width
-            color: "transparent"
-            height: 70
-
-            Row {
+            highlightFollowsCurrentItem: true
+            onWidthChanged: {
                 width: parent.width
-
-                Column {
-                    width: parent.width * .8
-
-                    Label {
-                        text: `${name}`
-                        font.pointSize: 20
-                        font.bold: false
-                    }
-
-                    Label {
-                        color: "grey"
-                        text: `${ALTcourse.session.starts} - ${ALTcourse.session.ends}`
-                        font.bold: true
-                        font.pointSize: 10
-                    }
-
-                    Label {
-                        text: `${school} • ${phone}`
-                    }
+                height: parent.height
+            }
+            model: callbacks_model
+            onMovementEnded: { }
+            onMovementStarted: { }
+            onContentYChanged: {
+                if ((taskScroll.position + taskScroll.size) == 1) {
+                    console.log("fetch more data")
+                    const oldPos = taskScroll.position
+                    const oldSize = taskScroll.size
+                    taskScroll.position = oldPos - taskScroll.position
                 }
+            }
+            ScrollBar.vertical: ScrollBar { id: taskScroll }
+            delegate: Rectangle {
+                width: callbacks_listview.width
+                color: "transparent"
+                height: 70
 
                 Row {
-                    anchors.verticalCenter: parent.verticalCenter
-                    width: parent.width * .2
-                    spacing: 5
+                    width: parent.width
 
-                    Button {
-                        text: `Delete`
-                        highlighted: true
-                        Material.background: Material.Red
-                        onClicked: page_controller.removeItem(index);
+                    Column {
+                        width: parent.width * .8
+
+                        Label {
+                            text: `${name}`
+                            font.pointSize: 20
+                            font.bold: false
+                        }
+
+                        Label {
+                            color: "grey"
+                            text: `${ALTcourse.session.starts} - ${ALTcourse.session.ends}`
+                            font.bold: true
+                            font.pointSize: 10
+                        }
+
+                        Label {
+                            text: `${school} • ${phone}`
+                        }
                     }
 
-                    Button {
-                        text: `Accept`
-                        enabled: `${isReviewed}`
-                        highlighted: true
-                        Material.background: Material.Green
-                        onClicked: page_controller.acceptItem(index);
+                    Row {
+                        id: cta_row
+                        spacing: 5
+                        width: parent.width * .2
+                        layoutDirection: Qt.RightToLeft
+                        anchors.verticalCenter: parent.verticalCenter
+
+                        Button {
+                            text: `Delete`
+                            highlighted: true
+                            Material.background: Material.Red
+                            onClicked: page_controller.removeItem(index);
+                        }
+
+                        Button {
+                            text: `Accept`
+                            enabled: `${isReviewed}`
+                            highlighted: true
+                            Material.background: Material.Green
+                            onClicked: page_controller.acceptItem(index);
+                        }
+
                     }
 
                 }
-
             }
         }
     }
@@ -159,6 +164,7 @@ Page {
         }
         onAllItemRemoved: {
             callbacks_model.clear()
+            application.pop()
         }
         onItemRemoved: {
             callbacks_model.remove(currentIndex)
@@ -170,9 +176,7 @@ Page {
             callbacks_model.append(objects.map(e => JSON.parse(e)));
         }
         onCallbackRequestsLoaded: {
-            for(let i = 0; i < callbacks.length; i++) {
-                callbacks_model.append(JSON.parse(JSON.stringify(callbacks[i])))
-            }
+            add_to_model(callbacks, callbacks_model)
         }
     }
 
@@ -180,10 +184,10 @@ Page {
         page_controller.loadCallbackRequests();
     }
 
-}
+    function add_to_model(dataArray, model_id) {
+        for(let i = 0; i < dataArray.length; i++) {
+            model_id.append(JSON.parse(JSON.stringify(dataArray[i])))
+        }
+    }
 
-/*##^##
-Designer {
-    D{i:0;autoSize:true;formeditorZoom:0.01;height:480;width:640}
 }
-##^##*/

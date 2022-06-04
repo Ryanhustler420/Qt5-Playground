@@ -31,6 +31,7 @@ public:
         QUrl *POST_API_XCODECLAZZ_REQUEST_CALLBACK = new QUrl(host + "/api/xcodeclazz/request_callback");
         QUrl *POST_API_XCODECLAZZ_REQUEST_CALLBACK_CREATE = new QUrl(host + "/api/xcodeclazz/request_callback/create");
         QUrl *POST_API_XCODECLAZZ_REQUEST_CALLBACK_DELETE = new QUrl(host + "/api/xcodeclazz/request_callback/delete");
+        QUrl *POST_API_XCODECLAZZ_REQUEST_CALLBACK_DELETE_ALL = new QUrl(host + "/api/xcodeclazz/request_callback/delete/all");
 
         QUrl *GET_API_XCODECLAZZ_COURSES = new QUrl(host + "/api/xcodeclazz/courses");
         QUrl *POST_API_XCODECLAZZ_COURSE = new QUrl(host + "/api/xcodeclazz/course");
@@ -63,6 +64,7 @@ public:
     QUrl post_api_xcodeclazz_request_callback() const;
     QUrl post_api_xcodeclazz_request_callback_create() const;
     QUrl post_api_xcodeclazz_request_callback_delete() const;
+    QUrl post_api_xcodeclazz_request_callback_delete_all() const;
 
     QUrl get_api_xcodeclazz_courses() const;
     QUrl post_api_xcodeclazz_course() const;

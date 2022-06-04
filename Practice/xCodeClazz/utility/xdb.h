@@ -13,6 +13,7 @@ public:
     bool save(QJsonDocument doc, const QString &file_name);
     QJsonDocument get(const QString &file_name);
     bool remove(const QString &file_name);
+    bool present(const QString &file_name);
 
 signals:
 

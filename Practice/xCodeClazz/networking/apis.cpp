@@ -284,6 +284,24 @@ void Apis::callbackRequestDelete(const QString &requestCallbackId, std::function
     });
 }
 
+void Apis::callbackRequestDeleteAll(std::function<void (QByteArray)> response, std::function<void (QByteArray)> error)
+{
+    clearResponse();
+    QJsonObject mainObject;
+
+    QJsonDocument jsonDoc;
+    jsonDoc.setObject(mainObject);
+
+    QNetworkRequest request(routes->post_api_xcodeclazz_request_callback_delete_all());
+    request.setHeader(QNetworkRequest::ContentTypeHeader, enums->_raw_headers.application_json);
+    QNetworkReply *mNetReply = mNetMan->post(request, jsonDoc.toJson());
+
+    connect(mNetReply, &QIODevice::readyRead, this, [=]() { mDataBuffer->append(mNetReply->readAll()); });
+    connect(mNetReply, &QNetworkReply::finished, this, [=](){
+        handleAllStatusCode(mNetReply, [=](/*OK*/){ response(*mDataBuffer); }, [=](/*ERROR*/){ error(mNetReply->errorString().toLatin1()); });
+    });
+}
+
 void Apis::getCourses(std::function<void(QByteArray)> response, std::function<void(QByteArray)> error)
 {
     clearResponse();

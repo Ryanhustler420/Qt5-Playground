@@ -19,3 +19,8 @@ bool xDB::remove(const QString &file_name)
 {
     return fs->deleteFile(file_name);
 }
+
+bool xDB::present(const QString &file_name)
+{
+    return fs->fileExist(file_name);
+}

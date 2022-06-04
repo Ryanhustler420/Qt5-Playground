@@ -27,6 +27,7 @@ public:
     void getRequestCallback(const QString &requestCallbackId, std::function<void(QByteArray)> response, std::function<void(QByteArray)> error);
     void callbackRequestCreate(const QString &courseId, const QString &name, const QString &phone, const QString &school, std::function<void(QByteArray)> response, std::function<void(QByteArray)> error);
     void callbackRequestDelete(const QString &requestCallbackId, std::function<void(QByteArray)> response, std::function<void(QByteArray)> error);
+    void callbackRequestDeleteAll(std::function<void(QByteArray)> response, std::function<void(QByteArray)> error);
     void getCourses(std::function<void(QByteArray)> response, std::function<void(QByteArray)> error);
     void getCourse(const QString &courseId, std::function<void(QByteArray)> response, std::function<void(QByteArray)> error);
     void createCourse(const QString &title, const QString &subtitle, const QString &duration, const QString &thumbnailUrl, const QString &imageContainer, QList<QString> &features, float price, bool hasActive, int spaceLeft, int spaceFull, const QString &starts, const QString &ends, std::function<void(QByteArray)> response, std::function<void(QByteArray)> error);

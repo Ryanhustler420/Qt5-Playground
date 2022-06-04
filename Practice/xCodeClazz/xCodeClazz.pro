@@ -26,6 +26,7 @@ SOURCES += \
     models/payment.cpp \
     models/student.cpp \
     models/timeslot.cpp \
+    shareable/assets.cpp \
     utility/filesystembroadcaster.cpp \
     models/god/modelconventions.cpp \
     parents/commonsuperclass.cpp \
@@ -99,6 +100,7 @@ HEADERS += \
     models/payment.h \
     models/student.h \
     models/timeslot.h \
+    shareable/assets.h \
     utility/filesystembroadcaster.h \
     models/god/modelconventions.h \
     parents/commonsuperclass.h \
