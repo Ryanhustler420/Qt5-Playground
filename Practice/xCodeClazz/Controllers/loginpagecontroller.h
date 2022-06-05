@@ -5,6 +5,9 @@
 #include <QDebug>
 #include <QTimer>
 
+#include "utility/xcodeclazzdb.h"
+#include "application/manager.h"
+#include "utility/jsonhelper.h"
 #include "oauth/googleoauth.h"
 #include "networking/apis.h"
 #include "server/server.h"
@@ -23,10 +26,13 @@ signals:
     void userAuthenticated(bool isAuthenticated);
     void loginSucced();
     void loginFailed();
+    void googleOauthSucced();
+    void googleOauthFailed();
 
 private:
     Apis apis;
     Server server;
+    XCodeClazzDB xdb;
     GoogleOAuth google_oauth;
 
 };

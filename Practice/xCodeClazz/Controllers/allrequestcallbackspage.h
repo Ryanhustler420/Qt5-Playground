@@ -41,9 +41,9 @@ signals:
     void allItemRemoved();
 
 private:
-    QVariantList callbacks;
-    XCodeClazzDB xdb;
     Apis apis;
+    XCodeClazzDB xdb;
+    QVariantList callbacks;
 
 };
 

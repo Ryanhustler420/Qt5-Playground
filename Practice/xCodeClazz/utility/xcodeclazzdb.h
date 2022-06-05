@@ -12,9 +12,9 @@ public:
     explicit XCodeClazzDB(QObject *parent = nullptr);
 
     bool login_file();
-    bool saveLoginDetails(const QString &username, const QString &password);
-    bool isPasswordMatched(const QString &username, const QString &password);
-    QString getPassword(const QString &username);
+    bool saveLoginDetails(const QJsonObject &o);
+    QJsonObject getLoginDetails();
+    bool deleteLoginDetails();
 
     bool callbackRequest_file();
     bool saveCallbackRequest(const QJsonObject &o);

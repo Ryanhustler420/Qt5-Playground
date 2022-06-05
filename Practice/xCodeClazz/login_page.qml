@@ -10,11 +10,6 @@ Page {
     Layout.fillWidth: true
     title: qsTr("xCodeClazz")
 
-    Component.onCompleted: {
-        popup.open()
-        page_controller.checkAuthentication()
-    }
-
     Row {
         id: row
         anchors.fill: parent
@@ -65,9 +60,7 @@ Page {
                     text: "Login"
                     Layout.fillWidth: true
                     Layout.alignment: Qt.AlignHCenter
-                    onClicked: {
-                        login()
-                    }
+                    onClicked: login()
                 }
 
                 Button {
@@ -76,9 +69,7 @@ Page {
                     text: "Continue with Google"
                     Layout.fillWidth: true
                     Layout.alignment: Qt.AlignHCenter
-                    onClicked: {
-                        page_controller.oauthGoogleLogin();
-                    }
+                    onClicked: loginWithGoogle()
                 }
 
             }
@@ -86,9 +77,11 @@ Page {
         }
     }
 
-    function login() {
-        popup.open()
-        page_controller.login(tfEmail.text, tfPassword.text)
+    Action {
+        shortcut: "return"
+        onTriggered: {
+            login()
+        }
     }
 
     Popup {
@@ -108,20 +101,39 @@ Page {
     LoginPageController {
         id: page_controller
         onUserAuthenticated: {
-            console.log(isAuthenticated)
             popup.close()
+            if (isAuthenticated == true)
+                application.replacePage(application.getDashboardPath())
         }
         onLoginSucced: {
             popup.close()
-            application.replacePage(application.getDashboardPath())
+            application.gotoPage(application.getDashboardPath())
+        }
+        onLoginFailed: {
+            popup.close()
+        }
+        onGoogleOauthSucced: {
+            popup.close()
+            application.gotoPage(application.getDashboardPath())
+        }
+        onGoogleOauthFailed: {
+            popup.close()
         }
     }
 
-    Action {
-        shortcut: "return"
-        onTriggered: {
-            login()
-        }
+    Component.onCompleted: {
+        popup.open()
+        page_controller.checkAuthentication()
+    }
+
+    function login() {
+        popup.open()
+        page_controller.login(tfEmail.text, tfPassword.text)
+    }
+
+    function loginWithGoogle() {
+        popup.open()
+        page_controller.oauthGoogleLogin();
     }
 
 }

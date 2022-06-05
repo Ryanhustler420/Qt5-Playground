@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.5
+import QtGraphicalEffects 1.0
 import QtQuick.Controls.Material 2.3
 
 import com.xcodeclazz.dashboardcontroller 1.0
@@ -14,10 +15,63 @@ Page {
 
     // these signals are being used in this page
     signal openCountState(string name, string count);
-    onOpenCountState: { dashboard_controller.openCountState(name, count) }
+    onOpenCountState: { page_controller.openCountState(name, count) }
 
-    // life cycle of this class are being used here in this page
-    Component.onCompleted: {
+    header: Item {
+        height: 70
+        width: parent.width
+
+        Label {
+            id: title
+            padding: 10
+            font.bold: true
+            font.pointSize: 30
+            text: qsTr("Dashboard")
+            anchors.left: parent.left
+        }
+
+        Loader {
+            id: profile_img_loader
+            width: 35
+            height: 35
+            asynchronous: true
+            visible: status == Loader.Ready
+        }
+
+        BusyIndicator {
+            id: profile_img_loader_busy_animation;
+            running: profile_img_loader.status === Loader.Loading;
+            height: profile_img_loader.height;
+            width: profile_img_loader.width;
+            anchors.margins: 10
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+
+            Image {
+                id: profile_pic
+                height: parent.height;
+                width: parent.width;
+                onWidthChanged: {
+                    height: parent.height
+                    width: parent.width
+                }
+                fillMode: Image.PreserveAspectCrop
+                layer.enabled: true
+                layer.effect: OpacityMask {
+                    maskSource: mask
+                }
+            }
+
+            Rectangle {
+                id: mask
+                radius: width
+                visible: false
+                width: profile_pic.width
+                height: profile_pic.height
+            }
+
+        }
+
     }
 
     Row {
@@ -48,7 +102,7 @@ Page {
                         } else if (modelData.name === "Callback Requests") {
                             application.gotoPage(application.getRequestCallbacksPagePath())
                         } else if (modelData.name === "Logout") {
-                            application.replacePage(application.getLoginPagePath())
+                            page_controller.logout()
                         }
                     }
                 }
@@ -240,41 +294,19 @@ Page {
     }
 
     DashboardPageController {
-        id: dashboard_controller
+        id: page_controller
+        onLogedout: {
+            application.pop()
+        }
+        onLoadedUserData: {
+            const doc = JSON.parse(JSON.stringify(o));
+            profile_pic.source = doc.picture
+            profile_img_loader.source = doc.picture
+        }
     }
 
-    //    Popup {
-    //        id: loading
-    //        width: parent.width
-    //        height: parent.height
-    //        anchors.centerIn: parent
-    //        focus: true
-    //        closePolicy: Popup.NoAutoClose
-
-    //        BusyIndicator {
-    //            id: bi_loading
-    //            running: true
-    //            antialiasing: true
-    //            anchors.centerIn: parent
-    //        }
-
-    //        Label {
-    //            anchors.top: bi_loading.bottom
-    //            text: qsTr("Loading\u2026")
-    //            font.pointSize: 15
-    //            anchors.horizontalCenter: parent.horizontalCenter
-    //        }
-
-    //        Component.onCompleted: {
-    //            loading.open()
-    //        }
-
-    //    }
+    Component.onCompleted: {
+        page_controller.loadUserData()
+    }
 
 }
-
-/*##^##
-Designer {
-    D{i:0;formeditorZoom:0.66}D{i:2}D{i:12}
-}
-##^##*/

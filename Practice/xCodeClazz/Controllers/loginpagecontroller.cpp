@@ -6,17 +6,19 @@ LoginPageController::LoginPageController(QObject *parent) : QObject(parent)
 
 void LoginPageController::checkAuthentication()
 {
-    QTimer::singleShot(1000, this, [=](){
+    QJsonObject doc = xdb.getLoginDetails();
+    if (doc.contains("email")) {
+        emit userAuthenticated(true);
+    } else {
         emit userAuthenticated(false);
-    });
+    }
 }
 
 void LoginPageController::login(QString email, QString password)
 {
-    qInfo() << email << password;
-    QTimer::singleShot(1000, this, [=](){
-        emit loginSucced();
-    });
+    Q_UNUSED(email);
+    Q_UNUSED(password);
+    QTimer::singleShot(1000, this, [=](){ emit loginSucced(); });
 }
 
 void LoginPageController::oauthGoogleLogin()
@@ -31,11 +33,18 @@ void LoginPageController::oauthGoogleLogin()
             QString access_token = root.find("access_token")->toString();
             QString token_type = root.find("token_type")->toString();
             apis.exchangeGoogleAccessTokenForUserInfo(token_type, access_token, [=](QByteArray response){
-                qInfo() << QJsonDocument::fromJson(response);
+                QJsonObject doc = QJsonDocument::fromJson(response).object();
+                if(xdb.saveLoginDetails(doc))
+                    emit googleOauthSucced();
+                server.stop();
             }, [=](QByteArray error){
+                server.stop();
+                emit googleOauthFailed();
                 qInfo() << error;
             });
         }, [=](QByteArray error){
+            server.stop();
+            emit googleOauthFailed();
             qWarning() << error;
         });
     });

@@ -2,10 +2,10 @@
 
 Apis::Apis(CommonSuperClass *parent) : Network(parent)
 {
-    enums = new Enums();
     mNetReply = nullptr;
     routes = new Routes();
     mDataBuffer = new QByteArray();
+    _raw_headers = new raw_headers();
     cookie_jar = new QNetworkCookieJar();
     mNetMan = new QNetworkAccessManager(parent);
 }
@@ -29,7 +29,7 @@ void Apis::postInit(std::function<void(QByteArray)> response, std::function<void
     jsonDoc.setObject(mainObject);
 
     QNetworkRequest request(routes->post_api__init__());
-    request.setHeader(QNetworkRequest::ContentTypeHeader, enums->_raw_headers.application_json);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, _raw_headers->application_json);
     QNetworkReply *mNetReply = mNetMan->post(request, jsonDoc.toJson());
 
     connect(mNetReply, &QIODevice::readyRead, this, [=]() { mDataBuffer->append(mNetReply->readAll()); });
@@ -140,7 +140,7 @@ void Apis::createStudent(const QString &name, const QString &imageUrl, const QSt
     jsonDoc.setObject(mainObject);
 
     QNetworkRequest request(routes->post_api_xcodeclazz_student_create());
-    request.setHeader(QNetworkRequest::ContentTypeHeader, enums->_raw_headers.application_json);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, _raw_headers->application_json);
     QNetworkReply *mNetReply = mNetMan->post(request, jsonDoc.toJson());
 
     connect(mNetReply, &QIODevice::readyRead, this, [=]() { mDataBuffer->append(mNetReply->readAll()); });
@@ -159,7 +159,7 @@ void Apis::deleteStudent(const QString &studentId, std::function<void(QByteArray
     jsonDoc.setObject(mainObject);
 
     QNetworkRequest request(routes->post_api_xcodeclazz_student_delete());
-    request.setHeader(QNetworkRequest::ContentTypeHeader, enums->_raw_headers.application_json);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, _raw_headers->application_json);
     QNetworkReply *mNetReply = mNetMan->post(request, jsonDoc.toJson());
 
     connect(mNetReply, &QIODevice::readyRead, this, [=]() { mDataBuffer->append(mNetReply->readAll()); });
@@ -203,7 +203,7 @@ void Apis::updateStudent(const QString &studentId, const QString &name, int age,
     jsonDoc.setObject(mainObject);
 
     QNetworkRequest request(routes->post_api_xcodeclazz_student_update());
-    request.setHeader(QNetworkRequest::ContentTypeHeader, enums->_raw_headers.application_json);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, _raw_headers->application_json);
     QNetworkReply *mNetReply = mNetMan->post(request, jsonDoc.toJson());
 
     connect(mNetReply, &QIODevice::readyRead, this, [=]() { mDataBuffer->append(mNetReply->readAll()); });
@@ -234,7 +234,7 @@ void Apis::getRequestCallback(const QString &requestCallbackId, std::function<vo
     jsonDoc.setObject(mainObject);
 
     QNetworkRequest request(routes->post_api_xcodeclazz_request_callback());
-    request.setHeader(QNetworkRequest::ContentTypeHeader, enums->_raw_headers.application_json);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, _raw_headers->application_json);
     QNetworkReply *mNetReply = mNetMan->post(request, jsonDoc.toJson());
 
     connect(mNetReply, &QIODevice::readyRead, this, [=]() { mDataBuffer->append(mNetReply->readAll()); });
@@ -256,7 +256,7 @@ void Apis::callbackRequestCreate(const QString &courseId, const QString &name, c
     jsonDoc.setObject(mainObject);
 
     QNetworkRequest request(routes->post_api_xcodeclazz_request_callback_create());
-    request.setHeader(QNetworkRequest::ContentTypeHeader, enums->_raw_headers.application_json);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, _raw_headers->application_json);
     QNetworkReply *mNetReply = mNetMan->post(request, jsonDoc.toJson());
 
     connect(mNetReply, &QIODevice::readyRead, this, [=]() { mDataBuffer->append(mNetReply->readAll()); });
@@ -275,7 +275,7 @@ void Apis::callbackRequestDelete(const QString &requestCallbackId, std::function
     jsonDoc.setObject(mainObject);
 
     QNetworkRequest request(routes->post_api_xcodeclazz_request_callback_delete());
-    request.setHeader(QNetworkRequest::ContentTypeHeader, enums->_raw_headers.application_json);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, _raw_headers->application_json);
     QNetworkReply *mNetReply = mNetMan->post(request, jsonDoc.toJson());
 
     connect(mNetReply, &QIODevice::readyRead, this, [=]() { mDataBuffer->append(mNetReply->readAll()); });
@@ -293,7 +293,7 @@ void Apis::callbackRequestDeleteAll(std::function<void (QByteArray)> response, s
     jsonDoc.setObject(mainObject);
 
     QNetworkRequest request(routes->post_api_xcodeclazz_request_callback_delete_all());
-    request.setHeader(QNetworkRequest::ContentTypeHeader, enums->_raw_headers.application_json);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, _raw_headers->application_json);
     QNetworkReply *mNetReply = mNetMan->post(request, jsonDoc.toJson());
 
     connect(mNetReply, &QIODevice::readyRead, this, [=]() { mDataBuffer->append(mNetReply->readAll()); });
@@ -324,7 +324,7 @@ void Apis::getCourse(const QString &courseId, std::function<void(QByteArray)> re
     jsonDoc.setObject(mainObject);
 
     QNetworkRequest request(routes->post_api_xcodeclazz_course());
-    request.setHeader(QNetworkRequest::ContentTypeHeader, enums->_raw_headers.application_json);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, _raw_headers->application_json);
     QNetworkReply *mNetReply = mNetMan->post(request, jsonDoc.toJson());
 
     connect(mNetReply, &QIODevice::readyRead, this, [=]() { mDataBuffer->append(mNetReply->readAll()); });
@@ -360,7 +360,7 @@ void Apis::createCourse(const QString &title, const QString &subtitle, const QSt
     jsonDoc.setObject(mainObject);
 
     QNetworkRequest request(routes->post_api_xcodeclazz_course_create());
-    request.setHeader(QNetworkRequest::ContentTypeHeader, enums->_raw_headers.application_json);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, _raw_headers->application_json);
     QNetworkReply *mNetReply = mNetMan->post(request, jsonDoc.toJson());
 
     connect(mNetReply, &QIODevice::readyRead, this, [=]() { mDataBuffer->append(mNetReply->readAll()); });
@@ -397,7 +397,7 @@ void Apis::updateCourse(const QString &courseId, const QString &title, const QSt
     jsonDoc.setObject(mainObject);
 
     QNetworkRequest request(routes->post_api_xcodeclazz_course_update());
-    request.setHeader(QNetworkRequest::ContentTypeHeader, enums->_raw_headers.application_json);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, _raw_headers->application_json);
     QNetworkReply *mNetReply = mNetMan->post(request, jsonDoc.toJson());
 
     connect(mNetReply, &QIODevice::readyRead, this, [=]() { mDataBuffer->append(mNetReply->readAll()); });
@@ -416,7 +416,7 @@ void Apis::deleteCourse(const QString &courseId, std::function<void(QByteArray)>
     jsonDoc.setObject(mainObject);
 
     QNetworkRequest request(routes->post_api_xcodeclazz_course_delete());
-    request.setHeader(QNetworkRequest::ContentTypeHeader, enums->_raw_headers.application_json);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, _raw_headers->application_json);
     QNetworkReply *mNetReply = mNetMan->post(request, jsonDoc.toJson());
 
     connect(mNetReply, &QIODevice::readyRead, this, [=]() { mDataBuffer->append(mNetReply->readAll()); });
@@ -440,9 +440,8 @@ void Apis::exchangeGoogleOAuthCode(QString code, std::function<void(QByteArray)>
     postData.append(QString("grant_type=%1").arg("authorization_code"));
 
     QNetworkRequest request(QUrl("https://oauth2.googleapis.com/token"));
-    request.setHeader(QNetworkRequest::ContentTypeHeader, enums->_raw_headers.url_encoded);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, _raw_headers->application_json);
 
-    QByteArray * mDataBuffer = new QByteArray();
     QNetworkReply *mNetReply = mNetMan->post(request, postData);
     connect(mNetReply, &QIODevice::readyRead, this, [=]() { mDataBuffer->append(mNetReply->readAll()); });
     connect(mNetReply, &QNetworkReply::finished, this, [=](){
@@ -453,10 +452,9 @@ void Apis::exchangeGoogleOAuthCode(QString code, std::function<void(QByteArray)>
 void Apis::exchangeGoogleAccessTokenForUserInfo(QString tokenType, QString accessToken, std::function<void (QByteArray)> response, std::function<void (QByteArray)> error)
 {
     QNetworkRequest request(QUrl("https://www.googleapis.com/oauth2/v2/userinfo"));
-    request.setHeader(QNetworkRequest::ContentTypeHeader, enums->_raw_headers.url_encoded);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, _raw_headers->url_encoded);
     request.setRawHeader("Authorization", QString("%1 %2").arg(tokenType).arg(accessToken).toLatin1());
 
-    QByteArray * mDataBuffer = new QByteArray();
     QNetworkReply *mNetReply = mNetMan->get(request);
     connect(mNetReply, &QIODevice::readyRead, this, [=]() { mDataBuffer->append(mNetReply->readAll()); });
     connect(mNetReply, &QNetworkReply::finished, this, [=](){

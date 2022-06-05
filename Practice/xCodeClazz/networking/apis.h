@@ -49,13 +49,11 @@ public:
         QString url_encoded = "application/x-www-form-urlencoded";
     } raw_headers;
 
-    struct Enums {
-        raw_headers _raw_headers;
-    };
+    raw_headers *_raw_headers;
 
-protected:
-    Enums *enums;
+private:
     Routes *routes;
+
 };
 
 #endif // APIS_H
