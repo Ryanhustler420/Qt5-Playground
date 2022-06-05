@@ -407,6 +407,7 @@ void Apis::deleteCourse(const QString &courseId, std::function<void(QByteArray)>
 // NOTE: the code=? is valid for one call only, please make sure you mention this before user hit the oauth button
 void Apis::exchangeGoogleOAuthCode(QString code, std::function<void(QByteArray)> response, std::function<void(QByteArray)> error)
 {
+    clearResponse();
     QByteArray postData;
     postData.append(QString("code=%1").arg(code));
     postData.append("&");
@@ -419,7 +420,7 @@ void Apis::exchangeGoogleOAuthCode(QString code, std::function<void(QByteArray)>
     postData.append(QString("grant_type=%1").arg("authorization_code"));
 
     QNetworkRequest request(QUrl("https://oauth2.googleapis.com/token"));
-    request.setHeader(QNetworkRequest::ContentTypeHeader, _raw_headers->application_json);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, _raw_headers->url_encoded);
 
     QNetworkReply *mNetReply = mNetMan->post(request, postData);
     connect(mNetReply, &QIODevice::readyRead, this, [=]() { mDataBuffer->append(mNetReply->readAll()); });
@@ -430,6 +431,7 @@ void Apis::exchangeGoogleOAuthCode(QString code, std::function<void(QByteArray)>
 
 void Apis::exchangeGoogleAccessTokenForUserInfo(QString tokenType, QString accessToken, std::function<void (QByteArray)> response, std::function<void (QByteArray)> error)
 {
+    clearResponse();
     QNetworkRequest request(QUrl("https://www.googleapis.com/oauth2/v2/userinfo"));
     request.setHeader(QNetworkRequest::ContentTypeHeader, _raw_headers->url_encoded);
     request.setRawHeader("Authorization", QString("%1 %2").arg(tokenType).arg(accessToken).toLatin1());

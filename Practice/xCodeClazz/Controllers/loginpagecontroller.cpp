@@ -37,8 +37,8 @@ void LoginPageController::oauthGoogleLogin()
             QJsonObject root = QJsonDocument::fromJson(response).object();
             QString access_token = root.find("access_token")->toString();
             QString token_type = root.find("token_type")->toString();
-            apis.exchangeGoogleAccessTokenForUserInfo(token_type, access_token, [=](QByteArray response){
-                QJsonObject doc = QJsonDocument::fromJson(response).object();
+            apis.exchangeGoogleAccessTokenForUserInfo(token_type, access_token, [=](QByteArray data){
+                QJsonObject doc = QJsonDocument::fromJson(data).object();
                 if(xdb.saveLoginDetails(doc))
                     emit googleOauthSucced();
                 server.stop();
