@@ -8,6 +8,8 @@
 
 #include "application/manager.h"
 #include "shareable/assets.h"
+#include "utility/timer.h"
+#include "rx/signals.h"
 
 #include "controllers/loginpagecontroller.h"
 #include "controllers/dashboardpagecontroller.h"
@@ -37,6 +39,7 @@ signals:
     void clearedStack();
     void pushPage(QString qrc);
     void pageReplaced(QString qrc);
+    void loading(bool b);
     void poped();
 
 public slots:
@@ -46,7 +49,12 @@ public slots:
     void pop();
 
 private:
+    void startListeners();
+
+private:
     QQmlApplicationEngine engine;
+    Timer timer;
+
 };
 
 #endif // APPLICATION_H

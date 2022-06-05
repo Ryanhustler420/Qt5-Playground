@@ -32,7 +32,7 @@ Page {
             anchors.bottom: parent.bottom
             anchors.margins: 10
             onClicked: {
-                console.log("Implement Form")
+                create_new_student_form.open()
             }
         }
 
@@ -389,6 +389,183 @@ Page {
     }
 
     Popup {
+        width: 420
+        modal: true
+        focus: true
+        id: create_new_student_form
+        anchors.centerIn: parent
+        closePolicy: Popup.NoAutoClose
+
+        ScrollView {
+            clip: true
+            visible: true
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            height: parent.height
+            width: parent.width
+            ScrollBar.vertical: ScrollBar {
+                height: 0
+            }
+
+            Column {
+                width: parent.width
+                spacing: 5
+
+                Row {
+                    width: parent.width
+
+                    Label {
+                        font.bold: true
+                        font.pointSize: 20
+                        text: "Create Student"
+                        width: parent.width * .9
+                    }
+
+                    Label {
+                        text: "X"
+                        font.bold: true
+                        font.pointSize: 20
+                        width: parent.width * .1
+
+                        MouseArea {
+                            cursorShape: Qt.PointingHandCursor
+                            anchors.fill: parent
+                            onClicked: {
+                                create_new_student_form.close()
+                            }
+                        }
+
+                    }
+
+                }
+
+                TextField {
+                    id: new_student_student_tf
+                    placeholderText: "School"
+                    width: parent.width
+                }
+
+                TextField {
+                    id: new_student_name_tf
+                    placeholderText: "Name"
+                    width: parent.width
+                }
+
+                TextField {
+                    id: new_student_avatar_tf
+                    placeholderText: "Avatar Url"
+                    width: parent.width
+                }
+
+                TextField {
+                    id: new_student_age_tf
+                    placeholderText: "Age"
+                    width: parent.width
+                }
+
+                TextField {
+                    id: new_student_clazz_tf
+                    placeholderText: "Clazz"
+                    width: parent.width
+                }
+
+                ComboBox {
+                    id: new_student_course_id_cb
+                    width: parent.width
+                    model: [ "C++ Course For Biggener", "Java Code", "Python Core" ]
+                }
+
+                Row {
+                    width: parent.width
+                    spacing: 5
+
+                    TextField {
+                        id: new_student_time_start_tf
+                        width: parent.width * .5
+                        placeholderText: "Session Starts"
+                    }
+
+                    TextField {
+                        id: new_student_time_ends_tf
+                        width: parent.width * .5
+                        placeholderText: "Session Ends"
+                    }
+
+                }
+
+                Row {
+                    width: parent.width
+                    spacing: 5
+                    CheckBox {id: new_student_work_week_sunday_ckb; text: "S"}
+                    CheckBox {id: new_student_work_week_monday_ckb; text: "M"}
+                    CheckBox {id: new_student_work_week_tuesday_ckb; text: "T"}
+                    CheckBox {id: new_student_work_week_wednesday_ckb; text: "W"}
+                    CheckBox {id: new_student_work_week_thursday_ckb; text: "T"}
+                    CheckBox {id: new_student_work_week_friday_ckb; text: "F"}
+                    CheckBox {id: new_student_work_week_saturday_ckb; text: "S" }
+                }
+
+                TextField {
+                    id: new_student_phone_numbers_tf
+                    placeholderText: "Phone Numbers, "
+                    width: parent.width
+                }
+
+                TextField {
+                    id: new_student_joinDate_tf
+                    placeholderText: "Joining From"
+                    width: parent.width
+                }
+
+                Row {
+                    width: parent.width
+                    spacing: 5
+
+                    TextField {
+                        id: new_student_fee_amount_tf
+                        width: parent.width * .5
+                        placeholderText: "Amount"
+                    }
+
+                    TextField {
+                        id: new_student_fee_per_tf
+                        width: parent.width * .5
+                        placeholderText: "Per"
+                    }
+
+                }
+
+                TextField {
+                    id: new_student_batchNumber_tf
+                    placeholderText: "Batch Number"
+                    width: parent.width
+                }
+
+                TextField {
+                    id: new_student_email_tf
+                    placeholderText: "Email Address"
+                    width: parent.width
+                }
+
+                Button {
+                    text: "Create"
+                    width: parent.width
+                    onClicked: {
+                        if (isCreateNewStudentFormValid()) {
+                            page_controller.createNewStudent(getCreateNewStudentFormData());
+                            resetCreateNewStudentForm();
+                            create_new_student_form.close()
+                        }
+                    }
+                }
+
+            }
+
+        }
+
+    }
+
+    Popup {
         id: popup
         modal: true
         focus: true
@@ -425,13 +602,28 @@ Page {
     }
 
     function searchFieldEmpty() {
-        return search_field.text.length == 0;
+        return search_field.text.length === 0;
     }
 
     function add_to_model(dataArray, model_id) {
         for(let i = 0; i < dataArray.length; i++) {
             model_id.append(JSON.parse(JSON.stringify(dataArray[i])))
         }
+    }
+
+    function resetCreateNewStudentForm() {
+        new_student_name_tf.text
+                = "";
+    }
+
+    function getCreateNewStudentFormData() {
+        return {
+            'name': new_student_name_tf.text,
+        }
+    }
+
+    function isCreateNewStudentFormValid() {
+        return true;
     }
 
 }

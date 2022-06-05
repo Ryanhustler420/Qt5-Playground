@@ -46,6 +46,7 @@ Page {
     }
 
     ScrollView {
+        clip: true
         height: parent.height
         anchors.fill: parent
         width: parent.width

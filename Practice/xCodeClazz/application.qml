@@ -9,11 +9,19 @@ ApplicationWindow {
     visible: true
     title: qsTr("xCodeClazz")
     // flags: Qt.FramelessWindowHint | Qt.Window
-
     StackView {
         id: stackview
         anchors.fill: parent
         initialItem: application.getLoginPagePath()
+    }
+
+    ProgressBar {
+        id: app_n_progress_bar
+        visible: false
+        value: .5
+        from: .1
+        indeterminate: true
+        width: parent.width
     }
 
     RoundButton {
@@ -33,6 +41,9 @@ ApplicationWindow {
         target: application
         onClearedStack: {
             stackview.clear()
+        }
+        onLoading: {
+            app_n_progress_bar.visible = b;
         }
         onPushPage: {
             stackview.push(qrc)

@@ -14,6 +14,8 @@ Application::Application(QObject *parent) : QObject(parent)
     qmlRegisterType<AllCoursesPageController>("com.xcodeclazz.allcoursespagecontroller", 1, 0, "AllCoursesPageController");
     qmlRegisterType<AllStudentsPageController>("com.xcodeclazz.allstudentspagecontroller", 1, 0, "AllStudentsPageController");
     qmlRegisterType<SingleCoursePageController>("com.xcodeclazz.singlecoursepagecontroller", 1, 0, "SingleCoursePageController");
+
+    startListeners();
 }
 
 void Application::boot(QGuiApplication &app)
@@ -43,4 +45,10 @@ void Application::replacePage(QString qrc)
 void Application::pop()
 {
     emit poped();
+}
+
+void Application::startListeners()
+{
+    // Signals Listeners...
+    // Signals::instance().onInternetStatusRefresh([=](bool b){});
 }
