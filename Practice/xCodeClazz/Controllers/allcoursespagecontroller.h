@@ -14,17 +14,22 @@ public:
     explicit AllCoursesPageController(QObject *parent = nullptr);
 
 public:
-    Q_INVOKABLE void hold(QVariant o);
+    Q_INVOKABLE void pass(QVariant o);
     Q_INVOKABLE void loadCourses();
+    Q_INVOKABLE void createNewCourse(QJsonObject o);
 
 signals:
-    void holded(QVariant o);
+    void showLoading(bool b);
+
+signals:
+    void passed(QVariant o);
     void coursesLoaded(QVariantList courses);
+    void newCourseCreated(QJsonObject course);
 
 private:
     Apis apis;
     LocalCache lc;
-    XCodeClazzDB db;
+    XCodeClazzDB xdb;
 };
 
 #endif // ALLCOURSESPAGECONTROLLER_H

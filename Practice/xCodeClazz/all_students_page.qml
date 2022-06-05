@@ -25,13 +25,15 @@ Page {
             anchors.left: parent.left
         }
 
-        TextField {
-            id: search_field
-            width: 400
+        Button {
+            id: create_student_btn
+            text: "New Student"
             anchors.right: parent.right
             anchors.bottom: parent.bottom
             anchors.margins: 10
-            placeholderText: "Search\u2026"
+            onClicked: {
+                console.log("Implement Form")
+            }
         }
 
     }
@@ -83,7 +85,10 @@ Page {
                     taskScroll.position = oldPos - taskScroll.position
                 }
             }
-            ScrollBar.vertical: ScrollBar { id: taskScroll }
+            ScrollBar.vertical: ScrollBar {
+                id: taskScroll
+                height: 0
+            }
             delegate: Component {
                 Item {
                     width: parent.width

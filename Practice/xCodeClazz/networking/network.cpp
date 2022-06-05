@@ -50,7 +50,7 @@ void Network::handleSpecifStatusCode(
     }
 }
 
-void Network::handleAllStatusCode(QNetworkReply *reply, std::function<void ()> ok, std::function<void ()> error)
+void Network::handleAllStatusCode(QNetworkReply *reply, QByteArray *response, std::function<void ()> ok, std::function<void (QByteArray)> error)
 {
     int errorCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
     switch (errorCode) {
@@ -62,7 +62,7 @@ void Network::handleAllStatusCode(QNetworkReply *reply, std::function<void ()> o
         case 501:
         case 502:
         case 503:
-            error();
+            error(*response);
             break;
     }
 }

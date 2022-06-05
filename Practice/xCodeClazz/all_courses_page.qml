@@ -15,7 +15,7 @@ Page {
 
     // these functions are being used in this page
     function openCourse(object) {
-        page_controller.hold(JSON.stringify(object))
+        page_controller.pass(JSON.stringify(object))
         application.gotoPage(application.getSingleCoursePagePath())
     }
 
@@ -56,6 +56,7 @@ Page {
         }
         ScrollBar.vertical: ScrollBar {
             id: scroll_handle
+            height: 0
             onPositionChanged: {
                 if (scroll_handle.position + scroll_handle.size == 1) {
                     console.log("Reached Bottom")
@@ -93,153 +94,204 @@ Page {
         anchors.centerIn: parent
         closePolicy: Popup.NoAutoClose
 
-        Column {
+        ScrollView {
+            clip: true
+            visible: true
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            height: parent.height
             width: parent.width
-            spacing: 5
+            ScrollBar.vertical: ScrollBar {
+                height: 0
+            }
 
-            Row {
+            Column {
                 width: parent.width
+                spacing: 5
 
-                Label {
-                    font.bold: true
-                    font.pointSize: 20
-                    text: "Course Create"
-                    width: parent.width * .9
-                }
+                Row {
+                    width: parent.width
 
-                Label {
-                    text: "X"
-                    font.bold: true
-                    font.pointSize: 20
-                    width: parent.width * .1
+                    Label {
+                        font.bold: true
+                        font.pointSize: 20
+                        text: "Course Create"
+                        width: parent.width * .9
+                    }
 
-                    MouseArea {
-                        cursorShape: Qt.PointingHandCursor
-                        anchors.fill: parent
-                        onClicked: {
-                            create_new_course_form.close()
+                    Label {
+                        text: "X"
+                        font.bold: true
+                        font.pointSize: 20
+                        width: parent.width * .1
+
+                        MouseArea {
+                            cursorShape: Qt.PointingHandCursor
+                            anchors.fill: parent
+                            onClicked: {
+                                create_new_course_form.close()
+                            }
                         }
+
                     }
 
                 }
 
-            }
-
-            TextField {
-                placeholderText: "Title"
-                width: parent.width
-            }
-
-            TextField {
-                placeholderText: "Subtitle"
-                width: parent.width
-            }
-
-            TextField {
-                placeholderText: "Duration 3 Months"
-                width: parent.width
-            }
-
-            TextField {
-                placeholderText: "Thumbnail Slug /assts/img.png"
-                width: parent.width
-            }
-
-            TextField {
-                placeholderText: "Features | One | By | One"
-                width: parent.width
-            }
-
-            TextField {
-                placeholderText: "Price"
-                width: parent.width
-            }
-
-            Row {
-                width: parent.width
-                spacing: 5
-
                 TextField {
-                    width: parent.width * .5
-                    placeholderText: "Session Starts"
+                    id: new_course_title_tf
+                    placeholderText: "Title"
+                    width: parent.width
                 }
 
                 TextField {
-                    width: parent.width * .5
-                    placeholderText: "Session Ends"
+                    id: new_course_subtitle_tf
+                    placeholderText: "Subtitle"
+                    width: parent.width
                 }
 
-            }
-
-            Row {
-                width: parent.width
-                spacing: 5
-
-                CheckBox {
-                    text: "HasActive"
+                TextField {
+                    id: new_course_duration_tf
+                    placeholderText: "Duration 3 Months"
+                    width: parent.width
                 }
 
-            }
-
-            Row {
-                width: parent.width
-                spacing: 5
-
-                Label {
-                    anchors.verticalCenter: parent.verticalCenter
-                    width: parent.width * .3
-                    font.pixelSize: 15
-                    text: "Space Left"
+                TextField {
+                    id: new_course_thumbnail_tf
+                    placeholderText: "Thumbnail Slug /assts/img.png"
+                    width: parent.width
                 }
 
-                SpinBox {
-                    width: parent.width * .7
-                    from: 0
-                    to: 50
+                TextField {
+                    id: new_course_features_tf
+                    placeholderText: "Features | One | By | One"
+                    width: parent.width
                 }
 
-            }
-
-            Row {
-                width: parent.width
-                spacing: 5
-
-                Label {
-                    anchors.verticalCenter: parent.verticalCenter
-                    width: parent.width * .3
-                    font.pixelSize: 15
-                    text: "Space Full"
+                TextField {
+                    id: new_course_price_tf
+                    placeholderText: "Price"
+                    width: parent.width
                 }
 
-                SpinBox {
-                    width: parent.width * .7
-                    from: 0
-                    to: 50
+                Row {
+                    width: parent.width
+                    spacing: 5
+
+                    TextField {
+                        id: new_course_session_start_tf
+                        width: parent.width * .5
+                        placeholderText: "Session Starts"
+                    }
+
+                    TextField {
+                        id: new_course_session_ends_tf
+                        width: parent.width * .5
+                        placeholderText: "Session Ends"
+                    }
+
                 }
 
-            }
+                Row {
+                    width: parent.width
+                    spacing: 5
 
-            Button {
-                text: "Create"
-                width: parent.width
-                onClicked: {
-                    create_new_course_form.close()
+                    CheckBox {
+                        id: new_course_has_active_cb
+                        text: "HasActive"
+                    }
+
                 }
+
+                Row {
+                    width: parent.width
+                    spacing: 5
+
+                    Label {
+                        anchors.verticalCenter: parent.verticalCenter
+                        width: parent.width * .3
+                        font.pixelSize: 15
+                        text: "Space Left"
+                    }
+
+                    SpinBox {
+                        id: new_course_space_left_sb
+                        width: parent.width * .7
+                        from: 0
+                        to: 50
+                    }
+
+                }
+
+                Row {
+                    width: parent.width
+                    spacing: 5
+
+                    Label {
+                        anchors.verticalCenter: parent.verticalCenter
+                        width: parent.width * .3
+                        font.pixelSize: 15
+                        text: "Space Full"
+                    }
+
+                    SpinBox {
+                        id: new_course_space_full_sb
+                        width: parent.width * .7
+                        from: 0
+                        to: 50
+                    }
+
+                }
+
+                Button {
+                    text: "Create"
+                    width: parent.width
+                    onClicked: {
+                        if (isCreateNewCourseFormValid()) {
+                            page_controller.createNewCourse(getCreateNewCourseFormData());
+                            resetCreateNewCourseForm();
+                            create_new_course_form.close()
+                        }
+                    }
+                }
+
             }
 
         }
 
     }
 
+    Popup {
+        id: popup
+        modal: true
+        focus: true
+        anchors.centerIn: parent
+        closePolicy: Popup.NoAutoClose
+
+        Label {
+            anchors.centerIn: parent
+            text: "Loading\u2026"
+            font.pointSize: 12
+        }
+    }
+
     AllCoursesPageController {
         id: page_controller
-        onCoursesLoaded: {
-            for(var i =0; i< courses.length; i++) {
-                ComponentGenerator.createCourseCard(i, JSON.parse(JSON.stringify(courses[i])), application.getSiteAssetsUrl(), coursesContainer);
+        onShowLoading: {
+            if (b) {
+                popup.open()
+            } else {
+                popup.close()
             }
         }
-        onHolded: {
-            // console.log(o);
+        onCoursesLoaded: {
+            for(var i =0; i< courses.length; i++)
+                ComponentGenerator.createCourseCard(i, JSON.parse(JSON.stringify(courses[i])), application.getSiteAssetsUrl(), coursesContainer);
+        }
+        onNewCourseCreated: {
+            ComponentGenerator.createCourseCard(Math.floor(Math.random() * 3000), JSON.parse(JSON.stringify(course)), application.getSiteAssetsUrl(), coursesContainer);
+        }
+        onPassed: {
+            console.log(o);
         }
     }
 
@@ -247,10 +299,43 @@ Page {
         page_controller.loadCourses()
     }
 
-}
+    function resetCreateNewCourseForm() {
+        new_course_has_active_cb.checked = false;
 
-/*##^##
-Designer {
-    D{i:0;formeditorZoom:0.9}
+        new_course_space_left_sb.value
+                = new_course_space_full_sb.value = 0;
+
+        new_course_title_tf.text
+                = new_course_subtitle_tf.text
+                = new_course_duration_tf.text
+                = new_course_thumbnail_tf.text
+                = new_course_features_tf.text
+                = new_course_price_tf.text
+                = new_course_session_start_tf.text
+                = new_course_session_ends_tf.text
+                = "";
+    }
+
+    function getCreateNewCourseFormData() {
+        return {
+            'title': new_course_title_tf.text,
+            'subtitle': new_course_subtitle_tf.text,
+            'duration': new_course_duration_tf.text,
+            'thumbnailUrl': new_course_thumbnail_tf.text,
+            'price': new_course_price_tf.text,
+            'hasActive': new_course_has_active_cb.checked,
+            'spaceLeft': new_course_space_left_sb.value,
+            'spaceFull': new_course_space_full_sb.value,
+            'session': {
+                'starts': new_course_session_start_tf.text,
+                'ends': new_course_session_ends_tf.text,
+            },
+            'features': new_course_features_tf.text.split("|"),
+        }
+    }
+
+    function isCreateNewCourseFormValid() {
+        return true;
+    }
+
 }
-##^##*/

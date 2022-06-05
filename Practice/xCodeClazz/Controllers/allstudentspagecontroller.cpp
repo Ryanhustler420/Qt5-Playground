@@ -5,7 +5,7 @@ AllStudentsPageController::AllStudentsPageController(QObject *parent) : QObject(
     // [signals] if any
 }
 
-void AllStudentsPageController::hold(QVariant o)
+void AllStudentsPageController::pass(QVariant o)
 {
 
 }

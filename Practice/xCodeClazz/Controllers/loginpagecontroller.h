@@ -11,6 +11,7 @@
 #include "oauth/googleoauth.h"
 #include "networking/apis.h"
 #include "server/server.h"
+#include "utility/timer.h"
 #include "rx/signals.h"
 
 class LoginPageController : public QObject
@@ -31,6 +32,7 @@ signals:
 
 private:
     Apis apis;
+    Timer timer;
     Server server;
     XCodeClazzDB xdb;
     GoogleOAuth google_oauth;

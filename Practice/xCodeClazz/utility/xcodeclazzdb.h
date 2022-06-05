@@ -34,7 +34,14 @@ public:
     bool deleteStudent(const QString &studentId);
     bool deleteStudents();
 
-    // courses
+    bool course_file();
+    bool saveCourse(const QJsonObject &o);
+    bool saveCourses(const QJsonArray &o);
+    QJsonArray getCourses();
+    QJsonObject getCourse(const QString &courseId);
+
+    bool deleteCourse(const QString &courseId);
+    bool deleteCourses();
 
 signals:
 
@@ -43,6 +50,7 @@ private:
 
     // files
     QString const app_name = "xcodeclazz";
+    QString const courses = app_name + "_" + "courses.json";
     QString const login_json = app_name + "_" + "login.json";
     QString const students = app_name + "_" + "students.json";
     QString const callback_requests = app_name + "_" + "callback_requests.json";

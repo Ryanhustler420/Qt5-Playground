@@ -75,7 +75,6 @@ Page {
     }
 
     Row {
-        anchors.fill: parent
         height: root.height
         width: root.width
         spacing: 25
@@ -119,15 +118,14 @@ Page {
             }
 
             ScrollView {
-                padding: 10
                 visible: true
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 height: parent.height
                 width: parent.width
                 ScrollBar.vertical: ScrollBar {
-                    height: 0
                     id: scroll_handle
+                    height: 0
                     onPositionChanged: {
                         if (scroll_handle.position + scroll_handle.size == 1) {
                             console.log("Reached Bottom")
@@ -300,8 +298,9 @@ Page {
         }
         onLoadedUserData: {
             const doc = JSON.parse(JSON.stringify(o));
-            profile_pic.source = doc.picture
-            profile_img_loader.source = doc.picture
+            const tempImg = "https://via.placeholder.com/50x50"
+            profile_pic.source = doc.picture ? doc.picture : tempImg
+            profile_img_loader.source = doc.picture ? doc.picture : tempImg
         }
     }
 

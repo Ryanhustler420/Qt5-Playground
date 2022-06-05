@@ -5,7 +5,7 @@ AllRequestCallbacksPage::AllRequestCallbacksPage(QObject *parent) : QObject(pare
     // [signals] if any
 }
 
-void AllRequestCallbacksPage::hold(QVariant o)
+void AllRequestCallbacksPage::pass(QVariant o)
 {
 
 }

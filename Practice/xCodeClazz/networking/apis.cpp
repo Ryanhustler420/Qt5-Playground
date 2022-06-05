@@ -34,7 +34,7 @@ void Apis::postInit(std::function<void(QByteArray)> response, std::function<void
 
     connect(mNetReply, &QIODevice::readyRead, this, [=]() { mDataBuffer->append(mNetReply->readAll()); });
     connect(mNetReply, &QNetworkReply::finished, this, [=](){
-        handleAllStatusCode(mNetReply, [=](/*OK*/){ response(*mDataBuffer); }, [=](/*ERROR*/){ error(mNetReply->errorString().toLatin1()); });
+        handleAllStatusCode(mNetReply, mDataBuffer, [=](/*OK*/){ response(*mDataBuffer); }, [=](QByteArray res){ error(res); });
     });
 }
 
@@ -46,7 +46,7 @@ void Apis::getStudentsStatus(std::function<void(QByteArray)> response, std::func
 
     connect(mNetReply, &QIODevice::readyRead, this, [=]() { mDataBuffer->append(mNetReply->readAll()); });
     connect(mNetReply, &QNetworkReply::finished, this, [=](){
-        handleAllStatusCode(mNetReply, [=](/*OK*/){ response(*mDataBuffer); }, [=](/*ERROR*/){ error(mNetReply->errorString().toLatin1()); });
+        handleAllStatusCode(mNetReply, mDataBuffer, [=](/*OK*/){ response(*mDataBuffer); }, [=](QByteArray res){ error(res); });
     });
 }
 
@@ -58,7 +58,7 @@ void Apis::getCoursesStatus(std::function<void(QByteArray)> response, std::funct
 
     connect(mNetReply, &QIODevice::readyRead, this, [=]() { mDataBuffer->append(mNetReply->readAll()); });
     connect(mNetReply, &QNetworkReply::finished, this, [=](){
-        handleAllStatusCode(mNetReply, [=](/*OK*/){ response(*mDataBuffer); }, [=](/*ERROR*/){ error(mNetReply->errorString().toLatin1()); });
+        handleAllStatusCode(mNetReply, mDataBuffer, [=](/*OK*/){ response(*mDataBuffer); }, [=](QByteArray res){ error(res); });
     });
 }
 
@@ -70,7 +70,7 @@ void Apis::getRequestCallbacksStatus(std::function<void(QByteArray)> response, s
 
     connect(mNetReply, &QIODevice::readyRead, this, [=]() { mDataBuffer->append(mNetReply->readAll()); });
     connect(mNetReply, &QNetworkReply::finished, this, [=](){
-        handleAllStatusCode(mNetReply, [=](/*OK*/){ response(*mDataBuffer); }, [=](/*ERROR*/){ error(mNetReply->errorString().toLatin1()); });
+        handleAllStatusCode(mNetReply, mDataBuffer, [=](/*OK*/){ response(*mDataBuffer); }, [=](QByteArray res){ error(res); });
     });
 }
 
@@ -82,7 +82,7 @@ void Apis::getStudents(std::function<void(QByteArray)> response, std::function<v
 
     connect(mNetReply, &QIODevice::readyRead, this, [=]() { mDataBuffer->append(mNetReply->readAll()); });
     connect(mNetReply, &QNetworkReply::finished, this, [=](){
-        handleAllStatusCode(mNetReply, [=](/*OK*/){ response(*mDataBuffer); }, [=](/*ERROR*/){ error(mNetReply->errorString().toLatin1()); });
+        handleAllStatusCode(mNetReply, mDataBuffer, [=](/*OK*/){ response(*mDataBuffer); }, [=](QByteArray res){ error(res); });
     });
 }
 
@@ -99,7 +99,7 @@ void Apis::getStudent(const QString &studentId, std::function<void(QByteArray)> 
 
     connect(mNetReply, &QIODevice::readyRead, this, [=]() { mDataBuffer->append(mNetReply->readAll()); });
     connect(mNetReply, &QNetworkReply::finished, this, [=](){
-        handleAllStatusCode(mNetReply, [=](/*OK*/){ response(*mDataBuffer); }, [=](/*ERROR*/){ error(mNetReply->errorString().toLatin1()); });
+        handleAllStatusCode(mNetReply, mDataBuffer, [=](/*OK*/){ response(*mDataBuffer); }, [=](QByteArray res){ error(res); });
     });
 }
 
@@ -145,7 +145,7 @@ void Apis::createStudent(const QString &name, const QString &imageUrl, const QSt
 
     connect(mNetReply, &QIODevice::readyRead, this, [=]() { mDataBuffer->append(mNetReply->readAll()); });
     connect(mNetReply, &QNetworkReply::finished, this, [=](){
-        handleAllStatusCode(mNetReply, [=](/*OK*/){ response(*mDataBuffer); }, [=](/*ERROR*/){ error(mNetReply->errorString().toLatin1()); });
+        handleAllStatusCode(mNetReply, mDataBuffer, [=](/*OK*/){ response(*mDataBuffer); }, [=](QByteArray res){ error(res); });
     });
 }
 
@@ -164,7 +164,7 @@ void Apis::deleteStudent(const QString &studentId, std::function<void(QByteArray
 
     connect(mNetReply, &QIODevice::readyRead, this, [=]() { mDataBuffer->append(mNetReply->readAll()); });
     connect(mNetReply, &QNetworkReply::finished, this, [=](){
-        handleAllStatusCode(mNetReply, [=](/*OK*/){ response(*mDataBuffer); }, [=](/*ERROR*/){ error(mNetReply->errorString().toLatin1()); });
+        handleAllStatusCode(mNetReply, mDataBuffer, [=](/*OK*/){ response(*mDataBuffer); }, [=](QByteArray res){ error(res); });
     });
 }
 
@@ -208,7 +208,7 @@ void Apis::updateStudent(const QString &studentId, const QString &name, int age,
 
     connect(mNetReply, &QIODevice::readyRead, this, [=]() { mDataBuffer->append(mNetReply->readAll()); });
     connect(mNetReply, &QNetworkReply::finished, this, [=](){
-        handleAllStatusCode(mNetReply, [=](/*OK*/){ response(*mDataBuffer); }, [=](/*ERROR*/){ error(mNetReply->errorString().toLatin1()); });
+        handleAllStatusCode(mNetReply, mDataBuffer, [=](/*OK*/){ response(*mDataBuffer); }, [=](QByteArray res){ error(res); });
     });
 }
 
@@ -220,7 +220,7 @@ void Apis::getRequestCallbacks(std::function<void(QByteArray)> response, std::fu
 
     connect(mNetReply, &QIODevice::readyRead, this, [=]() { mDataBuffer->append(mNetReply->readAll()); });
     connect(mNetReply, &QNetworkReply::finished, this, [=](){
-        handleAllStatusCode(mNetReply, [=](/*OK*/){ response(*mDataBuffer); }, [=](/*ERROR*/){ error(mNetReply->errorString().toLatin1()); });
+        handleAllStatusCode(mNetReply, mDataBuffer, [=](/*OK*/){ response(*mDataBuffer); }, [=](QByteArray res){ error(res); });
     });
 }
 
@@ -239,7 +239,7 @@ void Apis::getRequestCallback(const QString &requestCallbackId, std::function<vo
 
     connect(mNetReply, &QIODevice::readyRead, this, [=]() { mDataBuffer->append(mNetReply->readAll()); });
     connect(mNetReply, &QNetworkReply::finished, this, [=](){
-        handleAllStatusCode(mNetReply, [=](/*OK*/){ response(*mDataBuffer); }, [=](/*ERROR*/){ error(mNetReply->errorString().toLatin1()); });
+        handleAllStatusCode(mNetReply, mDataBuffer, [=](/*OK*/){ response(*mDataBuffer); }, [=](QByteArray res){ error(res); });
     });
 }
 
@@ -261,7 +261,7 @@ void Apis::callbackRequestCreate(const QString &courseId, const QString &name, c
 
     connect(mNetReply, &QIODevice::readyRead, this, [=]() { mDataBuffer->append(mNetReply->readAll()); });
     connect(mNetReply, &QNetworkReply::finished, this, [=](){
-        handleAllStatusCode(mNetReply, [=](/*OK*/){ response(*mDataBuffer); }, [=](/*ERROR*/){ error(mNetReply->errorString().toLatin1()); });
+        handleAllStatusCode(mNetReply, mDataBuffer, [=](/*OK*/){ response(*mDataBuffer); }, [=](QByteArray res){ error(res); });
     });
 }
 
@@ -280,7 +280,7 @@ void Apis::callbackRequestDelete(const QString &requestCallbackId, std::function
 
     connect(mNetReply, &QIODevice::readyRead, this, [=]() { mDataBuffer->append(mNetReply->readAll()); });
     connect(mNetReply, &QNetworkReply::finished, this, [=](){
-        handleAllStatusCode(mNetReply, [=](/*OK*/){ response(*mDataBuffer); }, [=](/*ERROR*/){ error(mNetReply->errorString().toLatin1()); });
+        handleAllStatusCode(mNetReply, mDataBuffer, [=](/*OK*/){ response(*mDataBuffer); }, [=](QByteArray res){ error(res); });
     });
 }
 
@@ -298,7 +298,7 @@ void Apis::callbackRequestDeleteAll(std::function<void (QByteArray)> response, s
 
     connect(mNetReply, &QIODevice::readyRead, this, [=]() { mDataBuffer->append(mNetReply->readAll()); });
     connect(mNetReply, &QNetworkReply::finished, this, [=](){
-        handleAllStatusCode(mNetReply, [=](/*OK*/){ response(*mDataBuffer); }, [=](/*ERROR*/){ error(mNetReply->errorString().toLatin1()); });
+        handleAllStatusCode(mNetReply, mDataBuffer, [=](/*OK*/){ response(*mDataBuffer); }, [=](QByteArray res){ error(res); });
     });
 }
 
@@ -310,7 +310,7 @@ void Apis::getCourses(std::function<void(QByteArray)> response, std::function<vo
 
     connect(mNetReply, &QIODevice::readyRead, this, [=]() { mDataBuffer->append(mNetReply->readAll()); });
     connect(mNetReply, &QNetworkReply::finished, this, [=](){
-        handleAllStatusCode(mNetReply, [=](/*OK*/){ response(*mDataBuffer); }, [=](/*ERROR*/){ error(mNetReply->errorString().toLatin1()); });
+        handleAllStatusCode(mNetReply, mDataBuffer, [=](/*OK*/){ response(*mDataBuffer); }, [=](QByteArray res){ error(res); });
     });
 }
 
@@ -329,35 +329,14 @@ void Apis::getCourse(const QString &courseId, std::function<void(QByteArray)> re
 
     connect(mNetReply, &QIODevice::readyRead, this, [=]() { mDataBuffer->append(mNetReply->readAll()); });
     connect(mNetReply, &QNetworkReply::finished, this, [=](){
-        handleAllStatusCode(mNetReply, [=](/*OK*/){ response(*mDataBuffer); }, [=](/*ERROR*/){ error(mNetReply->errorString().toLatin1()); });
+        handleAllStatusCode(mNetReply, mDataBuffer, [=](/*OK*/){ response(*mDataBuffer); }, [=](QByteArray res){ error(res); });
     });
 }
 
-void Apis::createCourse(const QString &title, const QString &subtitle, const QString &duration, const QString &thumbnailUrl, const QString &imageContainer, QList<QString> &features, float price, bool hasActive, int spaceLeft, int spaceFull, const QString &starts, const QString &ends, std::function<void(QByteArray)> response, std::function<void(QByteArray)> error)
+void Apis::createCourse(const QJsonObject &course, std::function<void(QByteArray)> response, std::function<void(QByteArray)> error)
 {
     clearResponse();
-    QJsonObject mainObject;
-    mainObject.insert("title", title);
-    mainObject.insert("subtitle", subtitle);
-    mainObject.insert("duration", duration);
-    mainObject.insert("thumbnailUrl", thumbnailUrl);
-    mainObject.insert("imageContainer", imageContainer);
-    mainObject.insert("price", price);
-    mainObject.insert("hasActive", hasActive);
-    mainObject.insert("spaceLeft", spaceLeft);
-    mainObject.insert("spaceFull", spaceFull);
-
-    QJsonObject session;
-    session.insert("starts", starts);
-    session.insert("ends", ends);
-    mainObject.insert("session", session);
-
-    QJsonArray array;
-    for(QString e: features) array.push_back(e);
-    mainObject.insert("features", array);
-
-    QJsonDocument jsonDoc;
-    jsonDoc.setObject(mainObject);
+    QJsonDocument jsonDoc(course);
 
     QNetworkRequest request(routes->post_api_xcodeclazz_course_create());
     request.setHeader(QNetworkRequest::ContentTypeHeader, _raw_headers->application_json);
@@ -365,7 +344,7 @@ void Apis::createCourse(const QString &title, const QString &subtitle, const QSt
 
     connect(mNetReply, &QIODevice::readyRead, this, [=]() { mDataBuffer->append(mNetReply->readAll()); });
     connect(mNetReply, &QNetworkReply::finished, this, [=](){
-        handleAllStatusCode(mNetReply, [=](/*OK*/){ response(*mDataBuffer); }, [=](/*ERROR*/){ error(mNetReply->errorString().toLatin1()); });
+        handleAllStatusCode(mNetReply, mDataBuffer, [=](/*OK*/){ response(*mDataBuffer); }, [=](QByteArray res){ error(res); });
     });
 }
 
@@ -402,7 +381,7 @@ void Apis::updateCourse(const QString &courseId, const QString &title, const QSt
 
     connect(mNetReply, &QIODevice::readyRead, this, [=]() { mDataBuffer->append(mNetReply->readAll()); });
     connect(mNetReply, &QNetworkReply::finished, this, [=](){
-        handleAllStatusCode(mNetReply, [=](/*OK*/){ response(*mDataBuffer); }, [=](/*ERROR*/){ error(mNetReply->errorString().toLatin1()); });
+        handleAllStatusCode(mNetReply, mDataBuffer, [=](/*OK*/){ response(*mDataBuffer); }, [=](QByteArray res){ error(res); });
     });
 }
 
@@ -421,7 +400,7 @@ void Apis::deleteCourse(const QString &courseId, std::function<void(QByteArray)>
 
     connect(mNetReply, &QIODevice::readyRead, this, [=]() { mDataBuffer->append(mNetReply->readAll()); });
     connect(mNetReply, &QNetworkReply::finished, this, [=](){
-        handleAllStatusCode(mNetReply, [=](/*OK*/){ response(*mDataBuffer); }, [=](/*ERROR*/){ error(mNetReply->errorString().toLatin1()); });
+        handleAllStatusCode(mNetReply, mDataBuffer, [=](/*OK*/){ response(*mDataBuffer); }, [=](QByteArray res){ error(res); });
     });
 }
 
@@ -445,7 +424,7 @@ void Apis::exchangeGoogleOAuthCode(QString code, std::function<void(QByteArray)>
     QNetworkReply *mNetReply = mNetMan->post(request, postData);
     connect(mNetReply, &QIODevice::readyRead, this, [=]() { mDataBuffer->append(mNetReply->readAll()); });
     connect(mNetReply, &QNetworkReply::finished, this, [=](){
-        handleAllStatusCode(mNetReply, [=](/*OK*/){ response(*mDataBuffer); }, [=](/*ERROR*/){ error(mNetReply->errorString().toLatin1()); });
+        handleAllStatusCode(mNetReply, mDataBuffer, [=](/*OK*/){ response(*mDataBuffer); }, [=](QByteArray res){ error(res); });
     });
 }
 
@@ -458,6 +437,6 @@ void Apis::exchangeGoogleAccessTokenForUserInfo(QString tokenType, QString acces
     QNetworkReply *mNetReply = mNetMan->get(request);
     connect(mNetReply, &QIODevice::readyRead, this, [=]() { mDataBuffer->append(mNetReply->readAll()); });
     connect(mNetReply, &QNetworkReply::finished, this, [=](){
-        handleAllStatusCode(mNetReply, [=](/*OK*/){ response(*mDataBuffer); }, [=](/*ERROR*/){ error(mNetReply->errorString().toLatin1()); });
+        handleAllStatusCode(mNetReply, mDataBuffer, [=](/*OK*/){ response(*mDataBuffer); }, [=](QByteArray res){ error(res); });
     });
 }

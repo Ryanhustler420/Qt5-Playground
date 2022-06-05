@@ -10,71 +10,66 @@ Page {
     Layout.fillWidth: true
     title: qsTr("xCodeClazz")
 
-    Row {
-        id: row
-        anchors.fill: parent
+    Column {
+        id: column
+        spacing: 5
+        height: 200
+        width: parent.width * .3
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.horizontalCenter: parent.horizontalCenter
+        Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+
+        Label {
+            id: label
+            width: parent.width
+            Layout.alignment: Qt.AlignHCenter
+            text: qsTr("<b>x</b>CodeClazz")
+            horizontalAlignment: Text.AlignHCenter
+            anchors.topMargin: 10
+            font.pointSize: 20
+        }
+
+        TextField {
+            id: tfEmail
+            width: parent.width
+            bottomPadding: 16
+            Layout.fillWidth: true
+            Layout.alignment: Qt.AlignHCenter
+            placeholderText: qsTr("Email")
+        }
+
+        TextField {
+            id: tfPassword
+            width: parent.width
+            Layout.fillWidth: true
+            Layout.alignment: Qt.AlignHCenter
+            placeholderText: qsTr("Password")
+            echoMode: TextField.Password
+        }
 
         Column {
-            id: column
-            spacing: 5
-            height: 200
-            width: parent.width * .3
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.horizontalCenter: parent.horizontalCenter
-            Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+            width: parent.width
 
-            Label {
-                id: label
+            Button {
+                id: loginBtn
                 width: parent.width
-                Layout.alignment: Qt.AlignHCenter
-                text: qsTr("<b>x</b>CodeClazz")
-                horizontalAlignment: Text.AlignHCenter
-                anchors.topMargin: 10
-                font.pointSize: 20
-            }
-
-            TextField {
-                id: tfEmail
-                width: parent.width
-                bottomPadding: 16
+                text: "Login"
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignHCenter
-                placeholderText: qsTr("Email")
+                onClicked: login()
             }
 
-            TextField {
-                id: tfPassword
+            Button {
+                id: googleLoginBtn
                 width: parent.width
+                text: "Continue with Google"
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignHCenter
-                placeholderText: qsTr("Password")
-                echoMode: TextField.Password
-            }
-
-            Column {
-                width: parent.width
-
-                Button {
-                    id: loginBtn
-                    width: parent.width
-                    text: "Login"
-                    Layout.fillWidth: true
-                    Layout.alignment: Qt.AlignHCenter
-                    onClicked: login()
-                }
-
-                Button {
-                    id: googleLoginBtn
-                    width: parent.width
-                    text: "Continue with Google"
-                    Layout.fillWidth: true
-                    Layout.alignment: Qt.AlignHCenter
-                    onClicked: loginWithGoogle()
-                }
-
+                onClicked: loginWithGoogle()
             }
 
         }
+
     }
 
     Action {

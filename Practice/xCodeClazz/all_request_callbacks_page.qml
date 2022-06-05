@@ -80,7 +80,10 @@ Page {
                     taskScroll.position = oldPos - taskScroll.position
                 }
             }
-            ScrollBar.vertical: ScrollBar { id: taskScroll }
+            ScrollBar.vertical: ScrollBar {
+                id: taskScroll
+                height: 0
+            }
             delegate: Rectangle {
                 width: callbacks_listview.width
                 color: "transparent"

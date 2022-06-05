@@ -36,7 +36,13 @@ bool XCodeClazzDB::callbackRequest_file()
 
 bool XCodeClazzDB::saveCallbackRequest(const QJsonObject &o)
 {
+    QJsonArray old = getCallbackRequests();
+    old.push_back(o);
 
+    QJsonDocument jsonDoc;
+    jsonDoc.setArray(old);
+
+    return x->save(jsonDoc, callback_requests);
 }
 
 bool XCodeClazzDB::saveCallbackRequests(const QJsonArray &o)
@@ -63,6 +69,16 @@ bool XCodeClazzDB::deleteCallbackRequests()
     return saveCallbackRequests(l);
 }
 
+QJsonObject XCodeClazzDB::getCallbackRequest(const QString &requestCallbackId)
+{
+
+}
+
+QJsonArray XCodeClazzDB::getCallbackRequests()
+{
+    return x->get(callback_requests).array();
+}
+
 bool XCodeClazzDB::student_file()
 {
     return x->present(students);
@@ -70,7 +86,13 @@ bool XCodeClazzDB::student_file()
 
 bool XCodeClazzDB::saveStudent(const QJsonObject &o)
 {
+    QJsonArray old = getStudents();
+    old.push_back(o);
 
+    QJsonDocument jsonDoc;
+    jsonDoc.setArray(old);
+
+    return x->save(jsonDoc, students);
 }
 
 bool XCodeClazzDB::saveStudents(const QJsonArray &o)
@@ -92,7 +114,13 @@ QJsonObject XCodeClazzDB::getStudent(const QString &studentId)
 
 bool XCodeClazzDB::deleteStudent(const QString &studentId)
 {
-
+    QJsonArray s = getStudents();
+    QJsonArray l;
+    for (int var = 0; var < s.size(); ++var) {
+        QJsonObject v = s.at(var).toObject();
+        if(!v.value("_id").toString().contains(studentId)) l.push_back(v);
+    }
+    return saveStudents(l);
 }
 
 bool XCodeClazzDB::deleteStudents()
@@ -101,12 +129,52 @@ bool XCodeClazzDB::deleteStudents()
     return saveStudents(l);
 }
 
-QJsonArray XCodeClazzDB::getCallbackRequests()
+bool XCodeClazzDB::course_file()
 {
-    return x->get(callback_requests).array();
+    return x->present(courses);
 }
 
-QJsonObject XCodeClazzDB::getCallbackRequest(const QString &requestCallbackId)
+bool XCodeClazzDB::saveCourse(const QJsonObject &o)
+{
+    QJsonArray old = getCourses();
+    old.push_back(o);
+
+    QJsonDocument jsonDoc;
+    jsonDoc.setArray(old);
+
+    return x->save(jsonDoc, courses);
+}
+
+bool XCodeClazzDB::saveCourses(const QJsonArray &o)
+{
+    QJsonDocument doc;
+    doc.setArray(o);
+    return x->save(doc, courses);
+}
+
+QJsonArray XCodeClazzDB::getCourses()
+{
+    return x->get(courses).array();
+}
+
+QJsonObject XCodeClazzDB::getCourse(const QString &courseId)
 {
 
+}
+
+bool XCodeClazzDB::deleteCourse(const QString &courseId)
+{
+    QJsonArray s = getCourses();
+    QJsonArray l;
+    for (int var = 0; var < s.size(); ++var) {
+        QJsonObject v = s.at(var).toObject();
+        if(!v.value("_id").toString().contains(courseId)) l.push_back(v);
+    }
+    return saveCourses(l);
+}
+
+bool XCodeClazzDB::deleteCourses()
+{
+    QJsonArray l;
+    return saveCourses(l);
 }

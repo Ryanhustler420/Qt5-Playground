@@ -86,6 +86,7 @@ Page {
                 }
                 ScrollBar.vertical: ScrollBar {
                     id: scroll_handle
+                    height: 0
                     onPositionChanged: {
                         if (scroll_handle.position + scroll_handle.size == 1) {
                             console.log("Reached Bottom")
@@ -456,7 +457,7 @@ Page {
             title.text = docs['title'];
             duration.text = docs['duration'];
             subtitle.text = docs['subtitle'];
-            price.text = docs['price'] + '/-';
+            price.text = formatMoney(docs['price']) + '/-';
             course_img_loader.source = docs['assetsUrl'] + docs['thumbnailUrl'];
             course_img_loader_placeholder.source = docs['assetsUrl'] + docs['thumbnailUrl'];
 
@@ -468,5 +469,20 @@ Page {
             console.log(_id);
             loading_popup.close()
         }
+
+        function formatMoney(number, decPlaces, decSep, thouSep) {
+            const _decPlaces = isNaN(decPlaces = Math.abs(decPlaces)) ? 2 : decPlaces,
+            _decSep = typeof decSep === "undefined" ? "." : decSep;
+            thouSep = typeof thouSep === "undefined" ? "," : thouSep;
+            var sign = number < 0 ? "-" : "";
+            var i = String(parseInt(number = Math.abs(Number(number) || 0).toFixed(_decPlaces)));
+            var j = (j = i.length) > 3 ? j % 3 : 0;
+
+            return sign +
+                (j ? i.substr(0, j) + thouSep : "") +
+                i.substr(j).replace(/(\decSep{3})(?=\decSep)/g, "$1" + thouSep) +
+                (_decPlaces ? _decSep + Math.abs(number - i).toFixed(_decPlaces).slice(2) : "");
+        }
+
     }
 }

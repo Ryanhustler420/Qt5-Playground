@@ -19,7 +19,7 @@ class AllRequestCallbacksPage : public QObject
 public:
     explicit AllRequestCallbacksPage(QObject *parent = nullptr);
 
-    Q_INVOKABLE void hold(QVariant o);
+    Q_INVOKABLE void pass(QVariant o);
     Q_INVOKABLE void loadCallbackRequests();
 
     Q_INVOKABLE void addNewItem(QVariant object);
@@ -32,7 +32,7 @@ signals:
     void showLoading(bool b);
 
 signals:
-    void holded(QVariant o);
+    void passed(QVariant o);
     void callbackRequestsLoaded(QVariantList callbacks);
 
     void newItemsAdded(QVariantList objects);

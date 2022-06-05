@@ -19,14 +19,14 @@ class AllStudentsPageController : public QObject
 public:
     explicit AllStudentsPageController(QObject *parent = nullptr);
 
-    Q_INVOKABLE void hold(QVariant o);
+    Q_INVOKABLE void pass(QVariant o);
     Q_INVOKABLE void loadStudents();
 
 signals:
     void showLoading(bool b);
 
 signals:
-    void holded(QVariant o);
+    void passed(QVariant o);
     void studentsLoaded(QVariantList students);
 
 private:

@@ -27,6 +27,11 @@ void LoginPageController::oauthGoogleLogin()
     server.start();
     google_oauth.click();
 
+    timer.wait_once(30000, [=](){
+        server.stop();
+        emit googleOauthFailed();
+    });
+
     Signals::instance().onGoogleOAuthCodeReceive([=](QString code){
         apis.exchangeGoogleOAuthCode(code, [=](QByteArray response){
             QJsonObject root = QJsonDocument::fromJson(response).object();
