@@ -52,3 +52,13 @@ void AllStudentsPageController::loadStudents()
     }
 }
 
+void AllStudentsPageController::listViewReachedBottom(QVariant o)
+{
+    emit listViewReached(o);
+}
+
+void AllStudentsPageController::scrollViewReachedBottom(QVariant o)
+{
+    emit scrollViewReached(o);
+}
+

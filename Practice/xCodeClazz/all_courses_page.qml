@@ -60,7 +60,7 @@ Page {
             height: 0
             onPositionChanged: {
                 if (scroll_handle.position + scroll_handle.size == 1) {
-                    console.log("Reached Bottom")
+                    page_controller.scrollViewReachedBottom({});
                 }
             }
         }
@@ -277,6 +277,12 @@ Page {
 
     AllCoursesPageController {
         id: page_controller
+        onListViewReached: {
+            console.log(o)
+        }
+        onScrollViewReached: {
+            console.log(o)
+        }
         onShowLoading: {
             if (b) {
                 popup.open()

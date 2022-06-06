@@ -2,16 +2,16 @@
 
 SingleCoursePageController::SingleCoursePageController(QObject *parent) : QObject(parent)
 {
-    bundle = QJsonDocument::fromJson(lc.get("Course").toByteArray()).object();
+}
 
-    // we will make google like design for shop keeper to check the product exstence across the city
+void SingleCoursePageController::pass(QVariant o)
+{
 
-    // get the data from the internet and emit an event which will render the data in view
-    // if already present the data in local then get that in the first place
+}
 
-    // goal is to render the details on page after it fetchs from server
-    // start loading the ui using busy indicator and when fetch emit a signal
-    // and render the data
+void SingleCoursePageController::loadCourse()
+{
+    QJsonObject bundle = QJsonDocument::fromJson(lc.get("Course").toByteArray()).object();
 
     // get the data from id
     QString _id = bundle.value("_id").toString();
@@ -19,18 +19,28 @@ SingleCoursePageController::SingleCoursePageController(QObject *parent) : QObjec
     // get the data from internet
     apis.getCourse(_id, [=](QByteArray response){
         QJsonObject doc = QJsonDocument::fromJson(response).object();
-        // send the data to UI
-        emit dataReady(QVariant(doc));
+        emit courseLoaded(QVariant(doc));
     }, [=](QByteArray error){
         qInfo() << error;
     });
-
 }
 
-void SingleCoursePageController::deleteCourse(QString _id)
+void SingleCoursePageController::deleteCourse(QJsonObject o)
 {
-    qInfo() << _id;
+    qInfo() << o;
+
+    // qInfo() << _id;
     // send delete request and emit
     // update the local data
     // redirect back
+}
+
+void SingleCoursePageController::listViewReachedBottom(QVariant o)
+{
+    emit listViewReached(o);
+}
+
+void SingleCoursePageController::scrollViewReachedBottom(QVariant o)
+{
+    emit scrollViewReached(o);
 }

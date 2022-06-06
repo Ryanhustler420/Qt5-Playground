@@ -73,15 +73,15 @@ Page {
             onMovementEnded: { }
             onMovementStarted: { }
             onContentYChanged: {
-                if ((taskScroll.position + taskScroll.size) == 1) {
-                    console.log("fetch more data")
-                    const oldPos = taskScroll.position
-                    const oldSize = taskScroll.size
-                    taskScroll.position = oldPos - taskScroll.position
+                if ((listScroll.position + listScroll.size) == 1) {
+                    const oldPos = listScroll.position
+                    const oldSize = listScroll.size
+                    listScroll.position = oldPos - listScroll.position
+                    page_controller.listViewReachedBottom({});
                 }
             }
             ScrollBar.vertical: ScrollBar {
-                id: taskScroll
+                id: listScroll
                 height: 0
             }
             delegate: Rectangle {
@@ -158,6 +158,12 @@ Page {
 
     AllRequestCallbacksPage {
         id: page_controller
+        onListViewReached: {
+            console.log(o)
+        }
+        onScrollViewReached: {
+            console.log(o)
+        }
         onShowLoading: {
             if (b) {
                 popup.open()

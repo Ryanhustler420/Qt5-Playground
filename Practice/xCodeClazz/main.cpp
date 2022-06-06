@@ -35,5 +35,13 @@ int main(int argc, char *argv[])
     i.setCheck_internet_connection_in_loop_is_running(true);
     i.check_internet_connection_in_loop();
 
+    // TODO: // every component can have stackView
+    // TODO: we will make google like design for shop keeper to check the product exstence across the city
+
+    // use animation
+    // if login page removed from stack view, then gotopage can't call
+    // first go to that page and then remove the stack below
+    // figure out the design pattern and use that in another project
+
     return app.exec();
 }

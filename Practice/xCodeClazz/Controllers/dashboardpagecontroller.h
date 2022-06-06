@@ -8,6 +8,7 @@
 #include "application/manager.h"
 #include "utility/jsonhelper.h"
 #include "networking/apis.h"
+#include "utility/timer.h"
 #include "rx/signals.h"
 
 class DashboardPageController : public QObject
@@ -19,6 +20,14 @@ public:
     Q_INVOKABLE void logout();
     Q_INVOKABLE void loadUserData();
 
+    Q_INVOKABLE void listViewReachedBottom(QVariant o);
+    Q_INVOKABLE void scrollViewReachedBottom(QVariant o);
+
+signals:
+    void showLoading(bool b);
+    void listViewReached(QVariant o);
+    void scrollViewReached(QVariant o);
+
 signals:
     void logedout();
     void loadedUserData(QJsonObject o);
@@ -26,6 +35,7 @@ signals:
 private:
     XCodeClazzDB xdb;
     Apis apis;
+    Timer timer;
 
 };
 

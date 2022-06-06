@@ -22,6 +22,13 @@ public:
     Q_INVOKABLE void checkAuthentication();
     Q_INVOKABLE void oauthGoogleLogin();
     Q_INVOKABLE void login(QString email, QString password);
+    Q_INVOKABLE void listViewReachedBottom(QVariant o);
+    Q_INVOKABLE void scrollViewReachedBottom(QVariant o);
+
+signals:
+    void showLoading(bool b);
+    void listViewReached(QVariant o);
+    void scrollViewReached(QVariant o);
 
 signals:
     void userAuthenticated(bool isAuthenticated);

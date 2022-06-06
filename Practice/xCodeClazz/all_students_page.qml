@@ -78,15 +78,16 @@ Page {
             onMovementEnded: { }
             onMovementStarted: { }
             onContentYChanged: {
-                if ((taskScroll.position + taskScroll.size) == 1) {
+                if ((listScroll.position + listScroll.size) == 1) {
                     console.log("fetch more data")
-                    const oldPos = taskScroll.position
-                    const oldSize = taskScroll.size
-                    taskScroll.position = oldPos - taskScroll.position
+                    const oldPos = listScroll.position
+                    const oldSize = listScroll.size
+                    listScroll.position = oldPos - listScroll.position
+                    page_controller.listViewReachedBottom({});
                 }
             }
             ScrollBar.vertical: ScrollBar {
-                id: taskScroll
+                id: listScroll
                 height: 0
             }
             delegate: Component {
@@ -144,6 +145,15 @@ Page {
             onWidthChanged: {
                 width: parent.width * 0.6
                 height: parent.height
+            }
+            ScrollBar.vertical: ScrollBar {
+                id: scroll_handle
+                height: 0
+                onPositionChanged: {
+                    if (scroll_handle.position + scroll_handle.size == 1) {
+                        page_controller.scrollViewReachedBottom({});
+                    }
+                }
             }
 
             Column {
@@ -581,6 +591,12 @@ Page {
 
     AllStudentsPageController {
         id: page_controller
+        onListViewReached: {
+            console.log(o)
+        }
+        onScrollViewReached: {
+            console.log(o)
+        }
         onShowLoading: {
             if (b) {
                 popup.open()

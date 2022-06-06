@@ -5,6 +5,11 @@ Signals::Signals(QWidget *parent) : OSingleton<Signals>()
     Q_UNUSED(parent);
 }
 
+void Signals::onApplicationLoading(std::function<void (bool)> callback)
+{
+    connect(this, &Signals::applicationLoading, this, [=](bool b){ callback(b); });
+}
+
 void Signals::onInternetStatusRefresh(std::function<void (bool)> callback)
 {
     connect(this, &Signals::internetStatusRefreshed, this, [=](bool b){ callback(b); });

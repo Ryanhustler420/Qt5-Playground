@@ -12,10 +12,12 @@ public:
     explicit Signals(QWidget *parent = nullptr);
 
 signals:
+    void applicationLoading(bool b);
     void internetStatusRefreshed(bool b);
     void googleOAuthCodeReceive(QString code);
 
 public slots:
+    void onApplicationLoading(std::function<void (bool b)> callback);
     void onInternetStatusRefresh(std::function<void (bool b)> callback);
     void onGoogleOAuthCodeReceive(std::function<void(QString code)> callback);
 

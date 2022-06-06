@@ -89,6 +89,21 @@ Page {
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 width: parent.width
+                onMovementEnded: { }
+                onMovementStarted: { }
+                onContentYChanged: {
+                    if ((listScroll.position + listScroll.size) == 1) {
+                        console.log("fetch more data")
+                        const oldPos = listScroll.position
+                        const oldSize = listScroll.size
+                        listScroll.position = oldPos - listScroll.position
+                        page_controller.listViewReachedBottom({});
+                    }
+                }
+                ScrollBar.vertical: ScrollBar {
+                    id: listScroll
+                    height: 0
+                }
                 model: [{ name: "Courses" }, { name: "Students" }, { name: "Callback Requests" }, { name: "Logout" }]
                 delegate: ItemDelegate {
                     text: modelData.name
@@ -128,7 +143,7 @@ Page {
                     height: 0
                     onPositionChanged: {
                         if (scroll_handle.position + scroll_handle.size == 1) {
-                            console.log("Reached Bottom")
+                            page_controller.scrollViewReachedBottom({});
                         }
                     }
                 }
@@ -293,6 +308,12 @@ Page {
 
     DashboardPageController {
         id: page_controller
+        onListViewReached: {
+            console.log(o)
+        }
+        onScrollViewReached: {
+            console.log(o)
+        }
         onLogedout: {
             application.pop()
         }

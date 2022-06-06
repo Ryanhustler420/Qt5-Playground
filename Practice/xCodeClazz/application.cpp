@@ -49,6 +49,5 @@ void Application::pop()
 
 void Application::startListeners()
 {
-    // Signals Listeners...
-    // Signals::instance().onInternetStatusRefresh([=](bool b){});
+    Signals::instance().onApplicationLoading([=](bool b){ emit loading(b); });
 }

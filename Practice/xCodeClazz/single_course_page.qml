@@ -11,10 +11,6 @@ Page {
     Layout.fillHeight: true
     title: qsTr("xCodeClazz")
 
-    Component.onCompleted: {
-
-    }
-
     Column {
         width: parent.width
         height: parent.height
@@ -89,7 +85,7 @@ Page {
                     height: 0
                     onPositionChanged: {
                         if (scroll_handle.position + scroll_handle.size == 1) {
-                            console.log("Reached Bottom")
+                            page_controller.scrollViewReachedBottom({});
                         }
                     }
                 }
@@ -178,7 +174,7 @@ Page {
                             text: "Edit"
                             Material.background: Material.Green
                             onClicked: {
-                                edit_form_popup.open()
+                                update_course_form.open()
                             }
                         }
 
@@ -188,7 +184,7 @@ Page {
                             Material.background: Material.Red
                             onClicked: {
                                 loading_popup.open()
-                                page_controller.courseDeleted("_id")
+                                page_controller.deleteCourse("_id")
                             }
                         }
 
@@ -291,142 +287,170 @@ Page {
         width: 350
         modal: true
         focus: true
-        id: edit_form_popup
+        id: update_course_form
         anchors.centerIn: parent
         closePolicy: Popup.NoAutoClose
 
-        Column {
+        ScrollView {
+            clip: true
+            visible: true
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            height: parent.height
             width: parent.width
-            spacing: 5
+            ScrollBar.vertical: ScrollBar {
+                height: 0
+            }
 
-            Row {
+            Column {
                 width: parent.width
+                spacing: 5
 
-                Label {
-                    font.bold: true
-                    font.pointSize: 20
-                    text: "Course Update"
-                    width: parent.width * .9
-                }
+                Row {
+                    width: parent.width
 
-                Label {
-                    text: "X"
-                    font.bold: true
-                    font.pointSize: 20
-                    width: parent.width * .1
+                    Label {
+                        font.bold: true
+                        font.pointSize: 20
+                        text: "Course Create"
+                        width: parent.width * .9
+                    }
 
-                    MouseArea {
-                        cursorShape: Qt.PointingHandCursor
-                        anchors.fill: parent
-                        onClicked: {
-                            edit_form_popup.close()
+                    Label {
+                        text: "X"
+                        font.bold: true
+                        font.pointSize: 20
+                        width: parent.width * .1
+
+                        MouseArea {
+                            cursorShape: Qt.PointingHandCursor
+                            anchors.fill: parent
+                            onClicked: {
+                                update_course_form.close()
+                            }
                         }
+
                     }
 
                 }
 
-            }
-
-            TextField {
-                placeholderText: "Title"
-                width: parent.width
-            }
-
-            TextField {
-                placeholderText: "Subtitle"
-                width: parent.width
-            }
-
-            TextField {
-                placeholderText: "Duration 3 Months"
-                width: parent.width
-            }
-
-            TextField {
-                placeholderText: "Thumbnail Slug /assts/img.png"
-                width: parent.width
-            }
-
-            TextField {
-                placeholderText: "Features | One | By | One"
-                width: parent.width
-            }
-
-            TextField {
-                placeholderText: "Price"
-                width: parent.width
-            }
-
-            Row {
-                width: parent.width
-                spacing: 5
-
                 TextField {
-                    width: parent.width * .5
-                    placeholderText: "Session Starts"
+                    id: update_title_tf
+                    placeholderText: "Title"
+                    width: parent.width
                 }
 
                 TextField {
-                    width: parent.width * .5
-                    placeholderText: "Session Ends"
+                    id: update_subtitle_tf
+                    placeholderText: "Subtitle"
+                    width: parent.width
                 }
 
-            }
-
-            Row {
-                width: parent.width
-                spacing: 5
-
-                CheckBox {
-                    text: "HasActive"
+                TextField {
+                    id: update_duration_tf
+                    placeholderText: "Duration 3 Months"
+                    width: parent.width
                 }
 
-            }
-
-            Row {
-                width: parent.width
-                spacing: 5
-
-                Label {
-                    anchors.verticalCenter: parent.verticalCenter
-                    width: parent.width * .3
-                    font.pixelSize: 15
-                    text: "Space Left"
+                TextField {
+                    id: update_thumbnail_tf
+                    placeholderText: "Thumbnail Slug /assts/img.png"
+                    width: parent.width
                 }
 
-                SpinBox {
-                    width: parent.width * .7
-                    from: 0
-                    to: 50
+                TextField {
+                    id: update_features_tf
+                    placeholderText: "Features | One | By | One"
+                    width: parent.width
                 }
 
-            }
-
-            Row {
-                width: parent.width
-                spacing: 5
-
-                Label {
-                    anchors.verticalCenter: parent.verticalCenter
-                    width: parent.width * .3
-                    font.pixelSize: 15
-                    text: "Space Full"
+                TextField {
+                    id: update_price_tf
+                    placeholderText: "Price"
+                    width: parent.width
                 }
 
-                SpinBox {
-                    width: parent.width * .7
-                    from: 0
-                    to: 50
+                Row {
+                    width: parent.width
+                    spacing: 5
+
+                    TextField {
+                        id: update_session_start_tf
+                        width: parent.width * .5
+                        placeholderText: "Session Starts"
+                    }
+
+                    TextField {
+                        id: update_session_ends_tf
+                        width: parent.width * .5
+                        placeholderText: "Session Ends"
+                    }
+
                 }
 
-            }
+                Row {
+                    width: parent.width
+                    spacing: 5
 
-            Button {
-                text: "Update"
-                width: parent.width
-                onClicked: {
-                    edit_form_popup.close()
+                    CheckBox {
+                        id: update_has_active_cb
+                        text: "HasActive"
+                    }
+
                 }
+
+                Row {
+                    width: parent.width
+                    spacing: 5
+
+                    Label {
+                        anchors.verticalCenter: parent.verticalCenter
+                        width: parent.width * .3
+                        font.pixelSize: 15
+                        text: "Space Left"
+                    }
+
+                    SpinBox {
+                        id: update_space_left_sb
+                        width: parent.width * .7
+                        from: 0
+                        to: 50
+                    }
+
+                }
+
+                Row {
+                    width: parent.width
+                    spacing: 5
+
+                    Label {
+                        anchors.verticalCenter: parent.verticalCenter
+                        width: parent.width * .3
+                        font.pixelSize: 15
+                        text: "Space Full"
+                    }
+
+                    SpinBox {
+                        id: update_space_full_sb
+                        width: parent.width * .7
+                        from: 0
+                        to: 50
+                    }
+
+                }
+
+                Button {
+                    text: "Update"
+                    width: parent.width
+                    onClicked: {
+                        if (isUpdateCourseFormValid()) {
+                            page_controller.updateCourse(getUpdateCourseFormData());
+                            resetUpdateCourseForm();
+                            update_course_form.close()
+                        }
+                    }
+                }
+
             }
 
         }
@@ -435,15 +459,24 @@ Page {
 
     SingleCoursePageController {
         id: page_controller
-        onDataReady: {
-            // every component can have stackView
-
-            // use animation
-            // if login page removed from stack view, then gotopage can't call
-            // first go to that page and then remove the stack below
-            // figure out the design pattern and use that in another project
-
-            var docs = JSON.parse(JSON.stringify(o))["course"];
+        onListViewReached: {
+            console.log(o)
+        }
+        onScrollViewReached: {
+            console.log(o)
+        }
+        onShowLoading: {
+            if (b) {
+                popup.open()
+            } else {
+                popup.close()
+            }
+        }
+        onCourseDeleted: {
+            loading_popup.close()
+        }
+        onCourseLoaded: {
+            var docs = JSON.parse(JSON.stringify(o)) ["course"];
             docs['assetsUrl'] = application.getSiteAssetsUrl();
 
             // docs['_id']
@@ -465,24 +498,24 @@ Page {
                 Qt.createQmlObject(`import QtQuick 2.0; import QtQuick.Controls 2.5; Label { text: "${docs['features'][i]}"; font.pointSize: 12; }`, features, "something")
             }
         }
-        onCourseDeleted: {
-            console.log(_id);
-            loading_popup.close()
-        }
 
-        function formatMoney(number, decPlaces, decSep, thouSep) {
-            const _decPlaces = isNaN(decPlaces = Math.abs(decPlaces)) ? 2 : decPlaces,
-            _decSep = typeof decSep === "undefined" ? "." : decSep;
-            thouSep = typeof thouSep === "undefined" ? "," : thouSep;
-            var sign = number < 0 ? "-" : "";
-            var i = String(parseInt(number = Math.abs(Number(number) || 0).toFixed(_decPlaces)));
-            var j = (j = i.length) > 3 ? j % 3 : 0;
+    }
 
-            return sign +
-                (j ? i.substr(0, j) + thouSep : "") +
-                i.substr(j).replace(/(\decSep{3})(?=\decSep)/g, "$1" + thouSep) +
-                (_decPlaces ? _decSep + Math.abs(number - i).toFixed(_decPlaces).slice(2) : "");
-        }
+    Component.onCompleted: {
+        page_controller.loadCourse();
+    }
 
+    function formatMoney(number, decPlaces, decSep, thouSep) {
+        const _decPlaces = isNaN(decPlaces = Math.abs(decPlaces)) ? 2 : decPlaces,
+        _decSep = typeof decSep === "undefined" ? "." : decSep;
+        thouSep = typeof thouSep === "undefined" ? "," : thouSep;
+        var sign = number < 0 ? "-" : "";
+        var i = String(parseInt(number = Math.abs(Number(number) || 0).toFixed(_decPlaces)));
+        var j = (j = i.length) > 3 ? j % 3 : 0;
+
+        return sign +
+            (j ? i.substr(0, j) + thouSep : "") +
+            i.substr(j).replace(/(\decSep{3})(?=\decSep)/g, "$1" + thouSep) +
+            (_decPlaces ? _decSep + Math.abs(number - i).toFixed(_decPlaces).slice(2) : "");
     }
 }

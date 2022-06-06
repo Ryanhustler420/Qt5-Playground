@@ -39,3 +39,13 @@ void AllCoursesPageController::createNewCourse(QJsonObject o)
         qWarning() << error;
     });
 }
+
+void AllCoursesPageController::listViewReachedBottom(QVariant o)
+{
+    emit listViewReached(o);
+}
+
+void AllCoursesPageController::scrollViewReachedBottom(QVariant o)
+{
+    emit scrollViewReached(o);
+}

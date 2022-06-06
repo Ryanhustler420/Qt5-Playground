@@ -119,3 +119,13 @@ void AllRequestCallbacksPage::removeAll()
         qInfo() << error;
     });
 }
+
+void AllRequestCallbacksPage::listViewReachedBottom(QVariant o)
+{
+    emit listViewReached(o);
+}
+
+void AllRequestCallbacksPage::scrollViewReachedBottom(QVariant o)
+{
+    emit scrollViewReached(o);
+}

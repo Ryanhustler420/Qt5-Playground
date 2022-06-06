@@ -17,9 +17,13 @@ public:
     Q_INVOKABLE void pass(QVariant o);
     Q_INVOKABLE void loadCourses();
     Q_INVOKABLE void createNewCourse(QJsonObject o);
+    Q_INVOKABLE void listViewReachedBottom(QVariant o);
+    Q_INVOKABLE void scrollViewReachedBottom(QVariant o);
 
 signals:
     void showLoading(bool b);
+    void listViewReached(QVariant o);
+    void scrollViewReached(QVariant o);
 
 signals:
     void passed(QVariant o);

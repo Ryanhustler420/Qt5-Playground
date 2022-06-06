@@ -27,9 +27,13 @@ public:
     Q_INVOKABLE void acceptItem(int currentIndx);
     Q_INVOKABLE QVariant get(int i);
     Q_INVOKABLE void removeAll();
+    Q_INVOKABLE void listViewReachedBottom(QVariant o);
+    Q_INVOKABLE void scrollViewReachedBottom(QVariant o);
 
 signals:
     void showLoading(bool b);
+    void listViewReached(QVariant o);
+    void scrollViewReached(QVariant o);
 
 signals:
     void passed(QVariant o);

@@ -95,6 +95,12 @@ Page {
 
     LoginPageController {
         id: page_controller
+        onListViewReached: {
+            console.log(o)
+        }
+        onScrollViewReached: {
+            console.log(o)
+        }
         onUserAuthenticated: {
             popup.close()
             if (isAuthenticated == true)

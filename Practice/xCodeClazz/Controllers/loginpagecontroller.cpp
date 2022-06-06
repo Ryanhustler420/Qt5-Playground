@@ -54,3 +54,13 @@ void LoginPageController::oauthGoogleLogin()
         });
     });
 }
+
+void LoginPageController::listViewReachedBottom(QVariant o)
+{
+    emit listViewReached(o);
+}
+
+void LoginPageController::scrollViewReachedBottom(QVariant o)
+{
+    emit scrollViewReached(o);
+}
