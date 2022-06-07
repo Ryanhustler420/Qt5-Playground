@@ -2,6 +2,9 @@
 
 AllCoursesPageController::AllCoursesPageController(QObject *parent) : QObject(parent)
 {
+    Signals::instance().onCourseDeleted([=](QJsonObject o) {
+        emit courseDeleted(o);
+    });
 }
 
 void AllCoursesPageController::pass(QVariant o)

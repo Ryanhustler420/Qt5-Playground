@@ -41,6 +41,15 @@ Page {
                 popup.close()
             }
         }
+        onCourseDeleted: {
+            const doc = JSON.parse(JSON.stringify(course));
+            for(let i = 0; i < courses_list.length; i++) {
+                if (courses_list[i]._id === doc._id) {
+                    courses_list[i].ref.destroy();
+                    courses_list.splice(i, 1);
+                }
+            }
+        }
         onCoursesLoaded: {
             for(var i =0; i< courses.length; i++) {
                 const doc = JSON.parse(JSON.stringify(courses[i]));

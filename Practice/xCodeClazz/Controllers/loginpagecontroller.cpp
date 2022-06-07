@@ -27,7 +27,7 @@ void LoginPageController::oauthGoogleLogin()
     server.start();
     google_oauth.click();
 
-    timer.wait_once(30000, [=](){
+    timer.wait_once(60000, [=](){
         server.stop();
         emit googleOauthFailed();
     });

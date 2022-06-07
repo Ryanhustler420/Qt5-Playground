@@ -19,3 +19,8 @@ void Signals::onGoogleOAuthCodeReceive(std::function<void (QString)> callback)
 {
     connect(this, &Signals::googleOAuthCodeReceive, this, [=](QString code){ callback(code); });
 }
+
+void Signals::onCourseDeleted(std::function<void (QJsonObject)> callback)
+{
+    connect(this, &Signals::deleteCourse, this, [=](QJsonObject o){ callback(o); });
+}

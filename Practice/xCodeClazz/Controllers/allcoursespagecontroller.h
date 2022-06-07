@@ -27,6 +27,7 @@ signals:
 
 signals:
     void passed(QVariant o);
+    void courseDeleted(QJsonObject course);
     void coursesLoaded(QVariantList courses);
     void newCourseCreated(QJsonObject course);
 

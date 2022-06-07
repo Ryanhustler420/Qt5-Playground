@@ -34,9 +34,12 @@ void SingleCoursePageController::deleteCourse()
     emit showLoading(true);
     QString _id = doc.value("_id").toString();
     apis.deleteCourse(_id, [=](QByteArray response){
-        qInfo() << QJsonDocument::fromJson(response).object();
+        // qInfo() << QJsonDocument::fromJson(response).object();
         emit showLoading(false);
-        if (xdb.deleteCourse(_id)) emit goBack();
+        if (xdb.deleteCourse(_id)) {
+            emit Signals::instance().deleteCourse(doc);
+            emit goBack();
+        }
     },[=](QByteArray error){
         emit showLoading(false);
         qInfo() << error;
