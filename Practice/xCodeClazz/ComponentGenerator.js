@@ -5,8 +5,8 @@
 //      i: int
 //      __parent__: ElementId
 //      obj: { name: String, count: String }
-function createCountState(i, obj, __parent__) {
-    Qt.createQmlObject(`
+function createCountState(id, obj, __parent__) {
+    return Qt.createQmlObject(`
 
        import QtQuick 2.0;
        import QtQuick.Layouts 1.3;
@@ -14,7 +14,7 @@ function createCountState(i, obj, __parent__) {
        import QtQuick.Controls.Material 2.3;
 
        Item {
-           id: createCountState_${i};
+           id: createCountState_${id};
            width: 150;
            height: 150;
            Material.elevation: 6;
@@ -48,7 +48,7 @@ function createCountState(i, obj, __parent__) {
            }
        }
 
-       ` , __parent__, `createCountState(${i})`);
+       ` , __parent__, `createCountState(${id})`);
 }
 
 // @Required - your context must have these signal(s)
@@ -59,15 +59,15 @@ function createCountState(i, obj, __parent__) {
 //      obj: { name: String, id: String, thumbnailUrl: String }
 //      assetsUrl: string
 //      __parent__: ElementId
-function createCourseCard(i, obj, assetsUrl, __parent__) {
-    Qt.createQmlObject(`
+function createCourseCard(id, obj, assetsUrl, __parent__) {
+    return Qt.createQmlObject(`
 
         import QtQuick 2.0;
         import QtQuick.Controls 2.3;
         import QtQuick.Controls.Material 2.3;
 
         Item {
-            id: createCourseCard_${i};
+            id: createCourseCard_${id};
             clip: true;
             width: 200;
             height: 200;
@@ -79,7 +79,7 @@ function createCourseCard(i, obj, assetsUrl, __parent__) {
 
                 Loader {
                    visible: status == Loader.Ready;
-                   id: course_img_loader_${i};
+                   id: course_img_loader_${id};
                    height: parent.height - 50;
                    width: parent.width;
                    source: "${assetsUrl}/${obj.thumbnailUrl}";
@@ -87,10 +87,10 @@ function createCourseCard(i, obj, assetsUrl, __parent__) {
                 }
 
                 BusyIndicator {
-                   running: course_img_loader_${i}.status === Loader.Loading;
-                   id: course_img_loader_busy_animation_${i};
-                   height: course_img_loader_${i}.height;
-                   width: course_img_loader_${i}.width;
+                   running: course_img_loader_${id}.status === Loader.Loading;
+                   id: course_img_loader_busy_animation_${id};
+                   height: course_img_loader_${id}.height;
+                   width: course_img_loader_${id}.width;
 
                    Image {
                        source: "${assetsUrl}/${obj.thumbnailUrl}";
@@ -112,5 +112,5 @@ function createCourseCard(i, obj, assetsUrl, __parent__) {
                 }
 
             }
-        }` , __parent__, `createCourseCard(${i})`);
+        }` , __parent__, `createCourseCard(${id})`);
 }

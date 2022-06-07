@@ -6,8 +6,9 @@ Course::Course(QObject *parent)
     this->fields = new _fields();
 }
 
-Course::Course(const QString &title, const QString &subtitle, const QString &duration, const QString &thumbnailUrl, const QString &imageContainer, QList<QString> *features, int price, bool hasActive, int spaceLeft, int spaceFull, Session *session)
+Course::Course(const QString &_id, const QString &title, const QString &subtitle, const QString &duration, const QString &thumbnailUrl, const QString &imageContainer, QList<QString> *features, int price, bool hasActive, int spaceLeft, int spaceFull, Session *session)
 {
+    this->_id = _id;
     this->title = title;
     this->subtitle = subtitle;
     this->duration = duration;
@@ -22,6 +23,16 @@ Course::Course(const QString &title, const QString &subtitle, const QString &dur
 
     this->className = "Course";
     this->fields = new _fields();
+}
+
+const QString &Course::id() const
+{
+    return _id;
+}
+
+void Course::setId(const QString &newId)
+{
+    _id = newId;
 }
 
 Session *Course::getSession() const
@@ -166,6 +177,16 @@ Course *Course::parseJSONObject(QJsonObject o)
     Course *n = new Course();
 
     try {
+        if (o.contains(fields->_id)) {
+            n->setId(o.value(fields->_id).toString());
+        } else {
+            n->setId(fallbackValue);
+        }
+    }  catch (QString error) {
+        n->setId(error);
+    }
+
+    try {
         if (o.contains(fields->title)) {
             n->setTitle(o.value(fields->title).toString());
         } else {
@@ -294,6 +315,7 @@ bool Course::equal(Course *o)
 QJsonObject Course::getAsJson() const
 {
     QJsonObject mainObject;
+    mainObject.insert(this->fields->_id, this->_id);
     mainObject.insert(this->fields->title, this->title);
     mainObject.insert(this->fields->subtitle, this->subtitle);
     mainObject.insert(this->fields->duration, this->duration);

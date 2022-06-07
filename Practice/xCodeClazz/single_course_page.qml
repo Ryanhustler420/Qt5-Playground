@@ -183,8 +183,7 @@ Page {
                             text: "Delete"
                             Material.background: Material.Red
                             onClicked: {
-                                loading_popup.open()
-                                page_controller.deleteCourse("_id")
+                                page_controller.deleteCourse()
                             }
                         }
 
@@ -270,7 +269,7 @@ Page {
     }
 
     Popup {
-        id: loading_popup
+        id: popup
         modal: true
         focus: true
         anchors.centerIn: parent
@@ -459,12 +458,9 @@ Page {
 
     SingleCoursePageController {
         id: page_controller
-        onListViewReached: {
-            console.log(o)
-        }
-        onScrollViewReached: {
-            console.log(o)
-        }
+        onGoBack: application.pop();
+        onListViewReached: {}
+        onScrollViewReached: {}
         onShowLoading: {
             if (b) {
                 popup.open()
@@ -473,10 +469,10 @@ Page {
             }
         }
         onCourseDeleted: {
-            loading_popup.close()
+            popup.close()
         }
         onCourseLoaded: {
-            var docs = JSON.parse(JSON.stringify(o)) ["course"];
+            var docs = JSON.parse(JSON.stringify(o));
             docs['assetsUrl'] = application.getSiteAssetsUrl();
 
             // docs['_id']
@@ -518,4 +514,5 @@ Page {
             i.substr(j).replace(/(\decSep{3})(?=\decSep)/g, "$1" + thouSep) +
             (_decPlaces ? _decSep + Math.abs(number - i).toFixed(_decPlaces).slice(2) : "");
     }
+
 }

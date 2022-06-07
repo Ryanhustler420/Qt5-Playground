@@ -95,11 +95,14 @@ Page {
 
     LoginPageController {
         id: page_controller
-        onListViewReached: {
-            console.log(o)
-        }
-        onScrollViewReached: {
-            console.log(o)
+        onListViewReached: {}
+        onScrollViewReached: {}
+        onShowLoading: {
+            if (b) {
+                popup.open()
+            } else {
+                popup.close()
+            }
         }
         onUserAuthenticated: {
             popup.close()

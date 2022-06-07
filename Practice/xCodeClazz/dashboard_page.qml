@@ -308,12 +308,8 @@ Page {
 
     DashboardPageController {
         id: page_controller
-        onListViewReached: {
-            console.log(o)
-        }
-        onScrollViewReached: {
-            console.log(o)
-        }
+        onListViewReached: {}
+        onScrollViewReached: {}
         onLogedout: {
             application.pop()
         }

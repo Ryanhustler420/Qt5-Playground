@@ -14,10 +14,13 @@ void AllCoursesPageController::loadCourses()
 {
     emit showLoading(true);
     apis.getCourses([=](QByteArray response){
-        Course *m = new Course();
-        QList<Course *> list = m->parseJSONArray(QJsonDocument::fromJson(response).object().value("courses").toArray());
-        QVariantList m_list = m->parseJSONArrayToVariantList(QJsonDocument::fromJson(response).object().value("courses").toArray());
-        emit coursesLoaded(m_list);
+        QList<Course *> list = (new Course())->parseJSONArray(QJsonDocument::fromJson(response).object().value("courses").toArray());
+        QJsonArray arr;
+        for (int var = 0; var < list.length(); ++var) {
+            arr.push_back(list[var]->getAsJson());
+        }
+        xdb.saveCourses(arr);
+        emit coursesLoaded(arr.toVariantList());
         emit showLoading(false);
     }, [=](QByteArray error){
         emit showLoading(false);

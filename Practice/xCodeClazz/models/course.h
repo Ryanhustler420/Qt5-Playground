@@ -9,9 +9,10 @@ class Course : public ModelConventions<Course>
     Q_OBJECT
 public:
     explicit Course(QObject *parent = nullptr);
-    Course(const QString &title, const QString &subtitle, const QString &duration, const QString &thumbnailUrl, const QString &imageContainer, QList<QString> *features, int price, bool hasActive, int spaceLeft, int spaceFull, Session *session);
+    Course(const QString &_id, const QString &title, const QString &subtitle, const QString &duration, const QString &thumbnailUrl, const QString &imageContainer, QList<QString> *features, int price, bool hasActive, int spaceLeft, int spaceFull, Session *session);
 
 private:
+    QString _id;
     QString title;
     QString subtitle;
     QString duration;
@@ -26,6 +27,7 @@ private:
 
 private:
     typedef struct FIELDS {
+        QString _id = "_id";
         QString title = "title";
         QString subtitle = "subtitle";
         QString duration = "duration";
@@ -56,6 +58,7 @@ public:
     QJsonArray getAsJsonArray(QList<Course *> t) const;
 
     void operator = (const Course &course) {
+        this->_id = course._id;
         this->title = course.title;
         this->subtitle = course.subtitle;
         this->duration = course.duration;
@@ -70,6 +73,8 @@ public:
     }
 
 public:
+    const QString &id() const;
+    void setId(const QString &newId);
     const QString &getTitle() const;
     void setTitle(const QString &newTitle);
     const QString &getSubtitle() const;

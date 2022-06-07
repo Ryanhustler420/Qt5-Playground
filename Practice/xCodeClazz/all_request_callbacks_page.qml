@@ -158,12 +158,8 @@ Page {
 
     AllRequestCallbacksPage {
         id: page_controller
-        onListViewReached: {
-            console.log(o)
-        }
-        onScrollViewReached: {
-            console.log(o)
-        }
+        onListViewReached: {}
+        onScrollViewReached: {}
         onShowLoading: {
             if (b) {
                 popup.open()

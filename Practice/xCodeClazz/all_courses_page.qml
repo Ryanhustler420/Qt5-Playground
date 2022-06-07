@@ -13,12 +13,96 @@ Page {
     Layout.fillWidth: true
     title: qsTr("xCodeClazz")
 
-    // these functions are being used in this page
+    // properties
+    property var courses_list: []
+    property bool isPageOnFocus: false
+
+    // listeners
+    onFocusChanged: {
+        isPageOnFocus = !isPageOnFocus;
+        if (isPageOnFocus) {
+            // courses_list[0].ref.destroy()
+            // courses_list.shift()
+        }
+    }
+
+    // Page Life Cycle
+    Component.onCompleted: { page_controller.loadCourses() }
+
+    // Controller
+    AllCoursesPageController {
+        id: page_controller
+        onListViewReached: {}
+        onScrollViewReached: {}
+        onShowLoading: {
+            if (b) {
+                popup.open()
+            } else {
+                popup.close()
+            }
+        }
+        onCoursesLoaded: {
+            for(var i =0; i< courses.length; i++) {
+                const doc = JSON.parse(JSON.stringify(courses[i]));
+                const ref = ComponentGenerator.createCourseCard(doc._id, doc, application.getSiteAssetsUrl(), coursesContainer);
+                courses_list.push({_id: doc._id, ref});
+            }
+        }
+        onNewCourseCreated: {
+            const doc = JSON.parse(JSON.stringify(course));
+            const ref = ComponentGenerator.createCourseCard(doc._id, doc, application.getSiteAssetsUrl(), coursesContainer);
+            courses_list.push({_id: doc._id, ref});
+        }
+        onPassed: {}
+    }
+
+    // methods
+    function resetCreateNewCourseForm() {
+        new_course_has_active_cb.checked = false;
+
+        new_course_space_left_sb.value
+                = new_course_space_full_sb.value = 0;
+
+        new_course_title_tf.text
+                = new_course_subtitle_tf.text
+                = new_course_duration_tf.text
+                = new_course_thumbnail_tf.text
+                = new_course_features_tf.text
+                = new_course_price_tf.text
+                = new_course_session_start_tf.text
+                = new_course_session_ends_tf.text
+                = "";
+    }
+
+    function getCreateNewCourseFormData() {
+        return {
+            'title': new_course_title_tf.text,
+            'subtitle': new_course_subtitle_tf.text,
+            'duration': new_course_duration_tf.text,
+            'thumbnailUrl': new_course_thumbnail_tf.text,
+            'price': new_course_price_tf.text,
+            'hasActive': new_course_has_active_cb.checked,
+            'spaceLeft': new_course_space_left_sb.value,
+            'spaceFull': new_course_space_full_sb.value,
+            'session': {
+                'starts': new_course_session_start_tf.text,
+                'ends': new_course_session_ends_tf.text,
+            },
+            'features': new_course_features_tf.text.split("|"),
+        }
+    }
+
+    function isCreateNewCourseFormValid() {
+        return true;
+    }
+
     function openCourse(object) {
+        // these functions are being used in this page
         page_controller.pass(JSON.stringify(object))
         application.gotoPage(application.getSingleCoursePagePath())
     }
 
+    // user interface
     header: Item {
         height: 70
         width: parent.width
@@ -273,76 +357,6 @@ Page {
             text: "Loading\u2026"
             font.pointSize: 12
         }
-    }
-
-    AllCoursesPageController {
-        id: page_controller
-        onListViewReached: {
-            console.log(o)
-        }
-        onScrollViewReached: {
-            console.log(o)
-        }
-        onShowLoading: {
-            if (b) {
-                popup.open()
-            } else {
-                popup.close()
-            }
-        }
-        onCoursesLoaded: {
-            for(var i =0; i< courses.length; i++)
-                ComponentGenerator.createCourseCard(i, JSON.parse(JSON.stringify(courses[i])), application.getSiteAssetsUrl(), coursesContainer);
-        }
-        onNewCourseCreated: {
-            ComponentGenerator.createCourseCard(Math.floor(Math.random() * 3000), JSON.parse(JSON.stringify(course)), application.getSiteAssetsUrl(), coursesContainer);
-        }
-        onPassed: {
-            console.log(o);
-        }
-    }
-
-    Component.onCompleted: {
-        page_controller.loadCourses()
-    }
-
-    function resetCreateNewCourseForm() {
-        new_course_has_active_cb.checked = false;
-
-        new_course_space_left_sb.value
-                = new_course_space_full_sb.value = 0;
-
-        new_course_title_tf.text
-                = new_course_subtitle_tf.text
-                = new_course_duration_tf.text
-                = new_course_thumbnail_tf.text
-                = new_course_features_tf.text
-                = new_course_price_tf.text
-                = new_course_session_start_tf.text
-                = new_course_session_ends_tf.text
-                = "";
-    }
-
-    function getCreateNewCourseFormData() {
-        return {
-            'title': new_course_title_tf.text,
-            'subtitle': new_course_subtitle_tf.text,
-            'duration': new_course_duration_tf.text,
-            'thumbnailUrl': new_course_thumbnail_tf.text,
-            'price': new_course_price_tf.text,
-            'hasActive': new_course_has_active_cb.checked,
-            'spaceLeft': new_course_space_left_sb.value,
-            'spaceFull': new_course_space_full_sb.value,
-            'session': {
-                'starts': new_course_session_start_tf.text,
-                'ends': new_course_session_ends_tf.text,
-            },
-            'features': new_course_features_tf.text.split("|"),
-        }
-    }
-
-    function isCreateNewCourseFormValid() {
-        return true;
     }
 
 }
