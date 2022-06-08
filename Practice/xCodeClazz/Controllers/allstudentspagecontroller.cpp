@@ -19,7 +19,9 @@ void AllStudentsPageController::loadStudents()
                 QList<Student *> list = (new Student())->parseJSONArray(QJsonDocument::fromJson(response).object().value("students").toArray());
 
                 QJsonArray arr;
-                for (int var = 0; var < list.size(); ++var) arr.push_back(list.at(var)->getAsJson());
+                for (int var = 0; var < list.size(); ++var) {
+                    arr.push_back(list.at(var)->getAsJson());
+                }
 
                 xdb.saveStudents(arr);
                 students.append(arr.toVariantList());
@@ -39,7 +41,9 @@ void AllStudentsPageController::loadStudents()
                 QList<Student *> list = (new Student())->parseJSONArray(QJsonDocument::fromJson(response).object().value("students").toArray());
 
                 QJsonArray arr;
-                for (int var = 0; var < list.size(); ++var) arr.push_back(list.at(var)->getAsJson());
+                for (int var = 0; var < list.size(); ++var) {
+                    arr.push_back(list.at(var)->getAsJson());
+                }
 
                 xdb.saveStudents(arr);
             }, [=](QByteArray error){

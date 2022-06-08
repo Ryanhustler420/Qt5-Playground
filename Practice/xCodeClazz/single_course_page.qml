@@ -4,12 +4,16 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls.Material 2.3
 
 import com.xcodeclazz.singlecoursepagecontroller 1.0
+import "qrc:/js/Utils.js" as Utils
 
 Page {
     id: root
     Layout.fillWidth: true
     Layout.fillHeight: true
     title: qsTr("xCodeClazz")
+
+    property string feature_seperator: "|"
+    property var loaded_course: undefined
 
     Column {
         width: parent.width
@@ -174,6 +178,7 @@ Page {
                             text: "Edit"
                             Material.background: Material.Green
                             onClicked: {
+                                populateEditFrom();
                                 update_course_form.open()
                             }
                         }
@@ -472,26 +477,26 @@ Page {
             popup.close()
         }
         onCourseLoaded: {
-            var docs = JSON.parse(JSON.stringify(o));
-            docs['assetsUrl'] = application.getSiteAssetsUrl();
+            loaded_course = JSON.parse(JSON.stringify(o));
+            loaded_course['assetsUrl'] = application.getSiteAssetsUrl();
 
-            // docs['_id']
-            // docs['hasActive']
-            // docs['spaceLeft']
-            // docs['spaceFull']
-            // docs['imageContainer']
-            // docs['session']['ends']
-            // docs['session']['starts']
+            // loaded_course['_id']
+            // loaded_course['hasActive']
+            // loaded_course['spaceLeft']
+            // loaded_course['spaceFull']
+            // loaded_course['imageContainer']
+            // loaded_course['session']['ends']
+            // loaded_course['session']['starts']
 
-            title.text = docs['title'];
-            duration.text = docs['duration'];
-            subtitle.text = docs['subtitle'];
-            price.text = formatMoney(docs['price']) + '/-';
-            course_img_loader.source = docs['assetsUrl'] + docs['thumbnailUrl'];
-            course_img_loader_placeholder.source = docs['assetsUrl'] + docs['thumbnailUrl'];
+            title.text = loaded_course['title'];
+            duration.text = loaded_course['duration'];
+            subtitle.text = loaded_course['subtitle'];
+            price.text = Utils.formatMoney(loaded_course['price']) + '/-';
+            course_img_loader.source = loaded_course['assetsUrl'] + loaded_course['thumbnailUrl'];
+            course_img_loader_placeholder.source = loaded_course['assetsUrl'] + loaded_course['thumbnailUrl'];
 
-            for(var i=0; i < docs['features'].length; i++) {
-                Qt.createQmlObject(`import QtQuick 2.0; import QtQuick.Controls 2.5; Label { text: "${docs['features'][i]}"; font.pointSize: 12; }`, features, "something")
+            for(var i=0; i < loaded_course['features'].length; i++) {
+                Qt.createQmlObject(`import QtQuick 2.0; import QtQuick.Controls 2.5; Label { text: "${loaded_course['features'][i]}"; font.pointSize: 12; }`, features, "something")
             }
         }
 
@@ -501,18 +506,58 @@ Page {
         page_controller.loadCourse();
     }
 
-    function formatMoney(number, decPlaces, decSep, thouSep) {
-        const _decPlaces = isNaN(decPlaces = Math.abs(decPlaces)) ? 2 : decPlaces,
-        _decSep = typeof decSep === "undefined" ? "." : decSep;
-        thouSep = typeof thouSep === "undefined" ? "," : thouSep;
-        var sign = number < 0 ? "-" : "";
-        var i = String(parseInt(number = Math.abs(Number(number) || 0).toFixed(_decPlaces)));
-        var j = (j = i.length) > 3 ? j % 3 : 0;
+    // methods
+    function resetUpdateCourseForm() {
+        update_has_active_cb.checked = false;
 
-        return sign +
-            (j ? i.substr(0, j) + thouSep : "") +
-            i.substr(j).replace(/(\decSep{3})(?=\decSep)/g, "$1" + thouSep) +
-            (_decPlaces ? _decSep + Math.abs(number - i).toFixed(_decPlaces).slice(2) : "");
+        update_space_left_sb.value
+                = update_space_full_sb.value = 0;
+
+        update_title_tf.text
+                = update_subtitle_tf.text
+                = update_duration_tf.text
+                = update_thumbnail_tf.text
+                = update_features_tf.text
+                = update_price_tf.text
+                = update_session_start_tf.text
+                = update_session_ends_tf.text
+                = "";
+    }
+
+    function getUpdateCourseFormData() {
+        return {
+            'title': update_title_tf.text,
+            'subtitle': update_subtitle_tf.text,
+            'duration': update_duration_tf.text,
+            'thumbnailUrl': update_thumbnail_tf.text,
+            'price': update_price_tf.text,
+            'hasActive': update_has_active_cb.checked,
+            'spaceLeft': update_space_left_sb.value,
+            'spaceFull': update_space_full_sb.value,
+            'session': {
+                'starts': update_session_start_tf.text,
+                'ends': update_session_ends_tf.text,
+            },
+            'features': update_features_tf.text.split(feature_seperator),
+        }
+    }
+
+    function populateEditFrom() {
+        update_title_tf.text = loaded_course.title
+        update_subtitle_tf.text = loaded_course.subtitle
+        update_duration_tf.text = loaded_course.duration
+        update_thumbnail_tf.text = loaded_course.thumbnailUrl
+        update_price_tf.text = loaded_course.price
+        update_has_active_cb.checked = loaded_course.hasActive
+        update_space_left_sb.value = loaded_course.spaceLeft
+        update_space_full_sb.value = loaded_course.spaceFull
+        update_session_start_tf.text = loaded_course.session.starts
+        update_session_ends_tf.text = loaded_course.session.ends
+        update_features_tf.text = loaded_course.features.join(feature_seperator)
+    }
+
+    function isUpdateCourseFormValid() {
+        return true;
     }
 
 }

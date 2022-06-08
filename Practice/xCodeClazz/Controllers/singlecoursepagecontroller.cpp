@@ -11,8 +11,8 @@ void SingleCoursePageController::pass(QVariant o)
 
 void SingleCoursePageController::loadCourse()
 {
-    QJsonObject bundle = QJsonDocument::fromJson(lc.get("Course").toByteArray()).object();
-    QString _id = bundle.value("_id").toString();
+    loaded_course = QJsonDocument::fromJson(lc.get("Course").toByteArray()).object();
+    QString _id = loaded_course.value("_id").toString();
 
     emit showLoading(true);
     apis.getCourse(_id, [=](QByteArray response){
@@ -58,5 +58,15 @@ void SingleCoursePageController::scrollViewReachedBottom(QVariant o)
 
 void SingleCoursePageController::updateCourse(QJsonObject o)
 {
-    qInfo() << o;
+    emit showLoading(true);
+    o.insert("courseId", loaded_course.value("_id").toString());
+    apis.updateCourse(o, [=](QByteArray response){
+        emit showLoading(false);
+        if (xdb.updateCourse(o)) {
+            emit goBack();
+        }
+    }, [=](QByteArray error){
+        emit showLoading(false);
+        qInfo() << error;
+    });
 }

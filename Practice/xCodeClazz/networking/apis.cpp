@@ -348,32 +348,10 @@ void Apis::createCourse(const QJsonObject &course, std::function<void(QByteArray
     });
 }
 
-void Apis::updateCourse(const QString &courseId, const QString &title, const QString &subtitle, const QString &duration, const QString &thumbnailUrl, QList<QString> &features, float price, bool hasActive, int spaceLeft, int spaceFull, const QString &starts, const QString &ends, std::function<void(QByteArray)> response, std::function<void(QByteArray)> error)
+void Apis::updateCourse(const QJsonObject &course, std::function<void(QByteArray)> response, std::function<void(QByteArray)> error)
 {
     clearResponse();
-    QJsonObject mainObject;
-    mainObject.insert("courseId", courseId);
-
-    mainObject.insert("title", title);
-    mainObject.insert("subtitle", subtitle);
-    mainObject.insert("duration", duration);
-    mainObject.insert("thumbnailUrl", thumbnailUrl);
-    mainObject.insert("price", price);
-    mainObject.insert("hasActive", hasActive);
-    mainObject.insert("spaceLeft", spaceLeft);
-    mainObject.insert("spaceFull", spaceFull);
-
-    QJsonObject session;
-    session.insert("starts", starts);
-    session.insert("ends", ends);
-    mainObject.insert("session", session);
-
-    QJsonArray array;
-    for(QString e: features) array.push_back(e);
-    mainObject.insert("features", array);
-
-    QJsonDocument jsonDoc;
-    jsonDoc.setObject(mainObject);
+    QJsonDocument jsonDoc(course);
 
     QNetworkRequest request(routes->post_api_xcodeclazz_course_update());
     request.setHeader(QNetworkRequest::ContentTypeHeader, _raw_headers->application_json);

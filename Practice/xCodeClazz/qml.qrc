@@ -5,6 +5,7 @@
     </qresource>
     <qresource prefix="/js">
         <file>ComponentGenerator.js</file>
+        <file>Utils.js</file>
     </qresource>
     <qresource prefix="/pages">
         <file>all_courses_page.qml</file>

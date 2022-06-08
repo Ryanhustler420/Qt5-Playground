@@ -46,6 +46,7 @@ private:
     LocalCache lc;
     QJsonObject doc;
     XCodeClazzDB xdb;
+    QJsonObject loaded_course;
 
 };
 

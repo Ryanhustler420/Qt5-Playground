@@ -162,6 +162,21 @@ QJsonObject XCodeClazzDB::getCourse(const QString &courseId)
 
 }
 
+bool XCodeClazzDB::updateCourse(const QJsonObject &o)
+{
+    QJsonArray s = getCourses();
+    QJsonArray l;
+    for (int var = 0; var < s.size(); ++var) {
+        QJsonObject v = s.at(var).toObject();
+        if(v.value("_id").toString().contains(o.value("_id").toString())) {
+            l.push_back(o);
+        } else {
+            l.push_back(v);
+        }
+    }
+    return saveCourses(l);
+}
+
 bool XCodeClazzDB::deleteCourse(const QString &courseId)
 {
     QJsonArray s = getCourses();

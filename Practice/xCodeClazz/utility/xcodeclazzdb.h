@@ -40,6 +40,7 @@ public:
     QJsonArray getCourses();
     QJsonObject getCourse(const QString &courseId);
 
+    bool updateCourse(const QJsonObject &o);
     bool deleteCourse(const QString &courseId);
     bool deleteCourses();
 

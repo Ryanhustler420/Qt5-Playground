@@ -31,7 +31,7 @@ public:
     void getCourses(std::function<void(QByteArray)> response, std::function<void(QByteArray)> error);
     void getCourse(const QString &courseId, std::function<void(QByteArray)> response, std::function<void(QByteArray)> error);
     void createCourse(const QJsonObject &course, std::function<void(QByteArray)> response, std::function<void(QByteArray)> error);
-    void updateCourse(const QString &courseId, const QString &title, const QString &subtitle, const QString &duration, const QString &thumbnailUrl, QList<QString> &features, float price, bool hasActive, int spaceLeft, int spaceFull, const QString &starts, const QString &ends, std::function<void(QByteArray)> response, std::function<void(QByteArray)> error);
+    void updateCourse(const QJsonObject &course, std::function<void(QByteArray)> response, std::function<void(QByteArray)> error);
     void deleteCourse(const QString &courseId, std::function<void(QByteArray)> response, std::function<void(QByteArray)> error);
 
     void exchangeGoogleOAuthCode(QString code, std::function<void(QByteArray)> response, std::function<void(QByteArray)> error);

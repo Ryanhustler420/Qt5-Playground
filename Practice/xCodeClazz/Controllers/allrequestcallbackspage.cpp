@@ -2,7 +2,6 @@
 
 AllRequestCallbacksPage::AllRequestCallbacksPage(QObject *parent) : QObject(parent)
 {
-    // [signals] if any
 }
 
 void AllRequestCallbacksPage::pass(QVariant o)
@@ -19,7 +18,11 @@ void AllRequestCallbacksPage::loadCallbackRequests()
                 QList<CallbackRequest *> list = (new CallbackRequest())->parseJSONArray(QJsonDocument::fromJson(response).object().value("callbacks").toArray());
 
                 QJsonArray arr;
-                for (int var = 0; var < list.size(); ++var) arr.push_back(list.at(var)->getAsJson());
+                for (int var = 0; var < list.size(); ++var) {
+                    if (list.at(var)->getALTcourse()) {
+                        arr.push_back(list.at(var)->getAsJson());
+                    }
+                }
 
                 xdb.saveCallbackRequests(arr);
                 callbacks.append(arr.toVariantList());
@@ -39,7 +42,11 @@ void AllRequestCallbacksPage::loadCallbackRequests()
                 QList<CallbackRequest *> list = (new CallbackRequest())->parseJSONArray(QJsonDocument::fromJson(response).object().value("callbacks").toArray());
 
                 QJsonArray arr;
-                for (int var = 0; var < list.size(); ++var) arr.push_back(list.at(var)->getAsJson());
+                for (int var = 0; var < list.size(); ++var) {
+                    if (list.at(var)->getALTcourse()) {
+                        arr.push_back(list.at(var)->getAsJson());
+                    }
+                }
 
                 xdb.saveCallbackRequests(arr);
 
