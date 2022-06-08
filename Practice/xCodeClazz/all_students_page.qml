@@ -39,7 +39,6 @@ Page {
     }
 
     Label {
-        id: nothing_found_label
         property string weight
         text: "No Student Found"
         padding: 10

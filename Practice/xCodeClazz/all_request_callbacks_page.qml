@@ -40,7 +40,6 @@ Page {
     }
 
     Label {
-        id: nothing_found_label
         property string weight
         text: "Nothing Found Here"
         padding: 15

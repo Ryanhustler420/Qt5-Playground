@@ -49,6 +49,7 @@ Page {
                     courses_list.splice(i, 1);
                 }
             }
+            nothing_found_here_label.visible = courses_list.length == 0;
         }
         onCoursesLoaded: {
             for(var i =0; i< courses.length; i++) {
@@ -56,11 +57,13 @@ Page {
                 const ref = ComponentGenerator.createCourseCard(doc._id, doc, application.getSiteAssetsUrl(), coursesContainer);
                 courses_list.push({_id: doc._id, ref});
             }
+            nothing_found_here_label.visible = courses_list.length == 0;
         }
         onNewCourseCreated: {
             const doc = JSON.parse(JSON.stringify(course));
             const ref = ComponentGenerator.createCourseCard(doc._id, doc, application.getSiteAssetsUrl(), coursesContainer);
             courses_list.push({_id: doc._id, ref});
+            nothing_found_here_label.visible = courses_list.length == 0;
         }
         onPassed: {}
     }
@@ -164,11 +167,24 @@ Page {
             width: parent.width
             spacing: 20
 
+            FontLoader { id: mainFont; source: assets.getEncodeSans_ExtraLight() }
             Label {
                 width: parent.width
                 font.pointSize: 12
                 wrapMode: Text.WordWrap
                 text: "Following are the courses you are providing to all of your bright student(s) "
+            }
+
+            Label {
+                id: nothing_found_here_label
+                property string weight
+                text: "Nothing Found Here"
+                visible: false
+                font {
+                    family: mainFont.name
+                    styleName: weight
+                    pointSize: 25
+                }
             }
 
             Flow {
