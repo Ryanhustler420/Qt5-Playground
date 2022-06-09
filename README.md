@@ -15,4 +15,5 @@
 - Build the project
 - Go to release folder, open cmd
 - run `C:\Qt\Qt5.12.12\5.12.12\mingw73_64\bin\windeployqt C:/Build/release`
-- paste the .dlls from `C:\Qt\Qt5.12.12\5.12.12\mingw73_64\bin` to `C:/Build/release`
+- try to run the application present `C:/Build/release/setup.exe` if not ran
+- paste the .dlls from `C:\Qt\Qt5.12.12\5.12.12\mingw73_64\bin` to `C:/Build/release` [Optional]
