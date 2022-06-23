@@ -1,0 +1,12 @@
+https://stackoverflow.com/a/58626558 -> OpenSSL (go through the comments as well)
+
+https://www.openssl.org/source/old/
+
+https://slproweb.com/products/Win32OpenSSL.html
+
+https://stackoverflow.com/a/20229695
+
+Download the above
+Install on local machine
+Copy the .dll files from installed OpenSSL-Win64 folder to your deploy folder
+Now those computer will also run the server code without open ssl installed on system level

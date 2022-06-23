@@ -9,6 +9,7 @@ ApplicationWindow {
     visible: true
     title: qsTr("xCodeClazz")
     // flags: Qt.FramelessWindowHint | Qt.Window
+
     StackView {
         id: stackview
         anchors.fill: parent

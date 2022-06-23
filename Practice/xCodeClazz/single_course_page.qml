@@ -52,7 +52,6 @@ Page {
 
                 BusyIndicator {
                     running: course_img_loader.status === Loader.Loading;
-                    id: course_img_loader_busy_animation;
                     height: course_img_loader.height;
                     width: course_img_loader.width;
                     anchors.horizontalCenter: parent.horizontalCenter;
@@ -76,6 +75,7 @@ Page {
             }
 
             ScrollView {
+                contentWidth: -1
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 width: parent.width * .7
@@ -210,6 +210,7 @@ Page {
             }
 
             ScrollView {
+                contentWidth: -1
                 padding: 10
                 Layout.fillHeight: true
                 Layout.fillWidth: true
@@ -296,6 +297,7 @@ Page {
         closePolicy: Popup.NoAutoClose
 
         ScrollView {
+            contentWidth: -1
             clip: true
             visible: true
             Layout.fillHeight: true

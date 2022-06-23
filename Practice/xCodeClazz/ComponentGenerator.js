@@ -65,14 +65,18 @@ function createCourseCard(id, obj, assetsUrl, __parent__) {
         import QtQuick 2.0;
         import QtQuick.Controls 2.3;
         import QtQuick.Controls.Material 2.3;
+        import QtQuick.Layouts 2.3;
 
-        Item {
+        Rectangle {
             id: createCourseCard_${id};
             clip: true;
             width: 200;
             height: 200;
+            radius: 10;
+            color: 'transparent';
+            border.color: 'white';
 
-            Column {
+            ColumnLayout {
                 width: parent.width;
                 anchors.fill: parent;
                 height: parent.height;
@@ -106,6 +110,7 @@ function createCourseCard(id, obj, assetsUrl, __parent__) {
                 Button {
                     text: "${obj.title}";
                     width: parent.width;
+                    anchors.bottom: parent.bottom;
                     onClicked: {
                         openCourse(${JSON.stringify(obj)});
                     }

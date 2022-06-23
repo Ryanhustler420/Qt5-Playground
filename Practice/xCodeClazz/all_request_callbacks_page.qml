@@ -52,6 +52,7 @@ Page {
     }
 
     ScrollView {
+        contentWidth: -1
         width: parent.width
         height: parent.height
         padding: 10

@@ -133,6 +133,7 @@ Page {
             }
 
             ScrollView {
+                contentWidth: -1
                 visible: true
                 Layout.fillHeight: true
                 Layout.fillWidth: true

@@ -142,6 +142,7 @@ Page {
     }
 
     ScrollView {
+        contentWidth: -1
         clip: true
         height: parent.height
         anchors.fill: parent
@@ -205,6 +206,7 @@ Page {
         closePolicy: Popup.NoAutoClose
 
         ScrollView {
+            contentWidth: -1
             clip: true
             visible: true
             Layout.fillHeight: true

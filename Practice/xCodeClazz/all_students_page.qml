@@ -135,6 +135,7 @@ Page {
         }
 
         ScrollView {
+            contentWidth: -1
             clip: true
             visible: (students_listview.count > 0 && isPreviewStudent())
             Layout.fillHeight: true
@@ -406,6 +407,7 @@ Page {
         closePolicy: Popup.NoAutoClose
 
         ScrollView {
+            contentWidth: -1
             clip: true
             visible: true
             Layout.fillHeight: true
