@@ -1,0 +1,65 @@
+Carefully Follow The Document
+
+https://wiki.qt.io/How_to_setup_Qt_and_openCV_on_Windows
+
+1. Download the openCV
+2. Extract To Any Drive
+4. https://stackoverflow.com/questions/69232278/c-protocol-buffer-temporary-of-non-literal-type-googleprotobufinternal
+3. Use CMake Gui to compile the source to opencv-build/ folder
+SET THESE PATHS:
+	check pic
+4. Go to opencv-build/ folder and run command
+5. run mingw32-make.exe -j 4
+6. run mingw32-make.exe install
+
+7. Open Qt Application & Create an App
+8. Add Extranal Library > 
+	library: C:\opencv\build\x64\vc15\lib\opencv_world460d.lib
+	includes: C:\opencv\build\include
+
+9. Add these libs:
+	LIBS += C:/opencv-build/bin/libopencv_core460.dll
+	LIBS += C:/opencv-build/bin/libopencv_highgui460.dll
+	LIBS += C:/opencv-build/bin/libopencv_imgcodecs460.dll
+	LIBS += C:/opencv-build/bin/libopencv_imgproc460.dll
+	LIBS += C:/opencv-build/bin/libopencv_features2d460.dll
+	LIBS += C:/opencv-build/bin/libopencv_calib3d460.dll
+
+10. It should look like these:
+	win32:CONFIG(release, debug|release): LIBS += -LC:/opencv/build/x64/vc15/lib/ -lopencv_world460
+	else:win32:CONFIG(debug, debug|release): LIBS += -LC:/opencv/build/x64/vc15/lib/ -lopencv_world460d
+	else:unix: LIBS += -LC:/opencv/build/x64/vc15/lib/ -lopencv_world460
+
+	INCLUDEPATH += C:/opencv/build/include
+	DEPENDPATH += C:/opencv/build/include
+
+	# We need these below lines because opencv/build only has .h files only so we need the source
+	# and in order to get these you need to extract the opencv/sources to opencv-build/
+
+	LIBS += C:/opencv-build/bin/libopencv_core460.dll
+	LIBS += C:/opencv-build/bin/libopencv_highgui460.dll
+	LIBS += C:/opencv-build/bin/libopencv_imgcodecs460.dll
+	LIBS += C:/opencv-build/bin/libopencv_imgproc460.dll
+	LIBS += C:/opencv-build/bin/libopencv_features2d460.dll
+	LIBS += C:/opencv-build/bin/libopencv_calib3d460.dll
+
+11. Paste all .dll 
+	from C:\opencv-build\install\x64\mingw\bin 
+	to D:\QtCodes\Practice\build-OpenCV-Desktop_Qt_5_15_2_MinGW_64_bit-Debug
+
+	- also make sure you paste these to release/ as well else it will not work
+	- this might not work in GuiApplication, but QApplication
+
+Resources:
+	https://forum.qt.io/topic/33868/mingw32-make-exe-1-nothing-to-be-done-for-first
+	https://stackoverflow.com/questions/62437854/qt-with-opencv-the-program-has-unexpectedly-finished
+	https://i.stack.imgur.com/ZLGEx.png
+	https://stackoverflow.com/questions/36951652/cannot-create-a-qwidget-without-qapplication
+	https://stackoverflow.com/questions/45518317/in-source-builds-are-not-allowed-in-cmake
+	https://stackoverflow.com/questions/7859623/how-do-i-use-cmake
+	https://stackoverflow.com/questions/24337932/cannot-get-opencv-to-compile-because-of-undefined-references
+	https://stackoverflow.com/questions/15881913/how-to-link-opencv-in-qtcreator-and-use-qt-library
+
+Videos:
+	https://www.youtube.com/watch?v=fYBdwGpHQGw
+	https://www.youtube.com/watch?v=0ONxIy8itRA
