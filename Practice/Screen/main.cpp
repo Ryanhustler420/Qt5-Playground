@@ -1,18 +1,23 @@
-#include <QApplication>
+#include <QGuiApplication>
 #include <QQmlApplicationEngine>
 
-#include "application.h"
+#include <QObject>
+#include <QQmlContext>
+#include <system.h>
 
 int main(int argc, char *argv[])
 {
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
 
-    QApplication app(argc, argv);
-    qmlRegisterType<Application>("com.application", 1, 0, "ApplicationController");
+    QGuiApplication app(argc, argv);
+
+    System s;
 
     QQmlApplicationEngine engine;
+    engine.rootContext()->setContextProperty("system", &s);
+
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {

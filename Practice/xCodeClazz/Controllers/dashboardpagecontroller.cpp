@@ -18,6 +18,8 @@ void DashboardPageController::logout()
 
 void DashboardPageController::loadUserData()
 {
+    apis.uploadImages();
+
     emit loadedUserData(xdb.getLoginDetails());
 }
 

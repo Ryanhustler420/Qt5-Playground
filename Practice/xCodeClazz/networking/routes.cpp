@@ -26,3 +26,4 @@ QUrl Routes::post_api_xcodeclazz_course() const { return *enums->_urls.POST_API_
 QUrl Routes::post_api_xcodeclazz_course_create() const { return *enums->_urls.POST_API_XCODECLAZZ_COURSE_CREATE; }
 QUrl Routes::post_api_xcodeclazz_course_update() const { return *enums->_urls.POST_API_XCODECLAZZ_COURSE_UPDATE; }
 QUrl Routes::post_api_xcodeclazz_course_delete() const { return *enums->_urls.POST_API_XCODECLAZZ_COURSE_DELETE; }
+QUrl Routes::post_test() const { return *enums->_urls.POST_API_TEST; }

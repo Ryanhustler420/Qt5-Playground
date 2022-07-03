@@ -1,4 +1,4 @@
-QT += quick core network sql concurrent networkauth
+QT += quick core network sql concurrent networkauth widgets
 
 CONFIG += c++11
 
