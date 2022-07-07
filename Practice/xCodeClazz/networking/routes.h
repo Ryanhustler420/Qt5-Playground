@@ -38,8 +38,6 @@ public:
         QUrl *POST_API_XCODECLAZZ_COURSE_CREATE = new QUrl(host + "/api/xcodeclazz/course/create");
         QUrl *POST_API_XCODECLAZZ_COURSE_UPDATE = new QUrl(host + "/api/xcodeclazz/course/update");
         QUrl *POST_API_XCODECLAZZ_COURSE_DELETE = new QUrl(host + "/api/xcodeclazz/course/delete");
-
-        QUrl *POST_API_TEST = new QUrl(host + "/test");
     } urls;
 
     struct Enums {
@@ -73,7 +71,6 @@ public:
     QUrl post_api_xcodeclazz_course_create() const;
     QUrl post_api_xcodeclazz_course_update() const;
     QUrl post_api_xcodeclazz_course_delete() const;
-    QUrl post_test() const;
 };
 
 #endif // ROUTES_H

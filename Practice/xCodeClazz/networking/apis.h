@@ -37,8 +37,6 @@ public:
     void exchangeGoogleOAuthCode(QString code, std::function<void(QByteArray)> response, std::function<void(QByteArray)> error);
     void exchangeGoogleAccessTokenForUserInfo(QString tokenType, QString accessToken, std::function<void(QByteArray)> response, std::function<void(QByteArray)> error);
 
-    void uploadImages();
-
  public:
     typedef struct HEADER_KEYS {
         QString raisehand_access_platform_names_array = "raisehand_access_platform_names_array";

@@ -1,5 +1,9 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>H1Label.qml</file>
+        <file>H2Label.qml</file>
+        <file>qtquickcontrols2.conf</file>
+        <file>dashboard_page.qml</file>
     </qresource>
 </RCC>
