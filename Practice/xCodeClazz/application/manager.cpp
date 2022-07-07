@@ -10,11 +10,11 @@ Manager::Manager(QObject *parent) : OSingleton<Manager>()
 #ifdef QT_DEBUG
     env = "dev";
     siteAssets = new QUrl("http://xcodeclazz.com");
-    hostUrl = new QUrl("http://localhost:3002/sandbox/v1");
+    hostUrl = new QUrl("http://localhost:3000/v1");
 #else
     env = "prod";
     siteAssets = new QUrl("http://xcodeclazz.com");
-    hostUrl = new QUrl("https://raisehand.software/v1");
+    hostUrl = new QUrl("https://xcodeclazz.herokuapp.com/v1");
 #endif
 }
 

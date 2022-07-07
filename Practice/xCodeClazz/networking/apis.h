@@ -39,12 +39,6 @@ public:
 
  public:
     typedef struct HEADER_KEYS {
-        QString raisehand_access_platform_names_array = "raisehand_access_platform_names_array";
-        QString raisehand_route_caller_appname = "raisehand_route_caller_appname";
-        QString raisehand_server_version = "raisehand_server_version";
-        QString raisehand_app_version = "raisehand_app_version";
-        QString raisehand_auth_token = "raisehand_auth_token";
-
         QString application_json = "application/json";
         QString url_encoded = "application/x-www-form-urlencoded";
     } raw_headers;

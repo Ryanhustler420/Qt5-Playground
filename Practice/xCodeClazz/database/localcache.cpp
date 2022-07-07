@@ -2,9 +2,9 @@
 
 LocalCache::LocalCache(CommonSuperClass *parent) : CommonSuperClass(parent)
 {
-    QCoreApplication::setOrganizationName("Raisehand");
-    QCoreApplication::setApplicationName("Raisehand Shop");
-    QCoreApplication::setOrganizationDomain("www.raisehand.io");
+    QCoreApplication::setOrganizationName("Raisehand Software Private Limited");
+    QCoreApplication::setApplicationName("XCodeClazz");
+    QCoreApplication::setOrganizationDomain("www.xcodeclazz.com");
     settings = new QSettings(QCoreApplication::organizationName(), QCoreApplication::applicationName());
 }
 
