@@ -1,5 +1,13 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>login.qml</file>
+        <file>qtquickcontrols2.conf</file>
+        <file>user_profile.qml</file>
+        <file>shop_payment.qml</file>
+        <file>notice_board.qml</file>
+        <file>bug_report.qml</file>
+        <file>dashboard.qml</file>
+        <file>import_single_repo_product.qml</file>
     </qresource>
 </RCC>

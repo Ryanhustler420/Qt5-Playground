@@ -15,6 +15,7 @@ ApplicationWindow {
         currentIndex: 1
         anchors.fill: parent
         states: [
+            // why it's here
             State {
                 when: window.width >= responsiveWidth
                 ParentChange { target: contacts; parent: contactsContainer; }
@@ -38,6 +39,7 @@ ApplicationWindow {
         }
     }
 
+    // hide when cross parent.width > responsiveWidth
     PageIndicator {
         id: indicator
         count: swipeView.count
@@ -47,6 +49,7 @@ ApplicationWindow {
         anchors.horizontalCenter: swipeView.horizontalCenter
     }
 
+    // visible always but the items are empty
     Row {
         id: splitView
         anchors.fill: parent
