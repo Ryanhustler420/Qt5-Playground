@@ -7,12 +7,12 @@ ApplicationWindow {
     id: window
     visible: true
 
-    property int responsiveWidth: 600
     property int default_pix_density: 4
-    property int scale_factor: Screen.pixelDensity / default_pix_density
+    property double scale_factor: 1.3 // Screen.pixelDensity / default_pix_density
 
-    minimumWidth: 400; minimumHeight:  400;
-    width: 800; height: 500;
+    property int responsiveWidth: 600 * scale_factor
+    width: 800 * scale_factor; height: 500 * scale_factor;
+    minimumWidth: 400 * scale_factor; minimumHeight:  400 * scale_factor;
 
     Item {
         states: [
@@ -72,7 +72,7 @@ ApplicationWindow {
                         text: "Dolo 650 Tablets"
                         wrapMode: Label.WordWrap
                         Layout.fillWidth: true
-                        font.pointSize: 25
+                        font.pointSize: 25 * scale_factor
                         font.bold: true
                     }
 
@@ -85,7 +85,7 @@ ApplicationWindow {
                             text: "Cipla India Ltd."
                             wrapMode: Label.WordWrap
                             Layout.fillWidth: true
-                            font.pointSize: 10
+                            font.pointSize: 10 * scale_factor
                             font.bold: false
                         }
 
@@ -93,7 +93,7 @@ ApplicationWindow {
                             text: "#2245"
                             wrapMode: Label.WordWrap
                             Layout.fillWidth: true
-                            font.pointSize: 10
+                            font.pointSize: 10 * scale_factor
                             font.bold: false
                             color: "gray"
                         }
@@ -107,23 +107,23 @@ ApplicationWindow {
 
                         Label {
                             font.bold: true
-                            font.pointSize: 13
+                            font.pointSize: 13 * scale_factor
                             text: "25K\nImports"
-                            Layout.preferredWidth: 100
+                            Layout.preferredWidth: 100 * scale_factor
                         }
 
                         Label {
                             font.bold: true
-                            font.pointSize: 13
+                            font.pointSize: 13 * scale_factor
                             text: "335K\nViews"
-                            Layout.preferredWidth: 100
+                            Layout.preferredWidth: 100 * scale_factor
                         }
 
                         Label {
                             font.bold: true
-                            font.pointSize: 13
+                            font.pointSize: 13 * scale_factor
                             text: "98.36\nPrice"
-                            Layout.preferredWidth: 100
+                            Layout.preferredWidth: 100 * scale_factor
                         }
 
                     }
@@ -165,7 +165,7 @@ ApplicationWindow {
                     Layout.fillWidth: true
 
                     Image {
-                        width: 200; height: 200;
+                        width: 200 * scale_factor; height: 200 * scale_factor;
                         id: repo_product_img_large
                         fillMode: Image.PreserveAspectFit
                         source: "https://play-lh.googleusercontent.com/WR3T4fGcfBDwU1JCPuo0dBPXavvEA7FA_pS0oLNQcWxX85aUyRc8pVdqdkiL-DADZA0n=w240-h480-rw"
@@ -184,7 +184,7 @@ ApplicationWindow {
                 Label {
                     text: "About"
                     font.bold: true
-                    font.pointSize: 20
+                    font.pointSize: 20 * scale_factor
                     Layout.fillWidth: true
                     wrapMode: Label.WordWrap
                 }
@@ -192,6 +192,7 @@ ApplicationWindow {
                 Label {
                     text: "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available. It is also used to temporarily replace text in a process called greeking, which allows designers to consider the form of a webpage or publication, without the meaning of the text influencing the design."
                     wrapMode: Label.WordWrap
+                    font.pointSize: 10 * scale_factor
                     Layout.fillWidth: true
                 }
 
@@ -204,30 +205,30 @@ ApplicationWindow {
                 spacing: 10
 
                 Rectangle {
-                    Layout.preferredWidth: 30
+                    Layout.preferredWidth: 30 * scale_factor
                     Layout.fillHeight: true
                     Layout.fillWidth: true
                     color: "black"
-                    height: 200
-                    width: 200
+                    height: 200 * scale_factor
+                    width: 200 * scale_factor
                 }
 
                 Rectangle {
-                    Layout.preferredWidth: 30
+                    Layout.preferredWidth: 30 * scale_factor
                     Layout.fillHeight: true
                     Layout.fillWidth: true
                     color: "black"
-                    height: 200
-                    width: 200
+                    height: 200 * scale_factor
+                    width: 200 * scale_factor
                 }
 
                 Rectangle {
-                    Layout.preferredWidth: 30
+                    Layout.preferredWidth: 30 * scale_factor
                     Layout.fillHeight: true
                     Layout.fillWidth: true
                     color: "black"
-                    height: 200
-                    width: 200
+                    height: 200 * scale_factor
+                    width: 200 * scale_factor
                 }
 
             }
@@ -241,7 +242,7 @@ ApplicationWindow {
                 Label {
                     text: "Updated"
                     font.bold: true
-                    font.pointSize: 20
+                    font.pointSize: 20 * scale_factor
                     Layout.fillWidth: true
                     wrapMode: Label.WordWrap
                 }
@@ -249,6 +250,7 @@ ApplicationWindow {
                 Label {
                     text: "32 Min ago"
                     wrapMode: Label.WordWrap
+                    font.pointSize: 10 * scale_factor
                     Layout.fillWidth: true
                 }
 
