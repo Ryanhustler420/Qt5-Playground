@@ -1,0 +1,4 @@
+# [https://forum.qt.io/topic/95542/enable-windows-autosize-function-on-frameless-qwidget/4](enable-windows-autosize-function-on-frameless-qwidget)
+# [https://forum.qt.io/topic/126265/how-to-resize-and-snap-frameless-windows-when-drag-to-edges/3](how-to-resize-and-snap-frameless-windows-when-drag-to-edges)
+# [https://subgroup-ash.blogspot.com/2015/12/qt-issue-problem-with-frameless-window.html](https://subgroup-ash.blogspot.com/2015/12/qt-issue-problem-with-frameless-window.html)
+# [https://forum.qt.io/topic/5253/dragging-a-titleless-window/16](https://forum.qt.io/topic/5253/dragging-a-titleless-window/16)

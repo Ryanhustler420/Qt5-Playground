@@ -1,24 +1,20 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 
-#include "inetwork.h"
-#include "logger/logger.h"
+#include <QQmlContext>
+#include "appcontroller.h"
 
 int main(int argc, char *argv[])
 {
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
-
     QGuiApplication app(argc, argv);
 
-    Logger::setPath("D:", "virus.txt");
-    Logger::attach();
-    Logger::logging = true;
-    Logger::dirty_console = true;
-
     QQmlApplicationEngine engine;
-    qmlRegisterType<INetwork>("com.app.inetwork", 1, 0, "INetwork");
+
+    AppController ac;
+    engine.rootContext()->setContextProperty("gApplicationController", &ac);
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

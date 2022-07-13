@@ -9,5 +9,10 @@
         <file>bug_report.qml</file>
         <file>dashboard.qml</file>
         <file>import_single_repo_product.qml</file>
+        <file>SingleRepoProductItem.qml</file>
+        <file>library.qml</file>
+    </qresource>
+    <qresource prefix="/images">
+        <file>images/raisehand_sample_qr.png</file>
     </qresource>
 </RCC>

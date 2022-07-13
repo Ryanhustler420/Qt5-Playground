@@ -17,7 +17,6 @@
 #include <QEventLoop>
 
 #include <QMap>
-#include "logger/logger.h"
 
 class INetwork : public QObject
 {

@@ -3,16 +3,16 @@ import QtQuick.Window 2.2
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.3
 
-ApplicationWindow {
+Page {
     id: window
     visible: true
 
     property int default_pix_density: 4
-    property double scale_factor: 1.3 // Screen.pixelDensity / default_pix_density
+    property double scale_factor: 1.2 // Screen.pixelDensity / default_pix_density
 
     property int responsiveWidth: 600 * scale_factor
     width: 800 * scale_factor; height: 500 * scale_factor;
-    minimumWidth: 400 * scale_factor; minimumHeight:  400 * scale_factor;
+    // minimumWidth: 400 * scale_factor; minimumHeight:  400 * scale_factor;
 
     Item {
         states: [
@@ -48,11 +48,13 @@ ApplicationWindow {
         ColumnLayout {
             Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
             anchors.fill: parent
+            spacing: 50
+            anchors.leftMargin: 50
+            anchors.rightMargin: 50
 
             RowLayout {
                 Layout.preferredWidth: parent.width
                 Layout.fillWidth: true
-                Layout.margins: 50
                 spacing: 10
 
                 ColumnLayout {
@@ -66,6 +68,9 @@ ApplicationWindow {
                         id: repo_product_img_tiny_container
                         Layout.alignment: Qt.AlignTop
                         Layout.fillWidth: true
+
+                        Item { height: 50 }
+
                     }
 
                     Label {
@@ -107,21 +112,21 @@ ApplicationWindow {
 
                         Label {
                             font.bold: true
-                            font.pointSize: 13 * scale_factor
+                            font.pointSize: 10 * scale_factor
                             text: "25K\nImports"
                             Layout.preferredWidth: 100 * scale_factor
                         }
 
                         Label {
                             font.bold: true
-                            font.pointSize: 13 * scale_factor
+                            font.pointSize: 10 * scale_factor
                             text: "335K\nViews"
                             Layout.preferredWidth: 100 * scale_factor
                         }
 
                         Label {
                             font.bold: true
-                            font.pointSize: 13 * scale_factor
+                            font.pointSize: 10 * scale_factor
                             text: "98.36\nPrice"
                             Layout.preferredWidth: 100 * scale_factor
                         }
@@ -135,6 +140,7 @@ ApplicationWindow {
 
                         Button {
                             text: "Import"
+                            font.pointSize: 10 * scale_factor
                             onClicked: {
 
                             }
@@ -142,13 +148,7 @@ ApplicationWindow {
 
                         Button {
                             text: "Raise Issue"
-                            onClicked: {
-
-                            }
-                        }
-
-                        RoundButton {
-                            text: "\u2026"
+                            font.pointSize: 10 * scale_factor
                             onClicked: {
 
                             }
@@ -164,6 +164,7 @@ ApplicationWindow {
                     Layout.fillHeight: true
                     Layout.fillWidth: true
 
+                    Item { height: 50 }
                     Image {
                         width: 200 * scale_factor; height: 200 * scale_factor;
                         id: repo_product_img_large
@@ -178,7 +179,6 @@ ApplicationWindow {
             ColumnLayout {
                 Layout.preferredWidth: parent.width
                 Layout.fillWidth: true
-                Layout.margins: 50
                 spacing: 10
 
                 Label {
@@ -198,45 +198,22 @@ ApplicationWindow {
 
             }
 
-            RowLayout {
-                Layout.preferredWidth: parent.width
+            ListView {
+                model: 3
+                clip: true
+                spacing: 5
+                width: parent.width
                 Layout.fillWidth: true
-                Layout.margins: 50
-                spacing: 10
+                height: 200 * scale_factor
+                orientation: ListView.Horizontal
+                delegate: SingleRepoProductItem {
 
-                Rectangle {
-                    Layout.preferredWidth: 30 * scale_factor
-                    Layout.fillHeight: true
-                    Layout.fillWidth: true
-                    color: "black"
-                    height: 200 * scale_factor
-                    width: 200 * scale_factor
                 }
-
-                Rectangle {
-                    Layout.preferredWidth: 30 * scale_factor
-                    Layout.fillHeight: true
-                    Layout.fillWidth: true
-                    color: "black"
-                    height: 200 * scale_factor
-                    width: 200 * scale_factor
-                }
-
-                Rectangle {
-                    Layout.preferredWidth: 30 * scale_factor
-                    Layout.fillHeight: true
-                    Layout.fillWidth: true
-                    color: "black"
-                    height: 200 * scale_factor
-                    width: 200 * scale_factor
-                }
-
             }
 
             ColumnLayout {
                 Layout.preferredWidth: parent.width
                 Layout.fillWidth: true
-                Layout.margins: 50
                 spacing: 10
 
                 Label {
